@@ -143,7 +143,7 @@
                                 </div>
                                 
                                 <!--SO Details Form -->
-                                <form method = "post" action = "order_add_order.php">
+                                <form method = "post" action = "order_add_order2.php">
                                     <div class="row">
                                         <div class="col-lg-5 mb-4" style="float: left;">
                                             <div class="card-body">
@@ -220,27 +220,7 @@
                                     </div>
                                 </form>
                             </div>
-                            
-                            <?php
-                                if(isset($_POST['proceed']))
-                                {
-                                    $customer = $_POST['customer'];
-                                    $address = $_POST['address'];
-                                    $_SESSION['customer'] = $customer;
-                                    $_SESSION['address'] = $address; 
-
-                                    // EDITED:  this checks if nag enter sila ng data sa first form and gives an error message if left blank
-                                    if (empty($_POST['customer']) || empty ($_POST['address']))
-                                        {
-                                            $alert = "Please fill up empty fields.";
-                                            echo '<script type="text/javascript">';
-                                            echo 'alert("'.$alert.'")';
-                                            echo '</script>';  
-                                        }
-
-                                }
-                                ?>
-                            
+                                                       
                         <div class="container-fluid">
                             <div class="col-lg-12">
                                 <header class="card-header font-weight-bold">Add Product Details</header>
@@ -457,7 +437,6 @@
                                           <th>Quantity</th>
                                           <th>Availability</th>
                                           <th>Price</th>
-                                          <th>Total Price</th>
                                         </tr>
                                       </thead>
                                       <tbody>
