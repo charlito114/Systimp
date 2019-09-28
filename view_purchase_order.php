@@ -151,7 +151,8 @@
                                     $result = $con->query($viewOrder);
                                     if ($result->num_rows > 0) {
                                     // output data of each row
-                                    while($row = $result->fetch_assoc()) {   
+                                    while($row = $result->fetch_assoc()) {
+                                        $status = $row['Status']; //added this part to get the status
                                 ?>
                                 <div class="card-header font-weight-bold" style="border-bottom:  .10rem solid #b4c540;">
                                     Sales Order Details
@@ -264,7 +265,7 @@
                                                 // output data of each row
                                                 while($row = $result2->fetch_assoc()) {
                                                     echo "<form method = 'post' action = '' >";
-                                                    echo "\t<tr><td >" . $row['ProductCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['ReceivedQuantity'] . "</td><td>" . $row['status'] .   "</td></tr>\n";
+                                                    echo "\t<tr><td >" . $row['ProductCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['ReceivedQuantity'] . "</td><td>" . $row['Status'] .   "</td></tr>\n";
                                                     }
                                                     echo "</form>";
                                                 } 
@@ -282,6 +283,10 @@
                                 <div class="d-flex" style=" margin-top: 10px;">
                                     <div style="width: 70%; float: left;"></div>
                                     <div class="d-flex" style="width: 30%; float: right;">
+                                        <?php
+                                        if($status == 'Ongoing'){ //made an if statement to check the status
+                                        ?>
+                                        
                                         <!-- Update Button-->
                                         <div style="width: 60%; float: left;">
                                             <button type = 'submit' name = 'update' class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" style="width: 100px;float: left; margin-right: 10px;"> Update </button>
@@ -291,7 +296,7 @@
                                         <div style="width: 80%; float: right;">
                                             <button type = 'submit' name = 'cancel' class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" style="width: 100px;float: left; margin-right: 10px;"> Cancel </button>
                                         </div>
-
+                                        <?php } ?>
                                         <!-- Back Button-->
                                         <div style="width: 80%; float: right;">
                                             <button type = 'submit' name = 'back' formaction =  'purchase_purchase_history.php' class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="width: 100px; float: right;"> Back </button>
