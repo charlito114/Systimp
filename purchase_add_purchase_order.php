@@ -141,7 +141,7 @@
                                 <header class="card-header font-weight-bold">Purchase Order Details</header>
                                 
                                 <!--SO Details Form -->
-                                <form method = "post" action = "purchase_add_purchase_order.php">
+                                <form method = "post" action = "purchase_add_purchase_order2.php">
                                     <div class="row">
                                         <div class="col-lg-5 mb-4" style="float: left;">
                                             <div class="card-body">
@@ -218,25 +218,7 @@
                                     </div>
                                 </form>
                             </div>
-                            
-                            <?php
-                                if(isset($_POST['proceed']))
-                                {
-                                    $supplier = $_POST['Supplier'];
-                                    $address = $_POST['Address'];
-                                    $_SESSION['SupplierName'] = $supplier;
-                                    $_SESSION['address'] = $address; 
-
-                                    if (empty($_POST['Supplier']) || empty ($_POST['Address']))
-                                    {
-                                        $alert = "Please fill up empty fields.";
-                                        echo '<script type="text/javascript">';
-                                        echo 'alert("'.$alert.'")';
-                                        echo '</script>';  
-                                    }
-                                }
-                                ?>
-                            
+                                                       
                         <div class="container-fluid">
                             <div class="col-lg-12">
                                 <header class="card-header font-weight-bold">Add Product Order Details</header>
