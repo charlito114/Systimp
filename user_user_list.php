@@ -1,6 +1,3 @@
-<?php
-    require_once("db/connection.php");
-        ?>
 <html>
     
     <head>
@@ -136,14 +133,14 @@
                         </div>
                     </div>
                     
-                    <!-- Inventory Stuff -->
+                    <!-- Sales Orders -->
                     
                     <div class="card-body mb-4">
                         <!-- Search Bar-->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
-                            <form action="user_user_list.php" class="navbar-search" method="post">
+                            <form action="" class="navbar-search" method="post">
                                 <div class="input-group">
-                                    <input type="text" class="form-control bg-light small" placeholder="Search by first name, last name or email address" aria-label="Search" aria-describedby="basic-addon2" style="width: 450px" name="valueToSearch">
+                                    <input type="text" class="form-control bg-light small" placeholder="Search by Email, Name, or Type" aria-label="Search" aria-describedby="basic-addon2" style="width: 450px" name="valueToSearch">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit" name="search" value="search">
                                             <i class="fas fa-search fa-sm"></i>
@@ -153,7 +150,6 @@
                             </form>
                             
                             <?php
-                                require_once("db/connection.php");
                                 if(isset($_POST['search']))
                                 {
                                     $valueToSearch = $_POST['valueToSearch'];
@@ -175,7 +171,6 @@
                                     $filter_Result = mysqli_query($con, $query);
                                     return $filter_Result;
                                 }
-
                             ?>
                             
                         </div>
@@ -218,8 +213,8 @@
                         <!-- Table -->
                         <div class="table-responsive">
                             <form method = 'post' action = ''>
-                                <div class="card-body mb-4" style="padding-top: 0;">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="padding-top: 0; border-top: .20rem solid #b4c540;">
+                                <div class="card-body mb-4" style="padding-top: 0; display: flex;">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="margin-top: 0; padding-top: 0; border-top: .20rem solid #b4c540;">
                                   <thead>
                                     <tr>
                                       <th>Email</th>
