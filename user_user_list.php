@@ -1,3 +1,7 @@
+<?php	
+    require_once("db/connection.php");	
+?>
+
 <html>
     
     <head>
@@ -138,7 +142,7 @@
                     <div class="card-body mb-4">
                         <!-- Search Bar-->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
-                            <form action="" class="navbar-search" method="post">
+                            <form action="user_user_list.php" class="navbar-search" method="post">
                                 <div class="input-group">
                                     <input type="text" class="form-control bg-light small" placeholder="Search by Email, Name, or Type" aria-label="Search" aria-describedby="basic-addon2" style="width: 450px" name="valueToSearch">
                                     <div class="input-group-append">
