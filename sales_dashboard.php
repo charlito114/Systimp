@@ -156,7 +156,8 @@
                                           </div>
                                         </div>
                                         
-                                        <div class="card-body">
+                                        <!-- Total Daily Sales and Top Selling Products -->
+                                        <div class="card-body" style="height: 50%;">
                                             <div class="card-body">
                                               <div class="card border-left-success shadow h-100 py-2">
                                                 <div class="card-body">
@@ -172,7 +173,7 @@
                                                 </div>
                                               </div>
                                             </div>
-                                        
+                                            <div class="card-body"></div>
                                             <div class="card-body">
                                                   <div class="card border-left-success shadow h-100 py-2">
                                                     <div class="card-body">
