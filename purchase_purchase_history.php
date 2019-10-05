@@ -7,6 +7,9 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         
+        <!-- Custom styles for this page -->
+          <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        
         <style>
             body{
                 background-color: #f0f3e1;
@@ -141,7 +144,7 @@
                         <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                             <form action="purchase_purchase_history.php" class="navbar-search" method="post">
                                 <div class="input-group">
-                                    <input type="text" class="form-control bg-light small" placeholder="Search by date, status or PO number" aria-label="Search" aria-describedby="basic-addon2" style="width: 450px" name="valueToSearch">
+                                    <input type="text" class="form-control bg-light small" placeholder="Search by date, or PO number" aria-label="Search" aria-describedby="basic-addon2" style="width: 450px" name="valueToSearch">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit" name="search" value="search">
                                             <i class="fas fa-search fa-sm"></i>
@@ -179,33 +182,6 @@
                             <!-- Print Button-->
                             <div style="width: 80%;">
                                 <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-left: 30px; width: 100px;"> Print </button>
-                            </div>
-
-                            <!-- Pagination -->
-                            <div class="col-md-7" style="width: 20%; float: right;">
-                                <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                    <ul class="pagination" style="float: right;">
-                                        <li class="paginate_button page-item previous disabled" id="dataTable_previous">
-                                            <a href ="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                                        <li class="paginate_button page-item active">
-                                            <a href ="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                                        </li>
-                                        <li class="paginate_button page-item">
-                                            <a href ="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-                                        </li>
-                                        <li class="paginate_button page-item">
-                                            <a href ="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-                                        </li>
-                                        <li class="paginate_button page-item">
-                                            <a href ="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a>
-                                        </li>
-                                        <li class="paginate_button page-item">
-                                            <a href ="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-                                        </li>
-                                        <li class="paginate_button page-item next" id="dataTable_next">
-                                            <a href ="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">Next</a></li>
-                                    </ul>
-                                </div>
                             </div>
                         </div>
                         
@@ -248,5 +224,11 @@
                 </div>
             </div>
         </div>
+          <!-- Page level plugins -->
+  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/demo/datatables-demo.js"></script>
     </body>
 </html>
