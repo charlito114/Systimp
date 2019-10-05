@@ -9,6 +9,9 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         
+          <!-- Custom styles for this page -->
+          <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        
         <style>
             body{
                 background-color: #f0f3e1;
@@ -185,7 +188,7 @@
                                 <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-left: 30px; width: 100px;"> Print </button>
                             </div>
 
-                            <!-- Pagination -->
+                            <!-- Pagination 
                             <div class="col-md-7" style="width: 20%; float: right;">
                                 <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
                                     <ul class="pagination" style="float: right;">
@@ -210,7 +213,7 @@
                                             <a href ="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">Next</a></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         
                         <!-- Table -->
@@ -252,5 +255,12 @@
                 </div>
             </div>
         </div>
+        
+  <!-- Page level plugins -->
+  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/demo/datatables-demo.js"></script>
     </body>
 </html>
