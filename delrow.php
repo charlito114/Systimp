@@ -6,7 +6,7 @@
 if (isset($_POST['remove']) && $_SESSION['countorder']!= 1 || $_SESSION['countpurchase']!= 1 )
 {
     $todelete =  $_SESSION['search'];
-    $query = "DELETE FROM products WHERE prodcode = $todelete";
+    $query = "UPDATE products SET status = 'Discontinued' WHERE prodcode = $todelete";
 
 
    if( mysqli_query($con,$query) ){

@@ -163,7 +163,7 @@
 
                                 }
                                 else {
-                                    $query = "SELECT * FROM products";
+                                    $query = "SELECT * FROM products WHERE status != 'Discontinued' ";
                                     $search_result = filterTable($query);
                                 }
 
