@@ -207,7 +207,7 @@
                         
                         <!-- Table -->
                         
-                            <div class="col-lg-12">
+                            <div class="col-lg-12" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
                                 <form method="post" class="navbar-expand col-lg-12">
                                 <header class="card-header font-weight-bold">LOW QUANTITY PRODUCTS</header>
                                 <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
