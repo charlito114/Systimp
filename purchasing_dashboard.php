@@ -8,6 +8,8 @@
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        <!-- Custom styles for this page -->
+          <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
         
         <style>
             body{
@@ -181,7 +183,7 @@
                                               ?></div>
                                           </div>
                                           <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            <i class="fas fa-ban fa-2x text-gray-300"></i>
                                           </div>
                                         </div>
                                       </div>
@@ -207,7 +209,7 @@
                                             </div>
                                           </div>
                                           <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            <i class="fas fa-hourglass-end fa-2x text-gray-300"></i>
                                           </div>
                                         </div>
                                       </div>
@@ -220,8 +222,8 @@
                         
                             <div class="col-lg-12" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
                                 <form method="post" class="navbar-expand col-lg-12">
-                                <header class="card-header font-weight-bold">ONGOING SUPPLIER DELIVERIES</header>
-                                <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
+                                <header class="card-header font-weight-bold" style="border-bottom: none;">ONGOING SUPPLIER DELIVERIES</header>
+                                <div class=" align-items-center justify-content-between mb-4" style="padding-top: 0;">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                       <thead>
                                         <tr>
@@ -236,7 +238,6 @@
                                         $search_result = mysqli_query($con, $viewTop);
                                         if ($search_result->num_rows > 0) {
                                             // output data of each row
-
                                             while($row = $search_result->fetch_assoc()) {
                                                 echo "\t<tr><td >" . $row['Date'] . "</td><td>" . $row['PONum'] . "</td><td>"  .  $row['SupplierName'] . "</td></tr><br>";
                                                 }
@@ -258,5 +259,12 @@
                 </div>
             </div>
         </div>
+                  <!-- Page level plugins -->
+  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/demo/datatables-demo.js"></script>
+        
     </body>
 </html>

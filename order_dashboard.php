@@ -32,7 +32,7 @@
                 <div id="content">
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg topbar mb-4 static-top shadow">
-                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Sales Management Dashboard</div>
+                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Order Management Dashboard</div>
                       <!-- Sidebar Toggle (Topbar) -->
                       <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -142,126 +142,81 @@
                             
                                 <div class="mb-4"></div>
                                 <!--Charts-->
-                                    <div class="row" style="display: flex;">
-                                        <div class="col-xl-4 col-lg-2">
-
-                                          <!-- Chart -->
-                                          <div class="card shadow mb-4">
-                                            <div class="card-header py-3">
-                                              <h6 class="m-0 font-weight-bold text-primary">Chart 1</h6>
-                                            </div>
-                                            <div class="card-body">
-                                              <div class="chart-area">
-                                                <canvas id="myAreaChart"></canvas>
+                                    <!-- Content Row -->
+                                <div class="row">
+                                    
+                                    <!-- Ready Orders-->
+                                  <div class="col-xl-3 col-md-6 mb-4">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                      <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                          <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Ready Orders</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <!-- Insert PHP Here-->
                                               </div>
-                                            </div>
+                                          </div>
+                                          <div class="col-auto">
+                                            <i class="fas fa-check fa-2x text-gray-300"></i>
                                           </div>
                                         </div>
-                                        
-                                        <!-- Total Daily Sales and Top Selling Products -->
-                                        <div class="card-body" style="height: 50%;">
-                                            <div class="card-body">
-                                              <div class="card border-left-success shadow h-100 py-2">
-                                                <div class="card-body">
-                                                  <div class="row no-gutters align-items-center">
-                                                    <div class="col mr-2">
-                                                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Daily Sales</div>
-                                                      <div class="h5 mb-0 font-weight-bold text-gray-800">P40,000</div>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="card-body"></div>
-                                            <div class="card-body">
-                                                  <div class="card border-left-success shadow h-100 py-2">
-                                                    <div class="card-body">
-                                                      <div class="row no-gutters align-items-center">
-                                                        <div class="col mr-2">
-                                                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Top Selling Products</div>
-                                                          <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                          <i class="fas fa-thumbs-up fa-2x text-gray-300"></i>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                        </div>
-
-                                        <div class="col-xl-4 col-lg-2">
-                                          <!-- Chart -->
-                                          <div class="card shadow mb-4">
-                                            <div class="card-header py-3">
-                                              <h6 class="m-0 font-weight-bold text-primary">Chart 2</h6>
-                                            </div>
-                                            <div class="card-body">
-                                              <div class="chart-bar">
-                                                <canvas id="myBarChart"></canvas>
-                                              </div>
-                                            </div>
-                                          </div>
-
-                                        </div>
-
-                                        
+                                      </div>
                                     </div>
+                                  </div>
+
+                                  <!-- Recently Placed Orders-->
+                                  <div class="col-xl-3 col-md-6 mb-4">
+                                    <div class="card border-left-warning shadow h-100 py-2">
+                                      <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                          <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Recently Placed Orders</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <!-- Insert PHP Here-->
+                                              </div>
+                                          </div>
+                                          <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div> 
+                                </div>
                              
                         
-                        <!-- Table -->
+                        <!-- Table  Shar-->
                         
-                            <div class="col-lg-12">
+                            <div class="col-lg-12" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
                                 <form method="post" class="navbar-expand col-lg-12">
-                                <header class="card-header font-weight-bold" style="border-bottom: none;">TOP SELLING PRODUCTS</header>
-                                <div class=" align-items-center justify-content-between mb-4" style="padding-top: 0; display: flex;">
+                                <header class="card-header font-weight-bold" style="border-bottom: none;">READY ORDERS</header>
+                                <div class="align-items-center justify-content-between mb-4" style="padding-top: 0;">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                       <thead>
                                         <tr>
-                                         <th>Product Code</th>
-                                        <th>Category</th>
-                                        <th>Brand</th>
-                                        <th>Description</th>
-                                        <th>Size</th>
-                                        <th>Quantity</th>
-                                        <th>Reorder Point</th>
-                                        <th>Quantity Sold</th>
-                                        <th>Price</th>
+                                         <th>Date</th>
+                                         <th>Sales Order Number</th>
+                                         <th>Total Amount</th>
+                                         <th>Suppliers</th>
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        <?php
-                                          $viewTop = "SELECT * FROM products ORDER BY quanSold DESC LIMIT 5";
-                                        $search_result = mysqli_query($con, $viewTop);
-                                        if ($search_result->num_rows > 0) {
-                                            // output data of each row
-
-                                            while($row = $search_result->fetch_assoc()) {
-                                                echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['quanSold'] . "</td><td>" . $row['price'] ."</td></tr><br>";
-                                                }
-                                            }
-                                        else{
-                                            echo "0 results";
-                                        }
-                                            
-                                          ?>
+                                        <!-- Insert PHP Here-->
                                       </tbody>
                                     </table>
                                 </div>
-                            </form>
+                            </form>  
                             </div> 
                     </div>
                 </div>
             </div>
         </div>
-                          <!-- Page level plugins -->
+                  <!-- Page level plugins -->
   <script src="vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
   <script src="js/demo/datatables-demo.js"></script>
+        
     </body>
 </html>
