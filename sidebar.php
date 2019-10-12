@@ -38,7 +38,6 @@
                 </a>
                 <!--<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                   <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Components:</h6>
                     <a class="collapse-item" href="buttons.html">Buttons</a>
                     <a class="collapse-item" href="cards.html">Cards</a>
                   </div>
@@ -52,7 +51,6 @@
                 </a>
                 <div id="collapseInv" class="collapse" aria-labelledby="headingInv" data-parent="#accordionSidebar">
                   <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Components:</h6>
                     <a class="collapse-item" href="buttons.html">Dashboard</a>
                     <a class="collapse-item" href="inventory.php">Inventory List</a>
                     <a class="collapse-item" href="inventory_add_product.php">Add Product</a>
@@ -69,8 +67,7 @@
             </a>
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
               <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Components:</h6>
-                <a class="collapse-item" href="sales_dashboard.php">Dashboard</a>
+                <a class="collapse-item" href="utilities-color.html">Dashboard</a>
                 <a class="collapse-item" href="sales_sales_list.php">Sales List</a>
                 <a class="collapse-item" href="sales_sales_report.php">Sales Report</a>
               </div>
@@ -85,9 +82,8 @@
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
               <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Components:</h6>
                 <a class="collapse-item" href="login.html">Dashboard</a>
-                <a class="collapse-item" href="purchase_purchase_cart.php">Purchase Cart</a>
+                <a class="collapse-item" href="purchase_purchase_cart.php">Purchasing Cart</a>
                 <a class="collapse-item" href="purchase_add_purchase_order.php">Add Purchase Order</a>
                 <a class="collapse-item" href="purchase_purchase_history.php">Purchase History</a>
               </div>
@@ -102,7 +98,6 @@
 
                   <div id="collapseOrder" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                   <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Components:</h6>
                     <a class="collapse-item" href="order_sales_orders.php">Dashboard</a>
                     <a class="collapse-item" href="order_sales_orders.php">Sales Orders</a>
                     <a class="collapse-item" href="order_add_order.php">Add Order</a>
@@ -118,7 +113,6 @@
 
               <div id="collapseUser" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
               <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Components:</h6>
                 <a class="collapse-item" href="user_add_user.php">Add User</a>
                 <a class="collapse-item" href="user_user_list.php">User List</a>
               </div>
@@ -138,5 +132,12 @@
 
       <!-- Custom scripts for all pages-->
       <script src="js/sb-admin-2.min.js"></script>
+
+      <!-- Page level plugins -->
+      <script src="vendor/chart.js/Chart.min.js"></script>
+
+      <!-- Page level custom scripts -->
+      <script src="js/demo/chart-area-demo.js"></script>
+      <script src="js/demo/chart-pie-demo.js"></script>
     </body>
 </html>
