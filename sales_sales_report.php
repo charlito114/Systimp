@@ -17,6 +17,15 @@ require_once("db/connection.php");
             .bg{
                 background-color: #b4c540;
             }
+            h1{
+                font-family: calibri; color: #cc0000; font-weight: bold;
+            }
+            header{
+                font-family: arial;
+                color: black;
+                margin: 10px;
+            }
+            table {border: none;}
         </style>
     </head>
     <body>
@@ -152,53 +161,60 @@ require_once("db/connection.php");
                                     </div>
                                 </div>
                             </form>
+                            <!-- Print and Page -->
+                            <div class="d-flex" style=" margin-right: 5%;">
+                                <div style="width: 80%;">
+                                    <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-left: 30px; width: 100px;" onclick="printContent('report')"> Print </button>
+                                </div>
+                            </div> 
                             
                             <?php
                                if (isset($_POST['submit']))
-{ 
-    $trial = $_POST['trial'];
-    $month =date("m", strtotime($trial));
-    $year= date("Y", strtotime($trial));
-   
+                                { 
+                                    $trial = $_POST['trial'];
+                                    $month =date("m", strtotime($trial));
+                                    $year= date("Y", strtotime($trial));
+                                    //echo $month; 
+                                    //echo $year;
 
-    $query = "SELECT * FROM salesreport WHERE month = $month AND year = $year";
-    $search_result = filterTable($query);
+                                    $query = "SELECT * FROM salesreport WHERE month = $month AND year = $year";
+                                    $search_result = filterTable($query);
 
-}
-    else {
-        $query = "SELECT * FROM salesreport";
-        $search_result = filterTable($query);
-    }
+                                }
+                                    else {
+                                        $query = "SELECT * FROM salesreport";
+                                        $search_result = filterTable($query);
+                                    }
 
 
-    function filterTable($query)
-    {
-        $con = mysqli_connect("localhost", "root", "", "inventory");
-        $filter_Result = mysqli_query($con, $query);
-        return $filter_Result;
-    }
-                            ?>
-                            
+                                    function filterTable($query)
+                                    {
+                                        $con = mysqli_connect("localhost", "root", "", "inventory");
+                                        $filter_Result = mysqli_query($con, $query);
+                                        return $filter_Result;
+                                    }
+                            ?>                                     
                         </div>
-                        
-                        <!-- Print and Page 
-                        <div class="d-flex" style=" margin-top: 0;">
-                            <div style="width: 80%;">
-                                <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-left: 30px; width: 100px;"> Print </button>
-                            </div>
-                        </div> -->
-                        
+
                         <!-- Table -->
                         <div class="table-responsive">
-                            <div class="card-body mb-4" style="padding-top: 0;">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="padding-top: 0; border-top: .20rem solid #b4c540;">
+                            <div class="card-body mb-4" id="report" style="padding-top: 0;">
+                            <div class="d-sm-flex align-items-center justify-content-between" style="margin-bottom: 30px;">
+                                <div style="width: 100%; display: inline-block; text-align: center;">
+                                    <h1>Jansy Commercial</h1>
+                                    <header class="justify-content-between">528A T. Alonzo St., Sta. Cruz Manila <br>Tel: 554-15-89 | Tel Fax: 554-15-85 <br>Email: jansycommercial@yahoo.com</header>
+                                    <header style="font-weight: bold;">YEARLY SALES AND INCOME REPORT <br>FOR THE YEAR BLANK </header>
+                                </div>
+                            </div>
+                            <table class="" id="dataTable" width="100%" cellspacing="0">
                               <thead>
                                 <tr>
-                                  <th>Year</th>
                                     <th>Month</th>
                                     <th>Sales Before Tax</th>
-                                    <th>VAT</th>
+                                    <th>VAT 12%</th>
                                     <th>Sales After Tax</th>
+                                    <th>Cost of Goods Sold</th>
+                                    <th>Gross Profit</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -227,5 +243,18 @@ require_once("db/connection.php");
                 </div>
             </div>
         </div>
+        <script>
+            function myFunction() {
+            window.print();
+        }
+        
+        function printContent(el){
+            var restorepage = document.body.innerHTML;
+            var printcontent = document.getElementById(el).innerHTML;
+            document.body.innerHTML = printcontent;
+            window.print();
+            document.body.innerHTML = restorepage;
+        }
+        </script>
     </body>
 </html>
