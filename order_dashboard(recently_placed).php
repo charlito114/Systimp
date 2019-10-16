@@ -153,6 +153,7 @@
                                           <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Ready Orders</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <!-- Insert PHP Here-->
                                                 <?php
                                               $OSDcount = "SELECT COUNT(Status) c FROM ordermanagement WHERE status='completed' ";
                                               $count_result = mysqli_query($con, $OSDcount);
@@ -214,7 +215,7 @@
                                       <tbody>
                                         <!-- Insert PHP Here-->
                                         <?php
-                                          $viewTop = "SELECT * FROM ordermanagement WHERE status ='Completed' ORDER BY date ASC LIMIT 5";
+                                          $viewTop = "SELECT * FROM ordermanagement ORDER BY date ASC LIMIT 5";
                                         $search_result = mysqli_query($con, $viewTop);
                                         if ($search_result->num_rows > 0) {
                                             // output data of each row
