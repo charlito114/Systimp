@@ -2,24 +2,19 @@
 if(!isset($_SESSION)){
     session_start();
 }
+
 require_once("connection.php");
-if(isset($_POST['submit']))
+if(isset($_POST['submit'])){
+$ReceivedQty = $_POST['receivevalue'];
+$PONum = $_SESSION['PONum'];
+$EditCode =  $_SESSION['EditCode'];
 
-{
-    $PONum= $_SESSION['PONum'];
-    $status = $_POST['cancelreason'];
-    $EditCode =  $_SESSION['EditCode'];
-
-    echo $PONum; 
-    echo $status; 
-    echo $EditCode;
-
-    $cancelQuery = "UPDATE p_podetails 
-                    SET status = '".$status."'
+$receivequery = "UPDATE p_podetails 
+                    SET ToReceive = ToReceive - '".$ReceivedQty."'
                     WHERE ProductCode = $EditCode  AND PONum = $PONum";
-    if(mysqli_query($con,$cancelQuery)){
+    if(mysqli_query($con,$receivequery)){
         
-        $alert = "Successfully cancelled an item in purchase order!";
+        $alert = "Successfully updated purchase order!";
         echo $alert;
         echo '<script type="text/javascript">';
         echo 'alert("'.$alert.'")';
@@ -39,8 +34,3 @@ if(isset($_POST['submit']))
                                 
                     }
 }
-
-  
-        
-
-?>
