@@ -18,6 +18,12 @@
             .bg{
                 background-color: #b4c540;
             }
+            .tablinks{
+              cursor: pointer;
+            }
+            .tabcontent {
+              display: none;
+            }
         </style>
     </head>
     <body>
@@ -144,40 +150,48 @@
                                 <!--Charts-->
                                     <!-- Content Row -->
                                 <div class="row">
-
-                                  <!-- Low Quantity  Products -->
-                                  <div class="col-xl-3 col-md-6 mb-4">
-                                    <div class="card border-left-warning shadow h-100 py-2">
-                                      <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                          <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Low Quantity Products</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                  
+                                    <!-- Low Quantity Products -->
+                                    <div class="col-xl-3 col-md-6 mb-4">
+                                      <div class="card border-left-warning shadow h-100 py-2">
+                                        <a class="tablinks" onclick="openTab(event, 'lowQuantity')">
+                                          <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                              <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Low Quantity Products</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                              </div>
+                                              <div class="col-auto">
+                                                <i class="fas fa-sort-amount-down fa-2x text-gray-300"></i>
+                                              </div>
+                                            </div>
                                           </div>
-                                          <div class="col-auto">
-                                            <i class="fas fa-sort-amount-down fa-2x text-gray-300"></i>
-                                          </div>
-                                        </div>
+                                        </a>
                                       </div>
                                     </div>
-                                  </div>
-
-                                  <!-- Discontinued Products -->
-                                  <div class="col-xl-3 col-md-6 mb-4">
-                                    <div class="card border-left-danger shadow h-100 py-2">
-                                      <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                          <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Discontinued Products</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                  
+                                  
+                                  
+                                    <!-- Discontinued Products -->
+                                    <div class="col-xl-3 col-md-6 mb-4">
+                                      <div class="card border-left-danger shadow h-100 py-2">
+                                        <a class="tablinks" onclick="openTab(event, 'discontinuedProducts')">
+                                          <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                              <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Discontinued Products</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                              </div>
+                                              <div class="col-auto">
+                                                <i class="fas fa-ban fa-2x text-gray-300"></i>
+                                              </div>
+                                            </div>
                                           </div>
-                                          <div class="col-auto">
-                                            <i class="fas fa-ban fa-2x text-gray-300"></i>
-                                          </div>
-                                        </div>
+                                          </a> 
                                       </div>
                                     </div>
-                                  </div>
+                                  
+                                  
 
                                   <!-- Restocked Products -->
                                   <div class="col-xl-3 col-md-6 mb-4">
@@ -207,53 +221,115 @@
                                 </div>
                              
                         
-                        <!-- Table -->
-                        
-                            <div class="col-lg-12" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
-                                <form method="post" class="navbar-expand col-lg-12">
-                                <header class="card-header font-weight-bold" style="border-bottom: none;">LOW QUANTITY PRODUCTS</header>
-                                <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                      <thead>
-                                        <tr>
-                                         <th>Product Code</th>
-                                        <th>Category</th>
-                                        <th>Brand</th>
-                                        <th>Description</th>
-                                        <th>Size</th>
-                                        <th>Quantity</th>
-                                        <th>Reorder Point</th>
-                                        <th>Quantity Sold</th>
-                                        <th>Price</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <?php
-                                          $viewTop = "SELECT * FROM products ORDER BY quanSold DESC LIMIT 5";
-                                        $search_result = mysqli_query($con, $viewTop);
-                                        if ($search_result->num_rows > 0) {
-                                            // output data of each row
-                                            while($row = $search_result->fetch_assoc()) {
-                                                echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['quanSold'] . "</td><td>" . $row['price'] ."</td></tr><br>";
+                        <!-- Low Quantity Table -->
+                        <div id="lowQuantity" class="tabcontent" style="display: block;">
+                          <div class="container-fluid">
+                              <div class="col-lg-12" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
+                                    <form method="post" class="navbar-expand col-lg-12 ">
+                                    <header class="card-header font-weight-bold" style="border-bottom: none;">LOW QUANTITY PRODUCTS</header>
+                                    <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                          <thead>
+                                            <tr>
+                                            <th>Product Code</th>
+                                            <th>Category</th>
+                                            <th>Brand</th>
+                                            <th>Description</th>
+                                            <th>Size</th>
+                                            <th>Quantity</th>
+                                            <th>Reorder Point</th>
+                                            <th>Quantity Sold</th>
+                                            <th>Price</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <?php
+                                              $viewTop = "SELECT * FROM products ORDER BY quanSold DESC LIMIT 5";
+                                            $search_result = mysqli_query($con, $viewTop);
+                                            if ($search_result->num_rows > 0) {
+                                                // output data of each row
+                                                while($row = $search_result->fetch_assoc()) {
+                                                    echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['quanSold'] . "</td><td>" . $row['price'] ."</td></tr><br>";
+                                                    }
                                                 }
+                                            else{
+                                                echo "0 results";
                                             }
-                                        else{
-                                            echo "0 results";
-                                        }
-                                            
-                                          ?>
-                                      </tbody>
-                                    </table>
-                                </div>
-                            </form>
-                            
-                            </div>
-                        
-                    </div>
-                    
+                                                
+                                              ?>
+                                          </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                              </div>
+                          </div>
+                        </div>
+
+                        <!-- Discontinued Products Table -->
+                        <div id="discontinuedProducts" class="tabcontent">
+                          <div class="container-fluid">
+                              <div class="col-lg-12" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
+                                    <form method="post" class="navbar-expand col-lg-12 ">
+                                    <header class="card-header font-weight-bold" style="border-bottom: none;">Discontinued Products PRODUCTS</header>
+                                    <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                          <thead>
+                                            <tr>
+                                            <th>Product Code</th>
+                                            <th>Category</th>
+                                            <th>Brand</th>
+                                            <th>Description</th>
+                                            <th>Size</th>
+                                            <th>Quantity</th>
+                                            <th>Reorder Point</th>
+                                            <th>Quantity Sold</th>
+                                            <th>Price</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                          <?php
+                                            $viewTop = "SELECT * FROM products WHERE status = 'Discontinued'";
+                                            $search_result = mysqli_query($con, $viewTop);
+                                            if ($search_result->num_rows > 0) {
+                                                // output data of each row
+                                                while($row = $search_result->fetch_assoc()) {
+                                                    echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint']  ."</td></tr><br>";
+                                                    }
+                                                }
+                                            else{
+                                                echo "0 results";
+                                            }
+                                            ?>
+                                          </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                              </div>
+                          </div>
+                        </div>
+                          
+                    </div>  
                 </div>
             </div>
         </div>
+
+        <script>
+          function openTab(evt, tabName) {
+            
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+              tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+              tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+          }
+        </script>
+
           <!-- Page level plugins -->
   <script src="vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
