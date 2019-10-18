@@ -18,6 +18,12 @@
             .bg{
                 background-color: #b4c540;
             }
+            .tablinks{
+              cursor: pointer;
+            }
+            .tabcontent {
+              display: none;
+            }
         </style>
     </head>
     <body>
@@ -148,95 +154,156 @@
                                     <!-- Ready Orders-->
                                   <div class="col-xl-3 col-md-6 mb-4">
                                     <div class="card border-left-success shadow h-100 py-2">
-                                      <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                          <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Ready Orders</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <?php
-                                              $OSDcount = "SELECT COUNT(Status) c FROM ordermanagement WHERE status='completed' ";
-                                              $count_result = mysqli_query($con, $OSDcount);
-                                              $row = $count_result->fetch_assoc();
-                                              echo $row['c'];
-                                              ?>
-                                              </div>
-                                          </div>
-                                          <div class="col-auto">
-                                            <i class="fas fa-check fa-2x text-gray-300"></i>
+                                      <a class="tablinks" onclick="openTab(event, 'readyOrders')">
+                                        <div class="card-body">
+                                          <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Ready Orders</div>
+                                              <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                  <?php
+                                                $OSDcount = "SELECT COUNT(Status) c FROM ordermanagement WHERE status='completed' ";
+                                                $count_result = mysqli_query($con, $OSDcount);
+                                                $row = $count_result->fetch_assoc();
+                                                echo $row['c'];
+                                                ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                              <i class="fas fa-check fa-2x text-gray-300"></i>
+                                            </div>
                                           </div>
                                         </div>
-                                      </div>
+                                      </a>
                                     </div>
                                   </div>
 
                                   <!-- Recently Placed Orders-->
                                   <div class="col-xl-3 col-md-6 mb-4">
                                     <div class="card border-left-warning shadow h-100 py-2">
-                                      <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                          <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Recently Placed Orders</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <!-- Insert PHP Here-->
-                                                <?php
-                                              $OSDcount = "SELECT COUNT(Status) c FROM ordermanagement";
-                                              $count_result = mysqli_query($con, $OSDcount);
-                                              $row = $count_result->fetch_assoc();
-                                              echo $row['c'];
-                                              ?>
-                                              </div>
-                                          </div>
-                                          <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                      <a class="tablinks" onclick="openTab(event, 'recentlyPlacedOrders')">
+                                        <div class="card-body">
+                                          <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Recently Placed Orders</div>
+                                              <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                  <!-- Insert PHP Here-->
+                                                  <?php
+                                                    $OSDcount = "SELECT COUNT(Status) c FROM ordermanagement";
+                                                    $count_result = mysqli_query($con, $OSDcount);
+                                                    $row = $count_result->fetch_assoc();
+                                                    echo $row['c'];
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                              <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            </div>
                                           </div>
                                         </div>
-                                      </div>
+                                      </a>
                                     </div>
                                   </div> 
                                 </div>
                              
                         
-                        <!-- Table  Shar-->
-                        
-                            <div class="col-lg-12" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
-                                <form method="post" class="navbar-expand col-lg-12">
-                                <header class="card-header font-weight-bold" style="border-bottom: none;">READY ORDERS</header>
-                                <div class="align-items-center justify-content-between mb-4" style="padding-top: 0;">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                      <thead>
-                                        <tr>
-                                         <th>Date</th>
-                                         <th>Sales Order Number</th>
-                                         <th>Total Amount</th>
-                                         <th>Status</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <!-- Insert PHP Here-->
-                                        <?php
-                                          $viewTop = "SELECT * FROM ordermanagement WHERE status ='Completed' ORDER BY date ASC LIMIT 5";
-                                        $search_result = mysqli_query($con, $viewTop);
-                                        if ($search_result->num_rows > 0) {
-                                            // output data of each row
+                        <!-- Ready Orders-->
+                          <div id="readyOrders" class="tabcontent" style="display: block;">
+                            <div class="col-lg-12 " style="padding-top: 0; border-top:  .10rem solid #b4c540;">
+                              <form method="post" class="navbar-expand col-lg-12">
+                              <header class="card-header font-weight-bold" style="border-bottom: none;">READY ORDERS</header>
+                                  <div class="align-items-center justify-content-between mb-4" style="padding-top: 0;">
+                                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                          <tr>
+                                          <th>Date</th>
+                                          <th>Sales Order Number</th>
+                                          <th>Total Amount</th>
+                                          <th>Status</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <?php
+                                            $viewTop = "SELECT * FROM ordermanagement WHERE status ='Completed' ORDER BY date ASC LIMIT 5";
+                                          $search_result = mysqli_query($con, $viewTop);
+                                          if ($search_result->num_rows > 0) {
+                                              // output data of each row
 
-                                            while($row = $search_result->fetch_assoc()) {
-                                                echo "\t<tr><td >" . $row['Date'] . "</td><td>" . $row['SONum'] . "</td><td>"  .  $row['TotalAmount'] . "</td>". "</td><td>"  .  $row['Status'] . "</td></tr><br>";
-                                                }
+                                              while($row = $search_result->fetch_assoc()) {
+                                                  echo "\t<tr><td >" . $row['Date'] . "</td><td>" . $row['SONum'] . "</td><td>"  .  $row['TotalAmount'] . "</td>". "</td><td>"  .  $row['Status'] . "</td></tr><br>";
+                                                  }
+                                              }
+                                          else{
+                                              echo "0 results";
+                                          }
+                                              
+                                            ?>
+                                        </tbody>
+                                      </table>
+                                  </div>
+                              </form>  
+                            </div> 
+                          </div>
+
+                          <!-- Recently Placed Orders-->
+                          <div id="recentlyPlacedOrders" class="tabcontent">
+                          <div class="col-lg-12 " style="padding-top: 0; border-top:  .10rem solid #b4c540;">
+                              <form method="post" class="navbar-expand col-lg-12">
+                              <header class="card-header font-weight-bold" style="border-bottom: none;">READY ORDERS</header>
+                                  <div class="align-items-center justify-content-between mb-4" style="padding-top: 0;">
+                                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                  <thead>
+                                    <tr>
+                                      <th>Date</th>
+                                      <th>Sales Order Number</th>
+                                      <th>Total Amount</th>
+                                      <th>Status</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <!-- Insert PHP Here-->
+                                    <?php
+                                      $viewTop = "SELECT * FROM ordermanagement ORDER BY date ASC LIMIT 5";
+                                    $search_result = mysqli_query($con, $viewTop);
+                                    if ($search_result->num_rows > 0) {
+                                        // output data of each row
+
+                                        while($row = $search_result->fetch_assoc()) {
+                                            echo "\t<tr><td >" . $row['Date'] . "</td><td>" . $row['SONum'] . "</td><td>"  .  $row['TotalAmount'] . "</td>". "</td><td>"  .  $row['Status'] . "</td></tr><br>";
                                             }
-                                        else{
-                                            echo "0 results";
                                         }
-                                            
-                                          ?>
-                                      </tbody>
-                                    </table>
+                                    else{
+                                        echo "0 results";
+                                    }
+                                        
+                                      ?>
+                                  </tbody>
+                                </table>
                                 </div>
                             </form>  
                             </div> 
+                          </div>
+                            
                     </div>
                 </div>
             </div>
         </div>
+
+        <script>
+          function openTab(evt, tabName) {
+            
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+              tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+              tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+          }
+        </script>
                   <!-- Page level plugins -->
   <script src="vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
