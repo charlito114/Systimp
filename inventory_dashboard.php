@@ -159,7 +159,22 @@
                                             <div class="row no-gutters align-items-center">
                                               <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Low Quantity Products</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                  <?php
+                                                  $LSQuery = ("SELECT count(prodcode) AS LSCount FROM products  WHERE prodquan < repoint");
+                                                  $LSResult =  $con->query($LSQuery);
+                                                  if ($LSResult->num_rows > 0) {
+                                                      // output data of each row
+                                                      while($row = $LSResult->fetch_assoc()) {
+                                                          $Lowstock= $row['LSCount'];
+                                                          $_SESSION['LSCount'] = $Lowstock;
+                                                          echo $Lowstock;
+                                                          }
+                                                      } else {
+                                                          echo "0";
+                                                          }
+                                                  ?>
+                                                </div>
                                               </div>
                                               <div class="col-auto">
                                                 <i class="fas fa-sort-amount-down fa-2x text-gray-300"></i>
@@ -180,7 +195,22 @@
                                             <div class="row no-gutters align-items-center">
                                               <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Discontinued Products</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                  <?php
+                                                  $DCQuery = ("SELECT count(prodcode) AS DCount FROM products  WHERE status = 'Discontinued' ");
+                                                  $DCResult =  $con->query($DCQuery);
+                                                  if ($DCResult->num_rows > 0) {
+                                                      // output data of each row
+                                                      while($row = $DCResult->fetch_assoc()) {
+                                                          $Discontinued= $row['DCount'];
+                                                          $_SESSION['DCount'] = $Discontinued;
+                                                          echo $Discontinued;
+                                                          }
+                                                      } else {
+                                                          echo "0";
+                                                          }
+                                                  ?>
+                                                </div>
                                               </div>
                                               <div class="col-auto">
                                                 <i class="fas fa-ban fa-2x text-gray-300"></i>
@@ -237,24 +267,22 @@
                                             <th>Description</th>
                                             <th>Size</th>
                                             <th>Quantity</th>
-                                            <th>Reorder Point</th>
-                                            <th>Quantity Sold</th>
-                                            <th>Price</th>
+                                            <th>Reorder Point</th>                                            
                                             </tr>
                                           </thead>
                                           <tbody>
                                             <?php
-                                              $viewTop = "SELECT * FROM products ORDER BY quanSold DESC LIMIT 5";
-                                            $search_result = mysqli_query($con, $viewTop);
-                                            if ($search_result->num_rows > 0) {
-                                                // output data of each row
-                                                while($row = $search_result->fetch_assoc()) {
-                                                    echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['quanSold'] . "</td><td>" . $row['price'] ."</td></tr><br>";
-                                                    }
-                                                }
-                                            else{
-                                                echo "0 results";
-                                            }
+                                              $viewTop = "SELECT * FROM products WHERE prodquan < repoint";
+                                              $search_result = mysqli_query($con, $viewTop);
+                                              if ($search_result->num_rows > 0) {
+                                                  // output data of each row
+                                                  while($row = $search_result->fetch_assoc()) {
+                                                      echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint']  ."</td></tr><br>";
+                                                      }
+                                                  }
+                                              else{
+                                                  echo "0 results";
+                                              }
                                                 
                                               ?>
                                           </tbody>
@@ -281,9 +309,7 @@
                                             <th>Description</th>
                                             <th>Size</th>
                                             <th>Quantity</th>
-                                            <th>Reorder Point</th>
-                                            <th>Quantity Sold</th>
-                                            <th>Price</th>
+                                            <th>Reorder Point</th>                                            
                                             </tr>
                                           </thead>
                                           <tbody>
