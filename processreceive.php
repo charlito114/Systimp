@@ -2,13 +2,11 @@
 if(!isset($_SESSION)){
     session_start();
 }
-
-require_once("connection.php");
+require_once("db/connection.php");
 if(isset($_POST['submit'])){
 $ReceivedQty = $_POST['receivevalue'];
 $PONum = $_SESSION['PONum'];
 $EditCode =  $_SESSION['EditCode'];
-
 $receivequery = "UPDATE p_podetails 
                     SET ToReceive = ToReceive - '".$ReceivedQty."'
                     WHERE ProductCode = $EditCode  AND PONum = $PONum";
@@ -36,7 +34,6 @@ $receivequery = "UPDATE p_podetails
 $updateinventory = "UPDATE products 
                     SET prodquan = prodquan + '".$ReceivedQty."'
                     WHERE prodcode = $EditCode";
-
 if(mysqli_query($con,$receivequery)){
         
     $alert = "Successfully updated purchase order!";

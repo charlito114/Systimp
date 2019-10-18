@@ -2,18 +2,15 @@
 if(!isset($_SESSION)){
     session_start();
 }
-require_once("connection.php");
+require_once("db/connection.php");
 if(isset($_POST['submit']))
-
 {
     $PONum= $_SESSION['PONum'];
     $status = $_POST['cancelreason'];
     $EditCode =  $_SESSION['EditCode'];
-
     echo $PONum; 
     echo $status; 
     echo $EditCode;
-
     $cancelQuery = "UPDATE p_podetails 
                     SET status = '".$status."'
                     WHERE ProductCode = $EditCode  AND PONum = $PONum";
@@ -39,8 +36,6 @@ if(isset($_POST['submit']))
                                 
                     }
 }
-
   
         
-
 ?>
