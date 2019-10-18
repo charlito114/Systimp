@@ -142,16 +142,17 @@
                             
                                 <div class="mb-4"></div>
                                 <!--Charts-->
-                                   
-                                            
-                                            
+                                    <div class="row" style="display: flex;">
+                                        <div class="col-xl-4 col-lg-2">
+
+                                          <!-- Chart -->
                                           <div class="card shadow mb-4">
                                             <div class="card-header py-3">
                                               <h6 class="m-0 font-weight-bold text-primary">Chart 1</h6>
                                             </div>
                                             <div class="card-body">
                                               <div class="chart-area">
-                                                <div class="chartjs-size-monitor">
+                                              <div class="chartjs-size-monitor">
                                                     <div class="chartjs-size-monitor-expand">
                                                         <div class=""></div>
                                                     </div>
@@ -207,15 +208,9 @@
                                               <h6 class="m-0 font-weight-bold text-primary">Chart 2</h6>
                                             </div>
                                             <div class="card-body">
-                                             <div class="chartjs-size-monitor">
-                                                <div class="chartjs-size-monitor-expand">
-                                                    <div class=""></div>
-                                                </div>
-                                                <div class="chartjs-size-monitor-shrink">
-                                                    <div class=""></div>
-                                                </div>
-                                            </div>
-                                            <canvas id="myBarChart" width="389" height="320" class="chartjs-render-monitor" style="display: block; width: 389px; height: 320px;"></canvas>
+                                              <div class="chart-bar">
+                                                <canvas id="myBarChart"></canvas>
+                                              </div>
                                             </div>
                                           </div>
 
@@ -273,8 +268,7 @@
                           <!-- Page level plugins -->
   <script src="vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Bootstrap core JavaScript-->
+  <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
