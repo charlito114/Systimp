@@ -142,17 +142,24 @@
                             
                                 <div class="mb-4"></div>
                                 <!--Charts-->
-                                    <div class="row" style="display: flex;">
-                                        <div class="col-xl-4 col-lg-2">
-
-                                          <!-- Chart -->
+                                   
+                                            
+                                            
                                           <div class="card shadow mb-4">
                                             <div class="card-header py-3">
                                               <h6 class="m-0 font-weight-bold text-primary">Chart 1</h6>
                                             </div>
                                             <div class="card-body">
                                               <div class="chart-area">
-                                                <canvas id="myAreaChart"></canvas>
+                                                <div class="chartjs-size-monitor">
+                                                    <div class="chartjs-size-monitor-expand">
+                                                        <div class=""></div>
+                                                    </div>
+                                                    <div class="chartjs-size-monitor-shrink">
+                                                        <div class=""></div>
+                                                    </div>
+                                                </div>
+                                                <canvas id="myAreaChart" width="389" height="320" class="chartjs-render-monitor" style="display: block; width: 389px; height: 320px;"></canvas>
                                               </div>
                                             </div>
                                           </div>
@@ -200,9 +207,15 @@
                                               <h6 class="m-0 font-weight-bold text-primary">Chart 2</h6>
                                             </div>
                                             <div class="card-body">
-                                              <div class="chart-bar">
-                                                <canvas id="myBarChart"></canvas>
-                                              </div>
+                                             <div class="chartjs-size-monitor">
+                                                <div class="chartjs-size-monitor-expand">
+                                                    <div class=""></div>
+                                                </div>
+                                                <div class="chartjs-size-monitor-shrink">
+                                                    <div class=""></div>
+                                                </div>
+                                            </div>
+                                            <canvas id="myBarChart" width="389" height="320" class="chartjs-render-monitor" style="display: block; width: 389px; height: 320px;"></canvas>
                                             </div>
                                           </div>
 
@@ -260,6 +273,23 @@
                           <!-- Page level plugins -->
   <script src="vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/demo/chart-area-demo.js"></script>
+  <script src="js/demo/chart-bar-demo.js"></script>
 
   <!-- Page level custom scripts -->
   <script src="js/demo/datatables-demo.js"></script>
