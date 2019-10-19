@@ -203,7 +203,7 @@ require_once("connection.php");
             ?>
 
     <form method = "post" action = "">
-    <input type = "submit" name = "submit"  value = "submit" formaction = "posorder.php" > <!-- edited this -->
+    <input type = "submit" name = "submit"  value = "submit" formaction = "pos.php" > <!-- edited this -->
     <input type = "submit" name = "back"  value = "back" formaction = "" >
     </form>
     <?php 
