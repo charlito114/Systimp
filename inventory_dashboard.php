@@ -258,7 +258,7 @@
                                     <form method="post" class="navbar-expand col-lg-12 ">
                                     <header class="card-header font-weight-bold" style="border-bottom: none;">Low Quantity Products</header>
                                     <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0; margin-right: 495px">
-                                        <table class="table table-bordered" id="dataTable" width="140%" cellspacing="0">
+                                        <table class="table table-bordered" id="dataTable" width="150%" cellspacing="0">
                                           <thead>
                                             <tr>
                                             <th>Product Code</th>
