@@ -212,7 +212,7 @@
                               <form method="post" class="navbar-expand col-lg-12">
                               <header class="card-header font-weight-bold" style="border-bottom: none;">READY ORDERS</header>
                                   <div class="align-items-center justify-content-between mb-4" style="padding-top: 0; display:inline-flex;">
-                                      <table class="table table-bordered" id="dataTable" width="275%" cellspacing="0">
+                                      <table class="table table-bordered" id="dataTable" width="230%" cellspacing="0">
                                         <thead>
                                           <tr>
                                           <th>Date</th>
