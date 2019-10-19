@@ -10,6 +10,8 @@
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         
         <style>
             body{
@@ -39,7 +41,7 @@
                 cursor: pointer;
             }
 
-            a.pos-btn,.pos-btn {
+            .pos-btn,.pos-btn {
                 display: inline-block;
                 outline: none;
                 *zoom: 1;
@@ -57,6 +59,7 @@
                 margin-bottom: 10px;
                 width: 40%;
                 height: 60px;
+                background: #fff;
             }
 
             .pos-btn-medium {
@@ -85,51 +88,11 @@
               border-color: #4682B4;
               text-decoration: none;
             }
-
-            #voidModal, #qtyModal, #truncateModal, #addModal {
-              display: none; /* Hidden by default */
-              position: fixed; /* Stay in place */
-              z-index: 1; /* Sit on top */
-              padding-top: 100px; /* Location of the box */
-              left: 0;
-              top: 0;
-              width: 100%; /* Full width */
-              height: 100%; /* Full height */
-              overflow: auto; /* Enable scroll if needed */
-              background-color: rgb(0,0,0); /* Fallback color */
-              background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            .c-label{
+                margin: 10px;
             }
-
-            /* Modal Content */
-            .bigmodal-content {
-              background-color: #fefefe;
-              margin: auto;
-              padding: 20px;
-              border: 1px solid #888;
-              width: 70%;
-            }
-
-            .smallmodal-content {
-              background-color: #fefefe;
-              margin: auto;
-              padding: 20px;
-              border: 1px solid #888;
-              width: 30%;
-            }
-
-            /* The Close Button */
-            .close1, .close2, .close3, .close4 {
-              color: #aaaaaa;
-              float: right;
-              font-size: 28px;
-              font-weight: bold;
-            }
-
-            .close1:hover,
-            .close1:focus, .close2:hover, .close2:focus, .close3:hover, .close3:focus, .close4:hover, .close4:focus  {
-              color: #000;
-              text-decoration: none;
-              cursor: pointer;
+            .c-input{
+                margin-right: 90px;
             }
 
         </style>
@@ -250,12 +213,13 @@
                             </div> 
                         </div>
                     </div>-->
+                    
                     <?php
             
-
                         $SONum = $_SESSION ['SONum']; 
                         $invoiceNum = $_SESSION ['invoiceNum']; 
-                        ?>
+                    ?>
+
                     <div class="container-fluid">
                         <div class="row">
                             <div class="card col-lg-8 shadow mb-4">
@@ -265,24 +229,24 @@
                                         <div class="col-lg-7 mb-4" style="float: left;">
                                             <div class="row d-flex justify-content-between" style="margin-top: 10px;">
                                                 <div>
-                                                    <label class="control-label">SO Number: <?php echo $SONum ?></label>
+                                                    <label class="control-label">SO Number: </label>
                                                 </div>
 
                                                 <div class="input-group col-sm-6 m-bot15">
                                                     <?php
-
+                                                        echo $SONum 
                                                     ?>
                                                 </div>
                                             </div>
 
                                             <div class="row d-flex justify-content-between" style="margin-top: 10px;">
                                                 <div>
-                                                    <label class="control-label">Invoice Number: <?php echo $invoiceNum ?></label>
+                                                    <label class="control-label">Invoice Number:</label>
                                                 </div>
 
                                                 <div class="input-group col-sm-6 m-bot15">
                                                     <?php
-
+                                                         echo $invoiceNum
                                                     ?>
                                                 </div>
                                             </div>
@@ -308,27 +272,28 @@
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                               <thead>
                                                 <tr>
-                                                  <th>Product Code</th>
-                                                  <th>Product Description</th>
-                                                  <th>Size</th>
-                                                  <th>Quantity</th>
-                                                  <th>Total Amount</th>
+                                                  <tr>Product Code</tr>
+                                                  <tr>Product Description</tr>
+                                                  <tr>Size</tr>
+                                                  <tr>Quantity</tr>
+                                                  <tr>Price</tr>
+                                                  <tr>Total Amount</tr>
                                                 </tr>
                                               </thead>
                                               <tbody>
-                                              <?php   
-                                              $viewDetailsQuery = "SELECT * FROM temporaryinvoice";
-                                              $result2 = $con->query($viewDetailsQuery);
-                                              if ($result2->num_rows > 0) {
-                                              // output data of each row
-                                              while($row = $result2->fetch_assoc()) {
-                                                  echo "<form method = 'post' action = '' >";
-                                                  echo "\t<tr><td >" .  $row['ProdCode'] . "</td><td>" .  $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" .  $row['QuantityIssued'] . "</td><td>" .  $row['Price'] . " </td></tr><br>";
-                                                  echo "</form>";
-                                                  }
-                                              } 
-
-                                              ?>
+                                                  <!-- INSERT PHP -->
+                                                  <?php   
+                                                      $viewDetailsQuery = "SELECT * FROM temporaryinvoice";
+                                                      $result2 = $con->query($viewDetailsQuery);
+                                                      if ($result2->num_rows > 0) {
+                                                      // output data of each row
+                                                      while($row = $result2->fetch_assoc()) {
+                                                          echo "<form method = 'post' action = '' >";
+                                                          echo "\t<tr><td >" .  $row['ProdCode'] . "</td><td>" .  $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" .  $row['QuantityIssued'] . "</td><td>" .  $row['Price'] . " </td></tr><br>";
+                                                          echo "</form>";
+                                                          }
+                                                      } 
+                                                  ?>
                                               </tbody>
                                             </table>
                                         </form>
@@ -341,88 +306,136 @@
                                 <div class="card-body">
                                     <!-- POS Buttons -->
                                     <div class="row">
-                                        <a id = "truncateBtn" class="pos-btn pos-btn-medium pos-btn-blue" href="#">Void <br> Sale</a>
-                                        <a id= "voidBtn" class="pos-btn pos-btn-medium pos-btn-blue" href="#">Void <br> Product</a>
+                                        <button id="truncateBtn" class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#truncateModal">Void <br> Sale</button>                                        
+                                        <button id="voidBtn" class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#voidModal">Void <br> Product</button>
                                     </div>
-
-                                    <div id="voidModal" class="modal">
-                                      <div class="smallmodal-content">
-                                        <span class="close1">&times;</span>
-                                        <form method = "post" action = "processvoiditem.php"> 
-                                        <label>Product Code: </label><input type = "number" name= prodcode><br>
-                                        <label>Password: </label><input type = "password" name= password><br>
-                                        <button type = "submit" name = "submit"> Submit </button>
-                                        </form>
-                                      </div>
-                                    </div>
-
-                                    <div id="truncateModal" class="modal">
-                                      <div class="smallmodal-content">
-                                        <span class="close2">&times;</span>
-                                        <form method = "post" action = "processTruncate.php"> 
-                                        <label>Please request for manager approval </label><br>
-                                        <label>Password: </label><input type = "password" name= password><br>
-                                        <button type = "submit" name = "submit"> Submit </button>
-                                        </form>
-                                      </div>
-                                    </div>
-
-                                   
-
-
-                                    <div class="row">
-                                        <a class="pos-btn pos-btn-medium pos-btn-blue" href="#">Search <br> Product</a>
-                                        <a id = "addBtn" class="pos-btn pos-btn-medium pos-btn-blue" href="#">Discount <br> Sale </a>
-                                    </div>
-
-                                   <div id="addModal" class="modal">
-                                      <div class="bigmodal-content">
-                                        <span class="close4">&times;</span>
-                                        <form method = "post" action = "processposadd.php"> 
-                                        <label>Add Products<label><br>
-                                        <label>Product Code: </label><input type = "number" name= prodcode><br>
-                                        <label>Quantity: </label><input type = "number" name= newQty><br><br>
-                                        <label>Sales Order Product Details<label>
-                                        <table> 
-                                          <tr>
-                                            <td> Product Code </td>
-                                            <td> Category </td>
-                                            <td> Brand </td>
-                                            <td> Product Description </td>
-                                            <td> Size </td>
-                                            <td> Quantity Ordered </td>
-                                            <td> Quantity Available </td>
-                                            <td> Quantity Issued </td>
-                                          </tr>
-
-
-                                        <?php 
-                                        $viewDetailsQuery = "SELECT * FROM salesorderdetails WHERE SONum = $SONum";
-                                        $result = $con->query($viewDetailsQuery);
-                                        if ($result->num_rows > 0) {
-                                        // output data of each row
-                                        // gets variables from table
-                                            while($row = $result->fetch_assoc()) {
-                                                echo    "<form method = 'post' >"; 
-                                                echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" .  $row['ProdQuan'] . "</td><td>" .  $row['Available'] . "</td><td>" .  $row['Issued'] ."</td></tr><br>";
-                                                echo    "</form >"; 
                                     
-                                            }
-                                          }
-                                        ?>
-                                        </table>
-                                        <button type = "submit" name = "submit"> Submit </button>
-                                        </form>
+                                    <!-- 1st Set of Modals -->
+                                    <div id="truncateModal" class="modal">
+                                      <div class="modal-dialog">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title">Void Sale</h4>
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                              <form method = "post" action = "processTruncate.php">
+                                                <div class="modal-body">
+                                                    <label>Note: Please request for manager approval </label><br>
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Password: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "password" name= password>
+                                                    </div>
+                                                </div>
+                                                  <div class="modal-footer">
+                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
+                                                  </div>
+                                              </form>
+                                          </div>
                                       </div>
                                     </div>
-
-                                    <div class="row">
-                                        <a class="pos-btn pos-btn-medium pos-btn-blue" href="#">Change <br> Quantity</a>
-                                        <a class="pos-btn pos-btn-medium pos-btn-blue" href="#">Customer <br> Details </a>
+                                    <div id="voidModal" class="modal">                                         
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title">Void Product</h4>
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                              <form method = "post" action = "processvoiditem.php">
+                                                <div class="modal-body">
+                                                    <label>Note: Please request for manager approval </label><br>
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Product Code: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= prodcode>
+                                                    </div>
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Password: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "password" name= password>
+                                                    </div>
+                                                </div>
+                                                  <div class="modal-footer">
+                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
+                                                  </div>
+                                              </form>
+                                          </div>
+                                      </div>
                                     </div>
+                                    
+                                    <!-- POS Buttons -->
                                     <div class="row">
-                                        <a class="pos-btn pos-btn-medium pos-btn-blue" href="#">Cash <br> Payment</a>
-                                        <a class="pos-btn pos-btn-medium pos-btn-blue" href="#">Cheque <br> Payment</a>
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#addModal">Search <br> Product</button>
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#">Discount <br> Sale </button>
+                                    </div>
+                                    
+                                    <!-- 2nd Set of Modals -->
+                                    <div id="addModal" class="modal">                                         
+                                        <div class="modal-dialog modal-lg">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title">Add Products</h4>
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                              <form method = "post" action = "processposadd.php">
+                                                <div class="modal-body">
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Product Code: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= prodcode>
+                                                    </div>
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Quantity: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= newQty>
+                                                    </div>
+                                                    <header class="card-header font-weight-bold">Sales Order Details</header>
+                                                    <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
+                                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                          <thead>
+                                                            <tr>
+                                                              <td>Category</td>
+                                                              <td>Brand</td>
+                                                              <td>Description</td>
+                                                              <td>Size</td>
+                                                              <td> Quantity Ordered </td>
+                                                              <td> Quantity Available </td>
+                                                              <td> Quantity Issued </td>
+                                                            </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                            <?php 
+                                                                $viewDetailsQuery = "SELECT * FROM salesorderdetails WHERE SONum = $SONum";
+                                                                $result = $con->query($viewDetailsQuery);
+                                                                if ($result->num_rows > 0) {
+                                                                // output data of each row
+                                                                // gets variables from table
+                                                                    while($row = $result->fetch_assoc()) {
+                                                                        echo    "<form method = 'post' >"; 
+                                                                        echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" .  $row['ProdQuan'] . "</td><td>" .  $row['Available'] . "</td><td>" .  $row['Issued'] ."</td></tr><br>";
+                                                                        echo    "</form >"; 
+
+                                                                    }
+                                                                  }
+                                                            ?>
+                                                          </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                  <div class="modal-footer">
+                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
+                                                  </div>
+                                              </form>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    
+                                    
+                                    <!-- POS Buttons -->
+                                    <div class="row">
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue">Change <br> Quantity</button>
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue">Customer <br> Details </button>
+                                    </div>
+                                    
+                                    <!-- POS Buttons -->
+                                    <div class="row">
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue">Cash <br> Payment</button>
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue">Cheque <br> Payment</button>
                                     </div>
                                     
                                     <!-- POS Lower Content -->
@@ -519,84 +532,8 @@
                 
             </div>
         </div>
-
-        <script>
-          // Get the modal
-          var modal = document.getElementById("voidModal");
-          var modal2 = document.getElementById("qtyModal");
-          var modal3 = document.getElementById("truncateModal");
-          var modal4 = document.getElementById("addModal");
-
-
-
-          // Get the button that opens the modal
-          var btn = document.getElementById("voidBtn");
-          var btn2 = document.getElementById("qtyBtn");
-          var btn3 = document.getElementById("truncateBtn");
-          var btn4 = document.getElementById("addBtn");
-
-
-
-          // Get the <span> element that closes the modal
-          var span = document.getElementsByClassName("close1")[0];
-          var span2 = document.getElementsByClassName("close2")[0];
-          var span3 = document.getElementsByClassName("close3")[0];
-          var span4 = document.getElementsByClassName("close4")[0];
-
-
-          // When the user clicks the button, open the modal 
-          btn.onclick = function() {
-            modal.style.display = "block";
-          }
-
-          btn2.onclick = function() {
-            modal2.style.display = "block";
-          }
-
-          btn3.onclick = function() {
-            modal3.style.display = "block";
-          }
-
-          btn4.onclick = function() {
-            modal4.style.display = "block";
-          }
-
-          // When the user clicks on <span> (x), close the modal
-          span.onclick = function() {
-            modal.style.display = "none";
-            
-          }
-
-          span2.onclick = function() {
-            modal2.style.display = "none";
-          }
-
-          span3.onclick = function() {
-            modal3.style.display = "none";
-          }
-
-          span4.onclick = function() {
-            modal4.style.display = "none";
-          }
-
-
-          // When the user clicks anywhere outside of the modal, close it
-          window.onclick = function(event) {
-            if (event.target == modal) {
-              modal.style.display = "none";
-            }
-            else if (event.target == modal2) {
-              modal2.style.display = "none";
-            }
-
-            else  if (event.target == modal3) {
-              modal3.style.display = "none";
-            }
-
-            else if (event.target == modal4) {
-              modal4.style.display = "none";
-            }
-          }
-          </script>
+                  <!-- Page level plugins -->
+          <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+          <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
     </body>
 </html>
