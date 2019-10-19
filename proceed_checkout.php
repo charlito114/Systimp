@@ -81,6 +81,7 @@ require_once("connection.php");
                 $proddesc= $row['ProdDesc'];
                 $size= $row['Size'];
                 $prodquan= $row['ProdQuan'];
+                $available= $row['Available']; //added this 
                 $price= $row['Price'];
                 $_SESSION['prodcode'] = $prodcode;
                 $_SESSION['category'] = $category;
@@ -89,6 +90,10 @@ require_once("connection.php");
                 $_SESSION['size'] = $size;
                 $_SESSION['prodquan'] = $prodquan;
                 $_SESSION['price '] = $price;
+                $_SESSION['available'] = $available; //added this 
+
+
+
 
             }
         }
@@ -112,6 +117,7 @@ require_once("connection.php");
 
             
             if(isset($_POST['add'])){
+                 $available= $_SESSION['available']; // added this 
 
                 $quantityIssued = $_POST['quantityIssued'];
                 $_SESSION['quantityIssued'] = $quantityIssued;
@@ -121,12 +127,12 @@ require_once("connection.php");
                 $_SESSION['totalPrice'] = $totalPrice;
 
                 // edited from here
-                if($_SESSION['prodquan'] >= $quantityIssued){
+                if($_SESSION['prodquan'] >= $quantityIssued && $available >= $quantityIssued){
     
-                $InvoiceDetailsQuery = "INSERT INTO temporaryinvoice (invoiceNum, SONum, ProdCode, Category, Brand, ProdDesc, Size, Quantity, QuantityIssued, Price)
+                $InvoiceDetailsQuery = "INSERT INTO temporaryinvoice (invoiceNum, SONum, ProdCode, Category, Brand, ProdDesc, Size, Available, Quantity, QuantityIssued, Price)
+                --added available in both columns and values 
 
-
-                VALUES ('". $_SESSION['invoiceNum']."','". $_SESSION['SONum']."', '". $_SESSION['prodcode']."', '". $_SESSION['category']."','". $_SESSION['brand']."','". $_SESSION['proddesc']."' ,'". $_SESSION['size']."', '". $_SESSION['prodquan']."' , '".$_SESSION['quantityIssued']."'  , '". $_SESSION['totalPrice']."'  )";
+                VALUES ('". $_SESSION['invoiceNum']."','". $_SESSION['SONum']."', '". $_SESSION['prodcode']."', '". $_SESSION['category']."','". $_SESSION['brand']."','". $_SESSION['proddesc']."' ,'". $_SESSION['size']."',  '". $_SESSION['available']."', '". $_SESSION['prodquan']."' , '".$_SESSION['quantityIssued']."'  , '". $_SESSION['totalPrice']."'  )";
 
                     if(mysqli_query($con,$InvoiceDetailsQuery)){
                         $alert = "Successfully added new records!";
@@ -197,7 +203,7 @@ require_once("connection.php");
             ?>
 
     <form method = "post" action = "">
-    <input type = "submit" name = "submit"  value = "submit" formaction = "posorder.php" >
+    <input type = "submit" name = "submit"  value = "submit" formaction = "posorder.php" > <!-- edited this -->
     <input type = "submit" name = "back"  value = "back" formaction = "" >
     </form>
     <?php 
