@@ -137,7 +137,7 @@ body{
 
         <div class="container-fluid">
             <!--Add New Product Form -->
-            <form action = "" method= "post">
+            <form action = "" method= "post"  onsubmit="return confirm('Add new product?');">
                 <div class="col-lg-12">
                     <div class="card-header font-weight-bold">
                         Add New Product
@@ -297,7 +297,7 @@ body{
                                 </div>
                             </form>
                             
-                            <form method="post"> 
+                            <form method="post" onsubmit="return confirm('Are you sure you want to continue action?');"> 
                                 <div class="d-flex" style=" margin-top: 10px;">
                                     <!-- Remove Button-->
                                     <div style="width: 80%; float: left;">

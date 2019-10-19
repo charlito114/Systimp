@@ -1,12 +1,12 @@
 <?php
-
+error_reporting(0);
 require_once("db/connection.php");
 session_start();
 
 if (isset($_POST['submit']))
 {
     $PONum = $_SESSION['PONum'];
-    echo $PONum;
+    //echo $PONum;
     $date = $_SESSION['date'];
     $supplier = $_SESSION['SupplierName'];
     $address = $_SESSION['address'];
@@ -54,7 +54,11 @@ if (isset($_POST['submit']))
     
     $refreshQuery = "DELETE FROM temporarypurchasing";
     if(mysqli_query($con,$refreshQuery)) {
-        header("location:purchase_purchase_history.php?message=successfully added new records");
+        echo '<script language="javascript">';
+        echo 'alert("This order has been successfully added!")';
+        echo '</script>';
+        include("purchase_purchase_history.php");
+        //header("location:purchase_purchase_history.php?message=successfully added new records");
         session_unset();
         session_destroy();
         

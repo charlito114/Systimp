@@ -141,7 +141,7 @@
                                 <header class="card-header font-weight-bold">Purchase Order Details</header>
                                 
                                 <!--SO Details Form -->
-                                <form method = "post" action = "purchase_add_purchase_order2.php">
+                                <form method = "post" onsubmit="return confirm('Are you sure you want to add this entry?');" action = "purchase_add_purchase_order2.php">
                                     <div class="row">
                                         <div class="col-lg-5 mb-4" style="float: left;">
                                             <div class="card-body">
@@ -423,7 +423,7 @@
                             </div>
                         </form>
 
-                        <form method="post"> 
+                        <form method="post" onsubmit="return confirm('Are you sure you want to continue action?');"> 
                             <div class="d-flex" style=" margin-top: 10px;">
                                 <!-- Remove Button-->
                                 <div style="width: 80%; float: left;">

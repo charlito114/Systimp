@@ -232,7 +232,7 @@ require_once("db/connection.php"); ?>
                           }
                           }
                             ?>  
-                        <form method = "post" action = "purchase_purchase_cart.php" style="width: 100%;">
+                        <form onsubmit="return confirm('Are you sure you want to continue action?');" method = "post" action = "purchase_purchase_cart.php" style="width: 100%;">
                         <div class="col-lg-12 navbar-expand">
                             <header class="panel-heading" style="padding-top: 0; border-bottom:  .10rem solid #b4c540;">Product Details</header>
                             

@@ -390,7 +390,7 @@
                         
                         <!-- Table -->
                         <div class="col-lg-12">
-                            <form method="post" class="navbar-expand col-lg-12">
+                            <form method="post" class="navbar-expand col-lg-12" >
                             <header class="card-header font-weight-bold">Product Order Summary</header>
                             <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -423,7 +423,7 @@
                             </div>
                         </form>
 
-                        <form method="post"> 
+                        <form method="post"  onsubmit="return confirm('Are you sure you want to continue action?');"> 
                             <div class="d-flex" style=" margin-top: 10px;">
                                 <!-- Remove Button-->
                                 <div style="width: 80%; float: left;">
