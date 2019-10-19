@@ -9,7 +9,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <!-- Custom styles for this page -->
-          <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
         
         <style>
             body{
@@ -18,12 +18,74 @@
             .bg{
                 background-color: #b4c540;
             }
-            .tablinks{
-              cursor: pointer;
+            
+            *, *:before, *:after {
+              -webkit-box-sizing: border-box;
+              -moz-box-sizing: border-box;
+              box-sizing: border-box;
+              margin: 0;
+              padding: 0;
             }
-            .tabcontent {
-              display: none;
+
+            /* Buttons styles */
+            input::-moz-focus-inner,
+            button::-moz-focus-inner {
+                border: 0;
+                padding: 0;
             }
+
+            input[type="submit"].btn,
+            button.btn {
+                cursor: pointer;
+            }
+
+            a.pos-btn,.pos-btn {
+                display: inline-block;
+                outline: none;
+                *zoom: 1;
+                text-align: center;
+                text-decoration: none;
+                font-family: inherit;
+                font-weight: 300;
+                letter-spacing: 1px;
+                vertical-align: middle;
+                border: 1px solid;
+                transition: all 0.2s ease;
+                box-sizing: border-box;
+                text-shadow: 0 1px 0 rgba(0,0,0,0.01);
+                margin: auto;
+                margin-bottom: 10px;
+                width: 40%;
+                height: 60px;
+            }
+
+            .pos-btn-medium {
+                font-size: 0.9375em;
+                padding: 0.5375em 1.375em;
+            }
+
+            /* Colors */
+            .pos-btn-green {
+                color: #3CB371;
+                border-color: #3CB371;
+            }
+            .pos-btn-green:hover {
+              background: #3CB371;
+              color: #fff;
+              border-color: #3CB371;
+              text-decoration: none;
+            }
+            .pos-btn-blue {
+                color: #4682B4;
+                border-color: #4682B4;
+            }
+            .pos-btn-blue:hover {
+              background: #4682B4;
+              color: #fff;
+              border-color: #4682B4;
+              text-decoration: none;
+            }
+
         </style>
     </head>
     <body>
@@ -37,7 +99,7 @@
                 <!-- Main Content -->
                 <div id="content">
                     <!-- Topbar -->
-                    <nav class="navbar navbar-expand navbar-light bg topbar mb-4 static-top shadow">
+                    <nav class="navbar navbar-expand navbar-light mb-4 bg topbar static-top shadow">
                         <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">POS System</div>
                       <!-- Sidebar Toggle (Topbar) -->
                       <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -144,12 +206,12 @@
                     </div>-->
 
                     <div class="container-fluid">
-                        <div class = "row">
-                            <div class = "card-body">
-                                <!--POS Details Form -->
-                                <div class="row">
-                                    <div class="col-lg-5 mb-4" style="float: left;">
-                                        <div class="card-body">
+                        <div class="row">
+                            <div class="card col-lg-8 shadow mb-4">
+                                <div class="card-body">
+                                    <!-- POS Details -->
+                                    <div class="row">
+                                        <div class="col-lg-7 mb-4" style="float: left;">
                                             <div class="row d-flex justify-content-between" style="margin-top: 10px;">
                                                 <div>
                                                     <label class="control-label">SO Number:</label>
@@ -157,7 +219,7 @@
 
                                                 <div class="input-group col-sm-6 m-bot15">
                                                     <?php
-                                                        
+
                                                     ?>
                                                 </div>
                                             </div>
@@ -169,15 +231,12 @@
 
                                                 <div class="input-group col-sm-6 m-bot15">
                                                     <?php
-                                                        
+
                                                     ?>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="col-lg-5 mb-4" style="float: right;">
-                                        <div class="card-body">
+                                        <div class="col-lg-5 mb-4" style="float: right;">
                                             <div class="row d-flex justify-content-between" style="margin-top: 10px;">
                                                 <div>
                                                     <label class="control-label">Customer Name:</label>
@@ -185,20 +244,150 @@
 
                                                 <div class="input-group col-sm-6 m-bot15">
                                                     <?php
-                                                        
+
                                                     ?>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                    <!-- Product Table -->
+                                    <div class="table-responsive">
+                                        <form method = "post" action = "">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                              <thead>
+                                                <tr>
+                                                  <th>Product Code</th>
+                                                  <th>Product Description</th>
+                                                  <th>Size</th>
+                                                  <th>Quantity</th>
+                                                  <th>Price</th>
+                                                  <th>Total Amount</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                  <!-- INSERT PHP -->
+                                              </tbody>
+                                            </table>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
+                            
+                            <!-- POS Sidebar -->
+                            <div class="card shadow col-lg-4 mb-4">
+                                <div class="card-body">
+                                    <!-- POS Buttons -->
+                                    <div class="row">
+                                        <a class="pos-btn pos-btn-medium pos-btn-blue" href="#">Void <br> Sale</a>
+                                        <a class="pos-btn pos-btn-medium pos-btn-blue" href="#">Void <br> Product</a>
+                                    </div>
+                                    <div class="row">
+                                        <a class="pos-btn pos-btn-medium pos-btn-blue" href="#">Search <br> Product</a>
+                                        <a class="pos-btn pos-btn-medium pos-btn-blue" href="#">Discount <br> Sale </a>
+                                    </div>
+                                    <div class="row">
+                                        <a class="pos-btn pos-btn-medium pos-btn-blue" href="#">Change <br> Quantity</a>
+                                        <a class="pos-btn pos-btn-medium pos-btn-blue" href="#">Customer <br> Details </a>
+                                    </div>
+                                    <div class="row">
+                                        <a class="pos-btn pos-btn-medium pos-btn-blue" href="#">Cash <br> Payment</a>
+                                        <a class="pos-btn pos-btn-medium pos-btn-blue" href="#">Cheque <br> Payment</a>
+                                    </div>
+                                    
+                                    <!-- POS Lower Content -->
+                                    <div class="col-lg-7 mb-4" style="float: left;">
+                                        <div class="row d-flex justify-content-between" style="margin-top: 10px;">
+                                            <div>
+                                                <label class="control-label">Total Items:</label>
+                                            </div>
 
-                            <div class = "card-body " style = "background-color: #e7e7e4;">
+                                            <div class="input-group col-sm-6 m-bot15">
+                                                <?php
+
+                                                ?>
+                                            </div>
+                                        </div>
+
+                                        <div class="row d-flex justify-content-between" style="margin-top: 10px;">
+                                            <div>
+                                                <label class="control-label">Subtotal:</label>
+                                            </div>
+
+                                            <div class="input-group col-sm-6 m-bot15">
+                                                <?php
+
+                                                ?>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row d-flex justify-content-between" style="margin-top: 10px;">
+                                            <div>
+                                                <label class="control-label">12% VAT:</label>
+                                            </div>
+
+                                            <div class="input-group col-sm-6 m-bot15">
+                                                <?php
+
+                                                ?>
+                                            </div>
+                                        </div>
+                                        
+                                        <br>
+                                        
+                                        <div class="row d-flex justify-content-between" style="margin-top: 10px;">
+                                            <div>
+                                                <label class="control-label">TOTAL:</label>
+                                            </div>
+
+                                            <div class="input-group col-sm-6 m-bot15">
+                                                <?php
+
+                                                ?>
+                                            </div>
+                                        </div>
+                                        
+                                        <br>
+                                        
+                                        <div class="row d-flex justify-content-between" style="margin-top: 10px;">
+                                            <div>
+                                                <label class="control-label">Amount Received:</label>
+                                            </div>
+
+                                            <div class="input-group col-sm-6 m-bot15">
+                                                <?php
+
+                                                ?>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row d-flex justify-content-between" style="margin-top: 10px;">
+                                            <div>
+                                                <label class="control-label">Change:</label>
+                                            </div>
+
+                                            <div class="input-group col-sm-6 m-bot15">
+                                                <?php
+
+                                                ?>
+                                            </div>
+                                        </div>
+                                        
+                                        <br>
+                                        
+                                        <div class="d-flex justify-content-between" style="margin-left: 50%">
+                                            <div style="width: 80%;">
+                                                <button name="" value="" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" style="margin-left: 30px; width: 100px;"> Done </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </div> 
                     </div>
-
-        
+                </div>
+                
+            </div>
+        </div>
     </body>
 </html>
