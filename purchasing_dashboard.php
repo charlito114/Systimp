@@ -220,11 +220,11 @@
                         
                         <!-- Table  Shar-->
                         
-                            <div class="col-lg-12" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
-                                <form method="post" class="navbar-expand col-lg-12">
+                            <div class="col-lg-12 table-responsive" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
+                                <form method='post' action = "view_purchase_order.php" class="navbar-expand col-lg-12">
                                 <header class="card-header font-weight-bold" style="border-bottom: none;">ONGOING SUPPLIER DELIVERIES</header>
                                 <div class=" align-items-center justify-content-between mb-4" style="padding-top: 0; display:inline-flex;">
-                                    <table class="table table-bordered" id="dataTable" width="300%" cellspacing="0">
+                                    <table class="table table-bordered" id="dataTable" width="250%" cellspacing="0">
                                       <thead>
                                         <tr>
                                          <th>Date</th>
@@ -233,13 +233,14 @@
                                         </tr>
                                       </thead>
                                       <tbody>
+                                        <!-- when po num is clicked and viewed and clicks back to go back to dashboard initially, it goes back to history instead -->
                                         <?php
                                           $viewTop = "SELECT * FROM p_purchasingmanagement WHERE status ='ongoing' ORDER BY PONum ASC LIMIT 5";
                                         $search_result = mysqli_query($con, $viewTop);
                                         if ($search_result->num_rows > 0) {
                                             // output data of each row
                                             while($row = $search_result->fetch_assoc()) {
-                                                echo "\t<tr><td >" . $row['Date'] . "</td><td>" . $row['PONum'] . "</td><td>"  .  $row['SupplierName'] . "</td></tr><br>";
+                                                echo "\t<tr><td >" . $row['Date'] . "</td><td><input type = 'submit' name = 'PONum' value = '" . $row['PONum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['SupplierName'] . "</td></tr><br>";
                                                 }
                                             }
                                         else{
