@@ -177,13 +177,12 @@
                             
                         </div>
                         
-                        <!-- Print and Page -->
+                        <!-- Print 
                         <div class="d-flex" style=" margin-top: 0;">
-                            <!-- Print Button-->
                             <div style="width: 80%;">
                                 <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-left: 30px; width: 100px;"> Print </button>
                             </div>
-                        </div>
+                        </div>-->
                         
                         <!-- Table -->
                         <div class="table-responsive">

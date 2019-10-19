@@ -52,6 +52,7 @@
                     <a class="collapse-item" href="inventory.php">Inventory List</a>
                     <a class="collapse-item" href="inventory_add_product.php">Add Product</a>
                     <a class="collapse-item" href="inventory_remove_product.php">Remove Product</a>
+                    <a class="collapse-item" href="inventory_inventory_report.php">Inventory Report</a>
                   </div>
                 </div>
           </li>
