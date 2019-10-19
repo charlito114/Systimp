@@ -121,7 +121,7 @@ require_once("connection.php");
                 $_SESSION['totalPrice'] = $totalPrice;
 
                 // edited from here
-                if($_SESSION['prodquan'] > $quantityIssued){
+                if($_SESSION['prodquan'] >= $quantityIssued){
     
                 $InvoiceDetailsQuery = "INSERT INTO temporaryinvoice (invoiceNum, SONum, ProdCode, Category, Brand, ProdDesc, Size, Quantity, QuantityIssued, Price)
 
