@@ -188,7 +188,7 @@ require_once("db/connection.php");?>
                         
                         <!-- Table -->
                         <div class="table-responsive">
-                            <form class="navbar-expand" onsubmit="return confirm('Do you really want to submit the form?');">
+                            <form class="navbar-expand" onsubmit="return confirm('Confirm removal of product?');">
                                  <header class="panel-heading">Product Details</header>
                             <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0; border-top: .20rem solid #b4c540;">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
