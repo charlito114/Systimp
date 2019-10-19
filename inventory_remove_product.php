@@ -159,7 +159,7 @@ require_once("db/connection.php");?>
                                 $_SESSION['search'] = $valueToSearch;
                                 // search in all table columns
                                 // using concat mysql function
-                                $query = "SELECT * FROM products WHERE CONCAT(prodcode) LIKE '%".$_SESSION['search']."%'";
+                                $query = "SELECT * FROM products WHERE status != 'Discontinued' AND CONCAT(prodcode) LIKE '%".$_SESSION['search']."%'";
                                 $search_result = filterTable($query);
 
                             }
@@ -188,7 +188,7 @@ require_once("db/connection.php");?>
                         
                         <!-- Table -->
                         <div class="table-responsive">
-                            <form class="navbar-expand">
+                            <form class="navbar-expand" onsubmit="return confirm('Do you really want to submit the form?');">
                                  <header class="panel-heading">Product Details</header>
                             <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0; border-top: .20rem solid #b4c540;">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -207,7 +207,7 @@ require_once("db/connection.php");?>
                               <tbody>
                                 <?php 
                                 
-                                  	while($row = $search_result->fetch_assoc()) {
+                                    while($row = $search_result->fetch_assoc()) {
                                     echo "\t<tr  ><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['price'] ."</td></tr>\n";
                                     }
                                   ?>

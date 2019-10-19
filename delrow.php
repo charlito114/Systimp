@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
  require_once("db/connection.php");
  session_start();
 
@@ -10,13 +10,21 @@ if (isset($_POST['remove']) && $_SESSION['countorder']!= 1 || $_SESSION['countpu
 
 
    if( mysqli_query($con,$query) ){
-    header("location:inventory_remove_product.php?message=Successfully removed product from database");
+    echo '<script language="javascript">';
+    echo 'alert("This item is deleted")';
+    echo '</script>';
+    include("inventory_remove_product.php");
+    //header("location:inventory_remove_product.php?message=Successfully removed product from database");
                 
-					session_unset(); 
-					session_destroy();
+                    session_unset(); 
+                    session_destroy();
                 }
     else{
-        header("location:inventory_remove_product.php?message=Error in removing the product");
+        echo '<script language="javascript">';
+        echo 'alert("Error")';
+        echo '</script>';
+        include("inventory_remove_product.php");
+        //header("location:inventory_remove_product.php?message=Error in removing the product");
     }
 
     
@@ -27,6 +35,6 @@ else{
     echo '</script>';
     include("inventory_remove_product.php");
     session_unset(); 
-	session_destroy();
+    session_destroy();
 }
 ?>
