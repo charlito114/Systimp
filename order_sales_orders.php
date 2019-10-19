@@ -189,38 +189,39 @@
                         
                         <!-- Table -->
                         <div class="table-responsive">
-                        <div class="card-body mb-4" style="padding-top: 0;">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="padding-top: 0; border-top: .20rem solid #b4c540;">
-                              <thead>
-                                <tr>
-                                  <th>Date</th>
-                                  <th>Sales Order Number</th>
-                                  <th>Total Amount</th>
-                                  <th>Status</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                  <!-- Change this*** -->
-                                <?php 
-                                  if ($search_result->num_rows > 0) {
-                                    // output data of each row
+                            <form method = "post" action = "view_sales_order.php">
+                                <div class="card-body mb-4" style="padding-top: 0;">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="padding-top: 0; border-top: .20rem solid #b4c540;">
+                                      <thead>
+                                        <tr>
+                                          <th>Date</th>
+                                          <th>Sales Order Number</th>
+                                          <th>Total Amount</th>
+                                          <th>Status</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                          <!-- Change this*** -->
+                                        <?php 
+                                          if ($search_result->num_rows > 0) {
+                                            // output data of each row
 
-                                    while($row = $search_result->fetch_assoc()) {
-                                        echo "<form method = 'post' action = 'view_sales_order.php'>";
-                                        echo "\t<tr><td >" . $row['Date'] . "</td><td><input type = 'submit' name = 'SONum' value = '" . $row['SONum'] . "' class = 'btn' style = 'color: #4e73df;' > </td><td>"  .  $row['TotalAmount'] . "</td><td>" . $row['Status'] ."</td></tr>\n";
-                                        }
-                                    } 
+                                            while($row = $search_result->fetch_assoc()) {
+                                                echo "\t<tr><td >" . $row['Date'] . "</td><td><input type = 'submit' name = 'SONum' value = '" . $row['SONum'] . "' class = 'btn' style = 'color: #4e73df;' > </td><td>"  .  $row['TotalAmount'] . "</td><td>" . $row['Status'] ."</td></tr>\n";
+                                                }
+                                            } 
 
-                                     #please add these error checking codes
-                                    else if (isset($_POST['search']) &&($search_result->num_rows == 0)){
-                                        echo '<script language="javascript">';
-                                        echo 'alert("Invalid Search Parameter. Please Try Again")';
-                                        echo '</script>';
-                                    }
-                                  ?>
-                              </tbody>
-                            </table>
-                            </div>
+                                             #please add these error checking codes
+                                            else if (isset($_POST['search']) &&($search_result->num_rows == 0)){
+                                                echo '<script language="javascript">';
+                                                echo 'alert("Invalid Search Parameter. Please Try Again")';
+                                                echo '</script>';
+                                            }
+                                          ?>
+                                      </tbody>
+                                    </table>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
