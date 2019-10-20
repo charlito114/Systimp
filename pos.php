@@ -311,7 +311,6 @@
                                                           echo "</form>";
                                                           }
                                                       } 
-
                                                   ?>
                                               </tbody>
                                             </table>
@@ -448,14 +447,14 @@
                                     <!-- POS Buttons -->
                                     <div class="row">
                                         <button class="pos-btn pos-btn-medium pos-btn-blue">Change <br> Quantity</button>
-                                        <button class="pos-btn pos-btn-medium pos-btn-blue">Customer <br> Details </button>
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue">Cash <br> Payment</button>
                                     </div>
                                     
-                                    <!-- POS Buttons -->
+                                    <!-- POS Buttons 
                                     <div class="row">
-                                        <button class="pos-btn pos-btn-medium pos-btn-blue">Cash <br> Payment</button>
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue">Customer <br> Details </button>
                                         <button class="pos-btn pos-btn-medium pos-btn-blue">Cheque <br> Payment</button>
-                                    </div>
+                                    </div> -->
                                     
                                     <!-- POS Lower Content -->
 
@@ -517,7 +516,6 @@
 
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
-
                                                     echo $VAT;
                                                 ?>
                                             </div>
@@ -532,7 +530,6 @@
 
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
-
                                                   echo $Total;
                                                 ?>
                                             </div>
