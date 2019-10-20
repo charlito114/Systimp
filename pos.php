@@ -381,7 +381,7 @@
                                     <!-- POS Buttons -->
                                     <div class="row">
                                         <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#addModal">Add <br> Product</button>
-                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#">Discount <br> Sale </button>
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#discountSale">Discount <br> Sale </button>
                                     </div>
                                     
                                     <!-- 2nd Set of Modals -->
@@ -443,11 +443,78 @@
                                       </div>
                                     </div>
                                     
+                                    <!-- ALY START HERE: ALL U NEED TO CHANGE IS INPUT NAME AND FORM ACTIONS -->
+                                    <div id="discountSale" class="modal">
+                                      <div class="modal-dialog">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title">Discount Sale</h4>
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                              <form method = "post" action = "">
+                                                <div class="modal-body">
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Discount Amount: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= "">
+                                                    </div>
+                                                </div>
+                                                  <div class="modal-footer">
+                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
+                                                  </div>
+                                              </form>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    
                                     
                                     <!-- POS Buttons -->
                                     <div class="row">
-                                        <button class="pos-btn pos-btn-medium pos-btn-blue">Change <br> Quantity</button>
-                                        <button class="pos-btn pos-btn-medium pos-btn-blue">Cash <br> Payment</button>
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#changeQuantity">Change <br> Quantity</button>
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#cashPayment">Cash <br> Payment</button>
+                                    </div>
+                                    
+                                    <!-- 3rd Set of Modals -->
+                                    <div id="changeQuantity" class="modal">
+                                      <div class="modal-dialog">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title">Change Quantity</h4>
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                              <form method = "post" action = "">
+                                                <div class="modal-body">
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Enter Quantity: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= "">
+                                                    </div>
+                                                </div>
+                                                  <div class="modal-footer">
+                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
+                                                  </div>
+                                              </form>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    <div id="cashPayment" class="modal">                                         
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title">Cash Payment</h4>
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                              <form method = "post" action = "">
+                                                <div class="modal-body">
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Enter Amount: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= prodcode>
+                                                    </div>
+                                                </div>
+                                                  <div class="modal-footer">
+                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
+                                                  </div>
+                                              </form>
+                                          </div>
+                                      </div>
                                     </div>
                                     
                                     <!-- POS Buttons 
