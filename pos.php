@@ -28,19 +28,16 @@
               margin: 0;
               padding: 0;
             }
-
             /* Buttons styles */
             input::-moz-focus-inner,
             button::-moz-focus-inner {
                 border: 0;
                 padding: 0;
             }
-
             input[type="submit"].btn,
             button.btn {
                 cursor: pointer;
             }
-
             .pos-btn,.pos-btn {
                 display: inline-block;
                 outline: none;
@@ -61,12 +58,10 @@
                 height: 60px;
                 background: #fff;
             }
-
             .pos-btn-medium {
                 font-size: 0.9375em;
                 padding: 0.5375em 1.375em;
             }
-
             /* Colors */
             .pos-btn-green {
                 color: #3CB371;
@@ -94,7 +89,6 @@
             .c-input{
                 margin-right: 90px;
             }
-
         </style>
     </head>
     <body>
@@ -217,7 +211,31 @@
                     <?php
             
                         $SONum = $_SESSION ['SONum']; 
-                        $invoiceNum = $_SESSION ['invoiceNum']; 
+                        $InvoiceQuery = ("SELECT count(invoiceNum) AS INVOICECOUNT FROM salesmanagement ");
+                        $result =  $con->query($InvoiceQuery);
+                        if ($result->num_rows > 0) {
+                            // output data of each row
+                            while($row = $result->fetch_assoc()) {
+                                $invoiceNum= $row['INVOICECOUNT'] +1 ;
+                                $_SESSION['invoiceNum'] = $invoiceNum;
+                                }
+                            } 
+                        else {
+                                echo "0 results";
+                            }
+                        
+                            $CustomerQuery = ("SELECT CustomerName FROM ordermanagement WHERE SONum = $SONum ");
+                            $result =  $con->query($CustomerQuery);
+                            if ($result->num_rows > 0) {
+                                // output data of each row
+                                while($row = $result->fetch_assoc()) {
+                                    $custName= $row['CustomerName'] ;
+                                    $_SESSION['CustomerName'] = $custName;
+                                    }
+                                } 
+                            else {
+                                    echo "0 results";
+                                }
                     ?>
 
                     <div class="container-fluid">
@@ -259,7 +277,7 @@
 
                                                 <div class="input-group col-sm-6 m-bot15">
                                                     <?php
-
+                                                     ECHO $custName;
                                                     ?>
                                                 </div>
                                             </div>
@@ -293,6 +311,7 @@
                                                           echo "</form>";
                                                           }
                                                       } 
+
                                                   ?>
                                               </tbody>
                                             </table>
@@ -362,7 +381,7 @@
                                     
                                     <!-- POS Buttons -->
                                     <div class="row">
-                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#addModal">Search <br> Product</button>
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#addModal">Add <br> Product</button>
                                         <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#">Discount <br> Sale </button>
                                     </div>
                                     
@@ -389,6 +408,7 @@
                                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                           <thead>
                                                             <tr>
+                                                               <td>Product Code</td>
                                                               <td>Category</td>
                                                               <td>Brand</td>
                                                               <td>Description</td>
@@ -409,7 +429,6 @@
                                                                         echo    "<form method = 'post' >"; 
                                                                         echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" .  $row['ProdQuan'] . "</td><td>" .  $row['Available'] . "</td><td>" .  $row['Issued'] ."</td></tr><br>";
                                                                         echo    "</form >"; 
-
                                                                     }
                                                                   }
                                                             ?>
@@ -439,6 +458,33 @@
                                     </div>
                                     
                                     <!-- POS Lower Content -->
+
+                                    <?php 
+                                        
+                                        $numQuery = "SELECT COUNT(ProdCode) AS Count FROM temporaryinvoice";
+                                        $numresult =  $con->query($numQuery);
+                                            if ($numresult->num_rows > 0) {
+                                                // output data of each row
+                                                while($row = $numresult->fetch_assoc()) {
+                                                    $numItems= $row['Count'];
+                                                    }
+                                                } else {
+                                                    echo "0 results";
+                                                    }
+                                        $SubtotalQuery = "SELECT SUM(Price) AS Subtotal FROM temporaryinvoice";
+                                        $Subtotalresult =  $con->query($SubtotalQuery);
+                                            if ($Subtotalresult->num_rows > 0) {
+                                                // output data of each row
+                                                while($row = $Subtotalresult->fetch_assoc()) {
+                                                    $Subtotal= $row['Subtotal'];
+                                                    }
+                                                } else {
+                                                    echo "0 results";
+                                                    }
+                                            $VAT = $Subtotal * 0.12; 
+                                            $Total = $Subtotal + $VAT; 
+                                            
+                                    ?>
                                     <div class="col-lg-7 mb-4" style="float: left;">
                                         <div class="row d-flex justify-content-between" style="margin-top: 10px;">
                                             <div>
@@ -447,7 +493,7 @@
 
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
-
+                                                  echo $numItems;
                                                 ?>
                                             </div>
                                         </div>
@@ -459,7 +505,7 @@
 
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
-
+                                                   echo $Subtotal;
                                                 ?>
                                             </div>
                                         </div>
@@ -472,6 +518,7 @@
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
 
+                                                    echo $VAT;
                                                 ?>
                                             </div>
                                         </div>
@@ -486,6 +533,7 @@
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
 
+                                                  echo $Total;
                                                 ?>
                                             </div>
                                         </div>
@@ -499,7 +547,6 @@
 
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
-
                                                 ?>
                                             </div>
                                         </div>
@@ -511,7 +558,6 @@
 
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
-
                                                 ?>
                                             </div>
                                         </div>
