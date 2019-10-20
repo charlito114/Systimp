@@ -18,14 +18,26 @@ if(isset($_POST['submit'])){
     if($inputpw == $password){
         $deleteQuery = " DELETE FROM temporaryinvoice WHERE ProdCode = $prodcode ";
                                 if(mysqli_query($con,$deleteQuery)){
-                                    header("location:pos.php");//dapat may alert na successfully voided item, please try again
+                                    echo '<script language="javascript">';
+                                    echo 'alert("Successfully voided item please try again")';
+                                    echo '</script>';
+                                    include("pos.php");
+                                    //header("location:pos.php");//dapat may alert na successfully voided item, please try again
                                         }
                                 else{
-                                    header("location:pos.php"); //dapat may alert na error in voiding item, please try again
+                                    echo '<script language="javascript">';
+                                    echo 'alert("Error in voiding item, please try again")';
+                                    echo '</script>';
+                                    include("pos.php");
+                                    //header("location:pos.php"); //dapat may alert na error in voiding item, please try again
                                         }
                                     }
     else{
-        header("location:pos.php"); //dapat may alert na error in voiding item, please try again
+        echo '<script language="javascript">';
+        echo 'alert("Error in voiding item, please try again")';
+        echo '</script>';
+        include("pos.php");
+        //header("location:pos.php"); //dapat may alert na error in voiding item, please try again
 
     }   
     

@@ -31,17 +31,19 @@ if(isset($_POST['submit'])){
     WHERE prodcode = $productcode  AND SONum = $SONum AND invoiceNum = $invoiceNum";
 
     if(mysqli_query($con,$updateQuery)){
-
-    $alert = "Successfully updated purchase order!";
-    echo $alert;
-    echo '<script type="text/javascript">';
-    echo 'alert("'.$alert.'")';
-    echo '</script>'; 
-    header("location:pos.php?message=Quantity has been successfully updated."); // palagay ng alert
+    echo '<script language="javascript">';
+    echo 'alert("Successfully updated purchase order!")';
+    echo '</script>';
+    include("pos.php");
+    //header("location:pos.php?message=Quantity has been successfully updated."); // palagay ng alert
 
     }
     else{
-        header("location:pos.php?message=Error in updating quantity."); // palagay ng alert
+        echo '<script language="javascript">';
+        echo 'alert("Error in updating quantity. Please try again")';
+        echo '</script>';
+        include("pos.php");
+        //header("location:pos.php?message=Error in updating quantity."); // palagay ng alert
 
     }
 
@@ -49,11 +51,11 @@ if(isset($_POST['submit'])){
     }
 
     else{
-        $alert = "Error in updating quantity. Please try again";
-                echo '<script type="text/javascript">';
-                echo 'alert("'.$alert.'")';
-                echo '</script>';  
-                header("location:pos.php?message=Error in updating quantity. Please try again.");   // palagay ng alert
+        echo '<script language="javascript">';
+        echo 'alert("Error in updating quantity. Please try again")';
+        echo '</script>';
+        include("pos.php");
+                //header("location:pos.php?message=Error in updating quantity. Please try again.");   // palagay ng alert
     }
 
 

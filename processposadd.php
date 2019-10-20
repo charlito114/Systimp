@@ -29,11 +29,11 @@ if(isset($_POST['submit'])){
 
                 }
             } else {
-                $alert = "Product not listed in customer sales order";
-                echo '<script type="text/javascript">';
-                echo 'alert("'.$alert.'")';
-                echo '</script>';  
-                header("location:pos.php?message=Error in adding the product. Please try again.");           //palagay ng alert      
+                echo '<script language="javascript">';
+                echo 'alert("Product not listed in customer sales order")';
+                echo '</script>';
+                include("pos.php");
+                //header("location:pos.php?message=Error in adding the product. Please try again.");           //palagay ng alert      
                 }
 
                 // alert not working 
@@ -50,11 +50,11 @@ if(isset($_POST['submit'])){
 
     }
     else{
-        $alert = "Product not listed in customer sales order";
-                echo '<script type="text/javascript">';
-                echo 'alert("'.$alert.'")';
-                echo '</script>';  
-                header("location:pos.php?message=Error in adding the product. Please try again.");   // palagay ng alert
+                echo '<script language="javascript">';
+                echo 'alert("Product not listed in customer sales order")';
+                echo '</script>';
+                include("pos.php");
+                //header("location:pos.php?message=Error in adding the product. Please try again.");   // palagay ng alert
     }
 }
   
