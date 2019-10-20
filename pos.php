@@ -211,6 +211,8 @@
                     <?php
             
                         $SONum = $_SESSION ['SONum']; 
+                        $payment = 0;
+                        $change = 0;
                         $InvoiceQuery = ("SELECT count(invoiceNum) AS INVOICECOUNT FROM salesmanagement ");
                         $result =  $con->query($InvoiceQuery);
                         if ($result->num_rows > 0) {
@@ -294,7 +296,6 @@
                                                   <th>Product Description</th>
                                                   <th>Size</th>
                                                   <th>Quantity</th>
-                                                  <th>Price</th>
                                                   <th>Total Amount</th>
                                                 </tr>
                                               </thead>
@@ -363,11 +364,11 @@
                                                     <label>Note: Please request for manager approval </label><br>
                                                     <div class="row d-flex justify-content-between">
                                                         <label class="c-label">Product Code: </label>
-                                                        <input class="c-input form-control col-sm-6" type = "number" name= prodcode>
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= "prodcode">
                                                     </div>
                                                     <div class="row d-flex justify-content-between">
                                                         <label class="c-label">Password: </label>
-                                                        <input class="c-input form-control col-sm-6" type = "password" name= password>
+                                                        <input class="c-input form-control col-sm-6" type = "password" name= "password">
                                                     </div>
                                                 </div>
                                                   <div class="modal-footer">
@@ -466,65 +467,6 @@
                                       </div>
                                     </div>
                                     
-                                    
-                                    <!-- POS Buttons -->
-                                    <div class="row">
-                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#changeQuantity">Change <br> Quantity</button>
-                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#cashPayment">Cash <br> Payment</button>
-                                    </div>
-                                    
-                                    <!-- 3rd Set of Modals -->
-                                    <div id="changeQuantity" class="modal">
-                                      <div class="modal-dialog">
-                                          <div class="modal-content">
-                                              <div class="modal-header">
-                                                  <h4 class="modal-title">Change Quantity</h4>
-                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                </div>
-                                              <form method = "post" action = "">
-                                                <div class="modal-body">
-                                                    <div class="row d-flex justify-content-between">
-                                                        <label class="c-label">Enter Quantity: </label>
-                                                        <input class="c-input form-control col-sm-6" type = "number" name= "">
-                                                    </div>
-                                                </div>
-                                                  <div class="modal-footer">
-                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
-                                                  </div>
-                                              </form>
-                                          </div>
-                                      </div>
-                                    </div>
-                                    <div id="cashPayment" class="modal">                                         
-                                        <div class="modal-dialog">
-                                          <div class="modal-content">
-                                              <div class="modal-header">
-                                                  <h4 class="modal-title">Cash Payment</h4>
-                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                </div>
-                                              <form method = "post" action = "">
-                                                <div class="modal-body">
-                                                    <div class="row d-flex justify-content-between">
-                                                        <label class="c-label">Enter Amount: </label>
-                                                        <input class="c-input form-control col-sm-6" type = "number" name= prodcode>
-                                                    </div>
-                                                </div>
-                                                  <div class="modal-footer">
-                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
-                                                  </div>
-                                              </form>
-                                          </div>
-                                      </div>
-                                    </div>
-                                    
-                                    <!-- POS Buttons 
-                                    <div class="row">
-                                        <button class="pos-btn pos-btn-medium pos-btn-blue">Customer <br> Details </button>
-                                        <button class="pos-btn pos-btn-medium pos-btn-blue">Cheque <br> Payment</button>
-                                    </div> -->
-                                    
-                                    <!-- POS Lower Content -->
-
                                     <?php 
                                         
                                         $numQuery = "SELECT COUNT(ProdCode) AS Count FROM temporaryinvoice";
@@ -551,6 +493,75 @@
                                             $Total = $Subtotal + $VAT; 
                                             
                                     ?>
+
+                                    <!-- POS Buttons -->
+                                    <div class="row">
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#changeQuantity">Change <br> Quantity</button>
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#cashPayment">Cash <br> Payment</button>
+                                    </div>
+                                    
+                                    <!-- 3rd Set of Modals -->
+                                    <div id="changeQuantity" class="modal">
+                                      <div class="modal-dialog">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title">Change Quantity</h4>
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                              <form method = "post" action = "processchangequan.php">
+                                                <div class="modal-body">
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Product Code: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= "prodcode"><br>
+                                                        <label class="c-label">Quantity: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= "newQty">
+                                                      
+                                                    </div>
+                                                </div>
+                                                  <div class="modal-footer">
+                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
+                                                  </div>
+                                              </form>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    <div id="cashPayment" class="modal">                                         
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title">Cash Payment</h4>
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                              <form method = "post" action = "">
+                                                <div class="modal-body">
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Enter Amount: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= "payment" >
+                                                    </div>
+                                                </div>
+                                                  <div class="modal-footer">
+                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
+                                                  </div>
+                                              </form>
+                                              <?php
+                                              if(isset($_POST['submit'])){
+                                                $payment = $_POST['payment'];
+                                                $change = $payment - $Total;
+                                              }
+                                              ?>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    
+                                    <!-- POS Buttons 
+                                    <div class="row">
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue">Customer <br> Details </button>
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue">Cheque <br> Payment</button>
+                                    </div> -->
+                                    
+                                    <!-- POS Lower Content -->
+
+                                   
                                     <div class="col-lg-7 mb-4" style="float: left;">
                                         <div class="row d-flex justify-content-between" style="margin-top: 10px;">
                                             <div>
@@ -611,6 +622,7 @@
 
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
+                                                  echo $payment;
                                                 ?>
                                             </div>
                                         </div>
@@ -622,6 +634,7 @@
 
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
+                                                  echo $change;
                                                 ?>
                                             </div>
                                         </div>
