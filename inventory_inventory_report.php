@@ -153,7 +153,7 @@ require_once("db/connection.php");
                         <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                             <form class="navbar-search" method="post">
                                 <div class="input-group">
-                                    <input type="month" name = "trial" class="form-control bg-light small" style="width: 200px; margin-left: 50px;" name="valueToSearch">
+                                    <input type="month" name = "date" class="form-control bg-light small" style="width: 200px; margin-left: 50px;" name="valueToSearch">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit" name="submit" value="submit">
                                            <i class="fas fa-calendar fa-sm"></i>
@@ -168,8 +168,8 @@ require_once("db/connection.php");
                                 </div>
                             </div> 
                             
-                            <?php
-                               if (isset($_POST['submit']))
+                             <?php 
+                                if (isset($_POST['submit']))
                                 { 
                                     $tempdate = $_POST['date'];
                                     $date = date('Y-m-d', strtotime($tempdate));
@@ -188,7 +188,8 @@ require_once("db/connection.php");
                                         $filter_Result = mysqli_query($con, $query);
                                         return $filter_Result;
                                     }
-                            ?>                                     
+
+                                ?>                          
                         </div>
 
                         <!-- Table -->
@@ -210,13 +211,14 @@ require_once("db/connection.php");
                             <table class="table-bordered" id="dataTable" width="100%" cellspacing="0">
                               <thead>
                                 <tr>
+                                    <th>Date</th>
                                     <th>Category</th>
-                                      <th>Brand</th>
-                                      <th>Code</th>
-                                      <th>Description</th>
-                                      <th>Size</th>
-                                      <th>Reorder Point</th>
-                                      <th>Stock Available</th>
+                                    <th>Brand</th>
+                                    <th>Product Code</th>
+                                    <th>Description</th>
+                                    <th>Size</th>
+                                    <th>Reorder Point</th>
+                                    <th>Stocks Available</th>
                                 </tr>
                               </thead>
                               <tbody>
