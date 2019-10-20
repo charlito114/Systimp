@@ -18,6 +18,12 @@
             .bg{
                 background-color: #b4c540;
             }
+            .tablinks{
+              cursor: pointer;
+            }
+            .tabcontent {
+              display: none;
+            }
         </style>
     </head>
     <body>
@@ -166,25 +172,30 @@
                                           </div>
                                         </div>
                                         
-                                        <!-- Total Daily Sales and Top Selling Products -->
+                                        <!-- Total Daily Sales  -->
                                         <div class="card-body" style="height: 50%;">
-                                            <div class="card-body">
-                                              <div class="card border-left-success shadow h-100 py-2">
+                                            <a class="tablinks" onclick="openTab(event, 'totalSales')">
                                                 <div class="card-body">
-                                                  <div class="row no-gutters align-items-center">
-                                                    <div class="col mr-2">
-                                                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Daily Sales</div>
-                                                      <div class="h5 mb-0 font-weight-bold text-gray-800">P40,000</div>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                  <div class="card border-left-success shadow h-100 py-2">
+                                                    <div class="card-body">
+                                                      <div class="row no-gutters align-items-center">
+                                                        <div class="col mr-2">
+                                                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Daily Sales</div>
+                                                          <div class="h5 mb-0 font-weight-bold text-gray-800">P40,000</div>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                          <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                        </div>
+                                                      </div>
                                                     </div>
                                                   </div>
                                                 </div>
-                                              </div>
-                                            </div>
+                                            </a>
+                                            
+                                            <!-- Top Selling Products -->
                                             <div class="card-body"></div>
-                                            <div class="card-body">
+                                            <a class="tablinks" onclick="openTab(event, 'topProducts')">
+                                                <div class="card-body">
                                                   <div class="card border-left-success shadow h-100 py-2">
                                                     <div class="card-body">
                                                       <div class="row no-gutters align-items-center">
@@ -199,6 +210,7 @@
                                                     </div>
                                                   </div>
                                                 </div>
+                                            </a>
                                         </div>
 
                                         <div class="col-xl-4 col-lg-2">
@@ -219,73 +231,95 @@
                                         
                                     </div>
                              
+                        <!-- Top Sales Table -->
+                        <div id="totalSales" class="tabcontent" style="display: block;">
+                            <!-- INSERT HERE Table -->
+                        </div>
                         
-                        <!-- Table -->
-                        
+                        <!-- Top Products Table -->
+                        <div id="topProducts" class="tabcontent" style="display: block;">
                             <div class="col-lg-12">
-                                <form method="post" class="navbar-expand col-lg-12">
-                                <header class="card-header font-weight-bold" style="border-bottom: none;">TOP SELLING PRODUCTS</header>
-                                <div class=" align-items-center justify-content-between mb-4" style="padding-top: 0; display: flex;">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                      <thead>
-                                        <tr>
-                                         <th>Product Code</th>
-                                        <th>Category</th>
-                                        <th>Brand</th>
-                                        <th>Description</th>
-                                        <th>Size</th>
-                                        <th>Quantity</th>
-                                        <th>Reorder Point</th>
-                                        <th>Quantity Sold</th>
-                                        <th>Price</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <?php
-                                          $viewTop = "SELECT * FROM products ORDER BY quanSold DESC LIMIT 5";
-                                        $search_result = mysqli_query($con, $viewTop);
-                                        if ($search_result->num_rows > 0) {
-                                            // output data of each row
-
-                                            while($row = $search_result->fetch_assoc()) {
-                                                echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['quanSold'] . "</td><td>" . $row['price'] ."</td></tr><br>";
-                                                }
+                            <form method="post" class="navbar-expand col-lg-12">
+                            <header class="card-header font-weight-bold" style="border-bottom: none;">TOP SELLING PRODUCTS</header>
+                            <div class=" align-items-center justify-content-between mb-4" style="padding-top: 0; display: flex;">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                  <thead>
+                                    <tr>
+                                     <th>Product Code</th>
+                                    <th>Category</th>
+                                    <th>Brand</th>
+                                    <th>Description</th>
+                                    <th>Size</th>
+                                    <th>Quantity</th>
+                                    <th>Reorder Point</th>
+                                    <th>Quantity Sold</th>
+                                    <th>Price</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <?php
+                                      $viewTop = "SELECT * FROM products ORDER BY quanSold DESC LIMIT 5";
+                                    $search_result = mysqli_query($con, $viewTop);
+                                    if ($search_result->num_rows > 0) {
+                                        // output data of each row
+                                        while($row = $search_result->fetch_assoc()) {
+                                            echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['quanSold'] . "</td><td>" . $row['price'] ."</td></tr><br>";
                                             }
-                                        else{
-                                            echo "0 results";
                                         }
-                                            
-                                          ?>
-                                      </tbody>
-                                    </table>
-                                </div>
+                                    else{
+                                        echo "0 results";
+                                    }
+
+                                      ?>
+                                  </tbody>
+                                </table>
+                            </div>
                             </form>
                             </div> 
+                        </div>
+                            
                     </div>
                 </div>
             </div>
         </div>
-                          <!-- Page level plugins -->
-  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-  <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        
+         <script>
+          function openTab(evt, tabName) {
+            
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+              tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+              tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+          }
+        </script>
+          <!-- Page level plugins -->
+          <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+          <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+          <!-- Bootstrap core JavaScript-->
+          <script src="vendor/jquery/jquery.min.js"></script>
+          <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+          <!-- Core plugin JavaScript-->
+          <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-  <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
+          <!-- Custom scripts for all pages-->
+          <script src="js/sb-admin-2.min.js"></script>
 
-  <!-- Page level plugins -->
-  <script src="vendor/chart.js/Chart.min.js"></script>
+          <!-- Page level plugins -->
+          <script src="vendor/chart.js/Chart.min.js"></script>
 
-  <!-- Page level custom scripts -->
-  <script src="js/demo/chart-area-demo.js"></script>
-  <script src="js/demo/chart-bar-demo.js"></script>
+          <!-- Page level custom scripts -->
+          <script src="js/demo/chart-area-demo.js"></script>
+          <script src="js/demo/chart-bar-demo.js"></script>
 
-  <!-- Page level custom scripts -->
-  <script src="js/demo/datatables-demo.js"></script>
+          <!-- Page level custom scripts -->
+          <script src="js/demo/datatables-demo.js"></script>
     </body>
 </html>
