@@ -272,12 +272,12 @@
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                               <thead>
                                                 <tr>
-                                                  <tr>Product Code</tr>
-                                                  <tr>Product Description</tr>
-                                                  <tr>Size</tr>
-                                                  <tr>Quantity</tr>
-                                                  <tr>Price</tr>
-                                                  <tr>Total Amount</tr>
+                                                  <th>Product Code</th>
+                                                  <th>Product Description</th>
+                                                  <th>Size</th>
+                                                  <th>Quantity</th>
+                                                  <th>Price</th>
+                                                  <th>Total Amount</th>
                                                 </tr>
                                               </thead>
                                               <tbody>
@@ -393,9 +393,9 @@
                                                               <td>Brand</td>
                                                               <td>Description</td>
                                                               <td>Size</td>
-                                                              <td> Quantity Ordered </td>
-                                                              <td> Quantity Available </td>
-                                                              <td> Quantity Issued </td>
+                                                              <td>Quantity Ordered </td>
+                                                              <td>Quantity Available </td>
+                                                              <td>Quantity Issued </td>
                                                             </tr>
                                                           </thead>
                                                           <tbody>
