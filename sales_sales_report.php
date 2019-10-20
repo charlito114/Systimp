@@ -209,12 +209,11 @@ require_once("db/connection.php");
                             <table class="" id="dataTable" width="100%" cellspacing="0">
                               <thead>
                                 <tr>
+                                    <th>Year</th>
                                     <th>Month</th>
                                     <th>Sales Before Tax</th>
-                                    <th>VAT 12%</th>
+                                    <th>12% VAT</th>
                                     <th>Sales After Tax</th>
-                                    <th>Cost of Goods Sold</th>
-                                    <th>Gross Profit</th>
                                 </tr>
                               </thead>
                               <tbody>
