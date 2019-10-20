@@ -185,7 +185,7 @@
                                                   <div class="col mr-2">
                                                     <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Cancelled Supplier Deliveries</div>
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?php
-                                                      $OSDcount = "SELECT COUNT(Status) c FROM p_purchasingmanagement WHERE status='canceled'";
+                                                      $OSDcount = "SELECT COUNT(Status) c FROM p_purchasingmanagement WHERE status='cancelled'";
                                                       $count_result = mysqli_query($con, $OSDcount);
                                                       $row = $count_result->fetch_assoc();
                                                       echo $row['c'];
@@ -210,7 +210,12 @@
                                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Overdue Supplier Deliveries</div>
                                                     <div class="row no-gutters align-items-center">
                                                       <div class="col-auto">
-                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php
+                                                      $OSDcount = "SELECT COUNT(Status) c FROM p_purchasingmanagement WHERE status='ongoing' AND DATEDIFF(now(),Date) > 7";
+                                                      $count_result = mysqli_query($con, $OSDcount);
+                                                      $row = $count_result->fetch_assoc();
+                                                      echo $row['c'];
+                                                      ?></div>
                                                       </div>
                                                       <div class="col">
                                                         <div class="progress progress-sm mr-2">
@@ -282,7 +287,7 @@
                                       </thead>
                                       <tbody>
                                         <?php
-                                          $viewTop = "SELECT * FROM p_purchasingmanagement WHERE status ='canceled' ORDER BY PONum ASC LIMIT 5";
+                                          $viewTop = "SELECT * FROM p_purchasingmanagement WHERE status ='cancelled' ORDER BY PONum ASC LIMIT 5";
                                         $search_result = mysqli_query($con, $viewTop);
                                         if ($search_result->num_rows > 0) {
                                             // output data of each row
@@ -305,6 +310,38 @@
                         <!--OVERDUE SUPPLIER DELIVERIES Table-->
                         <div id="overdueDeliveries" class="tabcontent" style="display: block;">
                             <!--INSERT HERE Table-->
+                            <div class="col-lg-12" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
+                                <form method="post" class="navbar-expand col-lg-12">
+                                <header class="card-header font-weight-bold">OVERDUE SUPPLIER DELIVERIES</header>
+                                <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                      <thead>
+                                        <tr>
+                                         <th>Date</th>
+                                        <th>PO Number</th>
+                                        <th>Supplier Name</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <?php
+                                          $viewTop = "SELECT * FROM p_purchasingmanagement WHERE status ='ongoing' AND DATEDIFF(now(),Date) > 7 ORDER BY PONum ASC LIMIT 5";
+                                        $search_result = mysqli_query($con, $viewTop);
+                                        if ($search_result->num_rows > 0) {
+                                            // output data of each row
+                                            while($row = $search_result->fetch_assoc()) {
+                                                echo "\t<tr><td >" . $row['Date'] . "</td><td>" . $row['PONum'] . "</td><td>"  .  $row['SupplierName'] . "</td></tr><br>";
+                                                }
+                                            }
+                                        else{
+                                            echo "0 results";
+                                        }
+                                            
+                                          ?>
+                                      </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                          </div>
                         </div>
                         
                     </div>

@@ -475,7 +475,7 @@
                                 </div>
                             </form>
                             
-                            <form method="post"> 
+                            <form method="post" onsubmit="return confirm('Are you sure you want to continue action?');"> 
                                 <div class="d-flex" style=" margin-top: 10px;">
                                     <!-- Remove Button-->
                                     <div style="width: 80%; float: left;">
