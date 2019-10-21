@@ -208,47 +208,49 @@
                         
                         <!-- Ready Orders-->
                           <div id="readyOrders" class="tabcontent" style="display: block;">
-                            <div class="col-lg-12 table-responsive" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
-                              <form method='post' class="navbar-expand col-lg-12" action='order_order_details.php'>
-                              <header class="card-header font-weight-bold" style="border-bottom: none;">READY ORDERS</header>
-                                  <div class="align-items-center justify-content-between mb-4" style="padding-top: 0; display:inline-flex;">
-                                      <table class="table table-bordered" id="dataTable" width="230%" cellspacing="0">
-                                        <thead>
-                                          <tr>
-                                          <th>Date</th>
-                                          <th>Sales Order Number</th>
-                                          <th>Total Amount</th>
-                                          <th>Status</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <?php
-                                            $viewTop = "SELECT * FROM ordermanagement WHERE status ='Completed' ORDER BY date ASC LIMIT 5";
-                                          $search_result = mysqli_query($con, $viewTop);
-                                          if ($search_result->num_rows > 0) {
-                                              // output data of each row
-
-                                              while($row = $search_result->fetch_assoc()) {
-                                                  echo "\t<tr><td >" . $row['Date'] . "</td><td><input type='submit' name='SONum' value='" . $row['SONum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['TotalAmount'] . "</td>". "</td><td>"  .  $row['Status'] . "</td></tr><br>";
+                              <div class="container-fluid">
+                                  <div class="col-lg-12 table-responsive" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
+                                  <form method='post' class="navbar-expand col-lg-12" action='order_order_details.php'>
+                                  <header class="card-header font-weight-bold" style="border-bottom: none;">READY ORDERS</header>
+                                      <div class="align-items-center justify-content-between mb-4" style="padding-top: 0; display:inline-flex;">
+                                          <table class="table table-bordered" id="dataTable" width="180%" cellspacing="0">
+                                            <thead>
+                                              <tr>
+                                              <th>Date</th>
+                                              <th>Sales Order Number</th>
+                                              <th>Total Amount</th>
+                                              <th>Status</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <?php
+                                                $viewTop = "SELECT * FROM ordermanagement WHERE status ='Completed' ORDER BY date ASC LIMIT 5";
+                                              $search_result = mysqli_query($con, $viewTop);
+                                              if ($search_result->num_rows > 0) {
+                                                  // output data of each row
+                                                  while($row = $search_result->fetch_assoc()) {
+                                                      echo "\t<tr><td >" . $row['Date'] . "</td><td><input type='submit' name='SONum' value='" . $row['SONum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['TotalAmount'] . "</td>". "</td><td>"  .  $row['Status'] . "</td></tr><br>";
+                                                      }
                                                   }
+                                              else{
+                                                  echo "0 results";
                                               }
-                                          else{
-                                              echo "0 results";
-                                          }
-                                              
-                                            ?>
-                                        </tbody>
-                                      </table>
-                                  </div>
-                              </form>  
-                            </div> 
+
+                                                ?>
+                                            </tbody>
+                                          </table>
+                                      </div>
+                                  </form>  
+                                </div>
+                              </div>
+                             
                           </div>
 
                           <!-- Recently Placed Orders-->
                           <div id="recentlyPlacedOrders" class="tabcontent">
                          <div class="container-fluid">
-                          <div class="col-lg-12 table-responsive" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
-                              <form method="post" class="navbar-expand col-lg-12" action='order_order_details.php'>
+                          <div class="col-lg-12 " style="padding-top: 0; border-top:  .10rem solid #b4c540;">
+                              <form method="post" class="navbar-expand col-lg-12">
                               <header class="card-header font-weight-bold" style="border-bottom: none;">RECENTLY PLACED ORDERS</header>
                                   <div class="align-items-center justify-content-between mb-4" style="padding-top: 0; display:flex;">
                                       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -267,9 +269,8 @@
                                     $search_result = mysqli_query($con, $viewTop);
                                     if ($search_result->num_rows > 0) {
                                         // output data of each row
-
                                         while($row = $search_result->fetch_assoc()) {
-                                            echo "\t<tr><td >" . $row['Date'] . "</td><td><input type='submit' name='SONum' value='" . $row['SONum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['TotalAmount'] . "</td>". "</td><td>"  .  $row['Status'] . "</td></tr><br>";
+                                            echo "\t<tr><td >" . $row['Date'] . "</td><td>" . $row['SONum'] . "</td><td>"  .  $row['TotalAmount'] . "</td>". "</td><td>"  .  $row['Status'] . "</td></tr><br>";
                                             }
                                         }
                                     else{
