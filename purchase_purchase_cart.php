@@ -147,9 +147,7 @@ require_once("db/connection.php"); ?>
                             $PONum= $row['POCount'] + 1 ;
                             $_SESSION['PONum'] = $PONum;
                             }
-                        } else {
-                            echo "0 results";
-                            }
+                        }
                         ?>
                         <!-- Table -->
                         <div class="table-responsive">
@@ -354,10 +352,7 @@ require_once("db/connection.php"); ?>
 
                             }
                         //}
-                    }
-                else{
-                    echo "0 results";
-                }    
+                    }   
                                   
                           ?>
                             
