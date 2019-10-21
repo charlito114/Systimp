@@ -7,11 +7,11 @@ if(isset($_POST['submit'])){
     $qty =$_POST['newQty'];
     $SONum = $_SESSION ['SONum']; 
     $invoiceNum = $_SESSION ['invoiceNum']; 
+$message = "HELLO";
 
-
-    echo $addcode;
-    echo $qty; 
-    echo $SONum;
+    //echo $addcode;
+    //echo $qty; 
+    //echo $SONum;
 
     $addQuery = ("SELECT * FROM salesorderdetails WHERE SONum = $SONum AND ProdCode = $addcode");
     $result =  $con->query($addQuery);
@@ -30,10 +30,9 @@ if(isset($_POST['submit'])){
 
                 }
             } else {
-                echo '<script language="javascript">';
-                echo 'alert("Product not listed in customer sales order")';
-                echo '</script>';
-                include("pos.php");
+
+                $message = "Product not listed in customer sales order";
+                header("location:pos.php?message=".$message);
                 //header("location:pos.php?message=Error in adding the product. Please try again.");           //palagay ng alert      
                 }
 
@@ -43,18 +42,20 @@ if(isset($_POST['submit'])){
     $insertQuery = "INSERT INTO temporaryinvoice (invoiceNum, SONum, ProdCode, Category, Brand, ProdDesc, Size, Available, Quantity, QuantityIssued, Price)
     VALUES('". $invoiceNum."', '". $SONum."','". $prodcode."', '". $category."', '". $brand."','". $desc."','". $size."' ,'". $available."' ,'". $qtyordered."' ,'". $qty."' ,'". $totalPrice."')";
     if(mysqli_query($con,$insertQuery)){
-        header("location:pos.php?message=Successfully added the product!");  // palagay ng alert
+        $message = "Successfully added the product!";
+        header("location:pos.php?message=".$message);
+        //header("location:pos.php?message=Successfully added the product!");  // palagay ng alert
     }
     else{
-        header("location:pos.php?message=Error in adding the product. Please try again.");   //palagay ng alert 
+        $message = "Error in adding the product. Please try again.";
+        header("location:pos.php?message=".$message);
+        //header("location:pos.php?message=Error in adding the product. Please try again.");   //palagay ng alert 
         }
 
     }
     else{
-                echo '<script language="javascript">';
-                echo 'alert("Product not listed in customer sales order")';
-                echo '</script>';
-                include("pos.php");
+                $message = "Error in adding the product. Please try again.";
+                header("location:pos.php?message=".$message);
                 //header("location:pos.php?message=Error in adding the product. Please try again.");   // palagay ng alert
     }
 }

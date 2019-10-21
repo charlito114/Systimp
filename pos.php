@@ -1,5 +1,13 @@
 <html>
     <?php
+
+    function phpAlert($message){
+      //echo 'script type="text/javascript">alert("'. $message . '")</script>';
+      echo "<script type='text/javascript'>alert('$message');</script>";
+    }
+     if (isset($_GET['message'])) {
+       phpAlert( $_GET['message']);
+     }
         session_start();
         require_once("db/connection.php");
     ?>

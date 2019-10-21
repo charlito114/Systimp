@@ -32,18 +32,14 @@ if(isset($_POST['submit'])){
     WHERE prodcode = $productcode  AND SONum = $SONum AND invoiceNum = $invoiceNum";
 
     if(mysqli_query($con,$updateQuery)){
-    echo '<script language="javascript">';
-    echo 'alert("Successfully updated purchase!")';
-    echo '</script>';
-    include("pos.php");
+    $message = "Successfully updated purchase!";
+    header("location:pos.php?message=".$message);
     //header("location:pos.php?message=Quantity has been successfully updated."); // palagay ng alert
 
     }
     else{
-        echo '<script language="javascript">';
-        echo 'alert("Error in updating quantity. Please try again")';
-        echo '</script>';
-        include("pos.php");
+        $message = "Error in updating quantity. Please try again";
+        header("location:pos.php?message=".$message);
         //header("location:pos.php?message=Error in updating quantity."); // palagay ng alert
 
     }
@@ -52,10 +48,8 @@ if(isset($_POST['submit'])){
     }
 
     else{
-        echo '<script language="javascript">';
-        echo 'alert("Error in updating quantity. Please try again")';
-        echo '</script>';
-        include("pos.php");
+        $message = "Error in updating quantity. Please try again";
+        header("location:pos.php?message=".$message);
                 //header("location:pos.php?message=Error in updating quantity. Please try again.");   // palagay ng alert
     }
 
