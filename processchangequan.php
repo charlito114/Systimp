@@ -33,7 +33,7 @@ if(isset($_POST['submit'])){
 
     if(mysqli_query($con,$updateQuery)){
     echo '<script language="javascript">';
-    echo 'alert("Successfully updated purchase order!")';
+    echo 'alert("Successfully updated purchase!")';
     echo '</script>';
     include("pos.php");
     //header("location:pos.php?message=Quantity has been successfully updated."); // palagay ng alert
