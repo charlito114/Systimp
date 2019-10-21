@@ -275,9 +275,7 @@
                                            }
                                                echo "</form>";
                                            } 
-                                           else {
-                                               echo "0 results";
-                                               }
+                                           
                                                     
                                           ?>
                                       </tbody>
