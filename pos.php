@@ -1,6 +1,6 @@
 <html>
     <?php
-
+    error_reporting(0);
     function phpAlert($message){
       //echo 'script type="text/javascript">alert("'. $message . '")</script>';
       echo "<script type='text/javascript'>alert('$message');</script>";
@@ -642,7 +642,12 @@
 
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
+                                                if ($change< "0") {
+                                                  echo "0";
+                                                }
+                                                else{
                                                   echo $change;
+                                                }
                                                 ?>
                                             </div>
                                         </div>
