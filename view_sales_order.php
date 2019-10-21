@@ -278,12 +278,7 @@
 
                                                 echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['ProdQuan'] . "</td><td>" . $row['Available'] . "</td><td>" . $row['Issued'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['TotalPrice'] . "</td></tr>\n";
                                                 }
-
-                                                // echo "</form>";
                                             } 
-                                            else {
-                                                echo "0 results";
-                                                }
                                           ?>
                                       </tbody>
                                     </table>
