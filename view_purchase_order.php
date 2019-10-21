@@ -230,7 +230,9 @@
                                         
                                         <?php
                                         }
-                                    } 
+                                    } else {
+                                        echo "0 results";
+                                        } 
                                         ?>
                                         
                                     </div>
@@ -266,6 +268,9 @@
                                                if($row['status'] == 'Processing' && $status== 'Ongoing'){
                                                echo "\t<tr><td ><input type = 'submit' name = 'ProductCode' value = '" . $row['ProductCode'] . "' class = 'btn' style = 'color: #4e73df;' ></td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['ToReceive'] . "</td><td>" . $row['status'] .  "</td> <td><button type = 'submit' name = 'receive' ' formaction = 'view_purchase_order2.php'  value = '" . $row['ProductCode']. "' class = 'btn'> <i class='fas fa-fw fa-pen' style = 'color:#b4c540;'/>  </button></td>
                                                <td><button type = 'submit' name = 'cancel' formaction = 'view_purchase_order_cancel.php'  value = '" . $row['ProductCode']. "' class = 'btn'> <i class='fas fa-fw fa-ban' style = 'color:#ff0000;'/>  </button></td></tr>\n";
+                                               }
+                                               else if ($row['status'] == 'Fully Received' && $status == 'Completed') {
+                                                echo "\t<tr><td ><input type = 'submit' name = 'ProductCode' value = '" . $row['ProductCode'] . "' class = 'btn' style = 'color: #4e73df;' ></td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['ToReceive'] . "</td><td>" . $row['status'] .  "</td> </tr>\n";
                                                }
                                                else{
                                                echo "\t<tr><td >" . $row['ProductCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['ToReceive'] . "</td><td>" . $row['status'] .  "</td> </tr>\n";
