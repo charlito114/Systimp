@@ -163,15 +163,12 @@
                                     // using concat mysql function
                                     $query = "SELECT * FROM products WHERE CONCAT(prodcode, category, brand, proddesc) LIKE '%".$valueToSearch."%'";
                                     $search_result = filterTable($query);
-
                                 }
                                 else {
                                     $query = "SELECT * FROM products";
                                      $query = "SELECT * FROM products WHERE status != 'Discontinued' ";
                                     $search_result = filterTable($query);
                                 }
-
-
                                 function filterTable($query)
                                 {
                                     $con = mysqli_connect("localhost", "root", "", "inventory");
@@ -237,14 +234,13 @@
                                     <?php 
                                       if ($search_result->num_rows > 0) {
                                     // output data of each row
-
                                     while($row = $search_result->fetch_assoc()) {
                                         echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['price'] ."</td></tr>\n";
                                         }
                                     } 
-                                    else {
-                                     echo "0 results";
-                                        }
+                                    //else {
+                                     //echo "0 results";
+                                        //}
                                       ?>
                                   </tbody>
                                 </table>
@@ -254,7 +250,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         
   <!-- Page level plugins -->
   <script src="vendor/datatables/jquery.dataTables.min.js"></script>
