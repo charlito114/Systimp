@@ -1,13 +1,13 @@
 <html>
     <?php
     error_reporting(0);
-    function phpAlert($message){
+    //function phpAlert($message){
       //echo 'script type="text/javascript">alert("'. $message . '")</script>';
-      echo "<script type='text/javascript'>alert('$message');</script>";
-    }
-     if (isset($_GET['message'])) {
-       phpAlert( $_GET['message']);
-     }
+    //  echo "<script type='text/javascript'>alert('$message');</script>";
+   // }
+   //  if (isset($_GET['message'])) {
+     //  phpAlert( $_GET['message']);
+     //}
         session_start();
         require_once("db/connection.php");
     ?>
@@ -198,7 +198,7 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <div class="btn btn-sm btn-primary shadow-sm" style="height: 30px; margin-top: 15px">
-                                <a href ="logout.php" class = "text-white"> Logout </a>
+                                Logout
                           </div>
                       </ul>
                     </nav>
@@ -221,6 +221,7 @@
                         $SONum = $_SESSION ['SONum']; 
                         $payment = 0;
                         $change = 0;
+                        //$discount = 0;
                         $InvoiceQuery = ("SELECT count(invoiceNum) AS INVOICECOUNT FROM salesmanagement ");
                         $result =  $con->query($InvoiceQuery);
                         if ($result->num_rows > 0) {
@@ -310,16 +311,34 @@
                                               <tbody>
                                                   <!-- INSERT PHP -->
                                                   <?php   
-                                                      $viewDetailsQuery = "SELECT * FROM temporaryinvoice";
+                                                      $insertQuery = "INSERT INTO temporaryinvoice (SONum, ProdCode, Category, Brand, ProdDesc, Size, Available, Quantity, QuantityIssued, ToBeIssued, Price) 
+                                                      SELECT s.SONum, s.ProdCode, s.Category, s.Brand, s.ProdDesc, s.Size, s.Available, s.ProdQuan, s.Issued, s.ProdQuan - s.Issued, s.TotalPrice
+                                                      FROM salesorderdetails s
+                                                      WHERE s.SONum = $SONum";
+                                                      if(mysqli_query($con,$insertQuery)){
+                                                        header("message=Successfully added new records");  
+                                                            }
+                                                    else{
+                                                        header("message=Error in adding the record");
+                                                            }
+                                                            
+                                                      $viewDetailsQuery = "SELECT * FROM temporaryinvoice WHERE ToBeIssued!= 0";
                                                       $result2 = $con->query($viewDetailsQuery);
                                                       if ($result2->num_rows > 0) {
                                                       // output data of each row
                                                       while($row = $result2->fetch_assoc()) {
+                                                          
                                                           echo "<form method = 'post' action = '' >";
-                                                          echo "\t<tr><td >" .  $row['ProdCode'] . "</td><td>" .  $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" .  $row['QuantityIssued'] . "</td><td>" .  $row['Price'] . " </td></tr><br>";
+                                                          echo "\t<tr><td><input type = 'submit' name = 'ProdCode' value = '" . $row['ProdCode'] . "' class = 'btn' style = 'color: #4e73df;' > </td><td>" .  $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" .  $row['ToBeIssued'] . "</td><td>" .  $row['Price'] . " </td></tr><br>";
                                                           echo "</form>";
                                                           }
-                                                      } 
+                                                      }
+
+                                                       if(isset($_POST['ProdCode']))
+                                                      {
+                                                        $ProdCode = $_POST['ProdCode'];
+                                                        $_SESSION['ProdCode'] = $ProdCode;
+                                                      }
                                                   ?>
                                               </tbody>
                                             </table>
@@ -345,7 +364,7 @@
                                                   <h4 class="modal-title">Void Sale</h4>
                                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
-                                              <form method = "post" action = "processTruncate.php">
+                                              <form method = "post" action = "processvoidsale.php">
                                                 <div class="modal-body">
                                                     <label>Note: Please request for manager approval </label><br>
                                                     <div class="row d-flex justify-content-between">
@@ -370,10 +389,10 @@
                                               <form method = "post" action = "processvoiditem.php">
                                                 <div class="modal-body">
                                                     <label>Note: Please request for manager approval </label><br>
-                                                    <div class="row d-flex justify-content-between">
-                                                        <label class="c-label">Product Code: </label>
+                                                    <!--<div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Product Code:<?php echo  $_SESSION['ProdCode'] ?> </label>
                                                         <input class="c-input form-control col-sm-6" type = "number" name= "prodcode">
-                                                    </div>
+                                                    </div> -->
                                                     <div class="row d-flex justify-content-between">
                                                         <label class="c-label">Password: </label>
                                                         <input class="c-input form-control col-sm-6" type = "password" name= "password">
@@ -401,16 +420,16 @@
                                                   <h4 class="modal-title">Add Products</h4>
                                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
-                                              <form method = "post" action = "processposadd.php">
+                                              <form method = "post" action = "">
                                                 <div class="modal-body">
-                                                    <div class="row d-flex justify-content-between">
+                                                   <!-- <div class="row d-flex justify-content-between">
                                                         <label class="c-label">Product Code: </label>
                                                         <input class="c-input form-control col-sm-6" type = "number" name= prodcode>
                                                     </div>
                                                     <div class="row d-flex justify-content-between">
                                                         <label class="c-label">Quantity: </label>
                                                         <input class="c-input form-control col-sm-6" type = "number" name= newQty>
-                                                    </div>
+                                                    </div> -->
                                                     <header class="card-header font-weight-bold">Sales Order Details</header>
                                                     <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -423,22 +442,63 @@
                                                               <td>Size</td>
                                                               <td>Quantity Ordered </td>
                                                               <td>Quantity Available </td>
-                                                              <td>Quantity Issued </td>
+                                                              <td>Quantity to Issue </td>
                                                             </tr>
                                                           </thead>
                                                           <tbody>
                                                             <?php 
-                                                                $viewDetailsQuery = "SELECT * FROM salesorderdetails WHERE SONum = $SONum";
+                                                                $viewDetailsQuery = "SELECT * FROM salesorderdetails WHERE SONum = $SONum AND Issued!= ProdQuan";
                                                                 $result = $con->query($viewDetailsQuery);
                                                                 if ($result->num_rows > 0) {
                                                                 // output data of each row
                                                                 // gets variables from table
                                                                     while($row = $result->fetch_assoc()) {
+                                                                        $toIssue = $row['ProdQuan'] - $row['Issued'];
                                                                         echo    "<form method = 'post' >"; 
-                                                                        echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" .  $row['ProdQuan'] . "</td><td>" .  $row['Available'] . "</td><td>" .  $row['Issued'] ."</td></tr><br>";
+                                                                        echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" .  $row['ProdQuan'] . "</td><td>" .  $row['Available'] . "</td><td>" .  $toIssue ."</td><td><button type = 'submit' name = 'add'  value = '" . $row['ProdCode']. "' class = 'btn'> <i class='fas fa-fw fa-plus-square' style = 'color:#2e59d9;'/>  </button></td></tr><br>";
                                                                         echo    "</form >"; 
                                                                     }
                                                                   }
+
+                                                                  /*if(isset($_POST['add']))
+                                                                        {
+                                                                          $prodcode = $_POST['add'];
+                                                                          $viewDetails = "SELECT * FROM salesorderdetails WHERE SONum = $SONum ProdCode = $prodcode";
+                                                                          $search_result = mysqli_query($con, $viewDetails);
+                                                                          if ($search_result->num_rows > 0) {
+                                                                              // output data of each row
+
+                                                                          while($row = $search_result->fetch_assoc()) {
+                                                                                      $category = $row['Category'];
+                                                                                      $brand= $row['Brand'];
+                                                                                      $proddesc= $row['ProdDesc'];
+                                                                                      $size= $row['Size'];
+                                                                                      $quantity= $row['ProdQuan'];
+                                                                                      $available= $row['Available'];
+                                                                                      $issued= $row['Issued'];
+                                                                                      $_SESSION['category'] = $category;
+                                                                                      $_SESSION['brand'] = $brand;
+                                                                                      $_SESSION['proddesc'] = $proddesc;
+                                                                                      $_SESSION['size'] = $size;
+                                                                                      $_SESSION['quantity'] = $quantity;
+                                                                                      $_SESSION['available'] = $available;
+                                                                                      $_SESSION['issued'] = $issued;
+                                                                                      $_SESSION['toissue'] = $toIssue;
+                                                                          }
+                                                                          }
+                                                                          $addQuery = "INSERT INTO temporaryinvoice (SONum, ProdCode, Category, Brand, ProdDesc, Size, Available, Quantity, QuantityIssued, ToBeIssued)
+                                                                          VALUES('". $SONum."', '". $prodcode."','". $category."', '". $brand."', '". $proddesc."','". $size."', '".$available."' ,'". $quantity."' ,'". $issued."' ,'". $toIssue."')";
+                                                                          if(mysqli_query($con,$addQuery)){
+                                                                              header("message=Successfully added new records");  
+                                                                                  }
+                                                                          else{
+                                                                              $alert = mysqli_error($con);
+                                                                              echo '<script type="text/javascript">';
+                                                                              echo 'alert("'.$alert.'")';
+                                                                              echo '</script>';    
+                                                                                  }
+                                                                                }
+                                                                                */
                                                             ?>
                                                           </tbody>
                                                         </table>
@@ -464,13 +524,20 @@
                                                 <div class="modal-body">
                                                     <div class="row d-flex justify-content-between">
                                                         <label class="c-label">Discount Amount: </label>
-                                                        <input class="c-input form-control col-sm-6" type = "number" name= "">
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= "discount">
                                                     </div>
                                                 </div>
                                                   <div class="modal-footer">
-                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
+                                                      <button type = "submit" class="btn btn-success" name = "discsubmit"> Submit </button>
                                                   </div>
                                               </form>
+                                              <?php
+                                              if(isset($_POST['discsubmit'])){
+                                                $discount = $_POST['discount'];
+                                                $_SESSION['discount'] = $discount;
+                                    
+                                              }
+                                              ?>
                                           </div>
                                       </div>
                                     </div>
@@ -498,7 +565,7 @@
                                                     echo "0 results";
                                                     }
                                             $VAT = $Subtotal * 0.12; 
-                                            $Total = $Subtotal + $VAT; 
+                                            $Total = $Subtotal + $VAT - $_SESSION['discount']; 
                                             
                                     ?>
 
@@ -519,8 +586,9 @@
                                               <form method = "post" action = "processchangequan.php">
                                                 <div class="modal-body">
                                                     <div class="row d-flex justify-content-between">
-                                                        <label class="c-label">Product Code: </label>
-                                                        <input class="c-input form-control col-sm-6" type = "number" name= "prodcode"><br>
+                                                        <label class="c-label">Product Code: <?php echo  $_SESSION['ProdCode'] ?> </label>
+                                                        <!--<input class="c-input form-control col-sm-6" type = "number" name= "prodcode">-->
+                                                        <br><br>
                                                         <label class="c-label">Quantity: </label>
                                                         <input class="c-input form-control col-sm-6" type = "number" name= "newQty">
                                                       
@@ -622,7 +690,7 @@
                                         </div>
                                         
                                         <br>
-                                        
+                                        <form method = "post">
                                         <div class="row d-flex justify-content-between" style="margin-top: 10px;">
                                             <div>
                                                 <label class="control-label">Amount Received:</label>
@@ -656,9 +724,11 @@
                                         
                                         <div class="d-flex justify-content-between" style="margin-left: 50%">
                                             <div style="width: 80%;">
-                                                <button name="" value="" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" style="margin-left: 30px; width: 100px;"> Done </button>
+                                                <button name="submit" value="" formaction="processcheckout.php" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" style="margin-left: 30px; width: 100px;"> Checkout </button>
                                             </div>
                                         </div>
+                                        </form>             
+
                                     </div>
                                 </div>
                             </div>
