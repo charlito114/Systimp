@@ -84,6 +84,7 @@
                 <a class="collapse-item" href="purchase_purchase_cart.php">Purchasing Cart</a>
                 <a class="collapse-item" href="purchase_add_purchase_order.php">Add Purchase Order</a>
                 <a class="collapse-item" href="purchase_purchase_history.php">Purchase History</a>
+                <a class="collapse-item" href="purchase_manage_purchase_orders.php">Manage Purchase Orders</a>
               </div>
             </div>
           </li>
