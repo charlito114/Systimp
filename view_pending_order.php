@@ -271,7 +271,7 @@
                                                echo "</form>";
                                            } 
                                            else {
-                                               echo "<tr><td colspan='6'><center> 0 results </center></td></tr>";
+                                               echo "<tr><td colspan='7'><center> 0 results </center></td></tr>";
                                                }
                                                     
                                           ?>
