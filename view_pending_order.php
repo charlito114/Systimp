@@ -143,8 +143,6 @@
                                     {
                                         $PONum = $_POST['PONum'];
                                         $_SESSION['PONum'] = $PONum;
-
-
                                     }
                                         
                                    $viewOrder = "SELECT * FROM p_purchasingmanagement WHERE PONum = " . $_SESSION['PONum'];
@@ -272,15 +270,56 @@
                                            }
                                                echo "</form>";
                                            } 
-                                          // else {
-                                            //   echo "0 results";
-                                             //  }
+                                           else {
+                                               echo "<tr><td colspan='6'><center> 0 results </center></td></tr>";
+                                               }
                                                     
                                           ?>
                                       </tbody>
                                     </table>
                                 </div>
                             </form>
+                        </div>
+                        
+                        <?php
+                             if(isset($_POST['ProductCode'])){
+                                $ProdDetails = $_POST['ProductCode'];                            
+                             ?>
+                        <div class="col-lg-12">
+                            <form class="navbar-expand col-lg-12">
+                                <header class="card-header font-weight-bold" style="border-bottom:  .10rem solid #b4c540;">Audit Log</header>
+                                <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Product Code</th>
+                                                <th>Quantity Received</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                                 $viewAudit = "SELECT * FROM purchaseaudit WHERE PONum = " . $_SESSION['PONum']. " AND ProductCode = $ProdDetails" ;
+                                                 $result2 = $con->query($viewAudit);
+                                                 if ($result2->num_rows > 0) {
+                                                     // output data of each row
+                                                     while($row = $result2->fetch_assoc()) {
+                                                         echo "<form method = 'post' action = '' >";
+                                                         echo "\t<tr><td >" . $row['Date'] . "</td><td>" . $row['ProductCode'] . "</td><td>"  .  $row['Received'] . "</td></tr>\n";
+                                                     }
+                                                         echo "</form>";
+                                                     } 
+                                                else {
+                                                   echo "<tr><td colspan='3'><center> No data available in table </center></td></tr>";
+                                                   }
+
+                                                ?>
+                                        </tbody>      
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                        <?php } ?>
 
                             <div class="col-lg-12">
                                 <form method="post" class="navbar-expand col-lg-12">
@@ -310,15 +349,16 @@
                                                
                                            }
                                            } 
-                                          // else {
-                                           //    echo "0 results";
-                                             //  }
+                                          else {
+                                               echo "<tr><td colspan='6'><center> No data available in table </center></td></tr>";
+                                               }
                                                     
                                           ?>
                                       </tbody>
                                     </table>
                                 </div>
                             </form>
+                        </div>
 
                             <div class="col-lg-12">
                                 <form method="post" class="navbar-expand col-lg-12">
@@ -348,51 +388,18 @@
                                                
                                            }
                                            } 
-                                          // else {
-                                           //    echo "0 results";
-                                             //  }
+                                          else {
+                                               echo "<tr><td colspan='6'><center> No data available in table </center></td></tr>";
+                                               }
                                                     
                                           ?>
                                       </tbody>
                                     </table>
                                 </div>
                             </form>
+                        </div>
 
-                            <?php
-                             if(isset($_POST['ProductCode'])){
-                                $ProdDetails = $_POST['ProductCode'];                            
-                             ?>
-                            <header class="card-header font-weight-bold" style="border-bottom:  .10rem solid #b4c540;">Audit Log</header>
-                            <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Product Code</th>
-                                            <th>Quantity Received</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                             $viewAudit = "SELECT * FROM purchaseaudit WHERE PONum = " . $_SESSION['PONum']. " AND ProductCode = $ProdDetails" ;
-                                             $result2 = $con->query($viewAudit);
-                                             if ($result2->num_rows > 0) {
-                                                 // output data of each row
-                                                 while($row = $result2->fetch_assoc()) {
-                                                     echo "<form method = 'post' action = '' >";
-                                                     echo "\t<tr><td >" . $row['Date'] . "</td><td>" . $row['ProductCode'] . "</td><td>"  .  $row['Received'] . "</td></tr>\n";
-                                                 }
-                                                     echo "</form>";
-                                                 } 
-                                                 else {
-                                                     echo "<tr>0 results</tr>";
-                                                     }
-                                                    
-                                            ?>
-                                    </tbody>      
-                                </table>
-                            </div>
-                            <?php } ?>
+                            
 
                             <form method="post"> 
                                 <div class="d-flex" style=" margin-top: 10px;">
@@ -400,15 +407,20 @@
                                     <div class="d-flex" style="width: 30%; float: right;">
                                         <!-- Back Button-->
                                         <div style="width: 80%; float: right;">
-                                            <button type = 'submit' name = 'back' formaction =  'purchase_purchase_history.php' class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="width: 100px; float: right;"> Back </button>
+                                            <button type = 'submit' name = 'back' formaction =  'purchase_pending_pos.php' class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="width: 100px; float: right;"> Back </button>
                                         </div>
                                     </div>
                                 </div>
                             </form>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
+  <!-- Page level plugins -->
+  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/demo/datatables-demo.js"></script>
     </body>
 </html>

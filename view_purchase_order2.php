@@ -283,10 +283,8 @@
                                            } 
                                        }
                                            else {
-                                               echo "0 results";
+                                               echo "<tr><td colspan='6'><center> No data available in table </center></td></tr>";
                                                }
-
-
                              ?>
 
                                     </tbody>
@@ -322,15 +320,16 @@
                                                
                                            }
                                            } 
-                                          // else {
-                                           //    echo "0 results";
-                                             //  }
+                                          else {
+                                               echo "<tr><td colspan='6'><center> No data available in table </center></td></tr>";
+                                               }
                                                     
                                           ?>
                                       </tbody>
                                     </table>
                                 </div>
                             </form>
+                        </div>
 
                             <div class="col-lg-12">
                                 <form method="post" class="navbar-expand col-lg-12">
@@ -360,27 +359,28 @@
                                                
                                            }
                                            } 
-                                          // else {
-                                           //    echo "0 results";
-                                             //  }
+                                          else {
+                                               echo "<tr><td colspan='6'><center> No data available in table </center></td></tr>";
+                                               }
                                                     
                                           ?>
                                       </tbody>
                                     </table>
                                 </div>
                             </form>
-                            <!--
-                            <form method="post"> 
+                        </div>
+                            
+                            <form > 
                                 <div class="d-flex" style=" margin-top: 10px;">
                                     <div style="width: 70%; float: left;"></div>
                                     <div class="d-flex" style="width: 30%; float: right;">
                                         
                                         <div style="width: 80%; float: right;">
-                                            <button type = 'submit' name = 'back' formaction =  'purchase_purchase_history.php' class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="width: 100px; float: right;"> Back </button>
+                                            <button type = 'submit' name = 'back' formaction =  'view_pending_order.php' class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="width: 100px; float: right;"> Back </button>
                                         </div>
                                     </div>
                                 </div>
-                            </form> -->
+                            </form> 
                         </div>
                     </div>
                 </div>

@@ -143,8 +143,6 @@
                                     {
                                         $PONum = $_POST['PONum'];
                                         $_SESSION['PONum'] = $PONum;
-
-
                                     }
                                         
                                    $viewOrder = "SELECT * FROM p_purchasingmanagement WHERE PONum = " . $_SESSION['PONum'];
@@ -279,7 +277,9 @@
                                                echo "</form>";
                                            } 
                                            
-                                                    
+                                             else {
+                                               echo "<tr><td colspan='6'><center> No data available in table </center></td></tr>";
+                                               }       
                                           ?>
                                       </tbody>
                                     </table>
@@ -313,8 +313,8 @@
                                                      echo "</form>";
                                                  } 
                                                  else {
-                                                     echo "<tr>0 results</tr>";
-                                                     }
+                                               echo "<tr><td colspan='6'><center> No data available in table </center></td></tr>";
+                                               }
                                                     
                                             ?>
                                     </tbody>      
