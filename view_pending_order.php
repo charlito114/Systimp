@@ -312,7 +312,6 @@
                                                 else {
                                                    echo "<tr><td colspan='3'><center> No data available in table </center></td></tr>";
                                                    }
-
                                                 ?>
                                         </tbody>      
                                     </table>
@@ -377,7 +376,7 @@
                                       </thead>
                                       <tbody>
                                         <?php
-                                           $viewDetails = "SELECT * FROM p_podetails WHERE PONum = " . $_SESSION['PONum'] . " AND status = 'Cancelled'";
+                                           $viewDetails = "SELECT * FROM p_podetails WHERE PONum = " . $_SESSION['PONum'] . " AND status = 'Timeframe' OR status = 'Insufficient Stock'";
                                            $result2 = $con->query($viewDetails);
                                            if ($result2->num_rows > 0) {
                                            // output data of each row
