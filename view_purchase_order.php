@@ -269,8 +269,8 @@
                                            }
                                            } 
                                            else {
-                                               echo "0 results";
-                                               }
+                                                    echo "<tr><td colspan='6'><center> No data available in table </center></td></tr>";
+                                                    } 
                                                     
                                           ?>
                                       </tbody>
@@ -307,8 +307,8 @@
                                                      echo "</form>";
                                                  } 
                                                  else {
-                                                     echo "<tr>0 results</tr>";
-                                                     }
+                                                    echo "<tr><td colspan='6'><center> No data available in table </center></td></tr>";
+                                                    }  
                                                     
                                             ?>
                                     </tbody>      
