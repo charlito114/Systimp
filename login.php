@@ -33,7 +33,7 @@ require_once('db/connection.php');
                     }
 
                 else if($userType[0]== 'Sales'){
-                        header("location:remove.php"); // indicate customized file location
+                        header("location:sales_dashboard.php"); // indicate customized file location
                         }
 
 			}
