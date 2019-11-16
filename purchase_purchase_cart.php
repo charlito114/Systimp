@@ -1,5 +1,6 @@
 <?php
-require_once("db/connection.php"); ?>
+require_once("db/connection.php");
+session_start();?>
 
 <html> 
     <head>
@@ -147,7 +148,9 @@ require_once("db/connection.php"); ?>
                             $PONum= $row['POCount'] + 1 ;
                             $_SESSION['PONum'] = $PONum;
                             }
-                        }
+                        } //else {
+                          //  echo "0 results";
+                          //  }
                         ?>
                         <!-- Table -->
                         <div class="table-responsive">
@@ -169,7 +172,7 @@ require_once("db/connection.php"); ?>
                               </thead>
                               <tbody>
                                 <?php  
-                            $viewLowStock = ("SELECT * FROM lowstockproducts");
+                            $viewLowStock = ("SELECT prodcode,category,brand,proddesc,size,onhand,forinventory,SUM(fororders) AS fororders FROM lowstockproducts GROUP BY prodcode;");
                             $search_result = mysqli_query($con, $viewLowStock);
                             if ($search_result->num_rows > 0) {
                                 // output data of each row
@@ -183,14 +186,14 @@ require_once("db/connection.php"); ?>
                                             $prodquan= $row['onhand'];
                                             $forinventory= $row['forinventory'];
                                             $fororders= $row['fororders'];
-                                            $_SESSION['prodcode'] = $prodcode;
+                                            /*$_SESSION['prodcode'] = $prodcode;
                                             $_SESSION['category'] = $category;
                                             $_SESSION['brand'] = $brand;
                                             $_SESSION['proddesc'] = $proddesc;
                                             $_SESSION['size'] = $size;
                                             $_SESSION['onhand'] = $prodquan;
                                             $_SESSION['forinventory'] = $forinventory;
-                                            $_SESSION['fororders'] = $fororders;
+                                            $_SESSION['fororders'] = $fororders;*/
                                   
                                     echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['onhand'] . "</td><td>" . $row['forinventory'] . "</td><td>" . $row['fororders'] .  "</td><td><button type = 'submit' name = 'add'  value = '" . $row['prodcode']. "' class = 'btn'> <i class='fas fa-fw fa-plus-square' style = 'color:#2e59d9;'/>  </button></td></tr><br>";
                                     }
@@ -204,33 +207,36 @@ require_once("db/connection.php"); ?>
                         
                        if(isset($_POST['add']))
                         {
-                          $prodcode = $_POST['add'];
-                          $viewDetails = "SELECT * FROM lowstockproducts WHERE prodcode = $prodcode";
+                          $pc = $_POST['add'];
+                          $viewDetails = "SELECT * FROM lowstockproducts WHERE prodcode = $pc";
                           $search_result = mysqli_query($con, $viewDetails);
                           if ($search_result->num_rows > 0) {
                               // output data of each row
 
                           while($row = $search_result->fetch_assoc()) {
-                                      $prodcode= $row['prodcode'];
-                                      $category = $row['category'];
-                                      $brand= $row['brand'];
-                                      $proddesc= $row['proddesc'];
-                                      $size= $row['size'];
-                                      $prodquan= $row['onhand'];
+                                      $prodcode1= $row['prodcode'];
+                                      $category1 = $row['category'];
+                                      $brand1= $row['brand'];
+                                      $proddesc1= $row['proddesc'];
+                                      $size1= $row['size'];
+                                      $prodquan1= $row['onhand'];
                                       $forinventory= $row['forinventory'];
                                       $fororders= $row['fororders'];
-                                      $_SESSION['prodcode'] = $prodcode;
-                                      $_SESSION['category'] = $category;
-                                      $_SESSION['brand'] = $brand;
-                                      $_SESSION['proddesc'] = $proddesc;
-                                      $_SESSION['size'] = $size;
+                                      $_SESSION['prodcode'] = $prodcode1;
+                                      $_SESSION['category'] = $category1;
+                                      $_SESSION['brand'] = $brand1;
+                                      $_SESSION['proddesc'] = $proddesc1;
+                                      $_SESSION['size'] = $size1;
                                       $_SESSION['onhand'] = $prodquan;
                                       $_SESSION['forinventory'] = $forinventory;
                                       $_SESSION['fororders'] = $fororders;
+
+                                      
                           }
                           }
+
                             ?>  
-                        <form onsubmit="return confirm('Are you sure you want to continue action?');" method = "post" action = "purchase_purchase_cart.php" style="width: 100%;">
+                        <form  method = "post" action = "" style="width: 100%;">
                         <div class="col-lg-12 navbar-expand">
                             <header class="panel-heading" style="padding-top: 0; border-bottom:  .10rem solid #b4c540;">Product Details</header>
                             
@@ -245,7 +251,7 @@ require_once("db/connection.php"); ?>
                                                 </div>
 
                                                 <div name = 'prodcode' class="input-group col-sm-6 m-bot15">
-                                                    <?php echo $prodcode; ?>
+                                                    <?php echo $prodcode1; ?>
                                                 </div>
                                             </div>
                                             
@@ -255,7 +261,7 @@ require_once("db/connection.php"); ?>
                                                 </div>
 
                                                 <div name = 'category' class="input-group col-sm-6 m-bot15">
-                                                    <?php echo $category; ?>
+                                                    <?php echo $category1; ?>
                                                 </div>
                                             </div>
 
@@ -265,7 +271,7 @@ require_once("db/connection.php"); ?>
                                                 </div>
 
                                                 <div name = 'brand' class="input-group col-sm-6 m-bot15">
-                                                    <?php echo $brand; ?>
+                                                    <?php echo $brand1; ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -279,7 +285,7 @@ require_once("db/connection.php"); ?>
                                                 </div>
 
                                                 <div name = 'proddesc' class="input-group col-sm-6 m-bot15">
-                                                    <?php echo $proddesc; ?>
+                                                    <?php echo $proddesc1; ?>
                                                 </div>
                                             </div>
 
@@ -289,7 +295,7 @@ require_once("db/connection.php"); ?>
                                                 </div>
 
                                                 <div name = 'size' class="input-group col-sm-6 m-bot15">
-                                                    <?php echo $size; ?>
+                                                    <?php echo $size1; ?>
                                                 </div>
                                             </div>
                                             
@@ -336,6 +342,7 @@ require_once("db/connection.php"); ?>
                                 }
                             if(isset($_POST['submit']))
                             {   
+                                
                                 $suggestedQuan = $_POST['suggestedQuan'];
                                 $orderQuan = $_POST['orderQuan'];
                                 $PurchaseOrderQuery = "INSERT INTO temporarypurchasing (PONum, ProductCode, Category, Brand, ProductDesc, Size,SuggestedQuantity, QuantitytobeOrdered)
@@ -352,11 +359,14 @@ require_once("db/connection.php"); ?>
 
                             }
                         //}
-                    }   
+                    }
+               // else{
+               //     echo "0 results";
+               // }    
                                   
                           ?>
                             
-                        <header class="panel-heading">Purchasing Cart</header>
+                       <header class="panel-heading">Purchasing Cart</header>
                         <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0; border-top: .20rem solid #b4c540;">
                             <form method="post" action="purchase_purchase_cart.php">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
