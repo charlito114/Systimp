@@ -260,10 +260,8 @@
                                           <th>Brand</th>
                                           <th>Description</th>
                                           <th>Size</th>
-                                          <th>Quantity</th>
-                                          <th>Available</th>
+                                          <th>Ordered</th>
                                           <th>Issued</th>
-                                          <th>Price</th>
                                           <th>Total Price</th>
                                         </tr>
                                       </thead>
@@ -275,8 +273,7 @@
                                             // output data of each row
                                             while($row = $result2->fetch_assoc()) {
                                                 // may part dito na  sa isang row, may button for update, once clicked, kukunin niya yung product code nung row na yun
-
-                                                echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['ProdQuan'] . "</td><td>" . $row['Available'] . "</td><td>" . $row['Issued'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['TotalPrice'] . "</td></tr>\n";
+                                                echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['ProdQuan'] . "</td><td>" . $row['Issued'] . "</td><td>" . $row['TotalPrice'] . "</td></tr>\n";
                                                 }
                                             } 
                                           ?>
