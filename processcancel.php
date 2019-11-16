@@ -21,7 +21,7 @@ if(isset($_POST['submit']))
         echo '<script type="text/javascript">';
         echo 'alert("'.$alert.'")';
         echo '</script>'; 
-        header("location:view_purchase_order.php?message=Cancellation Successful.");
+        header("location:view_pending_order.php?message=Cancellation Successful.");
         
             
             

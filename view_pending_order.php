@@ -2,7 +2,6 @@
     <?php
         session_start();
         require_once("db/connection.php");
-        
     ?>
     <head>
         <title>Lunatech Systems</title>
@@ -31,7 +30,7 @@
                 <div id="content">
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg topbar mb-4 static-top shadow">
-                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Cancel Purchase Order Details</div>
+                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Manage Purchase Order</div>
                       <!-- Sidebar Toggle (Topbar) -->
                       <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -140,15 +139,15 @@
                     <div class="container-fluid">
                             <div class="col-lg-12">
                                 <?php
-                                    if(isset($_POST['receive']))
+                                    if(isset($_POST['PONum']))
                                     {
-                                        $EditCode = $_POST['receive'];
-                                        $_SESSION['EditCode'] = $EditCode;
-                                        $PONum = $_SESSION['PONum'];
-                                    
+                                        $PONum = $_POST['PONum'];
+                                        $_SESSION['PONum'] = $PONum;
+
+
                                     }
                                         
-                                    $viewOrder = "SELECT * FROM p_purchasingmanagement WHERE PONum = " . $_SESSION['PONum'];
+                                   $viewOrder = "SELECT * FROM p_purchasingmanagement WHERE PONum = " . $_SESSION['PONum'];
                                     $result = $con->query($viewOrder);
                                     if ($result->num_rows > 0) {
                                     // output data of each row
@@ -242,7 +241,7 @@
                         <!-- Table -->
                         
                             <div class="col-lg-12">
-                                <form method="post" class="navbar-expand col-lg-12" action = "processreceive.php" >
+                                <form method="post" class="navbar-expand col-lg-12">
                                 <header class="card-header font-weight-bold" style="border-bottom:  .10rem solid #b4c540;">Processing Products</header>
                                 <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -255,41 +254,30 @@
                                           <th>Size</th>
                                           <th>Quantity Ordered</th>
                                           <th>Quantity To Be Received</th>
-                                          <th>Quantity Received</th>
-                                          <th></th>
                                         </tr>
                                       </thead>
                                       <tbody>
                                         <?php
-                                           $viewDetails = "SELECT * FROM p_podetails WHERE PONum = " . $_SESSION['PONum']. " AND status = 'Processing'";
+                                           $viewDetails = "SELECT * FROM p_podetails WHERE PONum = " . $_SESSION['PONum']. " AND status = 'Processing'" ;
                                            $result2 = $con->query($viewDetails);
                                            if ($result2->num_rows > 0) {
                                            // output data of each row
                                            while($row = $result2->fetch_assoc()) {
-                                             
-                                               if($row['ProductCode'] == $EditCode){
+                                               echo "<form method = 'post' action = '' >";
+                                               echo "\t<tr><td ><input type = 'submit' name = 'ProductCode' value = '" . $row['ProductCode'] . "' class = 'btn' style = 'color: #4e73df;' ></td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['ToReceive'] . "</td> <td><button type = 'submit' name = 'receive' ' formaction = 'view_purchase_order2.php'  value = '" . $row['ProductCode']. "' class = 'btn'> <i class='fas fa-fw fa-pen' style = 'color:#b4c540;'/>  </button></td>
+                                               <td><button type = 'submit' name = 'cancel' formaction = 'view_purchase_order_cancel.php'  value = '" . $row['ProductCode']. "' class = 'btn'> <i class='fas fa-fw fa-ban' style = 'color:#ff0000;'/>  </button></td></tr>\n";
+                                               
+                                               
                                               
-                                               echo "\t<tr><td >" . $row['ProductCode'] . "</td><td>" . $row['Category'] . "</td><td>"  . 
-                                                $row['Brand'] . "</td><td>" . $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>"
-                                                 . $row['ToReceive'] . "</td><td><input type = 'text' name = 'receivevalue'  value = '' class = 'form-control' ></td> <td><button type = 'submit' name = 'submit'  value = '" . $row['ProductCode'] . "' class = 'btn btn-sm btn-success shadow-sm'> Submit </button></td></tr>\n";
-                                               }
-                                               else{
-                                                 
-                                                echo "\t<tr><td >" . $row['ProductCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . 
-                                                "</td><td>" . $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] .
-                                                 "</td><td>" . $row['ToReceive'] . "</td><td></td></tr>\n";
-                                       
-                                               }
+                                           }
+                                               echo "</form>";
                                            } 
-                                       }
-                                           else {
-                                               echo "0 results";
-                                               }
-
-
-                             ?>
-
-                                    </tbody>
+                                          // else {
+                                            //   echo "0 results";
+                                             //  }
+                                                    
+                                          ?>
+                                      </tbody>
                                     </table>
                                 </div>
                             </form>
@@ -349,7 +337,7 @@
                                       </thead>
                                       <tbody>
                                         <?php
-                                           $viewDetails = "SELECT * FROM p_podetails WHERE PONum = " . $_SESSION['PONum'] . " AND status = 'Fully Received'";
+                                           $viewDetails = "SELECT * FROM p_podetails WHERE PONum = " . $_SESSION['PONum'] . " AND status = 'Cancelled'";
                                            $result2 = $con->query($viewDetails);
                                            if ($result2->num_rows > 0) {
                                            // output data of each row
@@ -369,18 +357,54 @@
                                     </table>
                                 </div>
                             </form>
-                            <!--
+
+                            <?php
+                             if(isset($_POST['ProductCode'])){
+                                $ProdDetails = $_POST['ProductCode'];                            
+                             ?>
+                            <header class="card-header font-weight-bold" style="border-bottom:  .10rem solid #b4c540;">Audit Log</header>
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Product Code</th>
+                                            <th>Quantity Received</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                             $viewAudit = "SELECT * FROM purchaseaudit WHERE PONum = " . $_SESSION['PONum']. " AND ProductCode = $ProdDetails" ;
+                                             $result2 = $con->query($viewAudit);
+                                             if ($result2->num_rows > 0) {
+                                                 // output data of each row
+                                                 while($row = $result2->fetch_assoc()) {
+                                                     echo "<form method = 'post' action = '' >";
+                                                     echo "\t<tr><td >" . $row['Date'] . "</td><td>" . $row['ProductCode'] . "</td><td>"  .  $row['Received'] . "</td></tr>\n";
+                                                 }
+                                                     echo "</form>";
+                                                 } 
+                                                 else {
+                                                     echo "<tr>0 results</tr>";
+                                                     }
+                                                    
+                                            ?>
+                                    </tbody>      
+                                </table>
+                            </div>
+                            <?php } ?>
+
                             <form method="post"> 
                                 <div class="d-flex" style=" margin-top: 10px;">
                                     <div style="width: 70%; float: left;"></div>
                                     <div class="d-flex" style="width: 30%; float: right;">
-                                        
+                                        <!-- Back Button-->
                                         <div style="width: 80%; float: right;">
                                             <button type = 'submit' name = 'back' formaction =  'purchase_purchase_history.php' class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="width: 100px; float: right;"> Back </button>
                                         </div>
                                     </div>
                                 </div>
-                            </form> -->
+                            </form>
                         </div>
                     </div>
                 </div>

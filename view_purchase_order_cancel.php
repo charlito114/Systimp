@@ -144,7 +144,6 @@
                                     {
                                         $EditCode = $_POST['cancel'];
                                         $_SESSION['EditCode'] = $EditCode;
-                                        echo $EditCode;
                                         $PONum = $_SESSION['PONum'];
                                         
                                     }
@@ -264,7 +263,7 @@
                                       </thead>
                                       <tbody>
                                         <?php
-                                          $viewDetails = "SELECT * FROM p_podetails WHERE PONum = " . $_SESSION['PONum'];
+                                          $viewDetails = "SELECT * FROM p_podetails WHERE PONum = " . $_SESSION['PONum']. " AND status = 'Processing'";
                                           $result2 = $con->query($viewDetails);
                                           if ($result2->num_rows > 0) {
                                           // output data of each row
@@ -277,7 +276,7 @@
                                                $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['ToReceive'] . "</td><td>" . $row['status'] . 
                                                 "</td><td><select name = 'cancelreason' class = 'form-control'> 
                                                 <option value='Timeframe'>Timeframe</option>
-                                                <option value='Stock'>Insufficient Stock</option></td> <td><button type = 'submit' name = 'submit' formaction = 'processcancel.php' value = '" . $row['ProductCode'] . "' class = 'btn btn-sm btn-success shadow-sm' > Submit </button></td><td><button type = 'submit' name = 'back' formaction = 'view_purchase_order.php' class = 'btn btn-sm btn-primary shadow-sm'>Back</td></tr>\n";
+                                                <option value='Insufficient Stock'>Insufficient Stock</option></td> <td><button type = 'submit' name = 'submit' formaction = 'processcancel.php' value = '" . $row['ProductCode'] . "' class = 'btn btn-sm btn-success shadow-sm' > Submit </button></td></tr>\n";
                                               }
                                               else{
                                                 
@@ -302,6 +301,87 @@
                                     </div>
                                 </div>
                             </form> -->
+                            </tbody>
+                                    </table>
+                                </div>
+                            </form>
+
+                            <div class="col-lg-12">
+                                <form method="post" class="navbar-expand col-lg-12">
+                                <header class="card-header font-weight-bold" style="border-bottom:  .10rem solid #b4c540;">Fully Received Products</header>
+                                <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                      <thead>
+                                        <tr>
+                                          <th>Product Code</th>
+                                          <th>Category</th>
+                                          <th>Brand</th>
+                                          <th>Description</th>
+                                          <th>Size</th>
+                                          <th>Quantity Ordered</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <?php
+                                           $viewDetails = "SELECT * FROM p_podetails WHERE PONum = " . $_SESSION['PONum'] . " AND status = 'Fully Received'";
+                                           $result2 = $con->query($viewDetails);
+                                           if ($result2->num_rows > 0) {
+                                           // output data of each row
+                                           while($row = $result2->fetch_assoc()) {
+                            
+                                               echo "\t<tr><td >" . $row['ProductCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td>
+                                               </tr>\n";
+                                               
+                                           }
+                                           } 
+                                          // else {
+                                           //    echo "0 results";
+                                             //  }
+                                                    
+                                          ?>
+                                      </tbody>
+                                    </table>
+                                </div>
+                            </form>
+
+                            <div class="col-lg-12">
+                                <form method="post" class="navbar-expand col-lg-12">
+                                <header class="card-header font-weight-bold" style="border-bottom:  .10rem solid #b4c540;">Cancelled Products</header>
+                                <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                      <thead>
+                                        <tr>
+                                          <th>Product Code</th>
+                                          <th>Category</th>
+                                          <th>Brand</th>
+                                          <th>Description</th>
+                                          <th>Size</th>
+                                          <th>Quantity Ordered</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <?php
+                                           $viewDetails = "SELECT * FROM p_podetails WHERE PONum = " . $_SESSION['PONum'] . " AND status = 'Fully Received'";
+                                           $result2 = $con->query($viewDetails);
+                                           if ($result2->num_rows > 0) {
+                                           // output data of each row
+                                           while($row = $result2->fetch_assoc()) {
+                            
+                                               echo "\t<tr><td >" . $row['ProductCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td>
+                                               </tr>\n";
+                                               
+                                           }
+                                           } 
+                                          // else {
+                                           //    echo "0 results";
+                                             //  }
+                                                    
+                                          ?>
+                                      </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                          
                         </div>
                     </div>
                 </div>

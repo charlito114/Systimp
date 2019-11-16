@@ -17,7 +17,7 @@ $receivequery = "UPDATE p_podetails
         echo '<script type="text/javascript">';
         echo 'alert("'.$alert.'")';
         echo '</script>'; 
-        header("location:view_purchase_order.php?message= Successfully Updated Purchase Order.");
+        header("location:view_pending_order.php?message= Successfully Updated Purchase Order.");
         
             
             
@@ -31,28 +31,5 @@ $receivequery = "UPDATE p_podetails
                         echo '</script>';  
                                 
                     }
-$updateinventory = "UPDATE products 
-                    SET prodquan = prodquan + '".$ReceivedQty."'
-                    WHERE prodcode = $EditCode";
-if(mysqli_query($con,$receivequery)){
-        
-    $alert = "Successfully updated purchase order!";
-    echo $alert;
-    echo '<script type="text/javascript">';
-    echo 'alert("'.$alert.'")';
-    echo '</script>'; 
-    header("location:view_purchase_order.php?message= Successfully Updated Purchase Order.");
-    
-        
-        
-                }
-                else{
-        
-                    $alert = mysqli_error($con);
-                    echo $alert;
-                    echo '<script type="text/javascript">';
-                    echo 'alert("'.$alert.'")';
-                    echo '</script>';  
-                       
-}
+
 }
