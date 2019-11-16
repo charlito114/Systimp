@@ -143,6 +143,8 @@
                                     {
                                         $PONum = $_POST['PONum'];
                                         $_SESSION['PONum'] = $PONum;
+
+
                                     }
                                         
                                    $viewOrder = "SELECT * FROM p_purchasingmanagement WHERE PONum = " . $_SESSION['PONum'];
@@ -251,40 +253,32 @@
                                           <th>Description</th>
                                           <th>Size</th>
                                           <th>Quantity Ordered</th>
-                                          <th>Quantity To Be Received</th>
-                                          <th>Status</th>
+                                        
                                         </tr>
                                       </thead>
                                       <tbody>
                                         <?php
-                                           $viewDetails = "SELECT * FROM p_podetails WHERE PONum = " . $_SESSION['PONum'];
+                                           $viewDetails = "SELECT * FROM p_podetails WHERE PONum = " . $_SESSION['PONum'] ;
                                            $result2 = $con->query($viewDetails);
                                            if ($result2->num_rows > 0) {
                                            // output data of each row
                                            while($row = $result2->fetch_assoc()) {
-                                               echo "<form method = 'post' action = '' >";
-                                               if($row['status'] == 'Processing' && $status== 'Ongoing'){
-                                               echo "\t<tr><td ><input type = 'submit' name = 'ProductCode' value = '" . $row['ProductCode'] . "' class = 'btn' style = 'color: #4e73df;' ></td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['ToReceive'] . "</td><td>" . $row['status'] .  "</td> <td><button type = 'submit' name = 'receive' ' formaction = 'view_purchase_order2.php'  value = '" . $row['ProductCode']. "' class = 'btn'> <i class='fas fa-fw fa-pen' style = 'color:#b4c540;'/>  </button></td>
-                                               <td><button type = 'submit' name = 'cancel' formaction = 'view_purchase_order_cancel.php'  value = '" . $row['ProductCode']. "' class = 'btn'> <i class='fas fa-fw fa-ban' style = 'color:#ff0000;'/>  </button></td></tr>\n";
-                                               }
-                                               else if ($row['status'] == 'Fully Received' && $status == 'Completed') {
-                                                echo "\t<tr><td ><input type = 'submit' name = 'ProductCode' value = '" . $row['ProductCode'] . "' class = 'btn' style = 'color: #4e73df;' ></td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['ToReceive'] . "</td><td>" . $row['status'] .  "</td> </tr>\n";
-                                               }
-                                               else{
-                                               echo "\t<tr><td >" . $row['ProductCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['ToReceive'] . "</td><td>" . $row['status'] .  "</td> </tr>\n";
-                                               }
+                                            
+                                               echo "\t<tr><td >" . $row['ProductCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td> </tr>\n";
+                                               
                                            }
-                                               echo "</form>";
                                            } 
-                                           
-                                             else {
-                                               echo "<tr><td colspan='6'><center> No data available in table </center></td></tr>";
-                                               }       
+                                           else {
+                                               echo "0 results";
+                                               }
+                                                    
                                           ?>
                                       </tbody>
                                     </table>
                                 </div>
                             </form>
+
+                            
 
                             <?php
                              if(isset($_POST['ProductCode'])){
@@ -313,8 +307,8 @@
                                                      echo "</form>";
                                                  } 
                                                  else {
-                                               echo "<tr><td colspan='6'><center> No data available in table </center></td></tr>";
-                                               }
+                                                     echo "<tr>0 results</tr>";
+                                                     }
                                                     
                                             ?>
                                     </tbody>      
