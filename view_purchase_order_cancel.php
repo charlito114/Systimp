@@ -286,8 +286,8 @@
                                           } 
                                       }
                                           else {
-                                              echo "0 results";
-                                              }
+                                               echo "<tr><td colspan='9'><center> No data available in table </center></td></tr>";
+                                               }
                              ?>
                             <!--
                             <form method="post"> 
