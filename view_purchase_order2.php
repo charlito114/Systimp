@@ -283,7 +283,7 @@
                                            } 
                                        }
                                            else {
-                                               echo "<tr><td colspan='6'><center> No data available in table </center></td></tr>";
+                                               echo "<tr><td colspan='8'><center> No data available in table </center></td></tr>";
                                                }
                              ?>
 
