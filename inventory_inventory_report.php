@@ -128,7 +128,7 @@ require_once("db/connection.php");
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <div class="btn btn-sm btn-primary shadow-sm" style="height: 30px; margin-top: 15px">
-                                <a href ="logout.php" class = "text-white"> Logout </a>
+                                Logout
                           </div>
                       </ul>
                     </nav>
@@ -178,8 +178,9 @@ require_once("db/connection.php");
                                 }
                                     else {
                                         $date = date('Y-m-d');
+                                        $mindate =  date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $date) ) ));
                                       //  echo $date;
-                                        $query = "SELECT * FROM inventoryreport WHERE date LIKE '$date' ";
+                                        $query = "SELECT * FROM inventoryreport WHERE date LIKE '$mindate' ";
                                         $search_result = filterTable($query);
                                     }
                                     function filterTable($query)
@@ -188,7 +189,6 @@ require_once("db/connection.php");
                                         $filter_Result = mysqli_query($con, $query);
                                         return $filter_Result;
                                     }
-
                                 ?>                          
                         </div>
 
@@ -204,7 +204,7 @@ require_once("db/connection.php");
                                     
                                     <div style="float: right;">
                                         <header style="font-weight: bold;">INVENTORY REPORT</header>
-                                        <header>AS OF XXX 99, 9999 </header>
+                                        <header>AS OF <?php echo $mindate ?> </header>
                                     </div>
                                 </div>
                             </div>
@@ -229,7 +229,6 @@ require_once("db/connection.php");
                                         echo "\t<tr><td >" . $row['date'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['prodcode'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['prodquan'] .    "</td></tr>\n";
                                         }
                                     } 
-
                                     #please add these error checking codes
                                     else {
                                         $alert = mysqli_error($con);
@@ -237,7 +236,6 @@ require_once("db/connection.php");
                                         echo 'alert("'.$alert.'")';
                                         echo '</script>';  
                                     }
-
                                   ?>
                               </tbody>
                             </table>
