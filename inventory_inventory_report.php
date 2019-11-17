@@ -207,8 +207,8 @@ require_once("db/connection.php");
                                     </div>
                                 </div>
                             </div>
-                            <table class="align-items-center" id="dataTable" width="100%" cellspacing="0">
-                              <thead>
+                            <table class="" style="margin: auto; width: 100% !important;" id="dataTable" cellspacing="0">
+                              <thead class="text-center">
                                 <tr>
                                     <th>Date</th>
                                     <th>Category</th>

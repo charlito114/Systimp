@@ -176,17 +176,13 @@ require_once("db/connection.php");
                                     $year= date("Y", strtotime($trial));
                                     //echo $month; 
                                     //echo $year;
-
                                     $query = "SELECT * FROM salesreport WHERE month = $month AND year = $year";
                                     $search_result = filterTable($query);
-
                                 }
                                     else {
                                         $query = "SELECT * FROM salesreport";
                                         $search_result = filterTable($query);
                                     }
-
-
                                     function filterTable($query)
                                     {
                                         $con = mysqli_connect("localhost", "root", "", "inventory");
@@ -206,8 +202,8 @@ require_once("db/connection.php");
                                     <header style="font-weight: bold;">YEARLY SALES AND INCOME REPORT <br>FOR THE YEAR BLANK </header>
                                 </div>
                             </div>
-                            <table class="" id="dataTable" width="100%" cellspacing="0">
-                              <thead>
+                            <table class="text-center" style="margin: auto; width: 90% !important;" id="dataTable" cellspacing="0">
+                              <thead class="">
                                 <tr>
                                     <th>Year</th>
                                     <th>Month</th>
@@ -220,12 +216,10 @@ require_once("db/connection.php");
                                 <?php 
                                   if ($search_result->num_rows > 0) {
                                     // output data of each row
-
                                     while($row = $search_result->fetch_assoc()) {
                                         echo "\t<tr><td >" . $row['year'] . "</td><td>" . $row['month'] . "</td><td>"  .  $row['salesbeforetax'] . "</td><td>" . $row['vat'] . "</td><td>" . $row['salesaftertax'] . "</td></tr>\n";
                                         }
                                     } 
-
                                      #please add these error checking codes
                                     else {
                                         $alert = mysqli_error($con);
