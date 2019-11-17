@@ -229,12 +229,11 @@
                             while($row = $result->fetch_assoc()) {
                                 $invoiceNum= $row['INVOICECOUNT'] +1 ;
                                 $_SESSION['invoiceNum'] = $invoiceNum;
-
                                 }
                             } 
-                        else {
-                                echo "0 results";
-                            }
+                        //else {
+                        //        echo "0 results";
+                         //   }
                         
                             $CustomerQuery = ("SELECT CustomerName FROM ordermanagement WHERE SONum = $SONum ");
                             $result =  $con->query($CustomerQuery);
@@ -245,11 +244,9 @@
                                     $_SESSION['CustomerName'] = $custName;
                                     }
                                 } 
-                            else {
-                                    echo "0 results";
-                                }
-
-
+                            //else {
+                              //      echo "0 results";
+                              //  }
                     ?>
 
                     <div class="container-fluid">
@@ -291,7 +288,7 @@
 
                                                 <div class="input-group col-sm-6 m-bot15">
                                                     <?php
-                                                     ECHO $custName;
+                                                     echo $custName;
                                                     ?>
                                                 </div>
                                             </div>
@@ -315,7 +312,6 @@
                                               <tbody>
                                                   <!-- INSERT PHP -->
                                                   <?php   
-
                                                   
                                                       $insertQuery = "INSERT INTO temporaryinvoice (SONum, ProdCode, Category, Brand, ProdDesc, Size, Available, Quantity, QuantityIssued, ToBeIssued, Price, TotalPrice) 
                                                       SELECT s.SONum, s.ProdCode, s.Category, s.Brand, s.ProdDesc, s.Size, s.Available, s.ProdQuan, s.Issued, s.ProdQuan - s.Issued, s.Price, s.TotalPrice
@@ -323,21 +319,18 @@
                                                       WHERE s.SONum = $SONum";
                                                       if(mysqli_query($con,$insertQuery)){
                                                         header("message=Successfully added new records");
-
                                                         $updateInvoice = "UPDATE temporaryinvoice 
                                                         SET invoiceNum =  $invoiceNum 
                                                         WHERE SONum = $SONum";
                                                             if(mysqli_query($con,$updateInvoice)){
                                                               header("message=Sucess in adding the record");
                                                               }
-
                                                               else{
                                                                 $alert = mysqli_error($con);
                                                                 echo $alert;
                                                             }
                                                             
                                                       }
-
                                                            
                                                            
                                                             
@@ -352,7 +345,9 @@
                                                           echo "</form>";
                                                           }
                                                       }
-
+                                                  else {
+                                                       echo "<tr><td colspan='7'><center> No data available in table </center></td></tr>";
+                                                       }
                                                        if(isset($_POST['ProdCode']))
                                                       {
                                                         $ProdCode = $_POST['ProdCode'];
@@ -478,7 +473,9 @@
                                                                         echo    "</form >"; 
                                                                     }
                                                                   }
-
+                                                                else {
+                                                                   echo "<tr><td colspan='8'><center> No data available </center></td></tr>";
+                                                                   }
                                                                   /*if(isset($_POST['add']))
                                                                         {
                                                                           $prodcode = $_POST['add'];
@@ -486,7 +483,6 @@
                                                                           $search_result = mysqli_query($con, $viewDetails);
                                                                           if ($search_result->num_rows > 0) {
                                                                               // output data of each row
-
                                                                           while($row = $search_result->fetch_assoc()) {
                                                                                       $category = $row['Category'];
                                                                                       $brand= $row['Brand'];
@@ -555,7 +551,6 @@
                                                 $discount = $_POST['discount'];                                    
                                               }
                                                  $_SESSION['discount'] = $discount;
-
                                               ?>
                                           </div>
                                       </div>
@@ -570,9 +565,9 @@
                                                 while($row = $numresult->fetch_assoc()) {
                                                     $numItems= $row['Count'];
                                                     }
-                                                } else {
-                                                    echo "0 results";
-                                                    }
+                                                } //else {
+                                                  //  echo "0 results";
+                                                   // }
                                         $SubtotalQuery = "SELECT SUM(TotalPrice) AS Subtotal FROM temporaryinvoice";
                                         $Subtotalresult =  $con->query($SubtotalQuery);
                                             if ($Subtotalresult->num_rows > 0) {
@@ -580,9 +575,9 @@
                                                 while($row = $Subtotalresult->fetch_assoc()) {
                                                     $Subtotal= $row['Subtotal'];
                                                     }
-                                                } else {
-                                                    echo "0 results";
-                                                    }
+                                                } //else {
+                                                  //  echo "0 results";
+                                                  //  }
                                             $VAT = $Subtotal * 0.12; 
                                             $Total = $Subtotal + $VAT - $_SESSION['discount']; 
                                             
@@ -657,16 +652,51 @@
                                     <!-- POS Lower Content -->
 
                                    
-                                    <div class="col-lg-7 mb-4" style="float: left;">
+                                    <div class="navbar-expand" style="float: left; width: 100% !important;">
+                                      <form method = "post" style="mb-20"> 
+                                        <table class="table" style="margin: auto; margin: 20 0px;" id="dataTable" cellspacing="0">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Total Items:</td>
+                                                    <td><?php echo $numItems; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Subtotal:</td>
+                                                    <td><?php echo $Subtotal; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>12% VAT:</td>
+                                                    <td>&#8369; <?php echo $VAT; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>TOTAL:</td>
+                                                    <td>&#8369; <?php echo $Total; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Amount Received:</td>
+                                                    <td>&#8369; <?php echo $payment; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Change:</td>
+                                                    <td>&#8369; <?php if ($change< "0") {
+                                                              echo "0";
+                                                            }
+                                                            else{
+                                                              echo $change;
+                                                            } ?></td>
+                                                </tr>
+                                            </tbody>      
+                                        </table>
+                                
+                                        
+                                        <!--
                                         <div class="row d-flex justify-content-between" style="margin-top: 10px;">
                                             <div>
                                                 <label class="control-label">Total Items:</label>
                                             </div>
 
                                             <div class="input-group col-sm-6 m-bot15">
-                                                <?php
-                                                  echo $numItems;
-                                                ?>
+                                                
                                             </div>
                                         </div>
 
@@ -677,7 +707,7 @@
 
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
-                                                   echo $Subtotal;
+                                                   
                                                 ?>
                                             </div>
                                         </div>
@@ -689,7 +719,7 @@
 
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
-                                                    echo $VAT;
+                                                    
                                                 ?>
                                             </div>
                                         </div>
@@ -703,13 +733,13 @@
 
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
-                                                  echo $Total;
+                                                  
                                                 ?>
                                             </div>
                                         </div>
                                         
                                         <br>
-                                        <form method = "post">
+                                        
                                         <div class="row d-flex justify-content-between" style="margin-top: 10px;">
                                             <div>
                                                 <label class="control-label">Amount Received:</label>
@@ -717,7 +747,7 @@
 
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
-                                                  echo $payment;
+                                                  
                                                 ?>
                                             </div>
                                         </div>
@@ -729,34 +759,28 @@
 
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
-                                                if ($change< "0") {
-                                                  echo "0";
-                                                }
-                                                else{
-                                                  echo $change;
-                                                }
+                                                
                                                 ?>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         
-                                        <br>
                                         
-                                        <div class="d-flex justify-content-between" style="margin-left: 50%">
-                                            <div style="width: 80%;">
-                                                <button name="submit" value="" formaction="processinvoice.php" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" style="margin-left: 30px; width: 100px;"> Checkout </button>
+                                        
+                                            <div class="d-flex justify-content-between" style="margin-left: 25%">
+                                                <div style="width: 80%;">
+                                                    <button name="submit" value="" formaction="processinvoice.php" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" style="margin-left: 30px; width: 100px;"> Checkout </button>
+                                                </div>
                                             </div>
-                                        </div>
                                         </form>             
-
+                                    </div>
                                     </div>
                                 </div>
                             </div>
                         </div> 
                     </div>
                 </div>
-                
             </div>
-        </div>
+        
                   <!-- Page level plugins -->
           <script src="vendor/datatables/jquery.dataTables.min.js"></script>
           <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
