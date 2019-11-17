@@ -117,7 +117,7 @@ require_once("db/connection.php");?>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <div class="btn btn-sm btn-primary shadow-sm" style="height: 30px; margin-top: 15px">
-                                Logout
+                                <a href ="logout.php" class = "text-white"> Logout </a>
                           </div>
                       </ul>
                     </nav>
