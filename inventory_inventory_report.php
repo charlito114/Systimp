@@ -25,7 +25,6 @@ require_once("db/connection.php");
                 color: black;
                 margin: 10px;
             }
-            table {border: none;}
         </style>
     </head>
     <body>
@@ -208,7 +207,7 @@ require_once("db/connection.php");
                                     </div>
                                 </div>
                             </div>
-                            <table class="table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="align-items-center" id="dataTable" width="100%" cellspacing="0">
                               <thead>
                                 <tr>
                                     <th>Date</th>
