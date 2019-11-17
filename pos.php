@@ -229,6 +229,7 @@
                             while($row = $result->fetch_assoc()) {
                                 $invoiceNum= $row['INVOICECOUNT'] +1 ;
                                 $_SESSION['invoiceNum'] = $invoiceNum;
+
                                 }
                             } 
                         else {
@@ -247,6 +248,8 @@
                             else {
                                     echo "0 results";
                                 }
+
+
                     ?>
 
                     <div class="container-fluid">
@@ -301,26 +304,42 @@
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                               <thead>
                                                 <tr>
-                                                  <th>Product Code</th>
-                                                  <th>Product Description</th>
+                                                  <th>Code</th>
+                                                  <th>Description</th>
                                                   <th>Size</th>
-                                                  <th>Quantity</th>
+                                                  <th>Available</th>
+                                                  <th>Quantity to Issue</th>
                                                   <th>Total Amount</th>
                                                 </tr>
                                               </thead>
                                               <tbody>
                                                   <!-- INSERT PHP -->
                                                   <?php   
-                                                      $insertQuery = "INSERT INTO temporaryinvoice (SONum, ProdCode, Category, Brand, ProdDesc, Size, Available, Quantity, QuantityIssued, ToBeIssued, Price) 
-                                                      SELECT s.SONum, s.ProdCode, s.Category, s.Brand, s.ProdDesc, s.Size, s.Available, s.ProdQuan, s.Issued, s.ProdQuan - s.Issued, s.TotalPrice
+
+                                                  
+                                                      $insertQuery = "INSERT INTO temporaryinvoice (SONum, ProdCode, Category, Brand, ProdDesc, Size, Available, Quantity, QuantityIssued, ToBeIssued, Price, TotalPrice) 
+                                                      SELECT s.SONum, s.ProdCode, s.Category, s.Brand, s.ProdDesc, s.Size, s.Available, s.ProdQuan, s.Issued, s.ProdQuan - s.Issued, s.Price, s.TotalPrice
                                                       FROM salesorderdetails s
                                                       WHERE s.SONum = $SONum";
                                                       if(mysqli_query($con,$insertQuery)){
-                                                        header("message=Successfully added new records");  
+                                                        header("message=Successfully added new records");
+
+                                                        $updateInvoice = "UPDATE temporaryinvoice 
+                                                        SET invoiceNum =  $invoiceNum 
+                                                        WHERE SONum = $SONum";
+                                                            if(mysqli_query($con,$updateInvoice)){
+                                                              header("message=Sucess in adding the record");
+                                                              }
+
+                                                              else{
+                                                                $alert = mysqli_error($con);
+                                                                echo $alert;
                                                             }
-                                                    else{
-                                                        header("message=Error in adding the record");
-                                                            }
+                                                            
+                                                      }
+
+                                                           
+                                                           
                                                             
                                                       $viewDetailsQuery = "SELECT * FROM temporaryinvoice WHERE ToBeIssued!= 0";
                                                       $result2 = $con->query($viewDetailsQuery);
@@ -329,7 +348,7 @@
                                                       while($row = $result2->fetch_assoc()) {
                                                           
                                                           echo "<form method = 'post' action = '' >";
-                                                          echo "\t<tr><td><input type = 'submit' name = 'ProdCode' value = '" . $row['ProdCode'] . "' class = 'btn' style = 'color: #4e73df;' > </td><td>" .  $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" .  $row['ToBeIssued'] . "</td><td>" .  $row['Price'] . " </td></tr><br>";
+                                                          echo "\t<tr><td><input type = 'submit' name = 'ProdCode' value = '" . $row['ProdCode'] . "' class = 'btn' style = 'color: #4e73df;' > </td><td>" .  $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" .  $row['Available'] . "</td><td>" .  $row['ToBeIssued'] . "</td><td>" .  $row['Price'] . " </td></tr><br>";
                                                           echo "</form>";
                                                           }
                                                       }
@@ -533,10 +552,10 @@
                                               </form>
                                               <?php
                                               if(isset($_POST['discsubmit'])){
-                                                $discount = $_POST['discount'];
-                                                $_SESSION['discount'] = $discount;
-                                    
+                                                $discount = $_POST['discount'];                                    
                                               }
+                                                 $_SESSION['discount'] = $discount;
+
                                               ?>
                                           </div>
                                       </div>
@@ -554,7 +573,7 @@
                                                 } else {
                                                     echo "0 results";
                                                     }
-                                        $SubtotalQuery = "SELECT SUM(Price) AS Subtotal FROM temporaryinvoice";
+                                        $SubtotalQuery = "SELECT SUM(TotalPrice) AS Subtotal FROM temporaryinvoice";
                                         $Subtotalresult =  $con->query($SubtotalQuery);
                                             if ($Subtotalresult->num_rows > 0) {
                                                 // output data of each row
@@ -724,7 +743,7 @@
                                         
                                         <div class="d-flex justify-content-between" style="margin-left: 50%">
                                             <div style="width: 80%;">
-                                                <button name="submit" value="" formaction="processcheckout.php" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" style="margin-left: 30px; width: 100px;"> Checkout </button>
+                                                <button name="submit" value="" formaction="processinvoice.php" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" style="margin-left: 30px; width: 100px;"> Checkout </button>
                                             </div>
                                         </div>
                                         </form>             
