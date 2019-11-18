@@ -320,7 +320,7 @@
                                     <div class="d-flex" style="width: 30%; float: right;">
                                         <!-- Back Button-->
                                         <div style="width: 80%; float: right;">
-                                            <button type = 'submit' name = 'back' formaction =  'purchase_purchase_history.php' class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="width: 100px; float: right;"> Back </button>
+                                            <button type = 'submit' name = 'back' formaction =  'purchase_purchase_history.php' class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" style="width: 100px; float: right;"> Back </button>
                                         </div>
                                     </div>
                                 </div>
