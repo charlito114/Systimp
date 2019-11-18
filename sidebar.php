@@ -83,7 +83,7 @@
                 <a class="collapse-item" href="purchasing_dashboard.php">Dashboard</a>
                 <a class="collapse-item" href="purchase_purchase_cart.php">Purchasing Cart</a>
                 <a class="collapse-item" href="purchase_add_purchase_order.php">Add Purchase Order</a>
-                <a class="collapse-item" href="purchase_purchase_history.php">Purchase History</a>
+                <a class="collapse-item" href="purchase_purchase_history.php">Purchase Orders</a>
                 <a class="collapse-item" href="purchase_pending_pos.php">Manage Purchase Orders</a>
               </div>
             </div>
@@ -99,6 +99,7 @@
                   <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="order_dashboard.php">Dashboard</a>
                     <a class="collapse-item" href="order_sales_orders.php">Sales Orders</a>
+                    <a class="collapse-item" href="order_pending_sos.php">Manage Sales Orders</a>
                     <a class="collapse-item" href="order_add_order.php">Add Order</a>
                   </div>
                 </div>
