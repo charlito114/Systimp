@@ -288,6 +288,7 @@
                                     </table>
                                 </div>
                             </form>
+                        </div>
 
                             <div class="col-lg-12">
                                 <form method="post" class="navbar-expand col-lg-12">
@@ -328,6 +329,7 @@
                                     </table>
                                 </div>
                             </form>
+                        </div>
                             
                             <form method="post"> 
                                 <div class="d-flex" style=" margin-top: 10px;">
@@ -343,7 +345,7 @@
                                     </div>
                                 </div>
                             </form>
-                            </div>
+                            
                        <!-- end bracket here -->
                         
                     </div>
