@@ -281,7 +281,10 @@
                                                 }
 
                                                 // echo "</form>";
-                                            } 
+                                            }
+                                          else {
+                                               echo "<tr><td colspan='10'><center> No data available in table </center></td></tr>";
+                                               }
                                             
                                           ?>
                                       </tbody>

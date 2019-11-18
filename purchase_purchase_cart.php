@@ -157,7 +157,7 @@ session_start();?>
                             <header class="panel-heading">Low Stock Products</header>
                             <form method="post" action="">
                             <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0; border-top: .20rem solid #b4c540;">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered text-center" style="margin: auto; width: 100% !important;" id="dataTable" cellspacing="0">
                               <thead>
                                 <tr>
                                   <th>Product Code</th>
@@ -197,6 +197,7 @@ session_start();?>
                                   
                                     echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['onhand'] . "</td><td>" . $row['forinventory'] . "</td><td>" . $row['fororders'] .  "</td><td><button type = 'submit' name = 'add'  value = '" . $row['prodcode']. "' class = 'btn'> <i class='fas fa-fw fa-plus-square' style = 'color:#2e59d9;'/>  </button></td></tr><br>";
                                     }
+                                    
                                   ?>
                                     
                               </tbody>
@@ -360,16 +361,16 @@ session_start();?>
                             }
                         //}
                     }
-               // else{
-               //     echo "0 results";
-               // }    
+               else {
+                   echo "<tr><td colspan='8'><center> No data available in table </center></td></tr>";
+                   }   
                                   
                           ?>
                             
                        <header class="panel-heading">Purchasing Cart</header>
                         <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0; border-top: .20rem solid #b4c540;">
                             <form method="post" action="purchase_purchase_cart.php">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered text-center" id="dataTable" style=" width: 100% !important; table-layout: fixed;" cellspacing="0">
                                   <thead>
                                     <tr>
                                       <th>Product Code</th>
@@ -392,7 +393,10 @@ session_start();?>
                                                 echo "\t<tr><td >" . $row['ProductCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" .  $row['SuggestedQuantity'] . "</td><td>" .  $row['QuantitytobeOrdered']. "</td><td><button type = 'submit' name = 'remove'  value = '" . $row['ProductCode'] . "' class = 'btn'> <i class='fas fa-fw fa-minus-square' style = 'color:#e74a3b;'/> </button></td></tr><br>";
                                             }
 
-                                        } 
+                                        }
+                                      else {
+                                               echo "<tr><td colspan='7'><center> No data available in table </center></td></tr>";
+                                               }
                                       ?>
                                   </tbody>
                                 </table>
