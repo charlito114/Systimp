@@ -535,12 +535,14 @@
                                     ?>
 
                                     <!-- POS Buttons -->
+                                    <!-- NEW CHANGES HERE -->  
                                     <div class="row">
                                         <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#chequePayment">Cheque <br> Payment</button>
                                         <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#cashPayment">Cash <br> Payment</button>
                                     </div>
                                     
                                     <!-- 3rd Set of Modals -->
+                                    <!-- NEW CHANGES HERE -->
                                     <div id="chequePayment" class="modal">                                         
                                         <div class="modal-dialog">
                                           <div class="modal-content">
@@ -624,44 +626,10 @@
                                           </div>
                                       </div>
                                     </div>
-                                    <div id="cashPayment" class="modal">                                         
-                                        <div class="modal-dialog">
-                                          <div class="modal-content">
-                                              <div class="modal-header">
-                                                  <h4 class="modal-title">Cash Payment</h4>
-                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                </div>
-                                              <form method = "post" action = "">
-                                                <div class="modal-body">
-                                                    <div class="row d-flex justify-content-between">
-                                                        <label class="c-label">Enter Amount: </label>
-                                                        <input class="c-input form-control col-sm-6" type = "number" name= "payment" >
-                                                    </div>
-                                                </div>
-                                                  <div class="modal-footer">
-                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
-                                                  </div>
-                                              </form>
-                                              <?php
-                                              if(isset($_POST['submit'])){
-                                                if( $_POST['payment']>=  $_SESSION['total']){
-                                                $payment = $_POST['payment'];
-                                                $_SESSION['payment'] = $payment;
-                                                $change = $payment - $Total;
-                                                $_SESSION['change'] = $change;
-                                                
-                                                }
-                                                
-                                              }
-                                              ?>
-                                          </div>
-                                      </div>
-                                    </div>
                                     
                                     
                                     <!-- POS Lower Content -->
 
-                                   <!-- NEW CHANGES HERE -->
                                     <div class="navbar-expand" style="float: left; width: 100% !important;">
                                       <form method = "post" style="mb-20"> 
                                         <table class="table" style="margin: auto; margin: 20 0px;" id="dataTable" cellspacing="0">
@@ -706,7 +674,7 @@
                                                 </tr>
                                             </tbody>      
                                         </table>
-                                        <!-- NEW CHANGES HERE -->  
+                                        
                                             <div class="d-flex" style=" margin-top: 10px;">
                                                 <div class="d-flex" style="margin-left: 10%; float: right;">
                                                     <!-- Checkout Button-->
