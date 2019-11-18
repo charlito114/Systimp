@@ -1,5 +1,8 @@
 <html>
     <?php
+     $connect = mysqli_connect("localhost", "root", "", "inventory");  
+     $query = "SELECT prodcode, quansold FROM products ORDER BY QUANSOLD DESC LIMIT 5";  
+     $result = mysqli_query($connect, $query);  
         session_start();
         require_once("db/connection.php");
     ?>
@@ -10,6 +13,33 @@
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <!-- Custom styles for this page -->
           <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+           <script type="text/javascript">  
+           google.charts.load('current', {'packages':['corechart']});  
+           google.charts.setOnLoadCallback(drawChart);  
+           function drawChart()  
+           {
+                var data = google.visualization.arrayToDataTable([  
+                          ['Product Code', 'Quantity Sold'],  
+                          <?php  
+                          while($row = mysqli_fetch_array($result))  
+                          {  
+                               echo "['".$row["prodcode"]."', ".$row["quansold"]."],";  
+                          }  
+                          ?>  
+                     ]);  
+                var options = {  
+                      title: 'For the month of October',
+                        width: '100%',
+                        legend: { position: 'bottom'},
+                        isStacked: 'true'
+                    
+                     };  
+                var chart = new google.visualization.BarChart(document.getElementById('piechart'));  
+                chart.draw(data, options);  
+           }  
+           </script>  
         
         <style>
             body{
@@ -144,7 +174,7 @@
                     </div>
                     
                     <!-- Sales Orders -->
-                    <div class="container-fluid">
+                    <div class="container">
                             
                                 <div class="mb-4"></div>
                                 <!--Charts-->
@@ -154,7 +184,7 @@
                                           <!-- Chart -->
                                           <div class="card shadow mb-4">
                                             <div class="card-header py-3">
-                                              <h6 class="m-0 font-weight-bold text-primary">Chart 1</h6>
+                                              <h6 class="m-0 font-weight-bold text-primary">Total Daily Sales</h6>
                                             </div>
                                             <div class="card-body">
                                               <div class="chart-area">
@@ -173,7 +203,7 @@
                                         </div>
                                         
                                         <!-- Total Daily Sales  -->
-                                        <div class="card-body" style="height: 50%;">
+                                        <div class="" style="height: 20%;">
                                             <a class="tablinks" onclick="openTab(event, 'totalSales')">
                                                 <div class="card-body">
                                                   <div class="card border-left-success shadow h-100 py-2">
@@ -192,8 +222,7 @@
                                                 </div>
                                             </a>
                                             
-                                            <!-- Top Selling Products -->
-                                            <div class="card-body"></div>
+                                            <!-- Top Selling Products -->                                            
                                             <a class="tablinks" onclick="openTab(event, 'topProducts')">
                                                 <div class="card-body">
                                                   <div class="card border-left-success shadow h-100 py-2">
@@ -213,15 +242,15 @@
                                             </a>
                                         </div>
 
-                                        <div class="col-xl-4 col-lg-2">
+                                        <div class="col-xl-5 col-lg-2">
                                           <!-- Chart -->
                                           <div class="card shadow mb-4">
                                             <div class="card-header py-3">
-                                              <h6 class="m-0 font-weight-bold text-primary">Chart 2</h6>
+                                              <h6 class="m-0 font-weight-bold text-primary">Top Selling Products</h6>
                                             </div>
                                             <div class="card-body">
                                               <div class="chart-bar">
-                                                <canvas id="myBarChart"></canvas>
+                                                <div id="piechart" style="width: 100%; height: 100%;"></div>
                                               </div>
                                             </div>
                                           </div>
