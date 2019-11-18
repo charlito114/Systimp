@@ -30,7 +30,7 @@
                 <div id="content">
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg topbar mb-4 static-top shadow">
-                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">View Sales Order</div>
+                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Manage SO Details</div>
                       <!-- Sidebar Toggle (Topbar) -->
                       <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -251,7 +251,7 @@
                         
                             <div class="col-lg-12">
                                 <form method="post" class="navbar-expand col-lg-12">
-                                <header class="card-header font-weight-bold">Product Order</header>
+                                <header class="card-header font-weight-bold">Processing Products</header>
                                 <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                       <thead>
@@ -261,25 +261,63 @@
                                           <th>Brand</th>
                                           <th>Description</th>
                                           <th>Size</th>
-                                          <th>Quantity Ordered</th>
-                                    
+                                          <th>Quantity</th>
+                                          <th>Available</th>
+                                          <th>Issued</th>
                                           <th>Price</th>
                                           <th>Total Price</th>
                                         </tr>
                                       </thead>
                                       <tbody>
                                         <?php
-                                          $viewDetails = "SELECT * FROM salesorderdetails WHERE SONum =" . $_SESSION['SONum'];
+                                          $viewDetails = "SELECT * FROM salesorderdetails WHERE SONum =" . $_SESSION['SONum']." AND Status = 'Processing' ";
                                             $result2 = $con->query($viewDetails);
                                             if ($result2->num_rows > 0) {
                                             // output data of each row
                                             while($row = $result2->fetch_assoc()) {
                                                 // may part dito na  sa isang row, may button for update, once clicked, kukunin niya yung product code nung row na yun
 
-                                                echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] .
-                                                 "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>"
-                                                  . $row['Size'] . "</td><td>" . $row['ProdQuan'] . "</td><td>" . 
-                                                   $row['Price'] . "</td><td>" . $row['TotalPrice'] . "</td></tr>\n";
+                                                echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['ProdQuan'] . "</td><td>" . $row['Available'] . "</td><td>" . $row['Issued'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['TotalPrice'] . "</td></tr>\n";
+                                                }
+
+                                                // echo "</form>";
+                                            } 
+                                            
+                                          ?>
+                                      </tbody>
+                                    </table>
+                                </div>
+                            </form>
+
+                            <div class="col-lg-12">
+                                <form method="post" class="navbar-expand col-lg-12">
+                                <header class="card-header font-weight-bold">Fully Received Products</header>
+                                <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                      <thead>
+                                        <tr>
+                                          <th>Product Code</th>
+                                          <th>Category</th>
+                                          <th>Brand</th>
+                                          <th>Description</th>
+                                          <th>Size</th>
+                                          <th>Quantity</th>
+                                          <th>Available</th>
+                                          <th>Issued</th>
+                                          <th>Price</th>
+                                          <th>Total Price</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <?php
+                                          $viewDetails = "SELECT * FROM salesorderdetails WHERE SONum =" . $_SESSION['SONum']." AND Status = 'Fully Issued' ";
+                                            $result2 = $con->query($viewDetails);
+                                            if ($result2->num_rows > 0) {
+                                            // output data of each row
+                                            while($row = $result2->fetch_assoc()) {
+                                                // may part dito na  sa isang row, may button for update, once clicked, kukunin niya yung product code nung row na yun
+
+                                                echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['ProdQuan'] . "</td><td>" . $row['Available'] . "</td><td>" . $row['Issued'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['TotalPrice'] . "</td></tr>\n";
                                                 }
 
                                                 // echo "</form>";
@@ -299,6 +337,7 @@
                                     </div>
                                     <div class="d-flex" style="width: 30%; float: right;">
                                     <!-- Submit Button-->
+                                    <button type = 'submit' name = 'submit'  value = 'Proceed to checkout' formaction =  'pos.php' class="d-flex d-sm-inline-block btn btn-sm btn-success shadow-sm" style="width: 200px; float: left; margin-right: 20%;"> Proceed to Checkout </button>
                                     <!-- Cancel Button-->
                                     <button type = 'submit' name = 'back'  value = 'back' formaction =  'order_sales_orders.php' class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" style="width: 100px; float: right;"> Back </button>
                                     </div>
