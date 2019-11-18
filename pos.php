@@ -599,14 +599,19 @@
                                                 </div>
                                               <form method = "post" action = "processchangequan.php">
                                                 <div class="modal-body">
-                                                    <div class="row d-flex justify-content-between">
-                                                        <label class="c-label">Product Code: <?php echo  $_SESSION['ProdCode'] ?> </label>
-                                                        <!--<input class="c-input form-control col-sm-6" type = "number" name= "prodcode">-->
-                                                        <br><br>
-                                                        <label class="c-label">Quantity: </label>
-                                                        <input class="c-input form-control col-sm-6" type = "number" name= "newQty">
-                                                      
+                                                    <div class="col-lg-10">
+                                                        <div class="row d-flex justify-content-between">
+                                                            <label class="c-label">Product Code: <?php echo  $_SESSION['ProdCode'] ?> </label>
+                                                        </div>
+                                                            <!--<input class="c-input form-control col-sm-6" type = "number" name= "prodcode">-->
+
+                                                        <div class="row d-flex justify-content-between">
+                                                            <label class="c-label">Quantity: </label>
+                                                            <input class="c-input form-control col-sm-4" type = "number" name= "newQty">
+
+                                                        </div>
                                                     </div>
+                                                    
                                                 </div>
                                                   <div class="modal-footer">
                                                       <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
@@ -694,17 +699,14 @@
                                             <div>
                                                 <label class="control-label">Total Items:</label>
                                             </div>
-
                                             <div class="input-group col-sm-6 m-bot15">
                                                 
                                             </div>
                                         </div>
-
                                         <div class="row d-flex justify-content-between" style="margin-top: 10px;">
                                             <div>
                                                 <label class="control-label">Subtotal:</label>
                                             </div>
-
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
                                                    
@@ -716,7 +718,6 @@
                                             <div>
                                                 <label class="control-label">12% VAT:</label>
                                             </div>
-
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
                                                     
@@ -730,7 +731,6 @@
                                             <div>
                                                 <label class="control-label">TOTAL:</label>
                                             </div>
-
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
                                                   
@@ -744,7 +744,6 @@
                                             <div>
                                                 <label class="control-label">Amount Received:</label>
                                             </div>
-
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
                                                   
@@ -756,7 +755,6 @@
                                             <div>
                                                 <label class="control-label">Change:</label>
                                             </div>
-
                                             <div class="input-group col-sm-6 m-bot15">
                                                 <?php
                                                 
