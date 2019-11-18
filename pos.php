@@ -422,102 +422,33 @@
                                     
                                     <!-- POS Buttons -->
                                     <div class="row">
-                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#addModal">Add <br> Product</button>
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#changeQuantity">Change <br> Quantity</button>
                                         <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#discountSale">Discount <br> Sale </button>
                                     </div>
                                     
                                     <!-- 2nd Set of Modals -->
-                                    <div id="addModal" class="modal">                                         
-                                        <div class="modal-dialog modal-lg">
+                                    <div id="changeQuantity" class="modal">
+                                      <div class="modal-dialog">
                                           <div class="modal-content">
                                               <div class="modal-header">
-                                                  <h4 class="modal-title">Add Products</h4>
+                                                  <h4 class="modal-title">Change Quantity</h4>
                                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
-                                              <form method = "post" action = "">
+                                              <form method = "post" action = "processchangequan.php">
                                                 <div class="modal-body">
-                                                   <!-- <div class="row d-flex justify-content-between">
-                                                        <label class="c-label">Product Code: </label>
-                                                        <input class="c-input form-control col-sm-6" type = "number" name= prodcode>
+                                                    <div class="col-lg-10">
+                                                        <div class="row d-flex justify-content-between">
+                                                            <label class="c-label">Product Code: <?php echo  $_SESSION['ProdCode'] ?> </label>
+                                                        </div>
+                                                            <!--<input class="c-input form-control col-sm-6" type = "number" name= "prodcode">-->
+
+                                                        <div class="row d-flex justify-content-between">
+                                                            <label class="c-label">Quantity: </label>
+                                                            <input class="c-input form-control col-sm-4" type = "number" name= "newQty">
+
+                                                        </div>
                                                     </div>
-                                                    <div class="row d-flex justify-content-between">
-                                                        <label class="c-label">Quantity: </label>
-                                                        <input class="c-input form-control col-sm-6" type = "number" name= newQty>
-                                                    </div> -->
-                                                    <header class="card-header font-weight-bold">Sales Order Details</header>
-                                                    <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
-                                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                                          <thead>
-                                                            <tr>
-                                                               <td>Product Code</td>
-                                                              <td>Category</td>
-                                                              <td>Brand</td>
-                                                              <td>Description</td>
-                                                              <td>Size</td>
-                                                              <td>Quantity Ordered </td>
-                                                              <td>Quantity Available </td>
-                                                              <td>Quantity to Issue </td>
-                                                            </tr>
-                                                          </thead>
-                                                          <tbody>
-                                                            <?php 
-                                                                $viewDetailsQuery = "SELECT * FROM salesorderdetails WHERE SONum = $SONum AND Issued!= ProdQuan";
-                                                                $result = $con->query($viewDetailsQuery);
-                                                                if ($result->num_rows > 0) {
-                                                                // output data of each row
-                                                                // gets variables from table
-                                                                    while($row = $result->fetch_assoc()) {
-                                                                        $toIssue = $row['ProdQuan'] - $row['Issued'];
-                                                                        echo    "<form method = 'post' >"; 
-                                                                        echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" .  $row['ProdQuan'] . "</td><td>" .  $row['Available'] . "</td><td>" .  $toIssue ."</td><td><button type = 'submit' name = 'add'  value = '" . $row['ProdCode']. "' class = 'btn'> <i class='fas fa-fw fa-plus-square' style = 'color:#2e59d9;'/>  </button></td></tr><br>";
-                                                                        echo    "</form >"; 
-                                                                    }
-                                                                  }
-                                                                else {
-                                                                   echo "<tr><td colspan='8'><center> No data available </center></td></tr>";
-                                                                   }
-                                                                  /*if(isset($_POST['add']))
-                                                                        {
-                                                                          $prodcode = $_POST['add'];
-                                                                          $viewDetails = "SELECT * FROM salesorderdetails WHERE SONum = $SONum ProdCode = $prodcode";
-                                                                          $search_result = mysqli_query($con, $viewDetails);
-                                                                          if ($search_result->num_rows > 0) {
-                                                                              // output data of each row
-                                                                          while($row = $search_result->fetch_assoc()) {
-                                                                                      $category = $row['Category'];
-                                                                                      $brand= $row['Brand'];
-                                                                                      $proddesc= $row['ProdDesc'];
-                                                                                      $size= $row['Size'];
-                                                                                      $quantity= $row['ProdQuan'];
-                                                                                      $available= $row['Available'];
-                                                                                      $issued= $row['Issued'];
-                                                                                      $_SESSION['category'] = $category;
-                                                                                      $_SESSION['brand'] = $brand;
-                                                                                      $_SESSION['proddesc'] = $proddesc;
-                                                                                      $_SESSION['size'] = $size;
-                                                                                      $_SESSION['quantity'] = $quantity;
-                                                                                      $_SESSION['available'] = $available;
-                                                                                      $_SESSION['issued'] = $issued;
-                                                                                      $_SESSION['toissue'] = $toIssue;
-                                                                          }
-                                                                          }
-                                                                          $addQuery = "INSERT INTO temporaryinvoice (SONum, ProdCode, Category, Brand, ProdDesc, Size, Available, Quantity, QuantityIssued, ToBeIssued)
-                                                                          VALUES('". $SONum."', '". $prodcode."','". $category."', '". $brand."', '". $proddesc."','". $size."', '".$available."' ,'". $quantity."' ,'". $issued."' ,'". $toIssue."')";
-                                                                          if(mysqli_query($con,$addQuery)){
-                                                                              header("message=Successfully added new records");  
-                                                                                  }
-                                                                          else{
-                                                                              $alert = mysqli_error($con);
-                                                                              echo '<script type="text/javascript">';
-                                                                              echo 'alert("'.$alert.'")';
-                                                                              echo '</script>';    
-                                                                                  }
-                                                                                }
-                                                                                */
-                                                            ?>
-                                                          </tbody>
-                                                        </table>
-                                                    </div>
+                                                    
                                                 </div>
                                                   <div class="modal-footer">
                                                       <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
@@ -605,38 +536,91 @@
 
                                     <!-- POS Buttons -->
                                     <div class="row">
-                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#changeQuantity">Change <br> Quantity</button>
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#chequePayment">Cheque <br> Payment</button>
                                         <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#cashPayment">Cash <br> Payment</button>
                                     </div>
                                     
                                     <!-- 3rd Set of Modals -->
-                                    <div id="changeQuantity" class="modal">
-                                      <div class="modal-dialog">
+                                    <div id="chequePayment" class="modal">                                         
+                                        <div class="modal-dialog">
                                           <div class="modal-content">
                                               <div class="modal-header">
-                                                  <h4 class="modal-title">Change Quantity</h4>
+                                                  <h4 class="modal-title">Cheque Payment</h4>
                                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
-                                              <form method = "post" action = "processchangequan.php">
+                                              <form method = "post" action = "">
                                                 <div class="modal-body">
-                                                    <div class="col-lg-10">
-                                                        <div class="row d-flex justify-content-between">
-                                                            <label class="c-label">Product Code: <?php echo  $_SESSION['ProdCode'] ?> </label>
-                                                        </div>
-                                                            <!--<input class="c-input form-control col-sm-6" type = "number" name= "prodcode">-->
-
-                                                        <div class="row d-flex justify-content-between">
-                                                            <label class="c-label">Quantity: </label>
-                                                            <input class="c-input form-control col-sm-4" type = "number" name= "newQty">
-
-                                                        </div>
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Enter Bank: </label>
+                                                        <input class="c-input form-control col-sm-4" type = "number" name= "" >
                                                     </div>
-                                                    
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Enter Account Number: </label>
+                                                        <input class="c-input form-control col-sm-4" type = "number" name= "" >
+                                                    </div>
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Enter Cheque Number: </label>
+                                                        <input class="c-input form-control col-sm-4" type = "number" name= "" >
+                                                    </div>
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Enter Date: </label>
+                                                        <input class="c-input form-control col-sm-4" type = "number" name= "" >
+                                                    </div>
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Enter Amount: </label>
+                                                        <input class="c-input form-control col-sm-4" type = "number" name= "payment" >
+                                                    </div>
                                                 </div>
                                                   <div class="modal-footer">
                                                       <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
                                                   </div>
                                               </form>
+                                              <?php
+                                              if(isset($_POST['submit'])){
+                                                if( $_POST['payment']>=  $_SESSION['total']){
+                                                $payment = $_POST['payment'];
+                                                $_SESSION['payment'] = $payment;
+                                                $change = $payment - $Total;
+                                                $_SESSION['change'] = $change;
+                                                
+                                                }
+                                                
+                                              }
+                                              ?>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    
+                                    <div id="cashPayment" class="modal">                                         
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title">Cash Payment</h4>
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                              <form method = "post" action = "">
+                                                <div class="modal-body">
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Enter Amount: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= "payment" >
+                                                    </div>
+                                                </div>
+                                                  <div class="modal-footer">
+                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
+                                                  </div>
+                                              </form>
+                                              <?php
+                                              if(isset($_POST['submit'])){
+                                                if( $_POST['payment']>=  $_SESSION['total']){
+                                                $payment = $_POST['payment'];
+                                                $_SESSION['payment'] = $payment;
+                                                $change = $payment - $Total;
+                                                $_SESSION['change'] = $change;
+                                                
+                                                }
+                                                
+                                              }
+                                              ?>
                                           </div>
                                       </div>
                                     </div>
@@ -674,11 +658,6 @@
                                       </div>
                                     </div>
                                     
-                                    <!-- POS Buttons 
-                                    <div class="row">
-                                        <button class="pos-btn pos-btn-medium pos-btn-blue">Customer <br> Details </button>
-                                        <button class="pos-btn pos-btn-medium pos-btn-blue">Cheque <br> Payment</button>
-                                    </div> -->
                                     
                                     <!-- POS Lower Content -->
 
