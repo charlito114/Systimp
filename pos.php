@@ -221,7 +221,7 @@
                         $SONum = $_SESSION ['SONum']; 
                         $payment = 0;
                         $change = 0;
-                        //$discount = 0;
+                        $discount1=0;
                         $InvoiceQuery = ("SELECT count(invoiceNum) AS INVOICECOUNT FROM salesmanagement ");
                         $result =  $con->query($InvoiceQuery);
                         if ($result->num_rows > 0) {
@@ -548,9 +548,22 @@
                                               </form>
                                               <?php
                                               if(isset($_POST['discsubmit'])){
-                                                $discount = $_POST['discount'];                                    
+                                               if($_SESSION['discount'] == 0)
+                                               {
+                                                $discount = $_POST['discount'];   
+                                                $_SESSION['discount'] = $discount;
+                                               }
+                                                else if($_SESSION['discount'] !=0){
+                                                 header("location:pos.php?message= Cannot Update Discount.");
+                                                 
+
+
+                                                }
+                                 
                                               }
-                                                 $_SESSION['discount'] = $discount;
+                                                $discount1= $_SESSION['discount'];
+                                                $_SESSION['discount1'] = $discount1;
+
                                               ?>
                                           </div>
                                       </div>
@@ -568,18 +581,25 @@
                                                 } //else {
                                                   //  echo "0 results";
                                                    // }
-                                        $SubtotalQuery = "SELECT SUM(TotalPrice) AS Subtotal FROM temporaryinvoice";
+                                        $SubtotalQuery = "SELECT SUM(Price * ToBeIssued) AS Subtotal FROM temporaryinvoice";
                                         $Subtotalresult =  $con->query($SubtotalQuery);
                                             if ($Subtotalresult->num_rows > 0) {
                                                 // output data of each row
                                                 while($row = $Subtotalresult->fetch_assoc()) {
                                                     $Subtotal= $row['Subtotal'];
+                                                    $_SESSION['Subtotal'] = $Subtotal;
+
                                                     }
                                                 } //else {
                                                   //  echo "0 results";
                                                   //  }
-                                            $VAT = $Subtotal * 0.12; 
-                                            $Total = $Subtotal + $VAT - $_SESSION['discount']; 
+
+                                            $Subtotal1 =  $_SESSION['Subtotal'];
+                                            $_SESSION['Subtotal1'] = $Subtotal1 - $discount1;
+                                            $VAT = $_SESSION['Subtotal1']  * 0.12; 
+                                            $Total = $_SESSION['Subtotal1']  + $VAT; 
+                                            $_SESSION['total'] = $Total; 
+
                                             
                                     ?>
 
@@ -640,8 +660,14 @@
                                               </form>
                                               <?php
                                               if(isset($_POST['submit'])){
+                                                if( $_POST['payment']>=  $_SESSION['total']){
                                                 $payment = $_POST['payment'];
+                                                $_SESSION['payment'] = $payment;
                                                 $change = $payment - $Total;
+                                                $_SESSION['change'] = $change;
+                                                
+                                                }
+                                                
                                               }
                                               ?>
                                           </div>
@@ -667,21 +693,29 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Subtotal:</td>
-                                                    <td><?php echo $Subtotal; ?></td>
+                                                    <td><?php echo  $_SESSION['Subtotal1']; ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>12% VAT:</td>
                                                     <td>&#8369; <?php echo $VAT; ?></td>
                                                 </tr>
+                                                <tr>
+                                                    <td>Discount:</td>
+                                                    <td><?php echo  $_SESSION['discount1']; ?></td>
+                                                </tr>
                                                 <!-- ALY TOTAL IS HERE, FOR UR CODE KANINA DURING WEBTECH -->
                                                 <tr>
                                                     <td>TOTAL:</td>
-                                                    <td>&#8369; <?php echo $Total; ?></td>
+                                                    <td>&#8369; <?php echo $_SESSION['total']; ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Amount Received:</td>
-                                                    <td>&#8369; <?php echo $payment; ?></td>
-                                                </tr>
+                                                    <td>&#8369; <?php if ($payment< "0") {
+                                                              echo "0";
+                                                            }
+                                                            else{
+                                                              echo $payment;
+                                                            } ?></td>                                                </tr>
                                                 <tr>
                                                     <td>Change:</td>
                                                     <td>&#8369; <?php if ($change< "0") {

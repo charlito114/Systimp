@@ -117,7 +117,7 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <div class="btn btn-sm btn-primary shadow-sm" style="height: 30px; margin-top: 15px">
-                                <a href ="logout.php" class = "text-white"> Logout </a>
+                                Logout
                           </div>
                       </ul>
                     </nav>
@@ -139,18 +139,20 @@
                     <div class="container-fluid">
                             <div class="col-lg-12">
                                 <?php
-                                    if(isset($_POST['invoiceNum']))
+                                   if(isset($_POST['invoiceNum']))
                                     {
                                         $invoiceNum = $_POST['invoiceNum'];
                                         $_SESSION['invoiceNum'] = $invoiceNum;
+
+                                    }
                                         
-                                   $getSONum = "SELECT SONum FROM salesmanagement WHERE invoiceNum = $invoiceNum";
+                                   $getSONum = "SELECT SONum FROM salesmanagement WHERE invoiceNum = " .$_SESSION['invoiceNum'];
                                     $SONum = mysqli_fetch_row(mysqli_query($con, $getSONum));
                                     $getName = "SELECT CustomerName FROM ordermanagement WHERE SONum = $SONum[0]";
                                     $name = mysqli_fetch_row(mysqli_query($con, $getName));
                                     $getAddress = "SELECT Address FROM ordermanagement WHERE SONum = $SONum[0]";
                                     $address = mysqli_fetch_row(mysqli_query($con, $getAddress));
-                                    $viewOrder = "SELECT * FROM salesmanagement WHERE invoiceNum = $invoiceNum";
+                                    $viewOrder = "SELECT * FROM salesmanagement WHERE invoiceNum =". $_SESSION['invoiceNum'];
                                     $result = $con->query($viewOrder);
                                     if ($result->num_rows > 0) {
                                     // output data of each row
@@ -175,6 +177,19 @@
                                                         ?>
                                                     </div>
                                                 </div>
+
+                                                <div class="row d-flex justify-content-between" style="margin-top: 10px;">
+                                                   <div>
+                                                       <label class="control-label">SO Number:</label>
+                                                    </div>
+
+                                                    <div class="input-group col-sm-6 m-bot15">
+                                                        <?php
+                                                            echo $row['SONum']; 
+                                                        ?>
+                                                    </div>
+                                                </div>
+
 
                                                 <div class="row d-flex justify-content-between" style="margin-top: 10px;">
                                                    <div>
@@ -218,7 +233,7 @@
                                                 
                                                 <div class="row d-flex justify-content-between" style="margin-top: 10px;">
                                                    <div>
-                                                       <label class="control-label">Sales Before VAT:</label>
+                                                       <label class="control-label">Subtotal:</label>
                                                     </div>
 
                                                     <div class="input-group col-sm-6 m-bot15">
@@ -230,7 +245,7 @@
                                                 
                                                 <div class="row d-flex justify-content-between" style="margin-top: 10px;">
                                                    <div>
-                                                       <label class="control-label">Sales After VAT:</label>
+                                                       <label class="control-label">Total:</label>
                                                     </div>
 
                                                     <div class="input-group col-sm-6 m-bot15">
@@ -271,7 +286,7 @@
                                       </thead>
                                       <tbody>
                                         <?php
-                                          $viewDetails = "SELECT * FROM invoicedetails WHERE invoiceNum = $invoiceNum";
+                                          $viewDetails = "SELECT * FROM invoicedetails WHERE invoiceNum = " . $_SESSION['invoiceNum'];
                                             $result2 = $con->query($viewDetails);
                                             if ($result2->num_rows > 0) {
                                             // output data of each row
@@ -304,7 +319,7 @@
                                 </div>
                             </form>
                             </div>
-                        <?php } ?>
+                        <?php //} ?>
                         
                     </div>
                     

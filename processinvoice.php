@@ -5,54 +5,64 @@
 
 if (isset($_POST['submit']))
 {
-    $TotalQuery = ("SELECT SUM(TotalPrice) FROM temporaryinvoice");
-    $total = mysqli_fetch_row(mysqli_query($con, $TotalQuery));
-    $discount = $_SESSION['discount'];
-    $finalAmount = ($total[0]  + ($total[0] * .12)) - $discount;
-    $invoiceNum = $_SESSION['invoiceNum'] ;
+    $Subtotal =  $_SESSION['Subtotal1'];
+    $Total =  $_SESSION['total'];
+    $invoiceNum = $_SESSION['invoiceNum'];
+    $payment = $_SESSION['payment'];
+    echo $payment;
+    $invoiceNum = $_SESSION['invoiceNum'];
+
     
-    $query = "INSERT INTO salesmanagement (Date, salesbeforeVat, salesafterVat, SONum)
-     VALUES('".$_SESSION['date' ]."', '".$total[0]."', '".$finalAmount."' , '".$_SESSION['SONum' ]."')";
-     if(mysqli_query($con,$query)){
-        $alert = "Successfully added new records!";
-                        
-                    }
-        else{
-            $alert = mysqli_error($con);
-            echo $alert;
-
-        }
-
+    if($payment != 0 ){
         $insertDetails = "INSERT INTO invoicedetails (invoiceNum, SONum, ProdCode, Category, Brand, ProdDesc, Size, Quantity, QuantityIssued, Price) 
         (SELECT invoiceNum, SONum, ProdCode, Category, Brand, ProdDesc, Size, Quantity, ToBeIssued, Price FROM temporaryinvoice)";
         if(mysqli_query($con,$insertDetails)){
             header("message=Successfully added new records");
+
+            $query = "INSERT INTO salesmanagement (Date, salesbeforeVat, salesafterVat, SONum)
+            VALUES('".$_SESSION['date' ]."', '".$Subtotal."', '".$Total."' , '".$_SESSION['SONum' ]."')";
+            if(mysqli_query($con,$query)){
+             //  $alert = "Successfully added new records!";
+             $refreshQuery = " DELETE FROM temporaryinvoice";
+             if(mysqli_query($con,$refreshQuery)){
+                     $_SESSION['discount'] = 0;
+                     $_SESSION['payment'] = 0;
+                     header("location:view_invoice.php?message= Successfully Created Invoice.");
+
+                               
+                           }
+               else{
+                   $alert = mysqli_error($con);
+                   echo $alert;
+                               
+                           }
+       
+               }
+       
                     
                 }
         else{
             $alert = mysqli_error($con);
             echo $alert;
+            $refreshQuery = " DELETE FROM temporaryinvoice";
+            if(mysqli_query($con,$refreshQuery)){
+                    $_SESSION['discount'] = 0;
+                    header("location:pos.php?message= Error In Creating Invoice.");
+
+                        
+                    }
         }
 
-        $refreshQuery = " DELETE FROM temporaryinvoice";
-        if(mysqli_query($con,$refreshQuery)){
-				//	session_unset(); 
-                //    session_destroy();
-                $_SESSION['discount'] = 0;
-                    $alert = "Checkout successful!";
-                    echo '<script type="text/javascript">';
-                    echo 'alert("'.$alert.'")';
-                    echo '</script>';  
-                    include("sales_sales_list.php");
-                }
-        else{
-            $alert = mysqli_error($con);
-            echo '<script type="text/javascript">';
-            echo 'alert("'.$alert.'")';
-            echo '</script>';  
-            include("sales_sales_list.php");
-                }
+    }
+    else{
+        header("location:pos.php?message= Please enter an amount and try again.");
+
+    }
+    
+
+        
                 
 
     }
+
     ?>
