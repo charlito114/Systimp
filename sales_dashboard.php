@@ -2,7 +2,9 @@
     <?php
      $connect = mysqli_connect("localhost", "root", "", "inventory");  
      $query = "SELECT prodcode, quansold FROM products ORDER BY QUANSOLD DESC LIMIT 5";  
+     $query2 = "SELECT sum(salesafterVat) AS TotalSalesoftheDay, date FROM salesmanagement ORDER BY date"; // PROBLEM IS IN THIS LINE OF CODE IDK Y, IF U CHANGE THIS QUERY TO SOMETHING ELSE GUMAGANA YUN GRAPH 2
      $result = mysqli_query($connect, $query);  
+     $result2 = mysqli_query($connect, $query2);  
         session_start();
         require_once("db/connection.php");
     ?>
@@ -18,6 +20,8 @@
            <script type="text/javascript">  
            google.charts.load('current', {'packages':['corechart']});  
            google.charts.setOnLoadCallback(drawChart);  
+           google.charts.setOnLoadCallback(lineChart); 
+               
            function drawChart()  
            {
                 var data = google.visualization.arrayToDataTable([  
@@ -38,7 +42,27 @@
                      };  
                 var chart = new google.visualization.BarChart(document.getElementById('piechart'));  
                 chart.draw(data, options);  
-           }  
+           }
+               
+               function lineChart()  
+           {
+                var data = google.visualization.arrayToDataTable([  
+                          ['Date', 'Sales After Vat'],  
+                          <?php  
+                          while($row = mysqli_fetch_array($result2))  
+                          {  
+                               echo "['".$row["date"]."', ".$row["TotalSalesoftheDay"]."],";  
+                          }  
+                          ?>  
+                     ]);  
+                var options = {
+                      title: 'Sales per Day',
+                      curveType: 'function',
+                      legend: { position: 'bottom'}
+                     };  
+                var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));  
+                chart.draw(data, options);  
+           }
            </script>  
         
         <style>
@@ -196,7 +220,7 @@
                                                         <div class=""></div>
                                                     </div>
                                                 </div>
-                                                <canvas id="myAreaChart" width="389" height="320" class="chartjs-render-monitor" style="display: block; width: 389px; height: 320px;"></canvas>
+                                                <div id="curve_chart" style="width: 100%; height: 100%;"></div> 
                                               </div>
                                             </div>
                                           </div>
