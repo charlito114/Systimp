@@ -199,34 +199,29 @@ require_once("db/connection.php");
                                 <div style="width: 100%; display: inline-block; text-align: center;">
                                     <h1>Jansy Commercial</h1>
                                     <header class="justify-content-between">528A T. Alonzo St., Sta. Cruz Manila <br>Tel: 554-15-89 | Tel Fax: 554-15-85 <br>Email: jansycommercial@yahoo.com</header>
-                                    <header style="font-weight: bold;">SALES AND INCOME REPORT <br>FOR THE YEAR BLANK </header>
+                                    <header style="font-weight: bold;">MONTHLY SALES REPORT <br> FOR THE MONTH OF  </header>
                                 </div>
                             </div>
-                            <table class="" style="margin: auto; width: 75% !important;" id="dataTable" cellspacing="0">
-                              <thead class="text-center">
+                            <table class="text-center" style="margin: auto; width: 90% !important;" id="dataTable" cellspacing="0">
+                              <thead class="">
                                 <tr>
-                                    <th>Month</th>
+                                    <th>Date</th>
                                     <th>Gross Sales</th>
                                     <th>Discount</th>
                                     <th>12% VAT</th>
                                     <th>Net Sales</th>
                                 </tr>
                               </thead>
-                              <tbody class="text-center">
+                              <tbody>
                                 <?php 
                                   if ($search_result->num_rows > 0) {
                                     // output data of each row
                                     while($row = $search_result->fetch_assoc()) {
-                                        echo "\t<tr><td>" . $row['month'] . "</td><td class='text-right'>"  . $row['salesbeforetax']  . "</td><td class='text-right'>" . /*INSERT HERE*/ . "</td><td class='text-right'>" . $row['vat'] . "</td><td class='text-right'>" . $row['salesaftertax'] . "</td></tr>\n";
+                                        echo "\t<tr><td >" . $row['date'] . "</td><td>" . $row['grosssales'] . "</td><td>"  .  $row['discount'] . "</td><td>" . $row['vat'] . "</td><td>" . $row['netsales'] . "</td></tr>\n";
                                         }
                                     } 
                                      #please add these error checking codes
-                                    else {
-                                        $alert = mysqli_error($con);
-                                        echo '<script type="text/javascript">';
-                                        echo 'alert("'.$alert.'")';
-                                        echo '</script>';  
-                                    }
+                                    
                                   ?>
                               </tbody>
                             </table>

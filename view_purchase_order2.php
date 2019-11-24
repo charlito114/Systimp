@@ -243,7 +243,7 @@
                         
                             <div class="col-lg-12">
                                 <form method="post" class="navbar-expand col-lg-12" action = "processreceive.php" >
-                                <header class="card-header font-weight-bold" style="border-bottom:  .10rem solid #b4c540;">Processing Products</header>
+                                <header class="card-header font-weight-bold" style="border-bottom:  .10rem solid #b4c540;">Pending Products</header>
                                 <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                       <thead>
@@ -291,10 +291,11 @@
                                     </table>
                                 </div>
                             </form>
+                        </div>
 
                             <div class="col-lg-12">
                                 <form method="post" class="navbar-expand col-lg-12">
-                                <header class="card-header font-weight-bold" style="border-bottom:  .10rem solid #b4c540;">Fully Received Products</header>
+                                <header class="card-header font-weight-bold" style="border-bottom:  .10rem solid #b4c540;">Received Products</header>
                                 <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                       <thead>
@@ -348,7 +349,7 @@
                                       </thead>
                                       <tbody>
                                         <?php
-                                           $viewDetails = "SELECT * FROM p_podetails WHERE PONum = " . $_SESSION['PONum'] . " AND status = 'Timeframe' OR status = 'Insufficient Stock'";
+                                           $viewDetails = "SELECT * FROM p_podetails WHERE PONum = " . $_SESSION['PONum'] . " AND (status = 'Timeframe' OR status = 'Insufficient Stock')";
                                            $result2 = $con->query($viewDetails);
                                            if ($result2->num_rows > 0) {
                                            // output data of each row
@@ -381,7 +382,7 @@
                                     </div>
                                 </div>
                             </form> 
-                        </div>
+                        
                     </div>
                 </div>
             </div>

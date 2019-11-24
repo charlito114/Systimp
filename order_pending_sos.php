@@ -22,7 +22,9 @@
     <body>
         <!-- Page Wrapper -->
         <div id="wrapper">
-            <?php include 'sidebar.php' ?>
+            <?php
+            session_start();
+            include 'sidebar.php' ?>
             
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -119,7 +121,7 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <div class="btn btn-sm btn-primary shadow-sm" style="height: 30px; margin-top: 15px">
-                                <a href ="logout.php" class = "text-white"> Logout </a>
+                        <a href ="logout.php" class = "text-white"> Logout </a> 
                           </div>
                       </ul>
                     </nav>
@@ -154,6 +156,23 @@
                             </form>
                             
                             <?php
+                             require_once("connection.php");
+
+                            if(isset($_POST['back']))
+                            {
+
+                              $refreshQuery = " DELETE FROM temporaryinvoice";
+                              if(mysqli_query($con,$refreshQuery)){
+                                     // $_SESSION['discount'] = 0;
+                                     // header("location:pos.php?message= Error In Creating Invoice.");
+
+                        
+                    }
+
+                            }
+                                
+                             //   $_SESSION['discount'] = 0;
+
                                 if(isset($_POST['search']))
                                 {
                                     $valueToSearch = $_POST['valueToSearch'];

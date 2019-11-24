@@ -224,7 +224,7 @@
                                             </thead>
                                             <tbody>
                                               <?php
-                                                $viewTop = "SELECT * FROM ordermanagement WHERE status ='Completed' ORDER BY date ASC LIMIT 5";
+                                                $viewTop = "SELECT * FROM ordermanagement WHERE status ='Pending' ORDER BY date ASC LIMIT 5";
                                               $search_result = mysqli_query($con, $viewTop);
                                               if ($search_result->num_rows > 0) {
                                                   // output data of each row

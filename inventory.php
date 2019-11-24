@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once("db/connection.php");
         ?>
 <html>
@@ -121,7 +122,8 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <div class="btn btn-sm btn-primary shadow-sm" style="height: 30px; margin-top: 15px">
-                             <a href ="logout.php" class = "text-white"> Logout </a>
+                        <a href ="logout.php" class = "text-white"> Logout </a> 
+
                           </div>
                       </ul>
                     </nav>
@@ -146,7 +148,7 @@
                         <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                             <form action="inventory.php" class="navbar-search" method="post">
                                 <div class="input-group">
-                                    <input type="text" class="form-control bg-light small" placeholder="Search by date, or Invoice number" aria-label="Search" aria-describedby="basic-addon2" style="width: 450px" name="valueToSearch">
+                                    <input type="text" class="form-control bg-light small" placeholder="Search by code, category, brand or description" aria-label="Search" aria-describedby="basic-addon2" style="width: 450px" name="valueToSearch">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit" name="search" value="search">
                                             <i class="fas fa-search fa-sm"></i>
@@ -163,12 +165,15 @@
                                     // using concat mysql function
                                     $query = "SELECT * FROM products WHERE CONCAT(prodcode, category, brand, proddesc) LIKE '%".$valueToSearch."%'";
                                     $search_result = filterTable($query);
+
                                 }
                                 else {
                                     $query = "SELECT * FROM products";
                                      $query = "SELECT * FROM products WHERE status != 'Discontinued' ";
                                     $search_result = filterTable($query);
                                 }
+
+
                                 function filterTable($query)
                                 {
                                     $con = mysqli_connect("localhost", "root", "", "inventory");
@@ -234,13 +239,12 @@
                                     <?php 
                                       if ($search_result->num_rows > 0) {
                                     // output data of each row
+
                                     while($row = $search_result->fetch_assoc()) {
                                         echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['price'] ."</td></tr>\n";
                                         }
                                     } 
-                                    //else {
-                                     //echo "0 results";
-                                        //}
+                                  
                                       ?>
                                   </tbody>
                                 </table>
@@ -250,6 +254,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         
   <!-- Page level plugins -->
   <script src="vendor/datatables/jquery.dataTables.min.js"></script>

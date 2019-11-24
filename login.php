@@ -1,9 +1,7 @@
 <?php
 session_start();
 require_once('db/connection.php');
-
 	if (isset($_POST['Login']))
-
 	{
         
 		if (empty($_POST['email']) || empty ($_POST['password']))
@@ -17,25 +15,29 @@ require_once('db/connection.php');
 			$query="select * from users where Email='".$_POST['email']."' and Password='".$_POST['password']."'";
             $result = mysqli_query($con,$query);
 			
+			if($result = $con->query($query)){
+                if ($result->num_rows > 0) { 
+                    while($row = $result->fetch_assoc()) {
+						$_SESSION['email'] = $row['Email'];
+						$_SESSION["userType"] = $row["UserType"];
+						$_SESSION["firstName"] = $row["FirstName"];
+						$_SESSION["lastName"] = $row["LastName"];
 
-			if (mysqli_fetch_assoc($result))
-			{
-                $_SESSION['email'] = $_POST['email'];
-                $userQuery = "select UserType from users where Email='".$_POST['email']."'";
-                $userType =	 mysqli_fetch_row(mysqli_query($con, $userQuery));
+					}
+				}
+				if($_SESSION["userType"] == 'Assistant Manager' || $_SESSION["userType"] == 'Purchasing' ){
+					header("location:purchasing_dashboard.php"); 
+				}
 
+				else if ($_SESSION["userType"] == 'Sales' ){
+					header("location:order_dashboard.php"); 
 
-                if($userType[0]== 'Manager'){
-                header("location:purchase_purchase_history.php"); // indicate customized file location
-                }
-                else if($userType[0]== 'Assistant Manager'){
-                    header("location:p_purchase_purchase_history.php"); // indicate customized file location
-                    }
+				}
 
-                else if($userType[0]== 'Sales'){
-                        header("location:sales_dashboard.php"); // indicate customized file location
-                        }
+				else if ($_SESSION["userType"] == 'Manager' ){
+					header("location:sales_dashboard.php"); 
 
+				}
 			}
 			else
 			{

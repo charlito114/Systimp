@@ -21,7 +21,9 @@
     <body>
         <!-- Page Wrapper -->
         <div id="wrapper">
-            <?php include 'sidebar.php' ?>
+            <?php 
+            session_start();
+            include 'sidebar.php' ?>
             
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -118,7 +120,7 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <div class="btn btn-sm btn-primary shadow-sm" style="height: 30px; margin-top: 15px">
-                                <a href ="logout.php" class = "text-white"> Logout </a>
+                                Logout
                           </div>
                       </ul>
                     </nav>
@@ -143,7 +145,7 @@
                         <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                             <form action="order_sales_orders.php" class="navbar-search" method="post">
                                 <div class="input-group">
-                                    <input type="text" name="valueToSearch" class="form-control bg-light small" placeholder="Search by date, PO number or status" aria-label="Search" aria-describedby="basic-addon2" style="width: 450px">
+                                    <input type="text" name="valueToSearch" class="form-control bg-light small" placeholder="Search by date, SO number or status" aria-label="Search" aria-describedby="basic-addon2" style="width: 450px">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit" name="search" value="search">
                                             <i class="fas fa-search fa-sm"></i>

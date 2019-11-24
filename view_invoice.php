@@ -117,7 +117,8 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <div class="btn btn-sm btn-primary shadow-sm" style="height: 30px; margin-top: 15px">
-                                Logout
+                        <a href ="logout.php" class = "text-white"> Logout </a> 
+
                           </div>
                       </ul>
                     </nav>
@@ -202,22 +203,6 @@
                                                         ?>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-5 mb-4" style="float: right;">
-                                            <div class="card-body">
-                                                <div class="row d-flex justify-content-between" style="margin-top: 10px;">
-                                                   <div>
-                                                       <label class="control-label">Date:</label>
-                                                    </div>
-
-                                                    <div class="input-group col-sm-6 m-bot15">
-                                                        <?php
-                                                            echo $row['date']; 
-                                                        ?>
-                                                    </div>
-                                                </div>
 
                                                 <div class="row d-flex justify-content-between" style="margin-top: 10px;">
                                                    <div>
@@ -230,6 +215,27 @@
                                                         ?>
                                                     </div>
                                                 </div>
+
+                                                <div class="row d-flex justify-content-between" style="margin-top: 10px;">
+                                                   <div>
+                                                       <label class="control-label">Date:</label>
+                                                    </div>
+
+                                                    <div class="input-group col-sm-6 m-bot15">
+                                                        <?php
+                                                            echo $row['date']; 
+                                                        ?>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-5 mb-4" style="float: right;">
+                                            <div class="card-body">
+                                               
+
+                                               
                                                 
                                                 <div class="row d-flex justify-content-between" style="margin-top: 10px;">
                                                    <div>
@@ -251,6 +257,30 @@
                                                     <div class="input-group col-sm-6 m-bot15">
                                                         <?php
                                                             echo $row['salesafterVat']; 
+                                                        ?>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row d-flex justify-content-between" style="margin-top: 10px;">
+                                                   <div>
+                                                       <label class="control-label">Discount:</label>
+                                                    </div>
+
+                                                    <div class="input-group col-sm-6 m-bot15">
+                                                        <?php
+                                                            echo $row['discount']; 
+                                                        ?>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row d-flex justify-content-between" style="margin-top: 10px;">
+                                                   <div>
+                                                       <label class="control-label">VAT:</label>
+                                                    </div>
+
+                                                    <div class="input-group col-sm-6 m-bot15">
+                                                        <?php
+                                                            echo $row['vat']; 
                                                         ?>
                                                     </div>
                                                 </div>
@@ -279,7 +309,6 @@
                                           <th>Brand</th>
                                           <th>Description</th>
                                           <th>Size</th>
-                                          <th>Quantity Ordered</th>
                                           <th>Quantity Issued</th>
                                           <th>Price</th>
                                         </tr>
@@ -293,7 +322,7 @@
                                             while($row = $result2->fetch_assoc()) {
                                                 // may part dito na  sa isang row, may button for update, once clicked, kukunin niya yung product code nung row na yun
 
-                                                echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['QuantityIssued'] . "</td><td>" . $row['Price'] . "</td></tr>\n";
+                                                echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['QuantityIssued'] . "</td><td>" . $row['Price'] . "</td></tr>\n";
                                                 }
 
                                                 // echo "</form>";

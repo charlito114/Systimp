@@ -21,7 +21,9 @@
     <body>
         <!-- Page Wrapper -->
         <div id="wrapper">
-            <?php include 'sidebar.php' ?>
+            <?php 
+            session_start();
+            include 'sidebar.php' ?>
             
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">

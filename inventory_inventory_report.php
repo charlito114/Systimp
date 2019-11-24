@@ -172,12 +172,14 @@ require_once("db/connection.php");
                                 { 
                                     $tempdate = $_POST['date'];
                                     $date = date('Y-m-d', strtotime($tempdate));
+                                    $_SESSION['date'] = $date;
                                     $query = "SELECT * FROM inventoryreport WHERE date = '$date'";
                                     $search_result = filterTable($query);
                                 }
                                     else {
                                         $date = date('Y-m-d');
                                         $mindate =  date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $date) ) ));
+                                        $_SESSION['date'] = $mindate;
                                       //  echo $date;
                                         $query = "SELECT * FROM inventoryreport WHERE date LIKE '$mindate' ";
                                         $search_result = filterTable($query);
@@ -203,14 +205,13 @@ require_once("db/connection.php");
                                     
                                     <div style="float: right;">
                                         <header style="font-weight: bold;">INVENTORY REPORT</header>
-                                        <header>AS OF <?php echo $mindate ?> </header>
+                                        <header>AS OF <?php echo $_SESSION['date'] ?> </header>
                                     </div>
                                 </div>
                             </div>
                             <table class="" style="margin: auto; width: 100% !important;" id="dataTable" cellspacing="0">
                               <thead class="text-center">
                                 <tr>
-                                    <th>Date</th>
                                     <th>Category</th>
                                     <th>Brand</th>
                                     <th>Product Code</th>
@@ -225,7 +226,7 @@ require_once("db/connection.php");
                                    if ($search_result->num_rows > 0) {
                                     // output data of each row
                                     while($row = $search_result->fetch_assoc()) {
-                                        echo "\t<tr><td >" . $row['date'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['prodcode'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['prodquan'] .    "</td></tr>\n";
+                                        echo "\t<tr><td >" .  $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['prodcode'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['prodquan'] .    "</td></tr>\n";
                                         }
                                     } 
                                     #please add these error checking codes

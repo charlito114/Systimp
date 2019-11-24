@@ -22,7 +22,9 @@
     <body>
         <!-- Page Wrapper -->
         <div id="wrapper">
-            <?php include 'sidebar.php' ?>
+            <?php 
+            session_start();
+            include 'sidebar.php' ?>
             
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -32,7 +34,7 @@
                     
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg topbar mb-4 static-top shadow">
-                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Purchase Orders</div>
+                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Manage Purchase Orders</div>
                       <!-- Sidebar Toggle (Topbar) -->
                       <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -119,7 +121,8 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <div class="btn btn-sm btn-primary shadow-sm" style="height: 30px; margin-top: 15px">
-                                <a href ="logout.php" class = "text-white"> Logout </a>
+                        <a href ="logout.php" class = "text-white"> Logout </a> 
+
                           </div>
                       </ul>
                     </nav>

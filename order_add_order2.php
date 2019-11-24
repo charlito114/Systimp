@@ -30,7 +30,7 @@
                 <div id="content">
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg topbar mb-4 static-top shadow">
-                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Add Order</div>
+                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Create Sales Order</div>
                       <!-- Sidebar Toggle (Topbar) -->
                       <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -117,7 +117,8 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <div class="btn btn-sm btn-primary shadow-sm" style="height: 30px; margin-top: 15px">
-                                <a href ="logout.php" class = "text-white"> Logout </a>
+                        <a href ="logout.php" class = "text-white"> Logout </a> 
+
                           </div>
                       </ul>
                     </nav>
@@ -233,7 +234,7 @@
                                     <div class="d-flex" style=" margin-top: 10px;">
                                         <div style="width: 80%; float: left;"></div>
                                         <div style="width: 20%;">
-                                          <button type = "submit" name = "proceed"  value = "proceed" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" style="width: 100px;float: right;"> Proceed </button>
+                                       <!--   <button type = "submit" name = "proceed"  value = "proceed" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" style="width: 100px;float: right;"> Proceed </button>-->
                                         </div>
                                     </div>
                                 </form>
@@ -244,7 +245,7 @@
                                 <header class="card-header font-weight-bold">Add Product Details</header>
                                 
                                 <!--Product Details Form -->
-                                <form method = "post" action = "">
+                                <form method = "post" action = "" >
                                     <div class="row">
                                         <div class="col-lg-5 mb-4" style="float: left;">
                                             <div class="card-body">
@@ -395,7 +396,7 @@
                                     <!-- Add Button-->
                                     <div class="d-flex" style=" margin-top: 10px;">
                                         <div style="width: 90%; float: left;"></div>
-                                        <button name="add" value="add" type="submit" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="width: 10%;float: right;"> Add </button>
+                                        <button name="add" value="add" type="submit" onclick = " return confirm('Are you sure you want to add this entry?')" ; class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="width: 10%;float: right;"> Add </button>
                                     </div>
                                 </form>
                                 <?php
@@ -475,7 +476,7 @@
                                 </div>
                             </form>
                             
-                            <form method="post" onsubmit="return confirm('Are you sure you want to continue action?');"> 
+                            <form method="post"> 
                                 <div class="d-flex" style=" margin-top: 10px;">
                                     <!-- Remove Button-->
                                     <div style="width: 80%; float: left;">

@@ -9,18 +9,19 @@ if (isset($_POST['submit']))
     $Total =  $_SESSION['total'];
     $invoiceNum = $_SESSION['invoiceNum'];
     $payment = $_SESSION['payment'];
-    echo $payment;
     $invoiceNum = $_SESSION['invoiceNum'];
+    $discount = $_SESSION['discount1'];
+    $VAT = $_SESSION['VAT'];
 
     
-    if($payment != 0 ){
+
         $insertDetails = "INSERT INTO invoicedetails (invoiceNum, SONum, ProdCode, Category, Brand, ProdDesc, Size, Quantity, QuantityIssued, Price) 
         (SELECT invoiceNum, SONum, ProdCode, Category, Brand, ProdDesc, Size, Quantity, ToBeIssued, Price FROM temporaryinvoice)";
         if(mysqli_query($con,$insertDetails)){
             header("message=Successfully added new records");
 
-            $query = "INSERT INTO salesmanagement (Date, salesbeforeVat, salesafterVat, SONum)
-            VALUES('".$_SESSION['date' ]."', '".$Subtotal."', '".$Total."' , '".$_SESSION['SONum' ]."')";
+            $query = "INSERT INTO salesmanagement (Date, salesbeforeVat, discount, vat, salesafterVat, SONum)
+            VALUES('".$_SESSION['date' ]."', '".$Subtotal."', '".$discount."', '".$VAT."','".$Total."' , '".$_SESSION['SONum' ]."')";
             if(mysqli_query($con,$query)){
              //  $alert = "Successfully added new records!";
              $refreshQuery = " DELETE FROM temporaryinvoice";
@@ -54,15 +55,12 @@ if (isset($_POST['submit']))
         }
 
     }
-    else{
-        header("location:pos.php?message= Please enter an amount and try again.");
-
-    }
+   
     
 
         
                 
 
-    }
+    
 
     ?>

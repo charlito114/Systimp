@@ -143,7 +143,6 @@
                                     {
                                         $SONum = $_POST['SONum'];
                                         $_SESSION['SONum'] = $SONum;
-
                                     }
                                     
                                         
@@ -251,7 +250,7 @@
                         
                             <div class="col-lg-12">
                                 <form method="post" class="navbar-expand col-lg-12">
-                                <header class="card-header font-weight-bold">Processing Products</header>
+                                <header class="card-header font-weight-bold">Pending Products</header>
                                 <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                       <thead>
@@ -276,10 +275,8 @@
                                             // output data of each row
                                             while($row = $result2->fetch_assoc()) {
                                                 // may part dito na  sa isang row, may button for update, once clicked, kukunin niya yung product code nung row na yun
-
                                                 echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['ProdQuan'] . "</td><td>" . $row['Available'] . "</td><td>" . $row['Issued'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['TotalPrice'] . "</td></tr>\n";
                                                 }
-
                                                 // echo "</form>";
                                             }
                                           else {
@@ -295,7 +292,7 @@
 
                             <div class="col-lg-12">
                                 <form method="post" class="navbar-expand col-lg-12">
-                                <header class="card-header font-weight-bold">Fully Received Products</header>
+                                <header class="card-header font-weight-bold">Issued Products</header>
                                 <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                       <thead>
@@ -320,10 +317,8 @@
                                             // output data of each row
                                             while($row = $result2->fetch_assoc()) {
                                                 // may part dito na  sa isang row, may button for update, once clicked, kukunin niya yung product code nung row na yun
-
                                                 echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['ProdQuan'] . "</td><td>" . $row['Available'] . "</td><td>" . $row['Issued'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['TotalPrice'] . "</td></tr>\n";
                                                 }
-
                                                 // echo "</form>";
                                             } 
                                             
@@ -342,7 +337,7 @@
                                     </div>
                                     <div class="d-flex" style="width: 30%; float: right;">
                                     <!-- Submit Button-->
-                                    <button type = 'submit' name = 'submit'  value = 'Proceed to checkout' formaction =  'pos.php' class="d-flex d-sm-inline-block btn btn-sm btn-success shadow-sm" style="width: 200px; float: left; margin-right: 20%;"> Proceed to Checkout </button>
+                                    <button type = 'submit' name = 'submitcheckout'  value = 'Proceed to checkout' formaction =  'pos.php' class="d-flex d-sm-inline-block btn btn-sm btn-success shadow-sm" style="width: 200px; float: left; margin-right: 20%;"> Proceed to Checkout </button>
                                     <!-- Cancel Button-->
                                     <button type = 'submit' name = 'back'  value = 'back' formaction =  'order_sales_orders.php' class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" style="width: 100px; float: right;"> Back </button>
                                     </div>

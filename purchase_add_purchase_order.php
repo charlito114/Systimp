@@ -30,7 +30,7 @@
                 <div id="content">
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg topbar mb-4 static-top shadow">
-                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Add Purchase Order</div>
+                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Create Purchase Order</div>
                       <!-- Sidebar Toggle (Topbar) -->
                       <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -117,7 +117,8 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <div class="btn btn-sm btn-primary shadow-sm" style="height: 30px; margin-top: 15px">
-                                <a href ="logout.php" class = "text-white"> Logout </a>
+                        <a href ="logout.php" class = "text-white"> Logout </a> 
+
                           </div>
                       </ul>
                     </nav>
@@ -141,7 +142,7 @@
                                 <header class="card-header font-weight-bold">Purchase Order Details</header>
                                 
                                 <!--SO Details Form -->
-                                <form method = "post" action = "purchase_add_purchase_order2.php">
+                                <form method = "post"  action = "purchase_add_purchase_order2.php">
                                     <div class="row">
                                         <div class="col-lg-5 mb-4" style="float: left;">
                                             <div class="card-body">
@@ -423,7 +424,7 @@
                             </div>
                         </form>
 
-                        <form method="post" onsubmit="return confirm('Are you sure you want to continue action?');"> 
+                        <form method="post" > 
                             <div class="d-flex" style=" margin-top: 10px;">
                                 <!-- Remove Button-->
                                 <div style="width: 80%; float: left;">
@@ -431,7 +432,7 @@
                                 </div>
                                 <div class="d-flex" style="width: 30%; float: right;">
                                 <!-- Submit Button-->
-                                <button type = 'submit' name = 'submit'  value = 'submit' formaction = 'processPurchasing.php' class="d-flex d-sm-inline-block btn btn-sm btn-success shadow-sm" style="width: 35%; float: left; margin-right: 20%;"> Submit </button>
+                                <button type = 'submit' name = 'submit' onclick="return confirm('Are you sure you want to continue action?');" value = 'submit' formaction = 'processPurchasing.php' class="d-flex d-sm-inline-block btn btn-sm btn-success shadow-sm" style="width: 35%; float: left; margin-right: 20%;"> Submit </button>
                                 <!-- Cancel Button-->
                                 <button type = 'submit' name = 'back'  value = 'back' class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" style="width: 35%; float: right;"> Back </button>
                                 </div>

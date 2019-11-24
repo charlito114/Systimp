@@ -32,7 +32,7 @@
                     
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg topbar mb-4 static-top shadow">
-                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Purchase History</div>
+                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Purchase Orders</div>
                       <!-- Sidebar Toggle (Topbar) -->
                       <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -119,7 +119,8 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <div class="btn btn-sm btn-primary shadow-sm" style="height: 30px; margin-top: 15px">
-                                <a href ="logout.php" class = "text-white"> Logout </a>
+                        <a href ="logout.php" class = "text-white"> Logout </a> 
+
                           </div>
                       </ul>
                     </nav>
@@ -144,7 +145,7 @@
                         <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                             <form action="purchase_purchase_history.php" class="navbar-search" method="post">
                                 <div class="input-group">
-                                    <input type="text" class="form-control bg-light small" placeholder="Search by date, or PO number" aria-label="Search" aria-describedby="basic-addon2" style="width: 450px" name="valueToSearch">
+                                    <input type="text" class="form-control bg-light small" placeholder="Search by date, PO number or status" aria-label="Search" aria-describedby="basic-addon2" style="width: 450px" name="valueToSearch">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit" name="search" value="search">
                                             <i class="fas fa-search fa-sm"></i>
