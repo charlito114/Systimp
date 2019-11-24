@@ -202,8 +202,8 @@ require_once("db/connection.php");
                                     <header style="font-weight: bold;">MONTHLY SALES REPORT <br> FOR THE MONTH OF  </header>
                                 </div>
                             </div>
-                            <table class="text-center" style="margin: auto; width: 90% !important;" id="dataTable" cellspacing="0">
-                              <thead class="">
+                            <table class="" style="margin: auto; width: 75% !important;" id="dataTable" cellspacing="0">
+                              <thead class="text-center">
                                 <tr>
                                     <th>Date</th>
                                     <th>Gross Sales</th>
@@ -217,7 +217,7 @@ require_once("db/connection.php");
                                   if ($search_result->num_rows > 0) {
                                     // output data of each row
                                     while($row = $search_result->fetch_assoc()) {
-                                        echo "\t<tr><td >" . $row['date'] . "</td><td>" . $row['grosssales'] . "</td><td>"  .  $row['discount'] . "</td><td>" . $row['vat'] . "</td><td>" . $row['netsales'] . "</td></tr>\n";
+                                        echo "\t<tr><td class='text-center'>" . $row['date'] . "</td><td class='text-right'>" . $row['grosssales'] . "</td><td class='text-right'>"  .  $row['discount'] . "</td><td class='text-right'>" . $row['vat'] . "</td><td class='text-right'>" . $row['netsales'] . "</td></tr>\n";
                                         }
                                     } 
                                      #please add these error checking codes
