@@ -199,25 +199,25 @@ require_once("db/connection.php");
                                 <div style="width: 100%; display: inline-block; text-align: center;">
                                     <h1>Jansy Commercial</h1>
                                     <header class="justify-content-between">528A T. Alonzo St., Sta. Cruz Manila <br>Tel: 554-15-89 | Tel Fax: 554-15-85 <br>Email: jansycommercial@yahoo.com</header>
-                                    <header style="font-weight: bold;">YEARLY SALES AND INCOME REPORT <br>FOR THE YEAR BLANK </header>
+                                    <header style="font-weight: bold;">SALES AND INCOME REPORT <br>FOR THE YEAR BLANK </header>
                                 </div>
                             </div>
-                            <table class="text-center" style="margin: auto; width: 90% !important;" id="dataTable" cellspacing="0">
-                              <thead class="">
+                            <table class="" style="margin: auto; width: 75% !important;" id="dataTable" cellspacing="0">
+                              <thead class="text-center">
                                 <tr>
-                                    <th>Year</th>
                                     <th>Month</th>
-                                    <th>Sales Before Tax</th>
+                                    <th>Gross Sales</th>
+                                    <th>Discount</th>
                                     <th>12% VAT</th>
-                                    <th>Sales After Tax</th>
+                                    <th>Net Sales</th>
                                 </tr>
                               </thead>
-                              <tbody>
+                              <tbody class="text-center">
                                 <?php 
                                   if ($search_result->num_rows > 0) {
                                     // output data of each row
                                     while($row = $search_result->fetch_assoc()) {
-                                        echo "\t<tr><td >" . $row['year'] . "</td><td>" . $row['month'] . "</td><td>"  .  $row['salesbeforetax'] . "</td><td>" . $row['vat'] . "</td><td>" . $row['salesaftertax'] . "</td></tr>\n";
+                                        echo "\t<tr><td>" . $row['month'] . "</td><td class='text-right'>"  . $row['salesbeforetax']  . "</td><td class='text-right'>" . /*INSERT HERE*/ . "</td><td class='text-right'>" . $row['vat'] . "</td><td class='text-right'>" . $row['salesaftertax'] . "</td></tr>\n";
                                         }
                                     } 
                                      #please add these error checking codes
