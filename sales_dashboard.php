@@ -1,7 +1,13 @@
 <html>
     <?php
      $connect = mysqli_connect("localhost", "root", "", "inventory");  
-     $query = "SELECT prodcode, quansold FROM products ORDER BY QUANSOLD DESC LIMIT 5";  
+     $query = "SELECT invoicedetails.ProdCode as productcode, sum(invoicedetails.quantity) as quansold
+FROM invoicedetails 
+JOIN salesmanagement ON invoicedetails.SONum = salesmanagement.SONum
+WHERE salesmanagement.date BETWEEN DATE_FORMAT(NOW() - INTERVAL 1 MONTH, '%Y-%m-01 00:00:00')
+AND DATE_FORMAT(LAST_DAY(NOW() - INTERVAL 1 MONTH), '%Y-%m-%d 23:59:59')
+GROUP BY ProdCode
+ORDER BY quansold desc;";  
      $query2 = "SELECT sum(salesafterVat) AS TotalSalesoftheDay, date FROM salesmanagement ORDER BY date"; // PROBLEM IS IN THIS LINE OF CODE IDK Y, IF U CHANGE THIS QUERY TO SOMETHING ELSE GUMAGANA YUN GRAPH 2
      $result = mysqli_query($connect, $query);  
      $result2 = mysqli_query($connect, $query2);  
@@ -24,17 +30,23 @@
                
            function drawChart()  
            {
+
+            var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+var d = new Date();
+var month = "For the month of " + monthNames[d.getMonth()-1];
+
                 var data = google.visualization.arrayToDataTable([  
                           ['Product Code', 'Quantity Sold'],  
                           <?php  
                           while($row = mysqli_fetch_array($result))  
                           {  
-                               echo "['".$row["prodcode"]."', ".$row["quansold"]."],";  
+                               echo "['".$row["productcode"]."', ".$row["quansold"]."],";  
                           }  
                           ?>  
                      ]);  
                 var options = {  
-                      title: 'For the month of October',
+                      title: month ,
                         width: '100%',
                         legend: { position: 'bottom'},
                         isStacked: 'true'
@@ -227,6 +239,16 @@
                                         </div>
                                         
                                         <!-- Total Daily Sales  -->
+                                        <?php 
+                                        $totalQuery = "SELECT sum(salesafterVat) AS totalsales FROM salesmanagement WHERE date = current_date()";
+                                        $result3 = $con->query($totalQuery);
+                                        if ($result3->num_rows > 0) {
+                                        // output data of each row
+                                        while($row = $result3->fetch_assoc()) {
+                                          $totalsales = $row['totalsales'];
+                                        }
+                                      }
+                                        ?>
                                         <div class="" style="height: 20%;">
                                             <a class="tablinks" onclick="openTab(event, 'totalSales')">
                                                 <div class="card-body">
@@ -235,7 +257,7 @@
                                                       <div class="row no-gutters align-items-center">
                                                         <div class="col mr-2">
                                                           <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Daily Sales</div>
-                                                          <div class="h5 mb-0 font-weight-bold text-gray-800">P40,000</div>
+                                                          <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo "₱".$totalsales ?></div>
                                                         </div>
                                                         <div class="col-auto">
                                                           <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -311,12 +333,22 @@
                                   </thead>
                                   <tbody>
                                     <?php
-                                      $viewTop = "SELECT * FROM products ORDER BY quanSold DESC LIMIT 5";
+                                      $viewTop = "SELECT invoicedetails.prodcode as ProductCode, invoicedetails.category as Category,invoicedetails.brand as Brand,
+invoicedetails.proddesc as ProdDescription,invoicedetails.size as Size,invoicedetails.quantity as Quantity,products.repoint as Reorder, 
+sum(invoicedetails.quantity) as Quansold, products.price as Price
+FROM invoicedetails 
+JOIN salesmanagement ON invoicedetails.SONum = salesmanagement.SONum
+JOIN products ON products.prodcode = invoicedetails.prodcode
+WHERE salesmanagement.date BETWEEN DATE_FORMAT(NOW() - INTERVAL 1 MONTH, '%Y-%m-01 00:00:00')
+AND DATE_FORMAT(LAST_DAY(NOW() - INTERVAL 1 MONTH), '%Y-%m-%d 23:59:59')
+GROUP BY invoicedetails.ProdCode 
+ORDER BY Quansold desc
+LIMIT 5;";
                                     $search_result = mysqli_query($con, $viewTop);
                                     if ($search_result->num_rows > 0) {
                                         // output data of each row
                                         while($row = $search_result->fetch_assoc()) {
-                                            echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['quanSold'] . "</td><td>" . $row['price'] ."</td></tr><br>";
+                                            echo "\t<tr><td >" . $row['ProductCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDescription'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['Reorder'] . "</td><td>" . $row['Quansold'] . "</td><td>" . $row['Price'] ."</td></tr><br>";
                                             }
                                         }
                                     else{
