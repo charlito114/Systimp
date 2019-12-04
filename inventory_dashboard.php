@@ -89,6 +89,7 @@
                                 <tr style="background-color: #858796;">
                                     <td><button class="btn text-white">Your order is ready!</button></td>
                                 </tr>
+                            STEP 3.5.5: FOR SECOND, REMOVE THE BACKGROUND COLOR BELOW 
                                 <tr style="background-color: #ff6565;">
                                     <td><button class="btn text-white">You have low stock!</button></td>
                                 </tr> -->
