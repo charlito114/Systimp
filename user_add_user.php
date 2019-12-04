@@ -19,7 +19,10 @@ body{
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-<?php include 'sidebar.php' ?>
+<?php
+
+session_start();
+include 'sidebar.php' ?>
 
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
@@ -222,11 +225,10 @@ body{
                     <div class="d-flex" style=" margin-top: 10px;">
                         <div style="width: 80%; float: left;"></div>
                         <button type = "submit" name = "adduser" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" style="width: 100px; float: left; margin-right: 20px;"> Confirm </button>
-                        <button name = "add" value = "add" formaction = "inventory_add_product.php" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" style="width: 100px; float: right;"> Cancel </button>
+                        <button name = "cancel" value = "cancel" formaction = "user_user_list.php" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" style="width: 100px; float: right;"> Cancel </button>
                     </div>
                     
                     <?php 
-                    session_start();
                     require_once("db/connection.php");
                     if (isset($_POST['adduser']))
                     { 

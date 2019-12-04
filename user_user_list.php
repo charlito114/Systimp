@@ -1,5 +1,6 @@
 <?php	
     require_once("db/connection.php");	
+    session_start();
 ?>
 
 <html>
@@ -163,7 +164,7 @@
                                     $valueToSearch = $_POST['valueToSearch'];
                                     // search in all table columns
                                     // using concat mysql function
-                                    $query = "SELECT * FROM users WHERE CONCAT(Email, FirstName, LastName) LIKE '%".$valueToSearch."%'";
+                                    $query = "SELECT * FROM users WHERE CONCAT(Email, FirstName, LastName, UserType) LIKE '%".$valueToSearch."%'";
                                     $search_result = filterTable($query);
 
                                 }
@@ -181,6 +182,14 @@
                                 }
                             ?>
                             
+                        </div>
+                        
+                        <!-- Print and Page -->
+                        <div class="d-flex" style=" margin-top: 0;">
+                            <!-- Print Button-->
+                            <div style="width: 80%;">
+                                <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-left: 30px; width: 100px;"> Print </button>
+                            </div>
                         </div>
                         
                         <!-- Table -->
@@ -205,7 +214,14 @@
 
                                     while($row = $search_result->fetch_assoc()) {
                                         echo "<form method = post>";
+                                        $currentstatus = $row['Status'];
+                                        if($currentstatus == 'Active' ){
                                         echo "\t<tr><td >" . $row['Email'] . "</td><td>" . $row['LastName'] . "</td><td>"  .  $row['FirstName'] . "</td><td>" . $row['Birthday'] .  "</td><td>" . $row['UserType'] . "</td><td>" . $row['Status'] ."</td><td><button type = 'submit' name = 'disable'  value = '" . $row['Email'] . "' class = 'btn' style = 'color: #e74a3b;' > <i class='fas fa-fw fa-ban'/> </button></td></tr><br>";
+                                        }
+                                        else{
+                                          echo "\t<tr><td >" . $row['Email'] . "</td><td>" . $row['LastName'] . "</td><td>"  .  $row['FirstName'] . "</td><td>" . $row['Birthday'] .  "</td><td>" . $row['UserType'] . "</td><td>" . $row['Status'] ."</td><td></td></tr><br>";
+
+                                        }
                                         echo "</form>";
                                         }
                                         if (isset($_POST['disable'])) {
