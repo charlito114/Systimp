@@ -1,7 +1,7 @@
 <html>
     <?php
      $connect = mysqli_connect("localhost", "root", "", "inventory");  
-     $query = "SELECT invoicedetails.ProdCode as productcode, sum(invoicedetails.quantity) as quansold
+     $query = "SELECT invoicedetails.ProdCode as productcode, sum(invoicedetails.quantity) as quansold, invoicedetails.brand as BRAND, invoicedetails.category as CATEGORY, invoicedetails.proddesc as prodesc
 FROM invoicedetails 
 JOIN salesmanagement ON invoicedetails.SONum = salesmanagement.SONum
 WHERE salesmanagement.date BETWEEN DATE_FORMAT(NOW() - INTERVAL 1 MONTH, '%Y-%m-01 00:00:00')
@@ -37,11 +37,11 @@ var d = new Date();
 var month = "For the month of " + monthNames[d.getMonth()-1];
 
                 var data = google.visualization.arrayToDataTable([  
-                          ['Product Code', 'Quantity Sold'],  
+                          ['Product Code', 'Quantity Sold',{label: 'T1', role: 'tooltip'}],  
                           <?php  
                           while($row = mysqli_fetch_array($result))  
                           {  
-                               echo "['".$row["productcode"]."', ".$row["quansold"]."],";  
+                               echo "['".$row["productcode"]."', ".$row["quansold"].", '".$row["BRAND"]."| ".$row["CATEGORY"]."| ".$row["prodesc"]."' ],";  
                           }  
                           ?>  
                      ]);  
