@@ -152,7 +152,7 @@ require_once("db/connection.php");
                         <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                             <form class="navbar-search" method="post">
                                 <div class="input-group">
-                                    <input type="month" name = "date" class="form-control bg-light small" style="width: 200px; margin-left: 50px;" name="valueToSearch">
+                                    <input type="date" name = "date" class="form-control bg-light small" style="width: 200px; margin-left: 50px;" name="valueToSearch">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit" name="submit" value="submit">
                                            <i class="fas fa-calendar fa-sm"></i>
