@@ -255,11 +255,11 @@
                         <!-- Low Quantity Table -->
                         <div id="lowQuantity" class="tabcontent" style="display: block;">
                           <div class="container-fluid">
-                              <div class="col-lg-12" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
-                                    <form method="post" class="navbar-expand col-lg-12 ">
-                                    <header class="card-header font-weight-bold" style="border-bottom: none;">Low Quantity Products</header>
-                                    <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0; margin-right: 495px">
-                                        <table class="table table-bordered" id="dataTable" width="150%" cellspacing="0">
+                              <div class="col-lg-12 table-responsive" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
+                                  <form method='post' class="navbar-expand col-lg-12">
+                                  <header class="card-header font-weight-bold" style="border-bottom: none;">Low Quantity Products</header>
+                                      <div class="align-items-center justify-content-between mb-4" style="padding-top: 0; display:inline-flex;">
+                                        <table class="table table-bordered" id="dataTable" width="125%" cellspacing="0">
                                           <thead>
                                             <tr>
                                             <th>Product Code</th>
@@ -281,9 +281,9 @@
                                                       echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint']  ."</td></tr><br>";
                                                       }
                                                   }
-                                              else{
-                                                  echo "0 results";
-                                              }
+                                             else {
+                                               echo "<tr><td colspan='7'><center> 0 results </center></td></tr>";
+                                               }
                                                 
                                               ?>
                                           </tbody>
@@ -323,9 +323,9 @@
                                                     echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint']  ."</td></tr><br>";
                                                     }
                                                 }
-                                            else{
-                                                echo "0 results";
-                                            }
+                                            else {
+                                               echo "<tr><td colspan='7'><center> 0 results </center></td></tr>";
+                                               }
                                             ?>
                                           </tbody>
                                         </table>
