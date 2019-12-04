@@ -227,26 +227,28 @@
                                   <!-- Restocked Products -->
                                   <div class="col-xl-3 col-md-6 mb-4">
                                     <div class="card border-left-success shadow h-100 py-2">
-                                      <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                          <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Restocked Products</div>
-                                            <div class="row no-gutters align-items-center">
-                                              <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                              </div>
-                                              <div class="col">
-                                                <div class="progress progress-sm mr-2">
-                                                  <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <a class="tablinks" onclick="openTab(event, 'restockedProducts')">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                  <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Restocked Products</div>
+                                                    <div class="row no-gutters align-items-center">
+                                                      <div class="col-auto">
+                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                                      </div>
+                                                      <div class="col">
+                                                        <div class="progress progress-sm mr-2">
+                                                          <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-auto">
+                                                    <i class="fas fa-boxes fa-2x text-gray-300"></i>
+                                                  </div>
                                                 </div>
                                               </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-auto">
-                                            <i class="fas fa-boxes fa-2x text-gray-300"></i>
-                                          </div>
-                                        </div>
-                                      </div>
+                                        </a>
                                     </div>
                                   </div>
                                 </div>
@@ -327,6 +329,35 @@
                                                echo "<tr><td colspan='7'><center> 0 results </center></td></tr>";
                                                }
                                             ?>
+                                          </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                              </div>
+                          </div>
+                        </div>
+                        
+                        <!-- Restocked Products Table -->
+                        <div id="restockedProducts" class="tabcontent">
+                          <div class="container-fluid">
+                              <div class="col-lg-12" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
+                                    <form method="post" class="navbar-expand col-lg-12 ">
+                                    <header class="card-header font-weight-bold" style="border-bottom: none;">Restocked Products</header>
+                                    <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                          <thead>
+                                            <tr>
+                                            <th>Product Code</th>
+                                            <th>Category</th>
+                                            <th>Brand</th>
+                                            <th>Description</th>
+                                            <th>Size</th>
+                                            <th>Quantity</th>
+                                            <th>Reorder Point</th>                                            
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                          <!-- INSERT HERE -->
                                           </tbody>
                                         </table>
                                     </div>
