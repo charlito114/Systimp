@@ -71,48 +71,43 @@
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-bell fa-fw"></i>
-                            <!-- Counter - Alerts -->
-                            <span class="badge badge-danger badge-counter">3+</span>
+                            <!-- Counter - Alerts 
+                            <span class="badge badge-danger badge-counter">3+</span> -->
                           </a>
                           <!-- Dropdown - Alerts -->
                           <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                             <h6 class="dropdown-header">
                               Notifications Center
                             </h6>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                              <div class="mr-3">
-                                <div class="icon-circle bg-primary">
-                                  <i class="fas fa-file-alt text-white"></i>
-                                </div>
-                              </div>
-                              <div>
-                                <div class="small text-gray-500">December 12, 2019</div>
-                                <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                              </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                              <div class="mr-3">
-                                <div class="icon-circle bg-success">
-                                  <i class="fas fa-donate text-white"></i>
-                                </div>
-                              </div>
-                              <div>
-                                <div class="small text-gray-500">December 7, 2019</div>
-                                $290.29 has been deposited into your account!
-                              </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                              <div class="mr-3">
-                                <div class="icon-circle bg-warning">
-                                  <i class="fas fa-exclamation-triangle text-white"></i>
-                                </div>
-                              </div>
-                              <div>
-                                <div class="small text-gray-500">December 2, 2019</div>
-                                Spending Alert: We've noticed unusually high spending for your account.
-                              </div>
-                            </a>
-                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
+                            <table class="table">
+                                <!-- DEAR BACKEND PPL, IF I DONT WAKE UP EARLY AND U NEED TO START AHEAD -->
+                                <!-- STEP 1: CHECK ALY'S PM, I SENT 3 PHOTOS HAHAHA PA PILI WHICH U GUYS LIKE THE MOST -->
+                                <!-- STEP 2: WHEN UR DONE CHOOSING, FOLLOW THE INSTRUCTIONS BELOW -->
+                                
+                                <!-- STEP 3.5: IF YOU CHOSE 1ST OR SECOND, REMOVE THE COMMENT BELOW -->  
+                                <!--
+                                <tr style="background-color: #858796;">
+                                    <td><button class="btn text-white">Your order is ready!</button></td>
+                                </tr>
+                                <tr style="background-color: #ff6565;">
+                                    <td><button class="btn text-white">You have low stock!</button></td>
+                                </tr> -->
+                                
+                                <!-- STEP 3.5: IF YOU CHOSE 3RD, REMOVE THE COMMENT BELOW -->
+                                <!--
+                                <tr>
+                                    <td style="width: 2%;"><span class="icon-circle bg-warning "><i class="fas fa-exclamation-triangle text-white"></i></span></td>
+                                    <td><button class="btn">Your order is ready!</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 2%;"><span class="icon-circle bg-danger "><i class="fas fa-exclamation-triangle text-white"></i></span></td>
+                                    <td><button class="btn">You have low stock!</button></td>
+                                </tr>-->
+                                
+                                <!-- STEP 4: YAYYYY SORRY IM SABOG HAHAHAHAHA -->
+                                <!-- WITH LOTS OF LOVE, SHAR <3 -->
+                                
+                            </table>
                           </div>
                         </li>
 
