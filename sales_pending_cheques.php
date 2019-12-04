@@ -38,7 +38,7 @@
                     
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg topbar mb-4 static-top shadow">
-                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Manage Purchase Orders</div>
+                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Manage Cheque Payments</div>
                       <!-- Sidebar Toggle (Topbar) -->
                       <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -166,11 +166,11 @@
                                     $valueToSearch = $_POST['valueToSearch'];
                                     // search in all table columns
                                     // using concat mysql function
-                                    $query = "SELECT * FROM pendingpo WHERE CONCAT(date, PONum) LIKE '%".$valueToSearch."%'";
+                                    $query = "SELECT * FROM pendingcheck WHERE CONCAT(date, invoiceNum) LIKE '%".$valueToSearch."%'";
                                     $search_result = filterTable($query);
                                 }             
                                 else {
-                                    $query = "SELECT * FROM pendingpo";
+                                    $query = "SELECT * FROM pendingcheck";
                                     $search_result = filterTable($query);
                                 }
 
@@ -193,17 +193,16 @@
                         
                         <!-- Table -->
                         <div class="table-responsive">
-                            <form method = 'post' action = 'view_pending_order.php'>
+                            <form method = 'post' action = 'processcheque.php'>
                                 <div class="card-body mb-4" style="padding-top: 0;">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="padding-top: 0; border-top: .20rem solid #b4c540;">
                                   <thead>
                                     <tr>
                                       <th>Date</th>
-                                      <th>PO Number</th>
-                                      <th>Supplier Name</th>
-                                      <th>Total Items</th>
-                                      <th>Pending Items</th>
-                                      <th>Completion Rate</th>
+                                      <th>Invoice Number</th>
+                                      <th>Customer Name</th>
+                                      <th>Bank Number</th>
+                                      <th>Check Number</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -212,7 +211,7 @@
                                         // output data of each row
 
                                         while($row = $search_result->fetch_assoc()) {
-                                            echo "\t<tr><td >" . $row['Date'] . "</td><td><input type = 'submit' name = 'PONum' value = '" . $row['PONum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['SupplierName'] . "</td><td>" . $row['totalItems'] ."</td><td>" . $row['pendingItems'] ."</td><td>" . $row['completion'] ."</td></tr>\n";
+                                            echo "\t<tr><td >" . $row['date'] . "</td><td>" . $row['invoiceNum'] . " </td><td>"  .  $row['CustomerName'] . "</td><td>" . $row['bankNum'] ."</td><td>" . $row['checkNum'] ."</td><td><button type = 'submit' name = 'receive'  value = '" . $row['invoiceNum']. "' > Mark As Received </button></td></tr>\n";
 
                                             }
                                         } 

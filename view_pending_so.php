@@ -269,7 +269,7 @@
                                       </thead>
                                       <tbody>
                                         <?php
-                                          $viewDetails = "SELECT * FROM salesorderdetails WHERE SONum =" . $_SESSION['SONum']." AND Status = 'Processing' ";
+                                          $viewDetails = "SELECT * FROM salesorderdetails WHERE SONum =" . $_SESSION['SONum']." AND Status = 'Processing' OR Status = 'Ready' ";
                                             $result2 = $con->query($viewDetails);
                                             if ($result2->num_rows > 0) {
                                             // output data of each row

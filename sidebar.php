@@ -39,6 +39,13 @@ $lastName = $_SESSION["lastName"];
               <!-- Divider -->
               <hr class="sidebar-divider my-0">
 
+              <!-- Nav Item - Point of Sale Menu -->
+              <li class="nav-item">
+                <a class="nav-link" href="pos.php">
+                  <i class="fas fa-fw fa-credit-card"></i>
+                  <span>Point of Sale</span>
+                </a>
+              </li>
             <!-- Nav Item - Inventory Management Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInv" aria-expanded="true" aria-controls="collapseInv">
@@ -73,11 +80,15 @@ $lastName = $_SESSION["lastName"];
                 <?php if($userType == "Manager"){?>
                 <a class="collapse-item" href="sales_dashboard.php">Dashboard</a>
                 <a class="collapse-item" href="sales_sales_list.php">Sales List</a>
+                <a class="collapse-item" href="sales_pending_cheques.php">Manage Pending Cheques</a>
+
                 <a class="collapse-item" href="sales_sales_report.php">Sales Report</a>
 
                 <?php } else if ($userType == "Assistant Manager" or $userType == "Sales" or $userType == "Purchasing"){ ?>
                   <a class="collapse-item" href="sales_dashboard.php">Dashboard</a>
                   <a class="collapse-item" href="sales_sales_list.php">Sales List</a>
+                  <a class="collapse-item" href="sales_pending_cheques.php">Manage Pending Cheques</a>
+
                 <?php } ?>
               </div>
             </div>

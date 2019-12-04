@@ -195,6 +195,8 @@
                                       <th>Invoice Number</th>
                                       <th>Sales Before VAT</th>
                                       <th>Sales After VAT</th>
+                                      <th>Status</th>
+
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -202,7 +204,7 @@
                                       if ($search_result->num_rows > 0) {
                                         // output data of each row
                                         while($row = $search_result->fetch_assoc()) {
-                                            echo "\t<tr><td >" . $row['date'] . "</td><td><input type = 'submit' name = 'invoiceNum' value = '" . $row['invoiceNum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['salesbeforeVat'] . "</td><td>" . $row['salesafterVat'] . "</td></tr>\n";
+                                            echo "\t<tr><td >" . $row['date'] . "</td><td><input type = 'submit' name = 'invoiceNum' value = '" . $row['invoiceNum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['salesbeforeVat'] . "</td><td>" . $row['salesafterVat'] . "</td><td>" . $row['status'] . "</td></tr>\n";
                                             }
                                         } 
                                          #please add these error checking codes

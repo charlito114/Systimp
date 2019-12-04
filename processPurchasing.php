@@ -57,11 +57,9 @@ if (isset($_POST['submit']))
         echo '<script language="javascript">';
         echo 'alert("This order has been successfully added!")';
         echo '</script>';
-        include("purchase_purchase_history.php");
+        include("view_purchase_order.php");
         //header("location:purchase_purchase_history.php?message=successfully added new records");
-        session_unset();
-        session_destroy();
-        
+      
                     
     }
     else {

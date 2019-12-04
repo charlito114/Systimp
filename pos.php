@@ -676,25 +676,44 @@
                                               <form method = "post" action = "">
                                                 <div class="modal-body">
                                                     <div class="row d-flex justify-content-between">
-                                                        <label class="c-label">Bank: </label>
-                                                        <input class="c-input form-control col-sm-6" type = "text" name= "">
+                                                        <label class="c-label">Bank Number: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= "banknumber">
                                                     </div>
                                                     <div class="row d-flex justify-content-between">
                                                         <label class="c-label">Cheque Number: </label>
-                                                        <input class="c-input form-control col-sm-6" type = "number" name= "">
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= "chequenumber">
                                                     </div>
                                                     <div class="row d-flex justify-content-between">
                                                         <label class="c-label">Enter Amount: </label>
-                                                        <input class="c-input form-control col-sm-6" type = "number" name= "">
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= "payment">
                                                     </div>
                                                 </div>
                                                   <div class="modal-footer">
-                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
+                                                      <button type = "submit" class="btn btn-success" name = "submitcheck"> Submit </button>
                                                   </div>
-                                              </form>                                              
+                                              </form>    
+                                              <?php
+                                              if(isset($_POST['submitcheck'])){
+                                                if( $_POST['payment']>=  $_SESSION['total']){
+                                                $payment = $_POST['payment'];
+                                                $_SESSION['payment'] = $payment;
+                                                $change = $payment - $Total;
+                                                $_SESSION['change'] = $change;
+                                                $banknumber = $_POST['banknumber'];
+                                                $_SESSION['banknumber'] = $banknumber;
+                                                $chequenumber = $_POST['chequenumber'];
+                                                $_SESSION['chequenumber'] = $chequenumber;
+
+                                                
+                                                }
+                                                
+                                              }
+                                              ?>                                          
                                           </div>
                                       </div>
                                     </div>
+
+
                                     
                                     <div id="cashPayment" class="modal">                                         
                                         <div class="modal-dialog">

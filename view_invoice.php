@@ -284,6 +284,19 @@
                                                         ?>
                                                     </div>
                                                 </div>
+
+                                                <div class="row d-flex justify-content-between" style="margin-top: 10px;">
+                                                   <div>
+                                                       <label class="control-label">Status:</label>
+                                                    </div>
+
+                                                    <div class="input-group col-sm-6 m-bot15">
+                                                        <?php
+                                                            echo $row['status']; 
+                                                        ?>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                         
