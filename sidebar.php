@@ -39,13 +39,13 @@ $lastName = $_SESSION["lastName"];
               <!-- Divider -->
               <hr class="sidebar-divider my-0">
 
-              <!-- Nav Item - Point of Sale Menu -->
+              <!-- Nav Item - Point of Sale Menu 
               <li class="nav-item">
                 <a class="nav-link" href="pos.php">
                   <i class="fas fa-fw fa-credit-card"></i>
                   <span>Point of Sale</span>
                 </a>
-              </li>
+              </li>-->
             <!-- Nav Item - Inventory Management Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInv" aria-expanded="true" aria-controls="collapseInv">

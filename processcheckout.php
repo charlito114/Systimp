@@ -38,8 +38,6 @@ if (isset($_POST['submit']))
 
         $refreshQuery = " DELETE FROM temporaryinvoice";
         if(mysqli_query($con,$refreshQuery)){
-					session_unset(); 
-                    session_destroy();
                     $alert = "Checkout successful!";
                     echo '<script type="text/javascript">';
                     echo 'alert("'.$alert.'")';

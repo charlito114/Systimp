@@ -36,8 +36,6 @@ if (isset($_POST['submit']))
         $refreshQuery = " DELETE FROM temporaryorders";
         if(mysqli_query($con,$refreshQuery)){
             header("location:order_sales_orders.php?message=Successfully added new records");
-					session_unset(); 
-                    session_destroy();
                     
                 }
         else{
