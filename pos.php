@@ -312,13 +312,11 @@
                                               <tbody>
                                                   <!-- INSERT PHP -->
                                                   <?php   
-
                                           if(isset($_POST['submitcheckout'])){
                                                       $insertQuery = "INSERT INTO temporaryinvoice (SONum, ProdCode, Category, Brand, ProdDesc, Size, Available, Quantity, QuantityIssued, ToBeIssued, Price, TotalPrice) 
                                                       SELECT s.SONum, s.ProdCode, s.Category, s.Brand, s.ProdDesc, s.Size, s.Available, s.ProdQuan, s.Issued, s.ProdQuan - s.Issued, s.Price, s.TotalPrice
                                                       FROM salesorderdetails s
                                                       WHERE s.SONum = $SONum AND (s.ProdQuan - s.Issued)!= 0";
-
                                                       if(mysqli_query($con,$insertQuery)){
                                                         header("message=Successfully added new records");
                                                         $updateInvoice = "UPDATE temporaryinvoice 
@@ -333,7 +331,6 @@
                                                             }
                                                             
                                                       
-
                                                     }
                                                   }
                                                            
@@ -435,7 +432,7 @@
                                     </div>
                                     
                                     <!-- 2nd Set of Modals -->
-                                    <div id="addModal" class="modal">                                         
+                                <!--    <div id="addModal" class="modal">                                         
                                         <div class="modal-dialog modal-lg">
                                           <div class="modal-content">
                                               <div class="modal-header">
@@ -444,14 +441,14 @@
                                                 </div>
                                               <form method = "post" action = "">
                                                 <div class="modal-body">
-                                                   <!-- <div class="row d-flex justify-content-between">
+                                                    <div class="row d-flex justify-content-between">
                                                         <label class="c-label">Product Code: </label>
                                                         <input class="c-input form-control col-sm-6" type = "number" name= prodcode>
                                                     </div>
                                                     <div class="row d-flex justify-content-between">
                                                         <label class="c-label">Quantity: </label>
                                                         <input class="c-input form-control col-sm-6" type = "number" name= newQty>
-                                                    </div> -->
+                                                    </div> 
                                                     <header class="card-header font-weight-bold">Sales Order Details</header>
                                                     <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -533,110 +530,7 @@
                                               </form>
                                           </div>
                                       </div>
-                                    </div>
-                                    
-                                    <!-- ALY START HERE: ALL U NEED TO CHANGE IS INPUT NAME AND FORM ACTIONS -->
-                                    <div id="discountSale" class="modal">
-                                      <div class="modal-dialog">
-                                          <div class="modal-content">
-                                              <div class="modal-header">
-                                                  <h4 class="modal-title">Discount Sale</h4>
-                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                </div>
-                                              <form method = "post" action = "">
-                                                <div class="modal-body">
-                                                    <div class="row d-flex justify-content-between">
-                                                        <label class="c-label">Discount Amount: </label>
-                                                        <input class="c-input form-control col-sm-6" type = "number" name= "discount">
-                                                    </div>
-                                                    <div class="row d-flex justify-content-between">
-                                                        <label class="c-label">Password: </label>
-                                                        <input class="c-input form-control col-sm-6" type = "password" name= password>
-                                                    </div>
-                                                </div>
-                                                  <div class="modal-footer">
-                                                      <button type = "submit" class="btn btn-success" name = "discsubmit"> Submit </button>
-                                                  </div>
-                                              </form>
-                                              <?php
-                                              if(isset($_POST['discsubmit'])){
-                                                $inputpw =$_POST['password'];
-                                                $pwQuery = ("SELECT Password FROM users WHERE Email = 'janelle.sy@gmail.com'");
-                                                $result =  $con->query($pwQuery);
-                                                    if ($result->num_rows > 0) {
-                                                        // output data of each row
-                                                        while($row = $result->fetch_assoc()) {
-                                                            $password= $row['Password'];
-                                                            }
-                                                        } else {
-                                                            echo "0 results";
-                                                            }
-                                                        
-
-                                               if(($_SESSION['discount'] == 0) && ($inputpw == $password))
-                                               {
-                                                $discount = $_POST['discount'];   
-                                                $_SESSION['discount'] = $discount;
-                                               }
-                                                else if(($_SESSION['discount'] !=0) || ($inputpw != $password)){
-                                                 header("location:pos.php?message= Cannot Update Discount.");
-                                                 
-
-
-                                                }
-                                 
-                                              }
-                                                $discount1= $_SESSION['discount'];
-                                                $_SESSION['discount1'] = $discount1;
-
-                                              ?>
-                                          </div>
-                                      </div>
-                                    </div>
-                                    
-                                    <?php 
-                                        
-                                        $numQuery = "SELECT COUNT(ProdCode) AS Count FROM temporaryinvoice";
-                                        $numresult =  $con->query($numQuery);
-                                            if ($numresult->num_rows > 0) {
-                                                // output data of each row
-                                                while($row = $numresult->fetch_assoc()) {
-                                                    $numItems= $row['Count'];
-                                                    }
-                                                } //else {
-                                                  //  echo "0 results";
-                                                   // }
-                                        $SubtotalQuery = "SELECT SUM(Price * ToBeIssued) AS Subtotal FROM temporaryinvoice";
-                                        $Subtotalresult =  $con->query($SubtotalQuery);
-                                            if ($Subtotalresult->num_rows > 0) {
-                                                // output data of each row
-                                                while($row = $Subtotalresult->fetch_assoc()) {
-                                                    $Subtotal= $row['Subtotal'];
-                                                    $_SESSION['Subtotal'] = $Subtotal;
-
-                                                    }
-                                                } //else {
-                                                  //  echo "0 results";
-                                                  //  }
-
-                                            $Subtotal1 =  $_SESSION['Subtotal'];
-                                            $_SESSION['Subtotal1'] = $Subtotal1 - $discount1;
-                                            $VAT = $_SESSION['Subtotal1']  * 0.12; 
-                                            $Total = $_SESSION['Subtotal1']  + $VAT; 
-                                            $_SESSION['total'] = $Total; 
-                                            $_SESSION['VAT'] = $VAT;
-
-                                            
-                                    ?>
-
-                                    <!-- POS Buttons -->
-                                    <div class="row">
-                                    <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="">Cheque <br> Payment</button>
-
-                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#cashPayment">Cash <br> Payment</button>
-                                    </div>
-                                    
-                                    <!-- 3rd Set of Modals -->
+                                    </div> -->
                                     <div id="changeQuantity" class="modal">
                                       <div class="modal-dialog">
                                           <div class="modal-content">
@@ -676,6 +570,132 @@
                                           </div>
                                       </div>
                                     </div>
+                                    
+                                    <!-- ALY START HERE: ALL U NEED TO CHANGE IS INPUT NAME AND FORM ACTIONS -->
+                                    <div id="discountSale" class="modal">
+                                      <div class="modal-dialog">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title">Discount Sale</h4>
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                              <form method = "post" action = "">
+                                                <div class="modal-body">
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Discount Amount: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= "discount">
+                                                    </div>
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Password: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "password" name= password>
+                                                    </div>
+                                                </div>
+                                                  <div class="modal-footer">
+                                                      <button type = "submit" class="btn btn-success" name = "discsubmit"> Submit </button>
+                                                  </div>
+                                              </form>
+                                              <?php
+                                              if(isset($_POST['discsubmit'])){
+                                                $inputpw =$_POST['password'];
+                                                $pwQuery = ("SELECT Password FROM users WHERE Email = 'janelle.sy@gmail.com'");
+                                                $result =  $con->query($pwQuery);
+                                                    if ($result->num_rows > 0) {
+                                                        // output data of each row
+                                                        while($row = $result->fetch_assoc()) {
+                                                            $password= $row['Password'];
+                                                            }
+                                                        } else {
+                                                            echo "0 results";
+                                                            }
+                                                        
+                                               if(($_SESSION['discount'] == 0) && ($inputpw == $password))
+                                               {
+                                                $discount = $_POST['discount'];   
+                                                $_SESSION['discount'] = $discount;
+                                               }
+                                                else if(($_SESSION['discount'] !=0) || ($inputpw != $password)){
+                                                 header("location:pos.php?message= Cannot Update Discount.");
+                                                 
+                                                }
+                                 
+                                              }
+                                                $discount1= $_SESSION['discount'];
+                                                $_SESSION['discount1'] = $discount1;
+                                              ?>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    
+                                    <?php 
+                                        
+                                        $numQuery = "SELECT COUNT(ProdCode) AS Count FROM temporaryinvoice";
+                                        $numresult =  $con->query($numQuery);
+                                            if ($numresult->num_rows > 0) {
+                                                // output data of each row
+                                                while($row = $numresult->fetch_assoc()) {
+                                                    $numItems= $row['Count'];
+                                                    }
+                                                } //else {
+                                                  //  echo "0 results";
+                                                   // }
+                                        $SubtotalQuery = "SELECT SUM(Price * ToBeIssued) AS Subtotal FROM temporaryinvoice";
+                                        $Subtotalresult =  $con->query($SubtotalQuery);
+                                            if ($Subtotalresult->num_rows > 0) {
+                                                // output data of each row
+                                                while($row = $Subtotalresult->fetch_assoc()) {
+                                                    $Subtotal= $row['Subtotal'];
+                                                    $_SESSION['Subtotal'] = $Subtotal;
+                                                    }
+                                                } //else {
+                                                  //  echo "0 results";
+                                                  //  }
+                                            $Subtotal1 =  $_SESSION['Subtotal'];
+                                            $_SESSION['Subtotal1'] = $Subtotal1 - $discount1;
+                                            $VAT = $_SESSION['Subtotal1']  * 0.12; 
+                                            $Total = $_SESSION['Subtotal1']  + $VAT; 
+                                            $_SESSION['total'] = $Total; 
+                                            $_SESSION['VAT'] = $VAT;
+                                            
+                                    ?>
+
+                                    <!-- POS Buttons -->
+                                    <div class="row">
+                                    <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#chequePayment">Cheque <br> Payment</button>
+
+                                        <button class="pos-btn pos-btn-medium pos-btn-blue" data-toggle="modal" data-target="#cashPayment">Cash <br> Payment</button>
+                                    </div>
+                                    
+                                    <!-- 3rd Set of Modals -->
+                                    <div id="chequePayment" class="modal">                                         
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title">Cheque Payment</h4>
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                              <form method = "post" action = "">
+                                                <div class="modal-body">
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Bank: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "text" name= "">
+                                                    </div>
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Cheque Number: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= "">
+                                                    </div>
+                                                    <div class="row d-flex justify-content-between">
+                                                        <label class="c-label">Enter Amount: </label>
+                                                        <input class="c-input form-control col-sm-6" type = "number" name= "">
+                                                    </div>
+                                                </div>
+                                                  <div class="modal-footer">
+                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
+                                                  </div>
+                                              </form>                                              
+                                          </div>
+                                      </div>
+                                    </div>
+                                    
                                     <div id="cashPayment" class="modal">                                         
                                         <div class="modal-dialog">
                                           <div class="modal-content">
