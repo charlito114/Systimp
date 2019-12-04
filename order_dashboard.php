@@ -161,7 +161,9 @@
                                               <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Ready Orders</div>
                                               <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                   <?php
-                                                $OSDcount = "SELECT COUNT(Status) c FROM ordermanagement WHERE status='completed' ";
+                                                $OSDcount = "SELECT COUNT(*) c FROM (SELECT SONum, SUM(CASE WHEN status = 'ready' THEN 1 ELSE 0 END) AS ReadyItems,COUNT(prodcode) AS TotalItems
+FROM salesorderdetails
+GROUP BY SONum) AS readyvstotal JOIN ordermanagement ON ordermanagement.SONum = readyvstotal.SONum WHERE ReadyItems = TotalItems;";
                                                 $count_result = mysqli_query($con, $OSDcount);
                                                 $row = $count_result->fetch_assoc();
                                                 echo $row['c'];
@@ -224,7 +226,9 @@
                                             </thead>
                                             <tbody>
                                               <?php
-                                                $viewTop = "SELECT * FROM ordermanagement WHERE status ='Pending' ORDER BY date ASC LIMIT 5";
+                                                $viewTop = "SELECT * FROM (SELECT SONum, SUM(CASE WHEN status = 'ready' THEN 1 ELSE 0 END) AS ReadyItems,COUNT(prodcode) AS TotalItems
+FROM salesorderdetails
+GROUP BY SONum) AS readyvstotal JOIN ordermanagement ON ordermanagement.SONum = readyvstotal.SONum WHERE ReadyItems = TotalItems;";
                                               $search_result = mysqli_query($con, $viewTop);
                                               if ($search_result->num_rows > 0) {
                                                   // output data of each row
