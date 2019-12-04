@@ -225,6 +225,19 @@
                                   
 
                                   <!-- Restocked Products -->
+                                  <?php
+                                  $RPQuery = "SELECT COUNT(PONum) AS RPCount FROM purchaseaudit WHERE Date(purchaseaudit.date) = date(now())";
+                                  $RPResult =  $con->query($RPQuery);
+                                  if ($RPResult->num_rows > 0) {
+                                      // output data of each row
+                                      while($row = $RPResult->fetch_assoc()) {
+                                          $Restocked= $row['RPCount'];
+                                          $_SESSION['RPCount'] = $Restocked;
+                                          }
+                                      } else {
+                                            $Restocked = 0;
+                                          }                       
+                                  ?>
                                   <div class="col-xl-3 col-md-6 mb-4">
                                     <div class="card border-left-success shadow h-100 py-2">
                                         <a class="tablinks" onclick="openTab(event, 'restockedProducts')">
@@ -234,7 +247,7 @@
                                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Restocked Products</div>
                                                     <div class="row no-gutters align-items-center">
                                                       <div class="col-auto">
-                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php echo $Restocked ?></div>
                                                       </div>
                                                       <div class="col">
                                                         <div class="progress progress-sm mr-2">
@@ -352,12 +365,26 @@
                                             <th>Brand</th>
                                             <th>Description</th>
                                             <th>Size</th>
+
                                             <th>Quantity</th>
-                                            <th>Reorder Point</th>                                            
                                             </tr>
                                           </thead>
                                           <tbody>
-                                          <!-- INSERT HERE -->
+                                          <?php
+                                            $viewRestocked = " SELECT pa.ProductCode, Sum(pa.Received)AS Received, p.category, p.brand, p.proddesc, p.size  FROM purchaseaudit pa JOIN products p ON pa.ProductCode = p.prodcode
+                                            WHERE Date(pa.date) = date(now())
+                                            GROUP BY pa.ProductCode";
+                                            $search_result = mysqli_query($con, $viewRestocked);
+                                            if ($search_result->num_rows > 0) {
+                                                // output data of each row
+                                                while($row = $search_result->fetch_assoc()) {
+                                                    echo "\t<tr><td >" . $row['ProductCode'] . "</td><td>" . $row['category'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['Received'] . "</td></tr><br>";
+                                                    }
+                                                }
+                                            else {
+                                               echo "<tr><td colspan='7'><center> 0 results </center></td></tr>";
+                                               }
+                                            ?>
                                           </tbody>
                                         </table>
                                     </div>
