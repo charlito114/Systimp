@@ -144,7 +144,7 @@
                                         $PONum = $_POST['PONum'];
                                         $_SESSION['PONum'] = $PONum;
                                     }
-                                        
+                                   
                                    $viewOrder = "SELECT * FROM p_purchasingmanagement WHERE PONum = " . $_SESSION['PONum'];
                                     $result = $con->query($viewOrder);
                                     if ($result->num_rows > 0) {

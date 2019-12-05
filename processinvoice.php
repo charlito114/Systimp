@@ -79,7 +79,7 @@ if (isset($_POST['submit'])){
 
      
             $query = "INSERT INTO salesmanagement (Date, salesbeforeVat, discount, vat, salesafterVat, SONum, status)
-            VALUES('".$_SESSION['date' ]."', '".$Subtotal."', '".$discount."', '".$VAT."','".$Total."' , '".$_SESSION['SONum' ]."', 'Ongoing' )";
+            VALUES('".$_SESSION['date' ]."', '".$Subtotal."', '".$discount."', '".$VAT."','".$Total."' , '".$_SESSION['SONum' ]."', 'Pending' )";
             if(mysqli_query($con,$query)){
              //  $alert = "Successfully added new records!";
              $refreshQuery = " DELETE FROM temporaryinvoice";

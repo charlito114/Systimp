@@ -79,6 +79,7 @@
                             <h6 class="dropdown-header">
                               Notifications Center
                             </h6>
+                            <form method = "post" >
                             <table class="table">
                                 <!-- DEAR BACKEND PPL, IF I DONT WAKE UP EARLY AND U NEED TO START AHEAD -->
                                 <!-- STEP 1: CHECK ALY'S PM, I SENT 3 PHOTOS HAHAHA PA PILI WHICH U GUYS LIKE THE MOST -->
@@ -93,14 +94,28 @@
                                 <tr style="background-color: #ff6565;">
                                     <td><button class="btn text-white">You have low stock!</button></td>
                                 </tr> -->
-                                
-                                <!-- STEP 3.5: IF YOU CHOSE 3RD, REMOVE THE COMMENT BELOW -->
-                                <!--
-                                <tr>
-                                    <td style="width: 2%;"><span class="icon-circle bg-warning "><i class="fas fa-exclamation-triangle text-white"></i></span></td>
-                                    <td><button class="btn">Your order is ready!</button></td>
-                                </tr>
-                                <tr>
+                                <?php
+                                $getNotifs ="SELECT * FROM notifications";
+                                $search_result = mysqli_query($con, $getNotifs);
+                                    if ($search_result->num_rows > 0) {
+                                        while($row = $search_result->fetch_assoc()) {
+
+                                            $status = $row['status'];
+                                            if($status == 'Unread'){
+                                              echo "\t<tr><td style='width: 2%;'><span class='icon-circle bg-warning '><i class='fas fa-exclamation-triangle text-white'></i></span></td>
+                                                  <td><button class='btn' name = 'notification' value = '" . $row['notifID'] . "'>" . $row['date']  . "<br>". $row['description'] . "  </button></td></tr>";
+
+                                            }
+                                            else if($status == 'Read') {                                              
+                                              echo "\t<tr><td style='width: 2%;'><span class='icon-circle bg-warning '><i class='fas fa-exclamation-triangle text-white'></i></span></td>
+                                              <td><button class='btn' name = 'notification' value = '" . $row['notifID'] . "'>" . $row['date']  . "<br>". $row['description'] . "  </button></td></tr>";
+                                            }
+                                                                        
+                                        }
+                                      }
+                                  
+                                ?>
+                                <!--<tr>
                                     <td style="width: 2%;"><span class="icon-circle bg-danger "><i class="fas fa-exclamation-triangle text-white"></i></span></td>
                                     <td><button class="btn">You have low stock!</button></td>
                                 </tr>-->
@@ -109,6 +124,47 @@
                                 <!-- WITH LOTS OF LOVE, SHAR <3 -->
                                 
                             </table>
+                            </form>
+
+                            <?php
+
+                            if(isset($_POST['notification'])) {
+                                $notifID = $_POST['notification']; 
+                                $specificNotif ="SELECT * FROM notifications WHERE notifID = $notifID";
+                                $search_result = mysqli_query($con, $specificNotif);
+                                if ($search_result->num_rows > 0) {
+                                    while($row = $search_result->fetch_assoc()) {
+                                        $redirect = $row['type'];
+                                        $code = $row['code'];
+                                    }
+                                }
+
+                                $updateStatus = "UPDATE notifications 
+                                SET status = 'Read' 
+                                WHERE notifID = $notifID";
+
+                                if(mysqli_query($con,$updateStatus)){
+                                    $alert = 'Yay';
+                                }
+
+                                else{
+                                    $alert = mysqli_error($con);
+                                    echo $alert;
+                                            }
+
+
+                                if($redirect == 'Inventory' ){
+                                    header("location:purchase_purchase_cart.php");       
+
+                                }
+                                else if($redirect == 'Purchase' ){
+                                    $_SESSION['PONum'] = $code;
+                                    header("location:view_pending_order.php");       
+
+                                }
+                                
+                            }
+                            ?>
                           </div>
                         </li>
 
