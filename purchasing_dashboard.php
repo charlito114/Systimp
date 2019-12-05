@@ -189,12 +189,12 @@
                                               <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Ongoing Supplier Deliveries</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                  <?php
-                                                      $OSDcount = "SELECT COUNT(Status) c FROM p_purchasingmanagement WHERE status='ongoing'";
-                                                      $count_result = mysqli_query($con, $OSDcount);
-                                                      $row = $count_result->fetch_assoc();
-                                                      echo $row['c'];
-                                                      ?>
+                                                   <?php
+                                              $OSDcount = "SELECT COUNT(Status) c FROM p_purchasingmanagement WHERE status='Pending'";
+                                              $count_result = mysqli_query($con, $OSDcount);
+                                              $row = $count_result->fetch_assoc();
+                                              echo $row['c'];
+                                              ?>
                                                 </div>
                                               </div>
                                               <div class="col-auto">
@@ -282,7 +282,7 @@
                                           <tbody>
                                             <!-- when po num is clicked and viewed and clicks back to go back to dashboard initially, it goes back to history instead -->
                                         <?php
-                                          $viewTop = "SELECT * FROM p_purchasingmanagement WHERE status ='ongoing' ORDER BY PONum ASC LIMIT 5";
+                                          $viewTop = "SELECT * FROM p_purchasingmanagement WHERE status ='pending' ORDER BY PONum ASC LIMIT 5";
                                         $search_result = mysqli_query($con, $viewTop);
                                         if ($search_result->num_rows > 0) {
                                             // output data of each row
