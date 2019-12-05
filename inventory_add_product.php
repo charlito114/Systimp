@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once("connection.php");
 ?>
 
 <html>
@@ -255,8 +256,9 @@ body{
                     </div>
                     
                     <?php
+                    
                         if (isset($_POST['add']) && !empty($_POST['description']) && !empty($_POST['size']) &&  !empty($_POST['quantity']) && !empty($_POST['repoint']) &&  !empty($_POST['price'])){
-    
+                         
                         $category = $_POST['category'];
                         $brand = $_POST['brand'];
                         $desc = $_POST['description'];
@@ -271,7 +273,23 @@ body{
                         $_SESSION['quantity'] = $quantity;
                         $_SESSION['repoint'] = $repoint;
                         $_SESSION['price'] = $price; 
+
+                        $inventoryQuery = "INSERT INTO temporaryinventory (category, brand, proddesc, size, prodquan, repoint, price)
+                        VALUES('". $_SESSION['category']."','". $_SESSION['brand']."', '". $_SESSION['proddesc']."', '". $_SESSION['size']."','". $_SESSION['quantity']."','". $_SESSION['repoint']."','". $_SESSION['price']."')";
+                        if(mysqli_query($con,$inventoryQuery)){
+                            header("message=Successfully added new records");  
+                                }
+                        else{
+                            header("message=Error in adding the record");
+                                } 
+                              }
+                              else if(isset($_POST['add']) && ( empty($_POST['description']) || empty($_POST['size']) ||  empty($_POST['quantity']) || empty($_POST['repoint']) ||  empty($_POST['price']))){
+                                echo '<script language="javascript">';
+                                        echo 'alert("Cannot Leave Fields Blank")';
+                                        echo '</script>';
+                                    }
                      ?>
+
                     
                     <div class="col-lg-12">
                                 <form method="post" class="navbar-expand col-lg-12">
@@ -287,12 +305,22 @@ body{
                                           <th>Quantity</th>
                                           <th>Reorder Point</th>
                                           <th>Price</th>
+                                          <th></th>
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        <?php
-                                          echo "<tr> <td>$category</td> <td>$brand</td> <td>$desc</td> <td>$size</td> <td>$quantity</td>  <td>$repoint</td> <td> $price</td></tr>";
-                                          ?>
+                                      <?php
+                                        $viewDetailsQuery = "SELECT * FROM temporaryinventory";
+                                        $result = $con->query($viewDetailsQuery);
+                                        if ($result->num_rows > 0) {
+                                        // output data of each row
+                                        // gets variables from table
+                                            while($row = $result->fetch_assoc()) {
+                                                echo "\t<tr><td >"  . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" .  $row['prodquan'] .  "</td><td>" .  $row['repoint'] . "</td><td>" . $row['price'] .  "</td> <td><button type = 'submit' name = 'remove'  value = '" . $row['id'] . "' class = 'btn'> <i class='fas fa-fw fa-minus-square' style = 'color:#e74a3b;'/> </button></td>
+                                                </tr>\n";
+                                            }
+                                        } 
+                                      ?>
                                       </tbody>
                                     </table>
                                 </div>
@@ -319,18 +347,58 @@ body{
                     echo 'function myFunction(){';
                     echo 'alert("Successfully added a product!")}';
                     echo '</script>';
-                }     
+                   
 
                 #please add these error checking codes
-                else if(isset($_POST['add']) && ( empty($_POST['description']) || empty($_POST['size']) ||  empty($_POST['quantity']) || empty($_POST['repoint']) ||  empty($_POST['price']))){
-                    echo '<script language="javascript">';
-                            echo 'alert("Cannot Leave Fields Blank")';
-                            echo '</script>';
-                        }
+               
                     ?>
                     
                 </div>
             </form>
+
+            <?php
+                                 
+
+                                 if(isset($_POST['submit'])){
+                                     $refreshQuery = " DELETE FROM temporarypurchasing";
+                                     if(mysqli_query($con,$refreshQuery)){
+                                         header("location:purchase_purchase_history.php");
+                                         session_unset(); 
+                                         session_destroy();
+ 
+                                             }
+                                     else{
+                                         header("location:inventory.php");
+                                             }
+                                 }
+                         
+                         //EDITED: remove process
+                                 if(isset($_POST['remove'])){
+                                    $deleteProd = $_POST['remove'];
+                                    $deleteQuery = " DELETE FROM temporaryinventory WHERE id = $deleteProd ";
+                                    if(mysqli_query($con,$deleteQuery)){
+                                        header("location:inventory_add_product.php");
+                                            }
+                                    else{
+                                        header("location:inventory_add_product.php");
+                                            }
+                                        }
+ 
+ 
+                                 if(isset($_POST['back'])){
+                                     $refreshQuery = " DELETE FROM temporaryinventory";
+                                     if(mysqli_query($con,$refreshQuery)){
+                                         header("location:inventory.php");
+                                         session_unset(); 
+                                         session_destroy();
+ 
+                                             }
+                                     else{
+                                         header("location:inventory.php");
+                                             }
+                                 }
+                             ?>
+                         
         </div>
     </div>
 </div>
