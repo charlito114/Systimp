@@ -361,7 +361,7 @@
                                           <th>Quantity Issued</th>
                                           <th>Quantity Returned</th>
                                           <th>Price</th>
-                                          <th></th>
+                                          <th>Quantity to Return</th>
                                           <th>Action</th>
 
                                         </tr>
