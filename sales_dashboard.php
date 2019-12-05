@@ -30,12 +30,9 @@ ORDER BY quansold desc;";
                
            function drawChart()  
            {
-
             var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
 var d = new Date();
 var month = "For the month of " + monthNames[d.getMonth()-1];
-
                 var data = google.visualization.arrayToDataTable([  
                           ['Product Code', 'Quantity Sold',{label: 'T1', role: 'tooltip'}],  
                           <?php  
@@ -307,15 +304,42 @@ var month = "For the month of " + monthNames[d.getMonth()-1];
                                     </div>
                              
                         <!-- Top Sales Table -->
-                        <div id="totalSales" class="tabcontent" style="display: block;">
-                            <!-- INSERT HERE Table -->
+                        <div id="totalSales" class="tabcontent">
+                            <div class="col-lg-12">
+                            <form method="post" class="navbar-expand col-lg-12">
+                            <header class="card-header font-weight-bold" style="border-bottom: none;">Total Daily Sales</header>
+                            <div class=" align-items-center justify-content-between mb-4" style="padding-top: 0; display: flex;">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                  <thead>
+                                    <tr>
+                                     <th>Product Code</th>
+                                    <th>Category</th>
+                                    <th>Brand</th>
+                                    <th>Description</th>
+                                    <th>Size</th>
+                                    <th>Quantity</th>
+                                    <th>Reorder Point</th>
+                                    <th>Quantity Sold</th>
+                                    <th>Price</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                      <!-- INSERT HERE php -->
+                                   <?php
+                                    
+                                      ?>
+                                  </tbody>
+                                </table>
+                            </div>
+                            </form>
+                            </div>
                         </div>
                         
                         <!-- Top Products Table -->
                         <div id="topProducts" class="tabcontent" style="display: block;">
                             <div class="col-lg-12">
                             <form method="post" class="navbar-expand col-lg-12">
-                            <header class="card-header font-weight-bold" style="border-bottom: none;">TOP SELLING PRODUCTS</header>
+                            <header class="card-header font-weight-bold" style="border-bottom: none;">Top Selling Porducts</header>
                             <div class=" align-items-center justify-content-between mb-4" style="padding-top: 0; display: flex;">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                   <thead>
@@ -351,10 +375,9 @@ LIMIT 5;";
                                             echo "\t<tr><td >" . $row['ProductCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDescription'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['Reorder'] . "</td><td>" . $row['Quansold'] . "</td><td>" . $row['Price'] ."</td></tr><br>";
                                             }
                                         }
-                                    else{
-                                        echo "0 results";
-                                    }
-
+                                    else {
+                                       echo "<tr><td colspan='10'><center> 0 results </center></td></tr>";
+                                       }
                                       ?>
                                   </tbody>
                                 </table>
