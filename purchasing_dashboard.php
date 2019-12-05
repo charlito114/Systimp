@@ -289,7 +289,16 @@
                                             </tr>
                                           </thead>
                                           <tbody>
-                                           
+                                           <?php
+                                          $viewTop = "SELECT * FROM p_purchasingmanagement WHERE status ='cancelled' ORDER BY PONum";
+                                        $search_result = mysqli_query($con, $viewTop);
+                                        if ($search_result->num_rows > 0) {
+                                            // output data of each row
+                                            while($row = $search_result->fetch_assoc()) {
+                                                echo "\t<tr><td >" . $row['Date'] . "</td><td><input type = 'submit' name = 'PONum' value = '" . $row['PONum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['SupplierName'] . "</td></tr><br>";
+                                                }
+                                            }
+                                          ?>
                                           </tbody>
                                         </table>
                                     </div>
@@ -314,7 +323,16 @@
                                             </tr>
                                           </thead>
                                           <tbody>
-                                            
+                                            <?php
+                                          $viewTop = "SELECT * FROM p_purchasingmanagement WHERE status='ongoing' AND DATEDIFF(date,NOW()) >7 ORDER BY PONum";
+                                        $search_result = mysqli_query($con, $viewTop);
+                                        if ($search_result->num_rows > 0) {
+                                            // output data of each row
+                                            while($row = $search_result->fetch_assoc()) {
+                                                echo "\t<tr><td >" . $row['Date'] . "</td><td><input type = 'submit' name = 'PONum' value = '" . $row['PONum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['SupplierName'] . "</td></tr><br>";
+                                                }
+                                            }
+                                          ?>
                                           </tbody>
                                         </table>
                                     </div>
