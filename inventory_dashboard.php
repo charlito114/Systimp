@@ -24,6 +24,7 @@
             .tabcontent {
               display: none;
             }
+            
         </style>
     </head>
     <body>
@@ -66,11 +67,11 @@
                             </form>
                           </div>
                         </li>
-
+<!-- COPY START -->
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-bell fa-fw"></i>
+                            <i class="fas fa-bell fa-fw text-white"></i>
                             <!-- Counter - Alerts 
                             <span class="badge badge-danger badge-counter">3+</span> -->
                           </a>
@@ -79,35 +80,20 @@
                             <h6 class="dropdown-header">
                               Notifications Center
                             </h6>
-                            <form method = "post" >
-                            <table class="table">
-                                <!-- DEAR BACKEND PPL, IF I DONT WAKE UP EARLY AND U NEED TO START AHEAD -->
-                                <!-- STEP 1: CHECK ALY'S PM, I SENT 3 PHOTOS HAHAHA PA PILI WHICH U GUYS LIKE THE MOST -->
-                                <!-- STEP 2: WHEN UR DONE CHOOSING, FOLLOW THE INSTRUCTIONS BELOW -->
-                                
-                                <!-- STEP 3.5: IF YOU CHOSE 1ST OR SECOND, REMOVE THE COMMENT BELOW -->  
-                                <!--
-                                <tr style="background-color: #858796;">
-                                    <td><button class="btn text-white">Your order is ready!</button></td>
-                                </tr>
-                            STEP 3.5.5: FOR SECOND, REMOVE THE BACKGROUND COLOR BELOW 
-                                <tr style="background-color: #ff6565;">
-                                    <td><button class="btn text-white">You have low stock!</button></td>
-                                </tr> -->
+                            <form method = "post" class="table-responsive-lg">
+                            <table class="table table-wrapper">
                                 <?php
                                 $getNotifs ="SELECT * FROM notifications";
                                 $search_result = mysqli_query($con, $getNotifs);
                                     if ($search_result->num_rows > 0) {
                                         while($row = $search_result->fetch_assoc()) {
-
                                             $status = $row['status'];
                                             if($status == 'Unread'){
-                                              echo "\t<tr><td style='width: 2%;'><span class='icon-circle bg-warning '><i class='fas fa-exclamation-triangle text-white'></i></span></td>
+                                              echo "\t<tr class='table-active'><td style='width: 1%;'><span class='icon-circle bg-warning '><i class='fas fa-exclamation-triangle text-white'></i></span></td>
                                                   <td><button class='btn' name = 'notification' value = '" . $row['notifID'] . "'>" . $row['date']  . "<br>". $row['description'] . "  </button></td></tr>";
-
                                             }
                                             else if($status == 'Read') {                                              
-                                              echo "\t<tr><td style='width: 2%;'><span class='icon-circle bg-warning '><i class='fas fa-exclamation-triangle text-white'></i></span></td>
+                                              echo "\t<tr><td style='width: 1%;'><span class='icon-circle bg-warning '><i class='fas fa-exclamation-triangle text-white'></i></span></td>
                                               <td><button class='btn' name = 'notification' value = '" . $row['notifID'] . "'>" . $row['date']  . "<br>". $row['description'] . "  </button></td></tr>";
                                             }
                                                                         
@@ -120,14 +106,10 @@
                                     <td><button class="btn">You have low stock!</button></td>
                                 </tr>-->
                                 
-                                <!-- STEP 4: YAYYYY SORRY IM SABOG HAHAHAHAHA -->
-                                <!-- WITH LOTS OF LOVE, SHAR <3 -->
-                                
                             </table>
                             </form>
 
                             <?php
-
                             if(isset($_POST['notification'])) {
                                 $notifID = $_POST['notification']; 
                                 $specificNotif ="SELECT * FROM notifications WHERE notifID = $notifID";
@@ -138,29 +120,22 @@
                                         $code = $row['code'];
                                     }
                                 }
-
                                 $updateStatus = "UPDATE notifications 
                                 SET status = 'Read' 
                                 WHERE notifID = $notifID";
-
                                 if(mysqli_query($con,$updateStatus)){
                                     $alert = 'Yay';
                                 }
-
                                 else{
                                     $alert = mysqli_error($con);
                                     echo $alert;
                                             }
-
-
                                 if($redirect == 'Inventory' ){
                                     header("location:purchase_purchase_cart.php");       
-
                                 }
                                 else if($redirect == 'Purchase' ){
                                     $_SESSION['PONum'] = $code;
                                     header("location:view_pending_order.php");       
-
                                 }
                                 
                             }
@@ -171,9 +146,11 @@
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-home fa-fw"></i>
+                            <i class="fas fa-home fa-fw text-white"></i>
                           </a>
                         </li>
+                          
+<!-- COPY END -->
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <div class="btn btn-sm btn-primary shadow-sm" style="height: 30px; margin-top: 15px">

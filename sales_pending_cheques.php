@@ -203,7 +203,6 @@
                                       <th>Customer Name</th>
                                       <th>Bank Number</th>
                                       <th>Check Number</th>
-                                      <th>Received?</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -212,7 +211,7 @@
                                         // output data of each row
 
                                         while($row = $search_result->fetch_assoc()) {
-                                            echo "\t<tr><td >" . $row['date'] . "</td><td>" . $row['invoiceNum'] . " </td><td>"  .  $row['CustomerName'] . "</td><td>" . $row['bankNum'] ."</td><td>" . $row['checkNum'] ."</td><td style='text-align: center; '><button type = 'submit' name = 'receive' class='btn' style = 'color:#1cc88a;' value = '" . $row['invoiceNum']. "' > <i class='fas fa-check fa-sm'></i> </button></td></tr>\n";
+                                            echo "\t<tr><td >" . $row['date'] . "</td><td>" . $row['invoiceNum'] . " </td><td>"  .  $row['CustomerName'] . "</td><td>" . $row['bankNum'] ."</td><td>" . $row['checkNum'] ."</td><td style='text-align: center; '><button type = 'submit' name = 'receive' class='btn btn-success' style = 'color:#1cc88a;' value = '" . $row['invoiceNum']. "' > Mark as Received </button></td></tr>\n";
 
                                             }
                                         } 

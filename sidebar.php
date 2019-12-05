@@ -19,6 +19,12 @@ $lastName = $_SESSION["lastName"];
             .bg-side{
                 background-color: #575a6c;
             }
+            .table-wrapper {
+              max-height: 400px;
+              overflow-y: scroll;
+              overflow-x: hidden;
+              display:inline-block;
+            }
         </style>
     </head>
     <body>
@@ -39,6 +45,13 @@ $lastName = $_SESSION["lastName"];
               <!-- Divider -->
               <hr class="sidebar-divider my-0">
 
+              <!-- Nav Item - Point of Sale Menu 
+              <li class="nav-item">
+                <a class="nav-link" href="pos.php">
+                  <i class="fas fa-fw fa-credit-card"></i>
+                  <span>Point of Sale</span>
+                </a>
+              </li>-->
             <!-- Nav Item - Inventory Management Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInv" aria-expanded="true" aria-controls="collapseInv">
