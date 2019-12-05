@@ -352,7 +352,7 @@
                                           </thead>
                                           <tbody>
                                             <?php
-                                          $viewTop = "SELECT * FROM p_purchasingmanagement WHERE status='ongoing' AND DATEDIFF(date,NOW()) >7 ORDER BY PONum";
+                                          $viewTop = "SELECT * FROM p_purchasingmanagement WHERE status='pending' AND DATEDIFF(date,NOW()) >7 ORDER BY PONum";
                                         $search_result = mysqli_query($con, $viewTop);
                                         if ($search_result->num_rows > 0) {
                                             // output data of each row
