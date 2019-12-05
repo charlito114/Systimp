@@ -347,7 +347,7 @@
                                                 // may part dito na  sa isang row, may button for update, once clicked, kukunin niya yung product code nung row na yun
                                                 if($row['ProdCode'] == $EditCode){
                                                 echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['QuantityIssued'] . "</td><td>" . $row['Returned'] . "</td><td>" . $row['Price'] .
-                                                 "<td><input type = 'text' name = 'returnvalue'  value = '' class = 'form-control' ></td> <td style='text-align: center; '><button type = 'submit' name = 'submitreturn'  value = '" . $row['ProdCode']. "' > Submit </button></td></tr>\n";
+                                                 "<td><input type = 'text' name = 'returnvalue'  value = '' class = 'form-control' ></td> <td style='text-align: center; '><button class = 'btn btn-sm btn-success shadow-sm' type = 'submit' name = 'submitreturn'  value = '" . $row['ProdCode']. "' > Submit </button></td></tr>\n";
                                                 }
                                                 else{
                                                     echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['QuantityIssued'] . "</td><td>" . $row['Returned'] . "</td><td>" . $row['Price'] .

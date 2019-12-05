@@ -208,13 +208,13 @@
                                           $status =  $row['status'];
                                           if($status!= "Fully Returned"){
                                             echo "\t<tr><td >" . $row['date'] . "</td><td><input type = 'submit' name = 'invoiceNum' value = '" . $row['invoiceNum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['salesbeforeVat'] . "</td><td>" . $row['salesafterVat'] . "</td><td>" . $row['status'] .
-                                             "</td><td style='text-align: center; '><button type = 'submit' name = 'return'  value = '" . $row['invoiceNum']. "' > Return Items </button></td></tr>\n";
+                                             "</td><td style='text-align: center; '><button class = 'btn btn-sm btn-success shadow-sm' type = 'submit' name = 'return'  value = '" . $row['invoiceNum']. "'> Return Items </button></td></tr>\n";
                                             }
 
                                             //dito sa part na toh, if fully returned na yung item dapat grayed out yung button and di na pwede iclick
                                           else{
                                             echo "\t<tr><td >" . $row['date'] . "</td><td><input type = 'submit' name = 'invoiceNum' value = '" . $row['invoiceNum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['salesbeforeVat'] . "</td><td>" . $row['salesafterVat'] . "</td><td>" . $row['status'] .
-                                            "</td><td style='text-align: center; '><button type = 'submit' style = 'background-color:blue;' name = 'return'  value = '" . $row['invoiceNum']. "' > Return Items </button></td></tr>\n";
+                                            "</td><td style='text-align: center; '><button class = 'btn btn-sm btn-success shadow-sm' type = 'submit' name = 'return'  value = '" . $row['invoiceNum']. "' disabled> Return Items </button></td></tr>\n";
                                           }
                                           }
                                         } 
