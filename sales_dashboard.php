@@ -81,12 +81,6 @@ var month = "For the month of " + monthNames[d.getMonth()-1];
             .bg{
                 background-color: #b4c540;
             }
-            .tablinks{
-              cursor: pointer;
-            }
-            .tabcontent {
-              display: none;
-            }
         </style>
     </head>
     <body>
@@ -247,42 +241,38 @@ var month = "For the month of " + monthNames[d.getMonth()-1];
                                       }
                                         ?>
                                         <div class="" style="height: 20%;">
-                                            <a class="tablinks" onclick="openTab(event, 'totalSales')">
+                                            <div class="card-body">
+                                              <div class="card border-left-success shadow h-100 py-2">
                                                 <div class="card-body">
-                                                  <div class="card border-left-success shadow h-100 py-2">
-                                                    <div class="card-body">
-                                                      <div class="row no-gutters align-items-center">
-                                                        <div class="col mr-2">
-                                                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Daily Sales</div>
-                                                          <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo "₱".$totalsales ?></div>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                          <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                                        </div>
-                                                      </div>
+                                                  <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Daily Sales</div>
+                                                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo "₱".$totalsales ?></div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
                                                     </div>
                                                   </div>
                                                 </div>
-                                            </a>
+                                              </div>
+                                            </div>
                                             
-                                            <!-- Top Selling Products -->                                            
-                                            <a class="tablinks" onclick="openTab(event, 'topProducts')">
+                                            <!-- Top Selling Products -->                             
+                                            <div class="card-body">
+                                              <div class="card border-left-success shadow h-100 py-2">
                                                 <div class="card-body">
-                                                  <div class="card border-left-success shadow h-100 py-2">
-                                                    <div class="card-body">
-                                                      <div class="row no-gutters align-items-center">
-                                                        <div class="col mr-2">
-                                                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Top Selling Products</div>
-                                                          <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                          <i class="fas fa-thumbs-up fa-2x text-gray-300"></i>
-                                                        </div>
-                                                      </div>
+                                                  <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Top Selling Products</div>
+                                                      <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                      <i class="fas fa-thumbs-up fa-2x text-gray-300"></i>
                                                     </div>
                                                   </div>
                                                 </div>
-                                            </a>
+                                              </div>
+                                            </div>
                                         </div>
 
                                         <div class="col-xl-5 col-lg-2">
@@ -298,45 +288,12 @@ var month = "For the month of " + monthNames[d.getMonth()-1];
                                             </div>
                                           </div>
 
-                                        </div>
-
-                                        
+                                        </div>                                        
                                     </div>
                              
-                        <!-- Top Sales Table -->
-                        <div id="totalSales" class="tabcontent">
-                            <div class="col-lg-12">
-                            <form method="post" class="navbar-expand col-lg-12">
-                            <header class="card-header font-weight-bold" style="border-bottom: none;">Total Daily Sales</header>
-                            <div class=" align-items-center justify-content-between mb-4" style="padding-top: 0; display: flex;">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                  <thead>
-                                    <tr>
-                                     <th>Product Code</th>
-                                    <th>Category</th>
-                                    <th>Brand</th>
-                                    <th>Description</th>
-                                    <th>Size</th>
-                                    <th>Quantity</th>
-                                    <th>Reorder Point</th>
-                                    <th>Quantity Sold</th>
-                                    <th>Price</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                      <!-- INSERT HERE php -->
-                                   <?php
-                                    
-                                      ?>
-                                  </tbody>
-                                </table>
-                            </div>
-                            </form>
-                            </div>
-                        </div>
                         
                         <!-- Top Products Table -->
-                        <div id="topProducts" class="tabcontent" style="display: block;">
+                        <div style="display: block;">
                             <div class="col-lg-12">
                             <form method="post" class="navbar-expand col-lg-12">
                             <header class="card-header font-weight-bold" style="border-bottom: none;">Top Selling Porducts</header>
@@ -390,23 +347,7 @@ LIMIT 5;";
                 </div>
             </div>
         </div>
-        
-         <script>
-          function openTab(evt, tabName) {
-            
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-              tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-              tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-          }
-        </script>
+
           <!-- Page level plugins -->
           <script src="vendor/datatables/jquery.dataTables.min.js"></script>
           <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
