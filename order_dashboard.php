@@ -236,10 +236,8 @@ GROUP BY SONum) AS readyvstotal JOIN ordermanagement ON ordermanagement.SONum = 
                                                       echo "\t<tr><td >" . $row['Date'] . "</td><td><input type='submit' name='SONum' value='" . $row['SONum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['TotalAmount'] . "</td>". "</td><td>"  .  $row['Status'] . "</td></tr><br>";
                                                       }
                                                   }
-                                              else{
-                                                  echo "0 results";
-                                              }
-                                                ?>
+                                              
+                                      ?>
                                             </tbody>
                                           </table>
                                       </div>
@@ -276,10 +274,9 @@ GROUP BY SONum) AS readyvstotal JOIN ordermanagement ON ordermanagement.SONum = 
                                             echo "\t<tr><td >" . $row['Date'] . "</td><td>" . $row['SONum'] . "</td><td>"  .  $row['TotalAmount'] . "</td>". "</td><td>"  .  $row['Status'] . "</td></tr><br>";
                                             }
                                         }
-                                    else{
-                                        echo "0 results";
-                                    }
-                                        
+                                    else {
+                                       echo "<tr><td colspan='4'><center> 0 results </center></td></tr>";
+                                       }
                                       ?>
                                   </tbody>
                                 </table>
