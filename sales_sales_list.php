@@ -186,7 +186,7 @@
                         
                         <!-- Table -->
                         <div class="table-responsive">
-                            <form method = 'post' action = 'view_invoice.php'>
+                            <form method = 'post' action = 'sales_manage_returns.php'>
                                 <div class="card-body mb-4" style="padding-top: 0;">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="padding-top: 0; border-top: .20rem solid #b4c540;">
                                   <thead>
@@ -196,6 +196,7 @@
                                       <th>Sales Before VAT</th>
                                       <th>Sales After VAT</th>
                                       <th>Status</th>
+                                      <th>Action </th>
 
                                     </tr>
                                   </thead>
@@ -204,8 +205,18 @@
                                       if ($search_result->num_rows > 0) {
                                         // output data of each row
                                         while($row = $search_result->fetch_assoc()) {
-                                            echo "\t<tr><td >" . $row['date'] . "</td><td><input type = 'submit' name = 'invoiceNum' value = '" . $row['invoiceNum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['salesbeforeVat'] . "</td><td>" . $row['salesafterVat'] . "</td><td>" . $row['status'] . "</td></tr>\n";
+                                          $status =  $row['status'];
+                                          if($status!= "Fully Returned"){
+                                            echo "\t<tr><td >" . $row['date'] . "</td><td><input type = 'submit' name = 'invoiceNum' value = '" . $row['invoiceNum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['salesbeforeVat'] . "</td><td>" . $row['salesafterVat'] . "</td><td>" . $row['status'] .
+                                             "</td><td style='text-align: center; '><button type = 'submit' name = 'return'  value = '" . $row['invoiceNum']. "' > Return Items </button></td></tr>\n";
                                             }
+
+                                            //dito sa part na toh, if fully returned na yung item dapat grayed out yung button and di na pwede iclick
+                                          else{
+                                            echo "\t<tr><td >" . $row['date'] . "</td><td><input type = 'submit' name = 'invoiceNum' value = '" . $row['invoiceNum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['salesbeforeVat'] . "</td><td>" . $row['salesafterVat'] . "</td><td>" . $row['status'] .
+                                            "</td><td style='text-align: center; '><button type = 'submit' style = 'background-color:blue;' name = 'return'  value = '" . $row['invoiceNum']. "' > Return Items </button></td></tr>\n";
+                                          }
+                                          }
                                         } 
                                          #please add these error checking codes
                                         else if (isset($_POST['search']) &&($search_result->num_rows == 0)){
