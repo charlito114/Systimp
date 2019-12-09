@@ -173,13 +173,19 @@
                                         $SONum = $_POST['SONum'];
                                         $_SESSION['SONum'] = $SONum;
                                     }
+
+                                    else{
+                                        $SONum = $_SESSION['SONum'];
+                                        $_SESSION['SONum'] = $SONum;
+                                    }
                                     
                                         
                                    $viewOrder = "SELECT * FROM ordermanagement WHERE SONum = " . $_SESSION['SONum'];
                                     $result = $con->query($viewOrder);
                                     if ($result->num_rows > 0) {
                                     // output data of each row
-                                    while($row = $result->fetch_assoc()) {     
+                                    while($row = $result->fetch_assoc()) { 
+                                        $status = $row['Status'];    
                                 ?>
                                 <div class="card-header font-weight-bold">
                                     Sales Order Details
@@ -294,22 +300,24 @@
                                           <th>Issued</th>
                                           <th>Price</th>
                                           <th>Total Price</th>
+                                          <th>Action</th>
                                         </tr>
                                       </thead>
                                       <tbody>
                                         <?php
-                                          $viewDetails = "SELECT * FROM salesorderdetails WHERE SONum =" . $_SESSION['SONum']." AND Status = 'Processing' OR Status = 'Ready' ";
+                                          $viewDetails = "SELECT * FROM salesorderdetails WHERE SONum =" . $_SESSION['SONum']." AND (Status = 'Processing' OR Status = 'Ready') ";
                                             $result2 = $con->query($viewDetails);
                                             if ($result2->num_rows > 0) {
                                             // output data of each row
                                             while($row = $result2->fetch_assoc()) {
                                                 // may part dito na  sa isang row, may button for update, once clicked, kukunin niya yung product code nung row na yun
-                                                echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['ProdQuan'] . "</td><td>" . $row['Available'] . "</td><td>" . $row['Issued'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['TotalPrice'] . "</td></tr>\n";
+                                                echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['ProdQuan'] . "</td><td>" . $row['Available'] . "</td><td>" . $row['Issued'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['TotalPrice'] . "</td>
+                                                <td><button type = 'submit' name = 'cancel' formaction = ''  value = '" . $row['ProdCode']. "' class = 'btn'> <i class='fas fa-fw fa-ban' style = 'color:#ff0000;'/>  </button></td></tr>\n";
                                                 }
                                                 // echo "</form>";
                                             }
                                           else {
-                                               echo "<tr><td colspan='10'><center> No data available in table </center></td></tr>";
+                                               echo "<tr><td colspan='12'><center> No data available in table </center></td></tr>";
                                                }
                                             
                                           ?>
@@ -317,6 +325,35 @@
                                     </table>
                                 </div>
                             </form>
+                            <?php if(isset($_POST['cancel'])){
+                                    $cancelitem = $_POST['cancel']; 
+                                
+                                    $updateStatus = "UPDATE salesorderdetails SET Status = 'Cancelled' WHERE ProdCode = $cancelitem AND SONum = " . $_SESSION['SONum'];
+                                    if(mysqli_query($con,$updateStatus)){
+        
+                                        $alert = "Successfully cancelled item!";
+                                        echo '<script type="text/javascript">';
+                                        echo 'alert("'.$alert.'")';
+                                        echo '</script>'; 
+                                        header("location:view_pending_so.php?message= Successfully Cancelled Item.");
+                                        
+                                            
+                                            
+                                                    }
+                                                    else{
+                                            
+                                                        $alert = mysqli_error($con);
+                                                        echo $alert;
+                                                       // echo '<script type="text/javascript">';
+                                                        //echo 'alert("'.$alert.'")';
+                                                        //echo '</script>';  
+                                                        //include("view_pending_so.php");
+                                
+                                                                
+                                                    }
+                            }
+                            ?>
+                                
                         </div>
 
                             <div class="col-lg-12">
@@ -349,7 +386,55 @@
                                                 echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['ProdQuan'] . "</td><td>" . $row['Available'] . "</td><td>" . $row['Issued'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['TotalPrice'] . "</td></tr>\n";
                                                 }
                                                 // echo "</form>";
+                                            
                                             } 
+
+                                            else {
+                                                echo "<tr><td colspan='12'><center> No data available in table </center></td></tr>";
+                                                }
+                                            
+                                          ?>
+                                      </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-lg-12">
+                                <form method="post" class="navbar-expand col-lg-12">
+                                <header class="card-header font-weight-bold">Cancelled Products</header>
+                                <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                      <thead>
+                                        <tr>
+                                          <th>Product Code</th>
+                                          <th>Category</th>
+                                          <th>Brand</th>
+                                          <th>Description</th>
+                                          <th>Size</th>
+                                          <th>Quantity</th>
+                                          <th>Available</th>
+                                          <th>Issued</th>
+                                          <th>Price</th>
+                                          <th>Total Price</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <?php
+                                          $viewDetails = "SELECT * FROM salesorderdetails WHERE SONum =" . $_SESSION['SONum']." AND Status = 'Cancelled' ";
+                                            $result2 = $con->query($viewDetails);
+                                            if ($result2->num_rows > 0) {
+                                            // output data of each row
+                                            while($row = $result2->fetch_assoc()) {
+                                                // may part dito na  sa isang row, may button for update, once clicked, kukunin niya yung product code nung row na yun
+                                                echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['ProdQuan'] . "</td><td>" . $row['Available'] . "</td><td>" . $row['Issued'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['TotalPrice'] . "</td></tr>\n";
+                                                }
+                                                // echo "</form>";
+                                            } 
+
+                                            else {
+                                                echo "<tr><td colspan='12'><center> No data available in table </center></td></tr>";
+                                                }
                                             
                                           ?>
                                       </tbody>
@@ -365,9 +450,12 @@
                                         <!--<button name="add" value="add" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="width: 10%;float: left;"> Remove </button>-->
                                     </div>
                                     <div class="d-flex" style="width: 30%; float: right;">
+
+                                    <?php if($status != "Cancelled"){?>
                                     <!-- Submit Button-->
                                     <button type = 'submit' name = 'submitcheckout'  value = 'Proceed to checkout' formaction =  'pos.php' class="d-flex d-sm-inline-block btn btn-sm btn-success shadow-sm" style="width: 200px; float: left; margin-right: 20%;"> Proceed to Checkout </button>
                                     <!-- Cancel Button-->
+                                    <?php } ?>
                                     <button type = 'submit' name = 'back'  value = 'back' formaction =  'order_sales_orders.php' class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" style="width: 100px; float: right;"> Back </button>
                                     </div>
                                 </div>
