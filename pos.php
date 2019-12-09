@@ -418,7 +418,7 @@
                                                     </div>
                                                 </div>
                                                   <div class="modal-footer">
-                                                      <button type = "submitvoid" class="btn btn-success" name = "submit"> Submit </button>
+                                                      <button type = "submitvoid" class="btn btn-success" onclick = "return confirm('Are you sure you want to void this sale?')" name = "submit"> Submit </button>
                                                   </div>
                                               </form>
                                             
@@ -445,7 +445,7 @@
                                                     </div>
                                                 </div>
                                                   <div class="modal-footer">
-                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
+                                                      <button type = "submit" class="btn btn-success" name = "submit" onclick = "return confirm('Are you sure you want to remove this product?')"> Submit </button>
                                                   </div>
                                               </form>
                                           </div>
@@ -593,7 +593,7 @@
                                                     
                                                 </div>
                                                   <div class="modal-footer">
-                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
+                                                      <button type = "submit" class="btn btn-success" name = "submit" onclick = "return confirm('Change the product quantity?')"> Submit </button>
                                                   </div>
                                               </form>
                                           </div>
@@ -620,7 +620,7 @@
                                                     </div>
                                                 </div>
                                                   <div class="modal-footer">
-                                                      <button type = "submit" class="btn btn-success" name = "discsubmit"> Submit </button>
+                                                      <button type = "submit" class="btn btn-success" name = "discsubmit" onclick = "return confirm('Add a discount for the order?')"> Submit </button>
                                                   </div>
                                               </form>
                                               <?php
@@ -718,7 +718,7 @@
                                                     </div>
                                                 </div>
                                                   <div class="modal-footer">
-                                                      <button type = "submit" class="btn btn-success" name = "submitcheck"> Submit </button>
+                                                      <button type = "submit" class="btn btn-success" name = "submitcheck" onclick = "return confirm('Add a check payment?')"> Submit </button>
                                                   </div>
                                               </form>    
                                               <?php
@@ -759,7 +759,7 @@
                                                     </div>
                                                 </div>
                                                   <div class="modal-footer">
-                                                      <button type = "submit" class="btn btn-success" name = "submit"> Submit </button>
+                                                      <button type = "submit" class="btn btn-success" name = "submit" onclick = "return confirm('Add cash payment?')"> Submit </button>
                                                   </div>
                                               </form>
                                               <?php
