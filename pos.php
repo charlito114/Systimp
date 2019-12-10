@@ -414,11 +414,11 @@
                                                     <label>Note: Please request for manager approval </label><br>
                                                     <div class="row d-flex justify-content-between">
                                                         <label class="c-label">Password: </label>
-                                                        <input class="c-input form-control col-sm-6" type = "password" name= password>
+                                                        <input class="c-input form-control col-sm-6" type = "password" name= "password">
                                                     </div>
                                                 </div>
                                                   <div class="modal-footer">
-                                                      <button type = "submitvoid" class="btn btn-success" onclick = "return confirm('Are you sure you want to void this sale?')" name = "submit"> Submit </button>
+                                                      <button type = "submit" class="btn btn-success" onclick = "return confirm('Are you sure you want to void this sale?')" name = "submitvoid"> Submit </button>
                                                   </div>
                                               </form>
                                             
@@ -639,11 +639,17 @@
                                                         
                                                if(($_SESSION['discount'] == 0) && ($inputpw == $password))
                                                {
+                                                $message = "Discount applied";
+echo "<script type='text/javascript'>alert('$message');";
+echo "window.location.href='pos.php'</script>";
                                                 $discount = $_POST['discount'];   
                                                 $_SESSION['discount'] = $discount;
                                                }
                                                 else if(($_SESSION['discount'] !=0) || ($inputpw != $password)){
-                                                 header("location:pos.php?message= Cannot Update Discount.");
+                                                    $message = "Cannot Update Discount";
+echo "<script type='text/javascript'>alert('$message');";
+echo "window.location.href='pos.php'</script>";
+                                                 //header("location:pos.php?message= Cannot Update Discount.");
                                                  
                                                 }
                                  
@@ -733,9 +739,13 @@
                                                 $chequenumber = $_POST['chequenumber'];
                                                 $_SESSION['chequenumber'] = $chequenumber;
 
-                                                
+                                                $message = "Checque Added!";
+echo "<script type='text/javascript'>alert('$message');";
+echo "window.location.href='pos.php'</script>";
                                                 }
-                                                
+                                                else{$message = "Failed to add checque";
+echo "<script type='text/javascript'>alert('$message');";
+echo "window.location.href='pos.php'</script>";}
                                               }
                                               ?>                                          
                                           </div>
@@ -770,8 +780,14 @@
                                                 $change = $payment - $Total;
                                                 $_SESSION['change'] = $change;
                                                 
+
+                                                $message = "Cash added!";
+echo "<script type='text/javascript'>alert('$message');";
+echo "window.location.href='pos.php'</script>";
                                                 }
-                                                
+                                                else {$message = "Error In adding amount";
+echo "<script type='text/javascript'>alert('$message');";
+echo "window.location.href='pos.php'</script>";}
                                               }
                                               ?>
                                               

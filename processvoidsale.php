@@ -2,8 +2,7 @@
 error_reporting(0);
 session_start();
 require_once("connection.php");
-if(isset($_POST['submit'])){
-    $prodcode =$_SESSION['ProdCode'];
+if(isset($_POST['submitvoid'])){
     $inputpw =$_POST['password'];
     $pwQuery = ("SELECT Password FROM users WHERE Email = 'janelle.sy@gmail.com'");
     $result =  $con->query($pwQuery);
@@ -17,29 +16,33 @@ if(isset($_POST['submit'])){
                 }
             }
     if($inputpw == $password){
-        $deleteQuery = " DELETE FROM temporaryinvoice WHERE ProdCode = $prodcode ";
+        $deleteQuery = "DELETE FROM temporaryinvoice";
                                 if(mysqli_query($con,$deleteQuery)){
                                   //  $message = "Successfully voided item";
                                  //   header("location:pos.php?message=".$message);
+                                 $_SESSION['Subtotal']=0;
+                                 $_SESSION['discount']=0;
+                                 $_SESSION['Total']=0;
 
-                                  $message = "Successfully Voided Product";
+                                 $message = "Sales Order Successfully Voided";
 echo "<script type='text/javascript'>alert('$message');";
 echo "window.location.href='pos.php'</script>";
-                                 //header("location:pos.php?message= Successfully Voided Product.");
-                                }
+                    
+                                    //header("location:pos.php?message=success");//dapat may alert na successfully voided item, please try again
+                                        }
                                 else{
-                                    $alert = mysqli_error($con);
 
-                                    $message = "Error in voiding item please try again";
+                                    $message = "Error in voiding Sales Order";
 echo "<script type='text/javascript'>alert('$message');";
-echo "window.location.href='pos.php'</script>";                                  
+echo "window.location.href='pos.php'</script>";
+                                 //   $message = "Error in voiding item please try again";
                                   //  header("location:pos.php?message=".$message);
-                                   // header("location:pos.php"); //dapat may alert na error in voiding item, please try again
+                                   //header("location:pos.php?message=ERROR"); //dapat may alert na error in voiding item, please try again
                                         }
                                     }
     else{
 
-      $message = "Error in voiding item please try again";
+        $message = "Incorrect Password";
 echo "<script type='text/javascript'>alert('$message');";
 echo "window.location.href='pos.php'</script>";
        // $message = "Error in voiding item, please try again";

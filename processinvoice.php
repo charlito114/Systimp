@@ -36,7 +36,11 @@ if (isset($_POST['submit'])){
                      $_SESSION['payment'] = 0;
                      $_SESSION['chequenumber']=0;
                      $_SESSION['banknumber']=0;
-                     header("location:view_invoice.php?message= Successfully Created Invoice.");
+
+                     $message = "Successfully Created Invoice";
+echo "<script type='text/javascript'>alert('$message');";
+echo "window.location.href='view_invoice.php'</script>";
+                     //header("location:view_invoice.php?message= Successfully Created Invoice.");
 
                                
                            }
@@ -56,7 +60,11 @@ if (isset($_POST['submit'])){
             $refreshQuery = " DELETE FROM temporaryinvoice";
             if(mysqli_query($con,$refreshQuery)){
                     $_SESSION['discount'] = 0;
-                    header("location:pos.php?message= Error In Creating Invoice.");
+
+                    $message = "Error In Creating Invoice";
+echo "<script type='text/javascript'>alert('$message');";
+echo "window.location.href='order_pending_sos.php'</script>";
+                    // header("location:pos.php?message= Error In Creating Invoice.");
 
                         
                     }
@@ -88,7 +96,11 @@ if (isset($_POST['submit'])){
                      $_SESSION['payment'] = 0;
                      $_SESSION['chequenumber']=0;
                      $_SESSION['banknumber']=0;
-                     header("location:view_invoice.php?message= Successfully Created Invoice.");
+
+                     $message = "Successfully Created Invoice";
+echo "<script type='text/javascript'>alert('$message');";
+echo "window.location.href='view_invoice.php'</script>";
+                     //header("location:view_invoice.php?message= Successfully Created Invoice.");
 
                                
                            }
@@ -109,7 +121,11 @@ if (isset($_POST['submit'])){
             $refreshQuery = " DELETE FROM temporaryinvoice";
             if(mysqli_query($con,$refreshQuery)){
                     $_SESSION['discount'] = 0;
-                    header("location:pos.php?message= Error In Creating Invoice.");
+
+                    $message = "Error In Creating Invoice";
+echo "<script type='text/javascript'>alert('$message');";
+echo "window.location.href='order_pending_sos.php'</script>";
+                    //header("location:pos.php?message= Error In Creating Invoice.");
 
                         
                     }

@@ -32,12 +32,19 @@ if(isset($_POST['submit'])){
     if(mysqli_query($con,$updateQuery)){
     //$message = "Successfully updated purchase!";
     //header("location:pos.php?message=".$message);
-    header("location:pos.php?message=Quantity has been successfully updated."); // palagay ng alert
+
+        $message = "Quantity has been successfully updated";
+echo "<script type='text/javascript'>alert('$message');";
+echo "window.location.href='pos.php'</script>";
+    //header("location:pos.php?message=Quantity has been successfully updated."); // palagay ng alert
     }
     else{
+        $message = "Error in updating quantity";
+echo "<script type='text/javascript'>alert('$message');";
+echo "window.location.href='pos.php'</script>";
       //  $message = "Error in updating quantity. Please try again";
        // header("location:pos.php?message=".$message);
-        header("location:pos.php?message=Error in updating quantity."); // palagay ng alert
+        //header("location:pos.php?message=Error in updating quantity."); // palagay ng alert
     }
     
     /*}
