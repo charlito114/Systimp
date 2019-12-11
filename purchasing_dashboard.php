@@ -270,7 +270,7 @@
                               <div class="col-lg-12 table-responsive" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
                                   <form method='post' action = "view_purchase_order.php" class="navbar-expand col-lg-12">
                                       <div class="d-flex" style=" margin-right: 5%;">
-                                          <div class="col-lg-10">
+                                          <div class="col-lg-9">
                                               <header class="card-header font-weight-bold" style="border-bottom: none;">Ongoing Supplier Deliveries</header>
                                           </div>
                                             <div class="col-lg-3">
@@ -315,7 +315,7 @@
                               <div class="col-lg-12 table-responsive" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
                                   <form method='post' action = "view_purchase_order.php" class="navbar-expand col-lg-12">
                                       <div class="d-flex" style=" margin-right: 5%;">
-                                          <div class="col-lg-10">
+                                          <div class="col-lg-9">
                                               <header class="card-header font-weight-bold" style="border-bottom: none;">Cancelled Supplier Deliveries</header>
                                           </div>
                                             <div class="col-lg-3">
@@ -357,7 +357,7 @@
                               <div class="col-lg-12 table-responsive" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
                                   <form method='post' action = "view_purchase_order.php" class="navbar-expand col-lg-12">
                                       <div class="d-flex" style=" margin-right: 5%;">
-                                          <div class="col-lg-10">
+                                          <div class="col-lg-9">
                                               <header class="card-header font-weight-bold" style="border-bottom: none;">Overdue Supplier Deliveries</header>
                                           </div>
                                             <div class="col-lg-3">

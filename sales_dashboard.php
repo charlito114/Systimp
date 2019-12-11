@@ -326,7 +326,7 @@ var month = "For the month of " + monthNames[d.getMonth()-1];
                             <div class="col-lg-12">
                             <form method="post" class="navbar-expand col-lg-12">
                                 <div class="d-flex" style=" margin-right: 5%;">
-                                      <div class="col-lg-10">
+                                      <div class="col-lg-9">
                                           <header class="card-header font-weight-bold" style="border-bottom: none;">Top Selling Products</header>
                                       </div>
                                         <div class="col-lg-3">
