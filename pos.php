@@ -345,7 +345,7 @@
                                                       $insertQuery = "INSERT INTO temporaryinvoice (SONum, ProdCode, Category, Brand, ProdDesc, Size, Available, Quantity, QuantityIssued, ToBeIssued, Price, TotalPrice) 
                                                       SELECT s.SONum, s.ProdCode, s.Category, s.Brand, s.ProdDesc, s.Size, s.Available, s.ProdQuan, s.Issued, s.ProdQuan - s.Issued, s.Price, s.TotalPrice
                                                       FROM salesorderdetails s
-                                                      WHERE s.SONum = $SONum AND (s.ProdQuan - s.Issued)!= 0";
+                                                      WHERE s.SONum = $SONum AND (s.ProdQuan - s.Issued)!= 0 AND s.Status!= 'Cancelled'";
                                                       if(mysqli_query($con,$insertQuery)){
                                                         header("message=Successfully added new records");
                                                         $updateInvoice = "UPDATE temporaryinvoice 
@@ -738,7 +738,6 @@ echo "window.location.href='pos.php'</script>";
                                                 $_SESSION['banknumber'] = $banknumber;
                                                 $chequenumber = $_POST['chequenumber'];
                                                 $_SESSION['chequenumber'] = $chequenumber;
-
                                                 $message = "Checque Added!";
 echo "<script type='text/javascript'>alert('$message');";
 echo "window.location.href='pos.php'</script>";
@@ -780,7 +779,6 @@ echo "window.location.href='pos.php'</script>";}
                                                 $change = $payment - $Total;
                                                 $_SESSION['change'] = $change;
                                                 
-
                                                 $message = "Cash added!";
 echo "<script type='text/javascript'>alert('$message');";
 echo "window.location.href='pos.php'</script>";
