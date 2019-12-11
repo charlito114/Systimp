@@ -189,12 +189,12 @@
                                               <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Ongoing Supplier Deliveries</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                   <?php
-                                              $OSDcount = "SELECT COUNT(Status) c FROM p_purchasingmanagement WHERE status='Pending'";
-                                              $count_result = mysqli_query($con, $OSDcount);
-                                              $row = $count_result->fetch_assoc();
-                                              echo $row['c'];
-                                              ?>
+                                                  <?php
+                                                      $OSDcount = "SELECT COUNT(Status) c FROM p_purchasingmanagement WHERE status='pending'";
+                                                      $count_result = mysqli_query($con, $OSDcount);
+                                                      $row = $count_result->fetch_assoc();
+                                                      echo $row['c'];
+                                                      ?>
                                                 </div>
                                               </div>
                                               <div class="col-auto">
@@ -215,7 +215,7 @@
                                                   <div class="col mr-2">
                                                     <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Cancelled Supplier Deliveries</div>
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?php
-                                                      $OSDcount = "SELECT COUNT(Status) c FROM p_purchasingmanagement WHERE status='canceled'";
+                                                      $OSDcount = "SELECT COUNT(Status) c FROM p_purchasingmanagement WHERE status='cancelled'";
                                                       $count_result = mysqli_query($con, $OSDcount);
                                                       $row = $count_result->fetch_assoc();
                                                       echo $row['c'];
@@ -241,7 +241,7 @@
                                                 <div class="row no-gutters align-items-center">
                                                   <div class="col-auto">
                                                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php
-                                                  $OSDcount = "SELECT COUNT(Status) c FROM p_purchasingmanagement WHERE status='ongoing' AND DATEDIFF(date,NOW()) >7";
+                                                  $OSDcount = "SELECT COUNT(Status) c FROM p_purchasingmanagement WHERE status='pending' AND DATEDIFF(date,NOW()) >7";
                                                   $count_result = mysqli_query($con, $OSDcount);
                                                   $row = $count_result->fetch_assoc();
                                                   echo $row['c'];
@@ -318,7 +318,7 @@
                                           </thead>
                                           <tbody>
                                            <?php
-                                          $viewTop = "SELECT * FROM p_purchasingmanagement WHERE status ='cancelled' ORDER BY PONum";
+                                          $viewTop = "SELECT * FROM p_purchasingmanagement WHERE status='cancelled' ORDER BY PONum ";
                                         $search_result = mysqli_query($con, $viewTop);
                                         if ($search_result->num_rows > 0) {
                                             // output data of each row
