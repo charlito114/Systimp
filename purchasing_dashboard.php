@@ -269,7 +269,15 @@
                           <div class="container-fluid">
                               <div class="col-lg-12 table-responsive" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
                                   <form method='post' action = "view_purchase_order.php" class="navbar-expand col-lg-12">
-                                  <header class="card-header font-weight-bold" style="border-bottom: none;">Ongoing Supplier Deliveries</header>
+                                      <div class="d-flex" style=" margin-right: 5%;">
+                                          <div class="col-lg-10">
+                                              <header class="card-header font-weight-bold" style="border-bottom: none;">Ongoing Supplier Deliveries</header>
+                                          </div>
+                                            <div class="col-lg-3">
+                                                <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Manage PO </button>
+                                            </div>
+                                        </div> 
+                                  
                                       <div class="align-items-center justify-content-between mb-4" style="padding-top: 0;">
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                           <thead>
@@ -306,7 +314,15 @@
                           <div class="container-fluid">
                               <div class="col-lg-12 table-responsive" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
                                   <form method='post' action = "view_purchase_order.php" class="navbar-expand col-lg-12">
-                                  <header class="card-header font-weight-bold" style="border-bottom: none;">Cancelled Supplier Deliveries</header>
+                                      <div class="d-flex" style=" margin-right: 5%;">
+                                          <div class="col-lg-10">
+                                              <header class="card-header font-weight-bold" style="border-bottom: none;">Cancelled Supplier Deliveries</header>
+                                          </div>
+                                            <div class="col-lg-3">
+                                                <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Purchase Orders </button>
+                                            </div>
+                                        </div>
+                                  
                                       <div class="align-items-center justify-content-between mb-4" style="padding-top: 0;">
                                         <table class="table table-bordered" id="dataTable" width="125%" cellspacing="0">
                                           <thead>
@@ -340,7 +356,15 @@
                           <div class="container-fluid">
                               <div class="col-lg-12 table-responsive" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
                                   <form method='post' action = "view_purchase_order.php" class="navbar-expand col-lg-12">
-                                  <header class="card-header font-weight-bold" style="border-bottom: none;">Overdue Supplier Deliveries</header>
+                                      <div class="d-flex" style=" margin-right: 5%;">
+                                          <div class="col-lg-10">
+                                              <header class="card-header font-weight-bold" style="border-bottom: none;">Overdue Supplier Deliveries</header>
+                                          </div>
+                                            <div class="col-lg-3">
+                                                <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Manage PO </button>
+                                            </div>
+                                        </div>
+                                  
                                       <div class="align-items-center justify-content-between mb-4" style="padding-top: 0;">
                                         <table class="table table-bordered" id="dataTable" width="125%" cellspacing="0">
                                           <thead>

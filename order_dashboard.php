@@ -242,7 +242,14 @@ GROUP BY SONum) AS readyvstotal JOIN ordermanagement ON ordermanagement.SONum = 
                               <div class="container-fluid">
                                   <div class="col-lg-12 table-responsive" style="padding-top: 0; border-top:  .10rem solid #b4c540;">
                                   <form method='post' class="navbar-expand col-lg-12" action='view_pending_so.php'>
-                                  <header class="card-header font-weight-bold" style="border-bottom: none;">READY ORDERS</header>
+                                      <div class="d-flex" style=" margin-right: 5%;">
+                                          <div class="col-lg-10">
+                                              <header class="card-header font-weight-bold" style="border-bottom: none;">Ready Orders</header>
+                                          </div>
+                                            <div class="col-lg-3">
+                                                <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Manage SO </button>
+                                            </div>
+                                        </div>
                                       <div class="align-items-center justify-content-between mb-4" style="padding-top: 0; display:inline-flex;">
                                           <table class="table table-bordered" id="dataTable" width="180%" cellspacing="0">
                                             <thead>
@@ -281,7 +288,14 @@ GROUP BY SONum) AS readyvstotal JOIN ordermanagement ON ordermanagement.SONum = 
                          <div class="container-fluid">
                           <div class="col-lg-12 " style="padding-top: 0; border-top:  .10rem solid #b4c540;">
                               <form method="post" class="navbar-expand col-lg-12">
-                              <header class="card-header font-weight-bold" style="border-bottom: none;">RECENTLY PLACED ORDERS</header>
+                              <div class="d-flex" style=" margin-right: 5%;">
+                                  <div class="col-lg-10">
+                                      <header class="card-header font-weight-bold" style="border-bottom: none;">Recently Placed Orders</header>
+                                  </div>
+                                    <div class="col-lg-3">
+                                        <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Manage SO </button>
+                                    </div>
+                                </div>
                                   <div class="align-items-center justify-content-between mb-4" style="padding-top: 0; display:flex;">
                                       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                   <thead>
