@@ -252,6 +252,11 @@ require_once("db/connection.php");
                                      #please add these error checking codes
                                     
                                   ?>
+                                  <tr><td style="line-height:50px;">&nbsp;</td></tr>
+                                  <tr>
+                                      <td class="text-right font-weight-bold" colspan=4>Total Monthly Sales:</td>
+                                      <td class="text-right">100.00</td>
+                                  </tr>
                               </tbody>
                             </table>
                             </div>
