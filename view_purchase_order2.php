@@ -1,5 +1,7 @@
 <html>
     <?php
+            error_reporting(0);
+
         session_start();
         require_once("db/connection.php");
         
@@ -31,7 +33,7 @@
                 <div id="content">
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg topbar mb-4 static-top shadow">
-                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Manage Purchase Order Details</div>
+                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Cancel Purchase Order Details</div>
                       <!-- Sidebar Toggle (Topbar) -->
                       <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -60,7 +62,7 @@
                           </div>
                         </li>
 
-                        <!-- COPY START -->
+                       <!-- COPY START -->
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -147,90 +149,7 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <div class="btn btn-sm btn-primary shadow-sm" style="height: 30px; margin-top: 15px">
-                                <a href ="logout.php" class = "text-white"> Logout </a><!-- COPY START -->
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-bell fa-fw text-white"></i>
-                            <!-- Counter - Alerts 
-                            <span class="badge badge-danger badge-counter">3+</span> -->
-                          </a>
-                          <!-- Dropdown - Alerts -->
-                          <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                            <h6 class="dropdown-header">
-                              Notifications Center
-                            </h6>
-                            <form method = "post" class="table-responsive-lg">
-                            <table class="table table-wrapper">
-                                <?php
-                                $getNotifs ="SELECT * FROM notifications";
-                                $search_result = mysqli_query($con, $getNotifs);
-                                    if ($search_result->num_rows > 0) {
-                                        while($row = $search_result->fetch_assoc()) {
-                                            $status = $row['status'];
-                                            if($status == 'Unread'){
-                                              echo "\t<tr class='table-active'><td style='width: 1%;'><span class='icon-circle bg-warning '><i class='fas fa-exclamation-triangle text-white'></i></span></td>
-                                                  <td><button class='btn' name = 'notification' value = '" . $row['notifID'] . "'>" . $row['date']  . "<br>". $row['description'] . "  </button></td></tr>";
-                                            }
-                                            else if($status == 'Read') {                                              
-                                              echo "\t<tr><td style='width: 1%;'><span class='icon-circle bg-warning '><i class='fas fa-exclamation-triangle text-white'></i></span></td>
-                                              <td><button class='btn' name = 'notification' value = '" . $row['notifID'] . "'>" . $row['date']  . "<br>". $row['description'] . "  </button></td></tr>";
-                                            }
-                                                                        
-                                        }
-                                      }
-                                  
-                                ?>
-                                <!--<tr>
-                                    <td style="width: 2%;"><span class="icon-circle bg-danger "><i class="fas fa-exclamation-triangle text-white"></i></span></td>
-                                    <td><button class="btn">You have low stock!</button></td>
-                                </tr>-->
-                                
-                            </table>
-                            </form>
-
-                            <?php
-                            if(isset($_POST['notification'])) {
-                                $notifID = $_POST['notification']; 
-                                $specificNotif ="SELECT * FROM notifications WHERE notifID = $notifID";
-                                $search_result = mysqli_query($con, $specificNotif);
-                                if ($search_result->num_rows > 0) {
-                                    while($row = $search_result->fetch_assoc()) {
-                                        $redirect = $row['type'];
-                                        $code = $row['code'];
-                                    }
-                                }
-                                $updateStatus = "UPDATE notifications 
-                                SET status = 'Read' 
-                                WHERE notifID = $notifID";
-                                if(mysqli_query($con,$updateStatus)){
-                                    $alert = 'Yay';
-                                }
-                                else{
-                                    $alert = mysqli_error($con);
-                                    echo $alert;
-                                            }
-                                if($redirect == 'Inventory' ){
-                                    header("location:purchase_purchase_cart.php");       
-                                }
-                                else if($redirect == 'Purchase' ){
-                                    $_SESSION['PONum'] = $code;
-                                    header("location:view_pending_order.php");       
-                                }
-                                
-                            }
-                            ?>
-                          </div>
-                        </li>
-
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-home fa-fw text-white"></i>
-                          </a>
-                        </li>
-                          
-<!-- COPY END -->
+                                <a href ="logout.php" class = "text-white"> Logout </a>
                           </div>
                       </ul>
                     </nav>

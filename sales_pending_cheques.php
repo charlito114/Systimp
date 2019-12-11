@@ -27,7 +27,6 @@
         <div id="wrapper">
             <?php 
            
-
             include 'sidebar.php' ?>
             
             <!-- Content Wrapper -->
@@ -67,7 +66,7 @@
                           </div>
                         </li>
 
-                       <!-- COPY START -->
+                        <!-- COPY START -->
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -202,7 +201,6 @@
                                     $query = "SELECT * FROM pendingcheck";
                                     $search_result = filterTable($query);
                                 }
-
                                 function filterTable($query)
                                 {
                                     $con = mysqli_connect("localhost", "root", "", "inventory");
@@ -239,13 +237,10 @@
                                     <?php 
                                       if ($search_result->num_rows > 0) {
                                         // output data of each row
-
                                         while($row = $search_result->fetch_assoc()) {
-                                            echo "\t<tr><td >" . $row['date'] . "</td><td>" . $row['invoiceNum'] . " </td><td>"  .  $row['CustomerName'] . "</td><td>" . $row['bankNum'] ."</td><td>" . $row['checkNum'] ."</td><td style='text-align: center; '><button type = 'submit' name = 'receive' class = 'btn btn-sm btn-success shadow-sm' value = '" . $row['invoiceNum']. "' > Mark as Received </button></td></tr>\n";
-
+                                            echo "\t<tr><td >" . $row['date'] . "</td><td>" . $row['invoiceNum'] . " </td><td>"  .  $row['CustomerName'] . "</td><td>" . $row['bankNum'] ."</td><td>" . $row['checkNum'] ."</td><td style='text-align: center; '><button type = 'submit' name = 'receive' class='btn btn-success' value = '" . $row['invoiceNum']. "' > Mark as Received </button></td></tr>\n";
                                             }
                                         } 
-
                                          #please add these error checking codes
                                         else if (isset($_POST['search']) &&($search_result->num_rows == 0)){
                                             echo '<script language="javascript">';

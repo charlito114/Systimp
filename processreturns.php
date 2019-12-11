@@ -1,4 +1,5 @@
 <?php 
+error_reporting(0);
 if(!isset($_SESSION)){
     session_start();
 }
@@ -19,7 +20,6 @@ $returnquery = "UPDATE invoicedetails
         }
         else{
             $alert = mysqli_error($con);
-                        echo $alert;
                         echo '<script type="text/javascript">';
                         echo 'alert("'.$alert.'")';
                         echo '</script>';  
@@ -27,7 +27,6 @@ $returnquery = "UPDATE invoicedetails
 
         }
         $alert = "Successfully Processed Return!";
-        echo $alert;
         echo '<script type="text/javascript">';
         echo 'alert("'.$alert.'")';
         echo '</script>'; 
@@ -39,7 +38,6 @@ $returnquery = "UPDATE invoicedetails
                     else{
             
                         $alert = mysqli_error($con);
-                        echo $alert;
                         echo '<script type="text/javascript">';
                         echo 'alert("'.$alert.'")';
                         echo '</script>';  

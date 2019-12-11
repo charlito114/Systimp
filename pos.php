@@ -826,7 +826,7 @@ echo "window.location.href='pos.php'</script>";}
                                                               echo "0";
                                                             }
                                                             else{
-                                                              echo $payment;
+                                                              echo round($payment,2);
                                                             } ?></td>                                                </tr>
                                                 <tr>
                                                     <td>Change:</td>
@@ -834,7 +834,7 @@ echo "window.location.href='pos.php'</script>";}
                                                               echo "0";
                                                             }
                                                             else{
-                                                              echo $change;
+                                                              echo round($change,2);
                                                             } ?></td>
                                                 </tr>
                                             </tbody>      

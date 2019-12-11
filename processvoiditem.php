@@ -21,7 +21,6 @@ if(isset($_POST['submit'])){
                                 if(mysqli_query($con,$deleteQuery)){
                                   //  $message = "Successfully voided item";
                                  //   header("location:pos.php?message=".$message);
-
                                   $message = "Successfully Voided Product";
 echo "<script type='text/javascript'>alert('$message');";
 echo "window.location.href='pos.php'</script>";
@@ -29,7 +28,6 @@ echo "window.location.href='pos.php'</script>";
                                 }
                                 else{
                                     $alert = mysqli_error($con);
-
                                     $message = "Error in voiding item please try again";
 echo "<script type='text/javascript'>alert('$message');";
 echo "window.location.href='pos.php'</script>";                                  
@@ -38,7 +36,6 @@ echo "window.location.href='pos.php'</script>";
                                         }
                                     }
     else{
-
       $message = "Error in voiding item please try again";
 echo "<script type='text/javascript'>alert('$message');";
 echo "window.location.href='pos.php'</script>";

@@ -30,7 +30,7 @@
                 <div id="content">
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg topbar mb-4 static-top shadow">
-                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Add Order</div>
+                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Create Sales Order</div>
                       <!-- Sidebar Toggle (Topbar) -->
                       <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -146,7 +146,7 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <div class="btn btn-sm btn-primary shadow-sm" style="height: 30px; margin-top: 15px">
-                                <a href ="logout.php" class = "text-white"> Logout </a>
+                                Logout
                           </div>
                       </ul>
                     </nav>
@@ -487,7 +487,7 @@
                                 </div>
                             </form>
                             
-                            <form method="post" onsubmit="return confirm('Are you sure you want to continue action?');"> 
+                            <form method="post"> 
                                 <div class="d-flex" style=" margin-top: 10px;">
                                     <!-- Remove Button-->
                                     <div style="width: 80%; float: left;">
@@ -522,9 +522,7 @@
                                     $refreshQuery = " DELETE FROM temporaryorders";
                                     if(mysqli_query($con,$refreshQuery)){
                                         header("location:order_sales_orders.php");
-                                        session_unset(); 
-                                        session_destroy();
-
+                                        
                                             }
                                     else{
                                         header("location:order_sales_orders.php");

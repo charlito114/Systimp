@@ -8,7 +8,7 @@ require_once('db/connection.php');
 		{
 			header("location:login.php?Empty=Please Fill in the blanks.");
 		}
-		else
+		else 
 		{
             
             
@@ -22,29 +22,42 @@ require_once('db/connection.php');
 						$_SESSION["userType"] = $row["UserType"];
 						$_SESSION["firstName"] = $row["FirstName"];
 						$_SESSION["lastName"] = $row["LastName"];
+						$_SESSION["status"] =  $row["Status"];
+
 
 					}
-				}
-				if($_SESSION["userType"] == 'Assistant Manager' || $_SESSION["userType"] == 'Purchasing' ){
-					header("location:purchasing_dashboard.php"); 
-				}
+					if($_SESSION["status"]== 'Disabled'){
+						header("location:login.php?User does not exist.");
 
-				else if ($_SESSION["userType"] == 'Sales' ){
-					header("location:order_dashboard.php"); 
+						
+					}
+					else{
 
-				}
-
-				else if ($_SESSION["userType"] == 'Manager' ){
-					header("location:sales_dashboard.php"); 
-
+					if($_SESSION["userType"] == 'Assistant Manager' || $_SESSION["userType"] == 'Purchasing' ){
+						header("location:purchasing_dashboard.php"); 
+					}
+	
+					else if ($_SESSION["userType"] == 'Sales' ){
+						header("location:order_dashboard.php"); 
+	
+					}
+	
+					else if ($_SESSION["userType"] == 'Manager' ){
+						header("location:sales_dashboard.php"); 
+	
+					}
+					
 				}
 			}
-			else
+				else
 			{
-                header("location:login.php?Invalid=Invalid Username and Password");
+				header("location:login.php?Invalid=Invalid Username or Password.");
             
 			}
 		}
+				
+			}
+			
     }
     
 	

@@ -23,6 +23,7 @@
         <div id="wrapper">
             <?php 
             session_start();
+            require_once("connection.php");
             include 'sidebar.php' ?>
             
             <!-- Content Wrapper -->
@@ -215,7 +216,7 @@
                         
                         <!-- Table -->
                         <div class="table-responsive">
-                            <form method = 'post' action = 'sales_manage_returns.php'>
+                            <form method = 'post' action = ''>
                                 <div class="card-body mb-4" style="padding-top: 0;">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="padding-top: 0; border-top: .20rem solid #b4c540;">
                                   <thead>
@@ -236,14 +237,13 @@
                                         while($row = $search_result->fetch_assoc()) {
                                           $status =  $row['status'];
                                           if($status!= "Fully Returned"){
-                                            echo "\t<tr><td >" . $row['date'] . "</td><td><input type = 'submit' name = 'invoiceNum' value = '" . $row['invoiceNum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['salesbeforeVat'] . "</td><td>" . $row['salesafterVat'] . "</td><td>" . $row['status'] .
-                                             "</td><td style='text-align: center; '><button class = 'btn btn-sm btn-success shadow-sm' type = 'submit' name = 'return'  value = '" . $row['invoiceNum']. "'> Return Items </button></td></tr>\n";
+                                            echo "\t<tr><td >" . $row['date'] . "</td><td><input type = 'submit' name = 'invoiceNum' formaction = 'view_invoice.php' value = '" . $row['invoiceNum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['salesbeforeVat'] . "</td><td>" . $row['salesafterVat'] . "</td><td>" . $row['status'] .
+                                             "</td><td style='text-align: center; '><button class = 'btn btn-sm btn-success shadow-sm' formaction = 'sales_manage_returns.php' type = 'submit' name = 'return'  value = '" . $row['invoiceNum']. "'> Return Items </button></td></tr>\n";
                                             }
-
                                             //dito sa part na toh, if fully returned na yung item dapat grayed out yung button and di na pwede iclick
                                           else{
-                                            echo "\t<tr><td >" . $row['date'] . "</td><td><input type = 'submit' name = 'invoiceNum' value = '" . $row['invoiceNum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['salesbeforeVat'] . "</td><td>" . $row['salesafterVat'] . "</td><td>" . $row['status'] .
-                                            "</td><td style='text-align: center; '><button class = 'btn btn-sm btn-success shadow-sm' type = 'submit' name = 'return'  value = '" . $row['invoiceNum']. "' disabled> Return Items </button></td></tr>\n";
+                                            echo "\t<tr><td >" . $row['date'] . "</td><td><input type = 'submit' formaction = 'view_invoice.php' name = 'invoiceNum' value = '" . $row['invoiceNum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['salesbeforeVat'] . "</td><td>" . $row['salesafterVat'] . "</td><td>" . $row['status'] .
+                                            "</td><td style='text-align: center; '><button class = 'btn btn-sm btn-success shadow-sm' formaction = 'sales_manage_returns.php' type = 'submit' name = 'return'  value = '" . $row['invoiceNum']. "' disabled> Return Items </button></td></tr>\n";
                                           }
                                           }
                                         } 

@@ -30,7 +30,7 @@
                 <div id="content">
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg topbar mb-4 static-top shadow">
-                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">View Invoice Details</div>
+                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Manage Returns</div>
                       <!-- Sidebar Toggle (Topbar) -->
                       <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -59,7 +59,7 @@
                           </div>
                         </li>
 
-                        <!-- COPY START -->
+                       <!-- COPY START -->
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -173,7 +173,6 @@
                                     {
                                         $invoiceNum = $_POST['invoiceNum'];
                                         $_SESSION['invoiceNum'] = $invoiceNum;
-
                                     }
                                     else if(isset($_POST['returnitem']))
                                     {

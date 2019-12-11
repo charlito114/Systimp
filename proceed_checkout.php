@@ -214,6 +214,8 @@ require_once("connection.php");
         $refreshQuery = "DELETE FROM temporaryinvoice";
         if(mysqli_query($con,$refreshQuery)){
             header("location:sales_orders.php");
+            session_unset(); 
+            session_destroy();
 
                 }
         else{

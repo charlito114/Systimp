@@ -196,25 +196,27 @@ session_start();?>
                                   <th>Size</th>
                                   <th>Quantity on Hand</th>
                                   <th>For Inventory</th>
-                                  <th>For Orders</th>
+                                  <th>EOQ</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <?php  
-                            $viewLowStock = ("SELECT prodcode,category,brand,proddesc,size,onhand,forinventory,SUM(fororders) AS fororders FROM lowstockproducts GROUP BY prodcode;");
+                            $viewLowStock = ("SELECT prodcode,category,brand,proddesc,size,onhand,forinventory,suggestedquantity FROM lowstockproducts 
+                            WHERE  (month(date)<= month(current_date()) AND month(date)>= month(current_date())-3) AND onhand < forinventory
+                            GROUP BY prodcode;");
                             $search_result = mysqli_query($con, $viewLowStock);
                             if ($search_result->num_rows > 0) {
                                 // output data of each row
-
                                 while($row = $search_result->fetch_assoc()) {
                                             $prodcode= $row['prodcode'];
+                                            
                                             $category = $row['category'];
                                             $brand= $row['brand'];
                                             $proddesc= $row['proddesc'];
                                             $size= $row['size'];
                                             $prodquan= $row['onhand'];
-                                            $forinventory= $row['forinventory'];
-                                            $fororders= $row['fororders'];
+                                            $forinventory=  $row['forinventory'] ;
+                                            $fororders= $row['suggestedquantity'];
                                             /*$_SESSION['prodcode'] = $prodcode;
                                             $_SESSION['category'] = $category;
                                             $_SESSION['brand'] = $brand;
@@ -224,7 +226,7 @@ session_start();?>
                                             $_SESSION['forinventory'] = $forinventory;
                                             $_SESSION['fororders'] = $fororders;*/
                                   
-                                    echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['onhand'] . "</td><td>" . $row['forinventory'] . "</td><td>" . $row['fororders'] .  "</td><td><button type = 'submit' name = 'add'  value = '" . $row['prodcode']. "' class = 'btn'> <i class='fas fa-fw fa-plus-square' style = 'color:#2e59d9;'/>  </button></td></tr><br>";
+                                    echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['onhand'] . "</td><td>" . $forinventory . "</td><td>" . $row['suggestedquantity'] .  "</td><td><button type = 'submit' name = 'add'  value = '" . $row['prodcode']. "' class = 'btn'> <i class='fas fa-fw fa-plus-square' style = 'color:#2e59d9;'/>  </button></td></tr><br>";
                                     }
                                     
                                   ?>
@@ -242,7 +244,6 @@ session_start();?>
                           $search_result = mysqli_query($con, $viewDetails);
                           if ($search_result->num_rows > 0) {
                               // output data of each row
-
                           while($row = $search_result->fetch_assoc()) {
                                       $prodcode1= $row['prodcode'];
                                       $category1 = $row['category'];
@@ -251,7 +252,7 @@ session_start();?>
                                       $size1= $row['size'];
                                       $prodquan1= $row['onhand'];
                                       $forinventory= $row['forinventory'];
-                                      $fororders= $row['fororders'];
+                                      $fororders= $row['suggestedquantity'];
                                       $_SESSION['prodcode'] = $prodcode1;
                                       $_SESSION['category'] = $category1;
                                       $_SESSION['brand'] = $brand1;
@@ -259,12 +260,10 @@ session_start();?>
                                       $_SESSION['size'] = $size1;
                                       $_SESSION['onhand'] = $prodquan;
                                       $_SESSION['forinventory'] = $forinventory;
-                                      $_SESSION['fororders'] = $fororders;
-
+                                      $_SESSION['suggestedquantity'] = $fororders;
                                       
                           }
                           }
-
                             ?>  
                         <form  method = "post" action = "" style="width: 100%;">
                         <div class="col-lg-12 navbar-expand">
@@ -335,7 +334,7 @@ session_start();?>
                                                 </div>
 
                                                 <div class="input-group col-sm-6 m-bot15">
-                                                    <input type="number" name="suggestedQuan" value="<?php echo $suggestedQuan = $forinventory + $fororders; ?>" class="form-control" readonly>
+                                                    <input type="number" name="suggestedQuan" value="<?php echo $forinventory + $fororders ?>" class="form-control" readonly>
                                                 </div>
                                             </div>
 
@@ -386,7 +385,6 @@ session_start();?>
                                     echo 'alert("'.$alert.'")';
                                     echo '</script>';    
                                         }
-
                             }
                         //}
                     }
@@ -421,7 +419,6 @@ session_start();?>
                                             while($row = $result->fetch_assoc()) {
                                                 echo "\t<tr><td >" . $row['ProductCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" .  $row['SuggestedQuantity'] . "</td><td>" .  $row['QuantitytobeOrdered']. "</td><td><button type = 'submit' name = 'remove'  value = '" . $row['ProductCode'] . "' class = 'btn'> <i class='fas fa-fw fa-minus-square' style = 'color:#e74a3b;'/> </button></td></tr><br>";
                                             }
-
                                         }
                                       else {
                                                echo "<tr><td colspan='7'><center> No data available in table </center></td></tr>";

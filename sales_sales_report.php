@@ -203,14 +203,115 @@ require_once("db/connection.php");
                                     $trial = $_POST['trial'];
                                     $month =date("m", strtotime($trial));
                                     $year= date("Y", strtotime($trial));
+
+                                    if($month==1){
+                                        $monthvalue = "JANUARY";
+                                    }
+                                    else if($month==2){
+                                      $monthvalue = "FEBRUARY";
+                                  }
+                                  else if($month==3){
+                                      $monthvalue = "MARCH";
+                                  }
+                                  else if($month==4){
+                                      $monthvalue = "APRIL";
+                                  }
+                                  else if($month==5){
+                                      $monthvalue = "MAY";
+                                  }
+                                  else if($month==6){
+                                      $monthvalue = "JUNE";
+                                  }
+                                  else if($month==7){
+                                      $monthvalue = "JULY";
+                                  }
+                                  else if($month==8){
+                                      $monthvalue = "AUGUST";
+                                  }
+                                  else if($month==9){
+                                      $monthvalue = "SEPTEMBER";
+                                  }
+                                  else if($month==10){
+                                      $monthvalue = "OCTOBER";
+                                  }
+                                  else if($month==11){
+                                      $monthvalue = "NOVEMBER";
+                                  }
+                                  else if($month==12){
+                                      $monthvalue = "DECEMBER";
+                                  }
+                                    
+                                
                                     //echo $month; 
                                     //echo $year;
+                                    $totalquery = "SELECT sum(netsales) as total FROM salesreport WHERE month = $month AND year = $year";
+
+                                    $totalresult =  $con->query($totalquery);
+                                    if ($totalresult->num_rows > 0) {
+
+                                        while($row = $totalresult->fetch_assoc()) {
+                                            $total= $row['total'];
+                                            }
+                                        } else {
+                                            echo "0 results";
+                                            }
                                     $query = "SELECT * FROM salesreport WHERE month = $month AND year = $year";
                                     $search_result = filterTable($query);
+                                   
+
+
                                 }
                                     else {
-                                        $query = "SELECT * FROM salesreport";
+                                        $month = date('m')-1;
+                                        if($month==1){
+                                            $monthvalue = "JANUARY";
+                                        }
+                                        else if($month==2){
+                                          $monthvalue = "FEBRUARY";
+                                      }
+                                      else if($month==3){
+                                          $monthvalue = "MARCH";
+                                      }
+                                      else if($month==4){
+                                          $monthvalue = "APRIL";
+                                      }
+                                      else if($month==5){
+                                          $monthvalue = "MAY";
+                                      }
+                                      else if($month==6){
+                                          $monthvalue = "JUNE";
+                                      }
+                                      else if($month==7){
+                                          $monthvalue = "JULY";
+                                      }
+                                      else if($month==8){
+                                          $monthvalue = "AUGUST";
+                                      }
+                                      else if($month==9){
+                                          $monthvalue = "SEPTEMBER";
+                                      }
+                                      else if($month==10){
+                                          $monthvalue = "OCTOBER";
+                                      }
+                                      else if($month==11){
+                                          $monthvalue = "NOVEMBER";
+                                      }
+                                      else if($month==12){
+                                          $monthvalue = "DECEMBER";
+                                      }
+                                        $totalquery = "SELECT sum(netsales) as total FROM salesreport WHERE month(date)= month(now())-1 ";
+                                        $totalresult =  $con->query($totalquery);
+                                                            if ($totalresult->num_rows > 0) {
+
+                                                                while($row = $totalresult->fetch_assoc()) {
+                                                                    $total= $row['total'];
+                                                                    }
+                                                                } else {
+                                                                    echo "0 results";
+                                                                    }
+                                        $query = "SELECT * FROM salesreport WHERE month(date)= month(now())-1";
                                         $search_result = filterTable($query);
+                                       
                                     }
                                     function filterTable($query)
                                     {
@@ -228,7 +329,7 @@ require_once("db/connection.php");
                                 <div style="width: 100%; display: inline-block; text-align: center;">
                                     <h1>Jansy Commercial</h1>
                                     <header class="justify-content-between">528A T. Alonzo St., Sta. Cruz Manila <br>Tel: 554-15-89 | Tel Fax: 554-15-85 <br>Email: jansycommercial@yahoo.com</header>
-                                    <header style="font-weight: bold;">MONTHLY SALES REPORT <br> FOR THE MONTH OF  </header>
+                                    <header style="font-weight: bold;">MONTHLY SALES REPORT <br> FOR THE MONTH OF <?php echo $monthvalue?>  </header>
                                 </div>
                             </div>
                             <table class="" style="margin: auto; width: 75% !important;" id="dataTable" cellspacing="0">
@@ -246,6 +347,7 @@ require_once("db/connection.php");
                                   if ($search_result->num_rows > 0) {
                                     // output data of each row
                                     while($row = $search_result->fetch_assoc()) {
+                                        
                                         echo "\t<tr><td class='text-center'>" . $row['date'] . "</td><td class='text-right'>" . $row['grosssales'] . "</td><td class='text-right'>"  .  $row['discount'] . "</td><td class='text-right'>" . $row['vat'] . "</td><td class='text-right'>" . $row['netsales'] . "</td></tr>\n";
                                         }
                                     } 
@@ -254,8 +356,9 @@ require_once("db/connection.php");
                                   ?>
                                   <tr><td style="line-height:50px;">&nbsp;</td></tr>
                                   <tr>
+                                  
                                       <td class="text-right font-weight-bold" colspan=4>Total Monthly Sales:</td>
-                                      <td class="text-right">100.00</td>
+                                      <td class="text-right"><?php echo $total?></td>
                                   </tr>
                               </tbody>
                             </table>

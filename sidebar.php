@@ -1,9 +1,7 @@
 <?php ob_start(); 
-
 $userType = $_SESSION["userType"];
 $firstName = $_SESSION["firstName"];
 $lastName = $_SESSION["lastName"];
-
 ?>
 <html>
     <head>

@@ -2,6 +2,7 @@
     <?php
         session_start();
         require_once("db/connection.php");
+        error_reporting(0);
     ?>
     <head>
         <title>Lunatech Systems</title>
@@ -59,7 +60,7 @@
                           </div>
                         </li>
 
-                       <!-- COPY START -->
+                     <!-- COPY START -->
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -308,7 +309,7 @@
                                                         }
                                                         else{
 
-                                                        $query = "SELECT * FROM products WHERE ProdCode = ". $valueToSearch;
+                                                        $query = "SELECT * FROM products WHERE ProdCode = ". $valueToSearch ." AND status = 'Available'";
                                                         $search_result = filterTable($query);
                                                         }
 
@@ -437,6 +438,7 @@
                                     echo '<script language="javascript">';
                                     echo 'alert("Invalid Search Parameter. Please Try Again")';
                                     echo '</script>';
+
                                 }
 
                                 if(isset($_POST['add']) && $_POST['add']){
@@ -485,6 +487,7 @@
                                           <th>Quantity</th>
                                           <th>Availability</th>
                                           <th>Price</th>
+                                          <th>Total Price</th>
                                         </tr>
                                       </thead>
                                       <tbody>
@@ -540,9 +543,7 @@
                                     $refreshQuery = " DELETE FROM temporaryorders";
                                     if(mysqli_query($con,$refreshQuery)){
                                         header("location:order_sales_orders.php");
-                                        session_unset(); 
-                                        session_destroy();
-
+                                      
                                             }
                                     else{
                                         header("location:order_sales_orders.php");

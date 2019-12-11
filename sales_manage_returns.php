@@ -30,7 +30,7 @@
                 <div id="content">
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg topbar mb-4 static-top shadow">
-                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">View Invoice Details</div>
+                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Manage Returns</div>
                       <!-- Sidebar Toggle (Topbar) -->
                       <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -59,7 +59,7 @@
                           </div>
                         </li>
 
-                        <!-- COPY START -->
+                       <!-- COPY START -->
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -173,7 +173,6 @@
                                     {
                                         $invoiceNum = $_POST['invoiceNum'];
                                         $_SESSION['invoiceNum'] = $invoiceNum;
-
                                     }
                                 
                                 else if(isset($_POST['return']))
@@ -378,15 +377,12 @@
                                                 echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['QuantityIssued'] . "</td><td>" . $row['Returned'] . "</td><td>" . $row['Price'] .
                                                  "<td style='text-align: center; '><button class = 'btn btn-sm btn-success shadow-sm' type = 'submit' formaction= 'sales_manage_returns_2.php' name = 'returnitem'  value = '" . $row['ProdCode']. "' > Return </button></td></tr>\n";
                                                 }
-
                                                 // dito sa part na toh, pag fully returned na status ng invoice or pag may item na nareturn na lahat, dapat grayed out din siya and not clickable
-
                                                 else{
                                                     echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['QuantityIssued'] . "</td><td>" . $row['Returned'] . "</td><td>" . $row['Price'] .
                                                     "<td style='text-align: center; '><button class = 'btn btn-sm btn-success shadow-sm' type = 'submit' name = 'returnitem' value = '" . $row['ProdCode']. "' disabled> Return </button></td></tr>\n";
                                                 }
                                             }
-
                                                 // echo "</form>";
                                             } 
                                             

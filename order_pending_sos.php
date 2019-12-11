@@ -24,6 +24,7 @@
         <div id="wrapper">
             <?php
             session_start();
+            require_once("connection.php");
             include 'sidebar.php' ?>
             
             <!-- Content Wrapper -->
@@ -207,7 +208,7 @@
                                     $valueToSearch = $_POST['valueToSearch'];
                                     // search in all table columns
                                     // using concat mysql function
-                                    $query = "SELECT * FROM pendingso WHERE CONCAT(date, PONum) LIKE '%".$valueToSearch."%'";
+                                    $query = "SELECT * FROM pendingso WHERE CONCAT(date, SONum) LIKE '%".$valueToSearch."%'";
                                     $search_result = filterTable($query);
                                 }             
                                 else {

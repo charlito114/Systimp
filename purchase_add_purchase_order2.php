@@ -59,7 +59,7 @@
                           </div>
                         </li>
 
-                       <!-- COPY START -->
+                        <!-- COPY START -->
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -189,6 +189,8 @@
                                                                 $_SESSION['SupplierName'] = $supplier;
                                                                 $_SESSION['address'] = $address; 
                                                             }
+
+                                                             
                                                         
                                                             $POQuery = ("SELECT count(PONum) AS POCount FROM p_purchasingmanagement");
                                                             $POresult =  $con->query($POQuery);
@@ -279,7 +281,9 @@
                                                     $valueToSearch = $_POST['prodcode'];
                                                     // search in all table columns
                                                     // using concat mysql function
-                                                    $query = "SELECT * FROM products WHERE prodcode  = ".$valueToSearch;
+                                                    $query = "SELECT prodcode,category,brand,proddesc,size,onhand,forinventory,suggestedquantity FROM lowstockproducts 
+                                                    WHERE prodcode = $valueToSearch AND (month(date)<= month(current_date()) AND month(date)>= month(current_date())-3) AND status = 'Available'
+                                                    GROUP BY prodcode";
                                                     $search_result = filterTable($query);
                                                 }
 
@@ -307,7 +311,10 @@
                                                     $proddesc= $row['proddesc'];
                                                     $size= $row['size'];
                                                     $PONum = $_SESSION['PONum'];                    
-                                                    $available = $row['prodquan'];
+                                                    $available = $row['onhand'];
+                                                    $repoint = $row['forinventory'];
+
+                                                    $suggested = $row['suggestedquantity'];
                                                     $_SESSION['prodcode'] = $prodcode;
                                                     $_SESSION['category'] = $category;
                                                     $_SESSION['brand'] = $brand;
@@ -387,7 +394,7 @@
                                                     </div>
 
                                                     <div class="input-group col-sm-6 m-bot15">
-                                                        <?php echo $available; ?>
+                                                        <?php echo ROUND($repoint + $suggested,0); ?>
                                                     </div>
                                                 </div>
                                                 
@@ -525,8 +532,7 @@
                                     $refreshQuery = " DELETE FROM temporarypurchasing";
                                     if(mysqli_query($con,$refreshQuery)){
                                         header("location:purchase_purchase_history.php");
-                                        session_unset(); 
-                                        session_destroy();
+                                       
 
                                             }
                                     else{

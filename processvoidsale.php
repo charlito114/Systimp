@@ -23,7 +23,6 @@ if(isset($_POST['submitvoid'])){
                                  $_SESSION['Subtotal']=0;
                                  $_SESSION['discount']=0;
                                  $_SESSION['Total']=0;
-
                                  $message = "Sales Order Successfully Voided";
 echo "<script type='text/javascript'>alert('$message');";
 echo "window.location.href='pos.php'</script>";
@@ -31,7 +30,6 @@ echo "window.location.href='pos.php'</script>";
                                     //header("location:pos.php?message=success");//dapat may alert na successfully voided item, please try again
                                         }
                                 else{
-
                                     $message = "Error in voiding Sales Order";
 echo "<script type='text/javascript'>alert('$message');";
 echo "window.location.href='pos.php'</script>";
@@ -41,7 +39,6 @@ echo "window.location.href='pos.php'</script>";
                                         }
                                     }
     else{
-
         $message = "Incorrect Password";
 echo "<script type='text/javascript'>alert('$message');";
 echo "window.location.href='pos.php'</script>";

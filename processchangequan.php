@@ -6,7 +6,6 @@ if(isset($_POST['submit'])){
     $productcode = $_SESSION['ProdCode'];
     $newQuan = $_POST['newQty'];
     $SONum = $_SESSION ['SONum']; 
-
    // $invoiceNum = $_SESSION ['invoiceNum']; 
     
     /*$availableQuery = ("SELECT  Available, QuantityIssued, Quantity FROM temporaryinvoice  WHERE ProdCode = $productcode  ");
@@ -32,7 +31,6 @@ if(isset($_POST['submit'])){
     if(mysqli_query($con,$updateQuery)){
     //$message = "Successfully updated purchase!";
     //header("location:pos.php?message=".$message);
-
         $message = "Quantity has been successfully updated";
 echo "<script type='text/javascript'>alert('$message');";
 echo "window.location.href='pos.php'</script>";

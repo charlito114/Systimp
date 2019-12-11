@@ -8,12 +8,12 @@ $ReceivedQty = $_POST['receivevalue'];
 $PONum = $_SESSION['PONum'];
 $EditCode =  $_SESSION['EditCode'];
 $receivequery = "UPDATE p_podetails 
-                    SET ToReceive = ToReceive - '".$ReceivedQty."'
+                    SET ToReceive = ToReceive - '".$ReceivedQty."', 
+                     Received = Received + '".$ReceivedQty."'
                     WHERE ProductCode = $EditCode  AND PONum = $PONum";
     if(mysqli_query($con,$receivequery)){
         
         $alert = "Successfully updated purchase order!";
-        echo $alert;
         echo '<script type="text/javascript">';
         echo 'alert("'.$alert.'")';
         echo '</script>'; 
@@ -25,10 +25,11 @@ $receivequery = "UPDATE p_podetails
                     else{
             
                         $alert = mysqli_error($con);
-                        echo $alert;
                         echo '<script type="text/javascript">';
                         echo 'alert("'.$alert.'")';
                         echo '</script>';  
+                        include("view_purchase_order2.php");
+
                                 
                     }
 

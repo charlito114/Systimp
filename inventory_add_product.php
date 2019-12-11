@@ -144,7 +144,6 @@ body{
                         </li>
                           
 <!-- COPY END -->
-
             <div class="topbar-divider d-none d-sm-block"></div>
             <div class="btn btn-sm btn-primary shadow-sm" style="height: 30px; margin-top: 15px">
             <a href ="logout.php" class = "text-white"> Logout </a> 
@@ -365,10 +364,22 @@ body{
                                     <!-- Submit Button-->
                                     <button type = 'submit' name = 'submit'  value = 'submit' formaction = 'insert.php'  class="d-flex d-sm-inline-block btn btn-sm btn-success shadow-sm" style="width: 35%; float: left; margin-right: 20%;"> Submit </button>
                                     <!-- Cancel Button-->
-                                    <button type = 'submit' name = 'back'  value = 'back' formaction = 'inventory_add_product.php'  class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" style="width: 35%; float: right;"> Cancel </button>
+                                    <button type = 'submit' name = 'back'  value = 'back' formaction = 'inventory_dashboard.php'  class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" style="width: 35%; float: right;"> Cancel </button>
                                     </div>
                                 </div>
                             </form>
+                            <?php if(isset($_POST['back'])){
+                                    $refreshQuery = " DELETE FROM temporaryinventory";
+                                    if(mysqli_query($con,$refreshQuery)){
+                                        header("location:inventory_dashboard.php");
+                                        
+
+                                            }
+                                    else{
+                                        header("location:inventory_dashboard.php");
+                                            }
+                                }
+                                ?>
                             </div>
                     
                 <?php

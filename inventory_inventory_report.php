@@ -201,7 +201,7 @@ require_once("db/connection.php");
                                     $tempdate = $_POST['date'];
                                     $date = date('Y-m-d', strtotime($tempdate));
                                     $_SESSION['date'] = $date;
-                                    $query = "SELECT * FROM inventoryreport WHERE date = '$date'";
+                                    $query = "SELECT * FROM inventoryreport WHERE date = '$date' ORDER BY prodquan ASC";
                                     $search_result = filterTable($query);
                                 }
                                     else {
@@ -209,7 +209,7 @@ require_once("db/connection.php");
                                         $mindate =  date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $date) ) ));
                                         $_SESSION['date'] = $mindate;
                                       //  echo $date;
-                                        $query = "SELECT * FROM inventoryreport WHERE date LIKE '$mindate' ";
+                                        $query = "SELECT * FROM inventoryreport WHERE date LIKE '$mindate' ORDER BY prodquan ASC ";
                                         $search_result = filterTable($query);
                                     }
                                     function filterTable($query)

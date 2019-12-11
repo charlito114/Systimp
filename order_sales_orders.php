@@ -23,6 +23,8 @@
         <div id="wrapper">
             <?php 
             session_start();
+            require_once("connection.php");
+
             include 'sidebar.php' ?>
             
             <!-- Content Wrapper -->

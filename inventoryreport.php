@@ -26,7 +26,6 @@ function printContent(el){
         $date = date('Y-m-d', strtotime($tempdate));
         $query = "SELECT * FROM inventoryreport WHERE date = '$date'";
         $search_result = filterTable($query);
-
     }
         else {
             $date = date('Y-m-d');
@@ -34,8 +33,6 @@ function printContent(el){
             $query = "SELECT * FROM inventoryreport WHERE date LIKE '$date' ";
             $search_result = filterTable($query);
         }
-
-
         function filterTable($query)
         {
             $con = mysqli_connect("localhost", "root", "", "inventory");
@@ -43,7 +40,6 @@ function printContent(el){
             return $filter_Result;
         }
         
-
     ?>
  
  <button onclick = "printContent('report')"> Print </button> 
@@ -67,10 +63,8 @@ function printContent(el){
         </tr>
 
         <?php
-
         if ($search_result->num_rows > 0) {
             // output data of each row
-
             while($row = $search_result->fetch_assoc()) {
                 echo "\t<tr><td >" . $row['date'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['prodcode'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['prodquan'] .    "</td></tr>\n";
                 }
@@ -83,7 +77,6 @@ function printContent(el){
                 echo 'alert("'.$alert.'")';
                 echo '</script>';  
             }
-
         ?>
         </table>
     </div>

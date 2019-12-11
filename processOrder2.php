@@ -3,9 +3,24 @@
  require_once("db/connection.php");
  session_start();
 
+ $counttemp = "SELECT count(SONum) as count from temporaryorders";
+ $countresult =  $con->query($counttemp);
+ if ($countresult->num_rows > 0) {
+
+     while($row = $countresult->fetch_assoc()) {
+         $count= $row['count'];
+         }
+        } 
+
 if (isset($_POST['submit']))
 {
-    
+    if($count==0){
+        header("location:order_add_order.php?message=Error in adding the record");
+
+    }
+    else{
+
+    $SONum =  $_SESSION['SONum'] ;
     $TotalQuery = ("SELECT SUM(TotalPrice) FROM temporaryorders");
 	$total = mysqli_fetch_row(mysqli_query($con, $TotalQuery));
     $date = $_SESSION['date' ];
@@ -35,7 +50,9 @@ if (isset($_POST['submit']))
 
         $refreshQuery = " DELETE FROM temporaryorders";
         if(mysqli_query($con,$refreshQuery)){
-            header("location:order_sales_orders.php?message=Successfully added new records");
+            header("location:view_sales_order.php?message=Successfully added new records");
+					//session_unset(); 
+                   // session_destroy();
                     
                 }
         else{
@@ -43,6 +60,7 @@ if (isset($_POST['submit']))
             $alert = mysqli_error($con);
            
                 }
+            }
     
 }
 ?>

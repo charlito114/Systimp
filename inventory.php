@@ -1,6 +1,7 @@
 <?php
     session_start();
-    require_once("db/connection.php");
+    require_once("connection.php");
+    error_reporting(0);
         ?>
 <html>
     
@@ -64,7 +65,7 @@
                           </div>
                         </li>
 
-                       <!-- COPY START -->
+                        <!-- COPY START -->
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

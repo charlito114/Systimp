@@ -3,8 +3,24 @@ error_reporting(0);
 require_once("db/connection.php");
 session_start();
 
+
+$counttemp = "SELECT count(PONum) as count from temporarypurchasing";
+$countresult =  $con->query($counttemp);
+if ($countresult->num_rows > 0) {
+
+    while($row = $countresult->fetch_assoc()) {
+        $count= $row['count'];
+        }
+       } 
+
 if (isset($_POST['submit']))
 {
+
+    if($count==0){
+        header("location:purchase_add_purchase_order.php?message=Error in adding the record");
+
+    }
+    else{
     $PONum = $_SESSION['PONum'];
     //echo $PONum;
     $date = $_SESSION['date'];
@@ -67,5 +83,6 @@ if (isset($_POST['submit']))
       
     } 
     
+}
 }
 ?>

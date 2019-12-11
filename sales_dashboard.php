@@ -350,16 +350,16 @@ var month = "For the month of " + monthNames[d.getMonth()-1];
                                   <tbody>
                                     <?php
                                       $viewTop = "SELECT invoicedetails.prodcode as ProductCode, invoicedetails.category as Category,invoicedetails.brand as Brand,
-invoicedetails.proddesc as ProdDescription,invoicedetails.size as Size,invoicedetails.quantity as Quantity,products.repoint as Reorder, 
-sum(invoicedetails.quantity) as Quansold, products.price as Price
-FROM invoicedetails 
-JOIN salesmanagement ON invoicedetails.SONum = salesmanagement.SONum
-JOIN products ON products.prodcode = invoicedetails.prodcode
-WHERE salesmanagement.date BETWEEN DATE_FORMAT(NOW() - INTERVAL 1 MONTH, '%Y-%m-01 00:00:00')
-AND DATE_FORMAT(LAST_DAY(NOW() - INTERVAL 1 MONTH), '%Y-%m-%d 23:59:59')
-GROUP BY invoicedetails.ProdCode 
-ORDER BY Quansold desc
-LIMIT 5;";
+                                                  invoicedetails.proddesc as ProdDescription,invoicedetails.size as Size,invoicedetails.quantity as Quantity,products.repoint as Reorder, 
+                                                  sum(invoicedetails.quantity) as Quansold, products.price as Price
+                                                  FROM invoicedetails 
+                                                  JOIN salesmanagement ON invoicedetails.SONum = salesmanagement.SONum
+                                                  JOIN products ON products.prodcode = invoicedetails.prodcode
+                                                  WHERE salesmanagement.date BETWEEN DATE_FORMAT(NOW() - INTERVAL 1 MONTH, '%Y-%m-01 00:00:00')
+                                                  AND DATE_FORMAT(LAST_DAY(NOW() - INTERVAL 1 MONTH), '%Y-%m-%d 23:59:59')
+                                                  GROUP BY invoicedetails.ProdCode 
+                                                  ORDER BY Quansold desc
+                                                  LIMIT 5;";
                                     $search_result = mysqli_query($con, $viewTop);
                                     if ($search_result->num_rows > 0) {
                                         // output data of each row
