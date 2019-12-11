@@ -325,7 +325,15 @@ var month = "For the month of " + monthNames[d.getMonth()-1];
                         <div style="display: block;">
                             <div class="col-lg-12">
                             <form method="post" class="navbar-expand col-lg-12">
-                            <header class="card-header font-weight-bold" style="border-bottom: none;">Top Selling Porducts</header>
+                                <div class="d-flex" style=" margin-right: 5%;">
+                                      <div class="col-lg-10">
+                                          <header class="card-header font-weight-bold" style="border-bottom: none;">Top Selling Products</header>
+                                      </div>
+                                        <div class="col-lg-3">
+                                            <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Inventory List </button>
+                                        </div>
+                                    </div>
+                            
                             <div class=" align-items-center justify-content-between mb-4" style="padding-top: 0; display: flex;">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                   <thead>
@@ -377,27 +385,5 @@ LIMIT 5;";
             </div>
         </div>
 
-          <!-- Page level plugins -->
-          <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-          <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-          <!-- Bootstrap core JavaScript-->
-          <script src="vendor/jquery/jquery.min.js"></script>
-          <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-          <!-- Core plugin JavaScript-->
-          <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-          <!-- Custom scripts for all pages-->
-          <script src="js/sb-admin-2.min.js"></script>
-
-          <!-- Page level plugins -->
-          <script src="vendor/chart.js/Chart.min.js"></script>
-
-          <!-- Page level custom scripts -->
-          <script src="js/demo/chart-area-demo.js"></script>
-          <script src="js/demo/chart-bar-demo.js"></script>
-
-          <!-- Page level custom scripts -->
-          <script src="js/demo/datatables-demo.js"></script>
     </body>
 </html>
