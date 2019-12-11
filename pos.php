@@ -738,9 +738,6 @@ echo "window.location.href='pos.php'</script>";
                                                 $_SESSION['banknumber'] = $banknumber;
                                                 $chequenumber = $_POST['chequenumber'];
                                                 $_SESSION['chequenumber'] = $chequenumber;
-                                                $message = "Checque Added!";
-echo "<script type='text/javascript'>alert('$message');";
-echo "window.location.href='pos.php'</script>";
                                                 }
                                                 else{$message = "Failed to add checque";
 echo "<script type='text/javascript'>alert('$message');";
@@ -778,10 +775,6 @@ echo "window.location.href='pos.php'</script>";}
                                                 $_SESSION['payment'] = $payment;
                                                 $change = $payment - $Total;
                                                 $_SESSION['change'] = $change;
-                                                
-                                                $message = "Cash added!";
-echo "<script type='text/javascript'>alert('$message');";
-echo "window.location.href='pos.php'</script>";
                                                 }
                                                 else {$message = "Error In adding amount";
 echo "<script type='text/javascript'>alert('$message');";
