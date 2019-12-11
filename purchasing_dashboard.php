@@ -274,7 +274,7 @@
                                               <header class="card-header font-weight-bold" style="border-bottom: none;">Ongoing Supplier Deliveries</header>
                                           </div>
                                             <div class="col-lg-3">
-                                                <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Manage PO </button>
+                                                <button formaction = "purchase_pending_pos.php" name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Manage PO </button>
                                             </div>
                                         </div> 
                                   
@@ -319,7 +319,7 @@
                                               <header class="card-header font-weight-bold" style="border-bottom: none;">Cancelled Supplier Deliveries</header>
                                           </div>
                                             <div class="col-lg-3">
-                                                <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Purchase Orders </button>
+                                                <button formaction = "purchase_purchase_history.php" name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Purchase Orders </button>
                                             </div>
                                         </div>
                                   
@@ -361,7 +361,7 @@
                                               <header class="card-header font-weight-bold" style="border-bottom: none;">Overdue Supplier Deliveries</header>
                                           </div>
                                             <div class="col-lg-3">
-                                                <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Manage PO </button>
+                                                <button formaction = "purchase_pending_pos.php" name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Manage PO </button>
                                             </div>
                                         </div>
                                   

@@ -329,9 +329,7 @@ var month = "For the month of " + monthNames[d.getMonth()-1];
                                       <div class="col-lg-9">
                                           <header class="card-header font-weight-bold" style="border-bottom: none;">Top Selling Products</header>
                                       </div>
-                                        <div class="col-lg-3">
-                                            <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Inventory List </button>
-                                        </div>
+                                        
                                     </div>
                             
                             <div class=" align-items-center justify-content-between mb-4" style="padding-top: 0; display: flex;">

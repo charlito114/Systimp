@@ -247,7 +247,7 @@ GROUP BY SONum) AS readyvstotal JOIN ordermanagement ON ordermanagement.SONum = 
                                               <header class="card-header font-weight-bold" style="border-bottom: none;">Ready Orders</header>
                                           </div>
                                             <div class="col-lg-3">
-                                                <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Manage SO </button>
+                                                <button formaction = "order_pending_sos.php" name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Manage SO </button>
                                             </div>
                                         </div>
                                       <div class="align-items-center justify-content-between mb-4" style="padding-top: 0; display:inline-flex;">
@@ -293,7 +293,7 @@ GROUP BY SONum) AS readyvstotal JOIN ordermanagement ON ordermanagement.SONum = 
                                       <header class="card-header font-weight-bold" style="border-bottom: none;">Recently Placed Orders</header>
                                   </div>
                                     <div class="col-lg-3">
-                                        <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Manage SO </button>
+                                        <button formaction = "order_sales_orders.php"name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to SO List </button>
                                     </div>
                                 </div>
                                   <div class="align-items-center justify-content-between mb-4" style="padding-top: 0; display:flex;">

@@ -306,7 +306,7 @@
                                               <header class="card-header font-weight-bold" style="border-bottom: none;">Low Quantity Products</header>
                                           </div>
                                             <div class="col-lg-3">
-                                                <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Purchasing Cart </button>
+                                                <button formaction = "purchase_purchase_cart.php" name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Purchasing Cart </button>
                                             </div>
                                         </div> 
 
@@ -397,7 +397,7 @@
                                               <header class="card-header font-weight-bold" style="border-bottom: none;">Restocked Products</header>
                                           </div>
                                             <div class="col-lg-3">
-                                                <button name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Purchase Orders </button>
+                                                <button formaction = "purchase_purchase_history.php" name="print" value="print" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-top: 15px; width: 100%;"> Proceed to Purchase Orders </button>
                                             </div>
                                         </div> 
                                     <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
