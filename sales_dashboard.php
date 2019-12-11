@@ -8,7 +8,7 @@ WHERE salesmanagement.date BETWEEN DATE_FORMAT(NOW() - INTERVAL 1 MONTH, '%Y-%m-
 AND DATE_FORMAT(LAST_DAY(NOW() - INTERVAL 1 MONTH), '%Y-%m-%d 23:59:59')
 GROUP BY ProdCode
 ORDER BY quansold desc;";  
-     $query2 = "SELECT sum(salesafterVat) AS TotalSalesoftheDay, date FROM salesmanagement Group BY date"; // PROBLEM IS IN THIS LINE OF CODE IDK Y, IF U CHANGE THIS QUERY TO SOMETHING ELSE GUMAGANA YUN GRAPH 2
+     $query2 = "SELECT sum(salesafterVat) AS TotalSalesoftheDay, date FROM salesmanagement WHERE date >= DATE(NOW()) - INTERVAL 7 DAY Group BY date ORDER BY date asc  LIMIT 7"; // PROBLEM IS IN THIS LINE OF CODE IDK Y, IF U CHANGE THIS QUERY TO SOMETHING ELSE GUMAGANA YUN GRAPH 2
      $result = mysqli_query($connect, $query);  
      $result2 = mysqli_query($connect, $query2);  
         session_start();
