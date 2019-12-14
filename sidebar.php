@@ -30,20 +30,6 @@
               <!-- Divider -->
               <hr class="sidebar-divider my-0">
 
-              <!-- Nav Item - Pages Collapse Menu -->
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <i class="fas fa-fw fa-credit-card"></i>
-                  <span>Point of Sale</span>
-                </a>
-                <!--<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                  <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Components:</h6>
-                    <a class="collapse-item" href="buttons.html">Buttons</a>
-                    <a class="collapse-item" href="cards.html">Cards</a>
-                  </div>
-                </div>-->
-              </li>
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInv" aria-expanded="true" aria-controls="collapseInv">
@@ -52,77 +38,11 @@
                 </a>
                 <div id="collapseInv" class="collapse" aria-labelledby="headingInv" data-parent="#accordionSidebar">
                   <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Components:</h6>
-                    <a class="collapse-item" href="buttons.html">Dashboard</a>
                     <a class="collapse-item" href="inventory.php">Inventory List</a>
                     <a class="collapse-item" href="inventory_add_product.php">Add Product</a>
                     <a class="collapse-item" href="inventory_remove_product.php">Remove Product</a>
                   </div>
                 </div>
-          </li>
-
-          <!-- Nav Item - Utilities Collapse Menu -->
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-              <i class="fas fa-fw fa-tags"></i>
-              <span>Sales Management</span>
-            </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-              <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Components:</h6>
-                <a class="collapse-item" href="sales_dashboard.php">Dashboard</a>
-                <a class="collapse-item" href="sales_sales_list.php">Sales List</a>
-                <a class="collapse-item" href="sales_sales_report.php">Sales Report</a>
-              </div>
-            </div>
-          </li>
-
-          <!-- Nav Item - Pages Collapse Menu -->
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-              <i class="fas fa-fw fa-shopping-cart"></i>
-              <span>Purchase Management</span>
-            </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-              <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Components:</h6>
-                <a class="collapse-item" href="login.html">Dashboard</a>
-                <a class="collapse-item" href="purchase_purchase_cart.php">Purchase Cart</a>
-                <a class="collapse-item" href="purchase_add_purchase_order.php">Add Purchase Order</a>
-                <a class="collapse-item" href="purchase_purchase_history.php">Purchase History</a>
-              </div>
-            </div>
-          </li>
-
-          <!-- Nav Item - Charts -->
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrder" aria-expanded="true" aria-controls="collapseOrder">
-              <i class="fas fa-fw fa-check-square"></i>
-              <span>Order Management</span></a>
-
-                  <div id="collapseOrder" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                  <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Components:</h6>
-                    <a class="collapse-item" href="order_sales_orders.php">Dashboard</a>
-                    <a class="collapse-item" href="order_sales_orders.php">Sales Orders</a>
-                    <a class="collapse-item" href="order_add_order.php">Add Order</a>
-                  </div>
-                </div>
-          </li>
-
-          <!-- Nav Item - Tables -->
-          <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser" aria-expanded="true" aria-controls="collapseUser">
-              <i class="fas fa-fw fa-users"></i>
-              <span>User Management</span></a>
-
-              <div id="collapseUser" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-              <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Components:</h6>
-                <a class="collapse-item" href="user_add_user.php">Add User</a>
-                <a class="collapse-item" href="user_user_list.php">User List</a>
-              </div>
-            </div>
           </li>
 
           <!-- Divider -->
