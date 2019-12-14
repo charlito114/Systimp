@@ -1,7 +1,7 @@
 <?php
-    session_start();
+    /*session_start();
     require_once("connection.php");
-    error_reporting(0);
+    error_reporting(0);*/
         ?>
 <html>
     
@@ -26,7 +26,7 @@
     <body>
         <!-- Page Wrapper -->
         <div id="wrapper">
-            <?php include 'sidebar.php' ?>
+            <?php include 'config.php' ?>
             
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -81,6 +81,7 @@
                             <form method = "post" class="table-responsive-lg">
                             <table class="table table-wrapper">
                                 <?php
+                                /*
                                 $getNotifs ="SELECT * FROM notifications";
                                 $search_result = mysqli_query($con, $getNotifs);
                                     if ($search_result->num_rows > 0) {
@@ -97,6 +98,7 @@
                                                                         
                                         }
                                       }
+                                      */
                                   
                                 ?>
                                 <!--<tr>
@@ -108,6 +110,7 @@
                             </form>
 
                             <?php
+                            /*
                             if(isset($_POST['notification'])) {
                                 $notifID = $_POST['notification']; 
                                 $specificNotif ="SELECT * FROM notifications WHERE notifID = $notifID";
@@ -136,7 +139,7 @@
                                     header("location:view_pending_order.php");       
                                 }
                                 
-                            }
+                            }*/
                             ?>
                           </div>
                         </li>
@@ -188,6 +191,7 @@
                             </form>
                             
                             <?php
+                            /*
                                 if(isset($_POST['search']))
                                 {
                                     $valueToSearch = $_POST['valueToSearch'];
@@ -209,7 +213,7 @@
                                     $con = mysqli_connect("localhost", "root", "", "inventory");
                                     $filter_Result = mysqli_query($con, $query);
                                     return $filter_Result;
-                                }
+                                }*/
                             ?>
                             
                         </div>
@@ -266,15 +270,33 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <?php 
+                                    <?php /* 
                                       if ($search_result->num_rows > 0) {
                                     // output data of each row
 
                                     while($row = $search_result->fetch_assoc()) {
                                         echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['price'] ."</td></tr>\n";
                                         }
-                                    } 
+                                    } */
+                                    $filter = [];
+                                    $option = [];
+                                    // select data in descending order from table/collection "users"
+                                    $read = new MongoDB\Driver\Query($filter, $option);
+                                    $result = $conn->executeQuery("$dbname.$c_users", $read);
+
+                                    foreach ($result as $res) {
+                                      echo "<tr>";
+                                      echo "<td>".$res->prodcode."</td>";
+                                      echo "<td>".$res->category."</td>";
+                                          echo "<td>".$res->brand."</td>";	
+                                          echo "<td>".$res->proddesc."</td>";
+                                      echo "<td>".$res->size."</td>";
+                                          echo "<td>".$res->prodquan."</td>";	
+                                          echo "<td>".$res->repoint."</td>";
+                                          echo "<td>".$res->price."</td>";	
+                                          echo "</tr>";
                                   
+                                    }
                                       ?>
                                   </tbody>
                                 </table>

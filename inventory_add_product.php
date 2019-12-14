@@ -1,6 +1,17 @@
-<?php
+ <?php /*
 session_start();
 require_once("connection.php");
+*/
+
+
+$dbhost = 'localhost';
+$dbport = '27017';
+$dbname = 'jansy';
+$c_users = 'products';
+$temptable = 'temporaryproducts';
+$conn = new MongoDB\Driver\Manager("mongodb://$dbhost:$dbport");
+
+
 ?>
 
 <html>
@@ -23,7 +34,7 @@ body{
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-<?php include 'sidebar.php' ?>
+<?php //include config.php ?>
 
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
@@ -76,7 +87,7 @@ body{
                             <form method = "post" class="table-responsive-lg">
                             <table class="table table-wrapper">
                                 <?php
-                                $getNotifs ="SELECT * FROM notifications";
+                                /*$getNotifs ="SELECT * FROM notifications";
                                 $search_result = mysqli_query($con, $getNotifs);
                                     if ($search_result->num_rows > 0) {
                                         while($row = $search_result->fetch_assoc()) {
@@ -92,6 +103,7 @@ body{
                                                                         
                                         }
                                       }
+                                      */
                                   
                                 ?>
                                 <!--<tr>
@@ -102,7 +114,7 @@ body{
                             </table>
                             </form>
 
-                            <?php
+                            <?php /*
                             if(isset($_POST['notification'])) {
                                 $notifID = $_POST['notification']; 
                                 $specificNotif ="SELECT * FROM notifications WHERE notifID = $notifID";
@@ -132,6 +144,7 @@ body{
                                 }
                                 
                             }
+                            */
                             ?>
                           </div>
                         </li>
@@ -167,7 +180,7 @@ body{
 
         <div class="container-fluid">
             <!--Add New Product Form -->
-            <form action = "" method= "post"  onsubmit="return confirm('Add new product?');">
+            <form action = "" method= "post">
                 <div class="col-lg-12">
                     <div class="card-header font-weight-bold">
                         Add New Product
@@ -286,14 +299,14 @@ body{
                     <?php
                     
                         if (isset($_POST['add']) && !empty($_POST['description']) && !empty($_POST['size']) &&  !empty($_POST['quantity']) && !empty($_POST['repoint']) &&  !empty($_POST['price'])){
-                         
+                        $prodcode = 10000000003;  //must insert code for count , siguro isa nanaman tong filter blah blah 
                         $category = $_POST['category'];
                         $brand = $_POST['brand'];
                         $desc = $_POST['description'];
                         $size = $_POST['size'];
-                        $quantity = $_POST['quantity'];
-                        $repoint = $_POST['repoint'];
-                        $price = $_POST['price'];
+                        $quantity = (int)$_POST['quantity'];
+                        $repoint =( int)$_POST['repoint'];
+                        $price = floatval($_POST['price']);
                         $_SESSION['category'] = $category;
                         $_SESSION['brand'] = $brand;
                         $_SESSION['proddesc'] = $desc;
@@ -302,7 +315,42 @@ body{
                         $_SESSION['repoint'] = $repoint;
                         $_SESSION['price'] = $price; 
 
-                        $inventoryQuery = "INSERT INTO temporaryinventory (category, brand, proddesc, size, prodquan, repoint, price)
+                        $product = array (
+                            'prodcode' => $prodcode,
+                            'category' => $category,
+                            'brand' => $brand,
+                            'proddesc' => $desc,
+                            'size' => $size,
+                            'prodquan' => $quantity,
+                            'repoint' => $repoint,
+                            'price' => $price,
+                            'status' => 'available' ,
+                        );
+                    
+                            // checking empty fields
+                            $errorMessage = '';
+                            foreach ($product as $key => $value) {
+                                if (empty($value)) {
+                                    $errorMessage .= $key . ' field is empty<br />';
+                                }
+                            }
+                            
+                            if ($errorMessage) {
+                                // print error message & link to the previous page
+                                echo '<span style="color:red">'.$errorMessage.'</span>';
+                                echo "<br/><a href='javascript:self.history.back();'>Go Back</a>";	
+                            } else {
+                                //insert data to database table/collection named 'users'
+                                $single_insert = new MongoDB\Driver\BulkWrite();
+                                $single_insert->insert($product);
+                                $conn->executeBulkWrite("$dbname.$temptable", $single_insert);
+                        
+                                //display success message
+                                echo "<font color='green'>Data added successfully.";
+                                echo "<br/><a href='index.php'>View Result</a>";
+                            }
+                        }
+                        /*$inventoryQuery = "INSERT INTO temporaryinventory (category, brand, proddesc, size, prodquan, repoint, price)
                         VALUES('". $_SESSION['category']."','". $_SESSION['brand']."', '". $_SESSION['proddesc']."', '". $_SESSION['size']."','". $_SESSION['quantity']."','". $_SESSION['repoint']."','". $_SESSION['price']."')";
                         if(mysqli_query($con,$inventoryQuery)){
                             header("message=Successfully added new records");  
@@ -316,6 +364,8 @@ body{
                                         echo 'alert("Cannot Leave Fields Blank")';
                                         echo '</script>';
                                     }
+                                    */
+                                
                      ?>
 
                     
@@ -338,6 +388,28 @@ body{
                                       </thead>
                                       <tbody>
                                       <?php
+                                      
+                                      $filter = [];
+                                        $option = [];
+                                        // select data in descending order from table/collection "users"
+                                        $read = new MongoDB\Driver\Query($filter, $option);
+                                        $result = $conn->executeQuery("$dbname.$temptable", $read);
+
+                                        foreach ($result as $res) {
+                                            echo "<tr>";
+                                           // echo "<td>".$res->prodcode."</td>";
+                                            echo "<td>".$res->category."</td>";
+                                            echo "<td>".$res->brand."</td>";	
+                                            echo "<td>".$res->proddesc."</td>";	
+                                            echo "<td>".$res->size."</td>";	
+                                            echo "<td>".$res->prodquan."</td>";	
+                                            echo "<td>".$res->repoint."</td>";
+                                            echo "<td>".$res->price."</td>";
+                                            echo  "<td><button type = 'submit' formaction = 'delete.php'  name = 'remove'  value = '" . $res->_id. "' class = 'btn'> <i class='fas fa-fw fa-minus-square' style = 'color:#e74a3b;'/> </button></td>";
+                                            echo "</tr>";
+                                        }
+
+                                        /*
                                         $viewDetailsQuery = "SELECT * FROM temporaryinventory";
                                         $result = $con->query($viewDetailsQuery);
                                         if ($result->num_rows > 0) {
@@ -348,6 +420,7 @@ body{
                                                 </tr>\n";
                                             }
                                         } 
+                                        */
                                       ?>
                                       </tbody>
                                     </table>

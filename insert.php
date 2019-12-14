@@ -1,40 +1,37 @@
 <?php
 
- require_once("db/connection.php");
- session_start();
+ require_once("config.php");
+ 
 
- $counttemp = "SELECT count(id) as count from temporaryinventory";
- $countresult =  $con->query($counttemp);
- if ($countresult->num_rows > 0) {
-
-     while($row = $countresult->fetch_assoc()) {
-         $count= $row['count'];
-         }
-        } 
+        
 if (isset($_POST['submit']))
 {
 
-    if($count==0){
-        header("location:inventory_add_product.php?message=Error in adding the record");
+    $filter = [];
+    $option = [];
+    // select data in descending order from table/collection "users"
+    $read = new MongoDB\Driver\Query($filter, $option);
+    $result = $conn->executeQuery("$dbname.$temptable", $read);
+    foreach ($result as $res) {
+      $res->category;
+        $res->brand;	
+       $res->proddesc;	
+       $res->size;	
+       $res->prodquan;	
+       $res->repoint;
+        $res->price;
+        $single_insert = new MongoDB\Driver\BulkWrite();
+        $single_insert->insert($res);
+        $conn->executeBulkWrite("$dbname.$c_users", $single_insert);
 
+      
     }
+    $single_insert = new MongoDB\Driver\BulkWrite();
+        $single_insert->delete(array());
+        $conn->executeBulkWrite("$dbname.$temptable", $single_insert);
 
-   else{
+    header("Location:inventory_add_product.php");
 
-    $query = "INSERT INTO products (category, brand, proddesc, size, prodquan, repoint, price) 
-    SELECT category, brand, proddesc, size, prodquan, repoint, price FROM temporaryinventory ";
-   if(mysqli_query($con,$query)){
-    echo '<script language="javascript">';
-    echo 'alert("The inventory list has been successfully updated!")';
-    echo '</script>';
-    include("inventory.php");
-                
-				
-                }
-    else{
-        header("location:inventory.php?message=Error in adding the record");
-    }
-}
 }
 ?>
     
