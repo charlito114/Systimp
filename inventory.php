@@ -177,7 +177,7 @@
                     <!-- Inventory Stuff -->
                     
                     <div class="card-body mb-4">
-                        <!-- Search Bar-->
+                        <!-- Search Bar
                         <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                             <form action="inventory.php" class="navbar-search" method="post">
                                 <div class="input-group">
@@ -216,7 +216,7 @@
                                 }*/
                             ?>
                             
-                        </div>
+                        </div> -->
                         
                         <!-- Print 
                         <div class="d-flex" style=" margin-top: 0;">
