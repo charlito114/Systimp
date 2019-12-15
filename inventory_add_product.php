@@ -136,12 +136,6 @@ body{
                           </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-home fa-fw text-white"></i>
-                          </a>
-                        </li>
                           
 <!-- COPY END -->
             <div class="topbar-divider d-none d-sm-block"></div>
@@ -344,7 +338,7 @@ body{
                                         // output data of each row
                                         // gets variables from table
                                             while($row = $result->fetch_assoc()) {
-                                                echo "\t<tr><td >"  . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" .  $row['prodquan'] .  "</td><td>" .  $row['repoint'] . "</td><td>" . $row['price'] .  "</td> <td><button type = 'submit' name = 'remove'  value = '" . $row['id'] . "' class = 'btn'> <i class='fas fa-fw fa-minus-square' style = 'color:#e74a3b;'/> </button></td>
+                                                echo "\t<tr><td >"  . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" .  $row['prodquan'] .  "</td><td>" .  $row['repoint'] . "</td><td>&#8369; " . $row['price'] .  "</td> <td><button type = 'submit' name = 'remove'  value = '" . $row['id'] . "' class = 'btn'> <i class='fas fa-fw fa-minus-square' style = 'color:#e74a3b;'/> </button></td>
                                                 </tr>\n";
                                             }
                                         } 

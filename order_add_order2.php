@@ -136,12 +136,6 @@
                           </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-home fa-fw text-white"></i>
-                          </a>
-                        </li>
                           
 <!-- COPY END -->
 
@@ -499,7 +493,7 @@
                                                 //EDITED: added field for totalprice and a button to remove items from temporaryorders 
                                             while($row = $result->fetch_assoc()) {
                                                 echo    "<form method = 'post' >"; 
-                                                echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['Available'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['TotalPrice'] . "</td><td><button type = 'submit' name = 'remove'  value = '" . $row['ProdCode'] . "' class = 'btn'> <i class='fas fa-fw fa-minus-square' style = 'color:#e74a3b;'/> </button></td></tr><br>";
+                                                echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['Available'] . "</td><td>&#8369; " . $row['Price'] . "</td><td>&#8369; " . $row['TotalPrice'] . "</td><td><button type = 'submit' name = 'remove'  value = '" . $row['ProdCode'] . "' class = 'btn'> <i class='fas fa-fw fa-minus-square' style = 'color:#e74a3b;'/> </button></td></tr><br>";
                                                 }
                                             }
                                           ?>

@@ -26,6 +26,10 @@ require_once("db/connection.php");
                 margin: 10px;
             }
             table {border: none;}
+            input[type=date]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                display: none;
+            }
         </style>
     </head>
     <body>
@@ -146,12 +150,12 @@ require_once("db/connection.php");
                           </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
+                        <!-- Nav Item - Messages 
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-home fa-fw text-white"></i>
                           </a>
-                        </li>
+                        </li> -->
                           
 <!-- COPY END -->
 
@@ -336,10 +340,10 @@ require_once("db/connection.php");
                               <thead class="text-center">
                                 <tr>
                                     <th>Date</th>
-                                    <th>Gross Sales</th>
-                                    <th>Discount</th>
-                                    <th>12% VAT</th>
-                                    <th>Net Sales</th>
+                                    <th class='text-right'>Gross Sales</th>
+                                    <th class='text-right'>Discount</th>
+                                    <th class='text-right'>12% VAT</th>
+                                    <th class='text-right'>Net Sales</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -348,7 +352,7 @@ require_once("db/connection.php");
                                     // output data of each row
                                     while($row = $search_result->fetch_assoc()) {
                                         
-                                        echo "\t<tr><td class='text-center'>" . $row['date'] . "</td><td class='text-right'>" . $row['grosssales'] . "</td><td class='text-right'>"  .  $row['discount'] . "</td><td class='text-right'>" . $row['vat'] . "</td><td class='text-right'>" . $row['netsales'] . "</td></tr>\n";
+                                        echo "\t<tr><td class='text-center'>" . $row['date'] . "</td><td class='text-right'>&#8369; " . $row['grosssales'] . "</td><td class='text-right'>&#8369; "  .  $row['discount'] . "</td><td class='text-right'>&#8369; " . $row['vat'] . "</td><td class='text-right'>&#8369; " . $row['netsales'] . "</td></tr>\n";
                                         }
                                     } 
                                      #please add these error checking codes
@@ -358,7 +362,7 @@ require_once("db/connection.php");
                                   <tr>
                                   
                                       <td class="text-right font-weight-bold" colspan=4>Total Monthly Sales:</td>
-                                      <td class="text-right"><?php echo $total?></td>
+                                      <td class="text-right">&#8369; <?php echo $total?></td>
                                   </tr>
                               </tbody>
                             </table>

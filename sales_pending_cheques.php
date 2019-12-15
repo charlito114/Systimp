@@ -142,12 +142,6 @@
                           </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-home fa-fw text-white"></i>
-                          </a>
-                        </li>
                           
 <!-- COPY END -->
 
@@ -228,7 +222,7 @@
                                       <th>Date</th>
                                       <th>Invoice Number</th>
                                       <th>Customer Name</th>
-                                      <th>Bank Number</th>
+                                      <th>Bank Name</th>
                                       <th>Check Number</th>
                                       <th>Action</th>
                                     </tr>

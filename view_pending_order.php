@@ -135,12 +135,6 @@
                           </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-home fa-fw text-white"></i>
-                          </a>
-                        </li>
                           
 <!-- COPY END -->
 
@@ -292,7 +286,7 @@
                                            while($row = $result2->fetch_assoc()) {
                                                echo "<form method = 'post' action = '' >";
                                                echo "\t<tr><td ><input type = 'submit' name = 'ProductCode' value = '" . $row['ProductCode'] . "' class = 'btn' style = 'color: #4e73df;' ></td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProductDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['ToReceive'] . "</td> <td><button type = 'submit' name = 'receive' ' formaction = 'view_purchase_order2.php'  value = '" . $row['ProductCode']. "' class = 'btn'> <i class='fas fa-fw fa-pen' style = 'color:#b4c540;'/>  </button></td>
-                                               <td><button type = 'submit' name = 'cancel' formaction = 'view_purchase_order_cancel.php'  value = '" . $row['ProductCode']. "' class = 'btn'> <i class='fas fa-fw fa-ban' style = 'color:#ff0000;'/>  </button></td></tr>\n";
+                                               <td><button type = 'submit' name = 'cancel' formaction = 'view_purchase_order_cancel.php'  value = '" . $row['ProductCode']. "' class = 'btn'> <i class='fas fa-fw fa-trash' style = 'color:#ff0000;'/>  </button></td></tr>\n";
                                                
                                                
                                               

@@ -135,13 +135,6 @@ require_once("db/connection.php");?>
                             ?>
                           </div>
                         </li>
-
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-home fa-fw text-white"></i>
-                          </a>
-                        </li>
                           
 <!-- COPY END -->
 
@@ -239,7 +232,7 @@ require_once("db/connection.php");?>
                                 <?php 
                                 
                                     while($row = $search_result->fetch_assoc()) {
-                                    echo "\t<tr  ><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['price'] ."</td></tr>\n";
+                                    echo "\t<tr  ><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint'] . "</td><td>&#8369; " . $row['price'] ."</td></tr>\n";
                                     }
                                   ?>
                               </tbody>
@@ -265,7 +258,7 @@ require_once("db/connection.php");?>
                                     $countorder =1;
                                     $_SESSION['countorder'] = $countorder;
                                     while($row = $result->fetch_assoc()) {
-                                        echo "\t<tr  ><td >" . $row['Date'] . "</td><td>" . $row['SONum'] . "</td><td>"  .  $row['TotalAmount'] ."</td></tr>\n"; }
+                                        echo "\t<tr  ><td >" . $row['Date'] . "</td><td>" . $row['SONum'] . "</td><td>&#8369; "  .  $row['TotalAmount'] ."</td></tr>\n"; }
                                 ?>
                             <?php } ?>
                               </tbody>

@@ -200,12 +200,12 @@ var month = "For the month of " + monthNames[d.getMonth()-1];
                           </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
+                        <!-- Nav Item - Messages 
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-home fa-fw text-white"></i>
                           </a>
-                        </li>
+                        </li>-->
                           
 <!-- COPY END -->
 
@@ -286,7 +286,7 @@ var month = "For the month of " + monthNames[d.getMonth()-1];
                                               </div>
                                             </div>
                                             
-                                            <!-- Top Selling Products -->                             
+                                            <!-- Top Selling Products                              
                                             <div class="card-body">
                                               <div class="card border-left-success shadow h-100 py-2">
                                                 <div class="card-body">
@@ -301,7 +301,7 @@ var month = "For the month of " + monthNames[d.getMonth()-1];
                                                   </div>
                                                 </div>
                                               </div>
-                                            </div>
+                                            </div>-->
                                         </div>
 
                                         <div class="col-xl-5 col-lg-2">
@@ -364,7 +364,7 @@ var month = "For the month of " + monthNames[d.getMonth()-1];
                                     if ($search_result->num_rows > 0) {
                                         // output data of each row
                                         while($row = $search_result->fetch_assoc()) {
-                                            echo "\t<tr><td >" . $row['ProductCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDescription'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['Reorder'] . "</td><td>" . $row['Quansold'] . "</td><td>" . $row['Price'] ."</td></tr><br>";
+                                            echo "\t<tr><td >" . $row['ProductCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDescription'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['Quantity'] . "</td><td>" . $row['Reorder'] . "</td><td>" . $row['Quansold'] . "</td><td>&#8369; " . $row['Price'] ."</td></tr><br>";
                                             }
                                         }
                                     else {

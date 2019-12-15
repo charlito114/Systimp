@@ -139,12 +139,6 @@
                           </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-home fa-fw text-white"></i>
-                          </a>
-                        </li>
                           
 <!-- COPY END -->
 
@@ -237,7 +231,7 @@
                                         while($row = $search_result->fetch_assoc()) {
                                           $status =  $row['status'];
                                           if($status!= "Fully Returned"){
-                                            echo "\t<tr><td >" . $row['date'] . "</td><td><input type = 'submit' name = 'invoiceNum' formaction = 'view_invoice.php' value = '" . $row['invoiceNum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['salesbeforeVat'] . "</td><td>" . $row['salesafterVat'] . "</td><td>" . $row['status'] .
+                                            echo "\t<tr><td >" . $row['date'] . "</td><td><input type = 'submit' name = 'invoiceNum' formaction = 'view_invoice.php' value = '" . $row['invoiceNum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>&#8369; "  .  $row['salesbeforeVat'] . "</td><td>&#8369; " . $row['salesafterVat'] . "</td><td>" . $row['status'] .
                                              "</td><td style='text-align: center; '><button class = 'btn btn-sm btn-success shadow-sm' formaction = 'sales_manage_returns.php' type = 'submit' name = 'return'  value = '" . $row['invoiceNum']. "'> Return Items </button></td></tr>\n";
                                             }
                                             //dito sa part na toh, if fully returned na yung item dapat grayed out yung button and di na pwede iclick

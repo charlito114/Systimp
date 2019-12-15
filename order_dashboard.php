@@ -269,7 +269,7 @@ GROUP BY SONum) AS readyvstotal JOIN ordermanagement ON ordermanagement.SONum = 
                                               if ($search_result->num_rows > 0) {
                                                   // output data of each row
                                                   while($row = $search_result->fetch_assoc()) {
-                                                      echo "\t<tr><td >" . $row['Date'] . "</td><td><input type='submit' name='SONum' value='" . $row['SONum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>"  .  $row['TotalAmount'] . "</td>". "</td><td>"  .  $row['Status'] . "</td></tr><br>";
+                                                      echo "\t<tr><td >" . $row['Date'] . "</td><td><input type='submit' name='SONum' value='" . $row['SONum'] . "' class = 'btn' style = 'color: #4e73df;'> </td><td>&#8369; "  .  $row['TotalAmount'] . "</td>". "</td><td>"  .  $row['Status'] . "</td></tr><br>";
                                                       }
                                                   }
                                               
@@ -314,7 +314,7 @@ GROUP BY SONum) AS readyvstotal JOIN ordermanagement ON ordermanagement.SONum = 
                                     if ($search_result->num_rows > 0) {
                                         // output data of each row
                                         while($row = $search_result->fetch_assoc()) {
-                                            echo "\t<tr><td >" . $row['Date'] . "</td><td>" . $row['SONum'] . "</td><td>"  .  $row['TotalAmount'] . "</td>". "</td><td>"  .  $row['Status'] . "</td></tr><br>";
+                                            echo "\t<tr><td >" . $row['Date'] . "</td><td>" . $row['SONum'] . "</td><td>&#8369; "  .  $row['TotalAmount'] . "</td>". "</td><td>"  .  $row['Status'] . "</td></tr><br>";
                                             }
                                         }
                                     else {

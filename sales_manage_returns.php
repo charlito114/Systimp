@@ -135,12 +135,6 @@
                           </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-home fa-fw text-white"></i>
-                          </a>
-                        </li>
                           
 <!-- COPY END -->
 
@@ -278,7 +272,7 @@
                                                        <label class="control-label">Subtotal:</label>
                                                     </div>
 
-                                                    <div class="input-group col-sm-6 m-bot15">
+                                                    <div class="input-group col-sm-6 m-bot15">&#8369; 
                                                         <?php
                                                             echo $row['salesbeforeVat']; 
                                                         ?>
@@ -290,7 +284,7 @@
                                                        <label class="control-label">Total:</label>
                                                     </div>
 
-                                                    <div class="input-group col-sm-6 m-bot15">
+                                                    <div class="input-group col-sm-6 m-bot15">&#8369; 
                                                         <?php
                                                             echo $row['salesafterVat']; 
                                                         ?>
@@ -302,7 +296,7 @@
                                                        <label class="control-label">Discount:</label>
                                                     </div>
 
-                                                    <div class="input-group col-sm-6 m-bot15">
+                                                    <div class="input-group col-sm-6 m-bot15">&#8369; 
                                                         <?php
                                                             echo $row['discount']; 
                                                         ?>
@@ -314,7 +308,7 @@
                                                        <label class="control-label">VAT:</label>
                                                     </div>
 
-                                                    <div class="input-group col-sm-6 m-bot15">
+                                                    <div class="input-group col-sm-6 m-bot15">&#8369; 
                                                         <?php
                                                             echo $row['vat']; 
                                                         ?>
@@ -374,7 +368,7 @@
                                             while($row = $result2->fetch_assoc()) {
                                                 
                                                 if($status != 'Fully Returned' && $row['QuantityIssued']!= $row['Returned'] ){
-                                                echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['QuantityIssued'] . "</td><td>" . $row['Returned'] . "</td><td>" . $row['Price'] .
+                                                echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['QuantityIssued'] . "</td><td>" . $row['Returned'] . "</td><td>&#8369; " . $row['Price'] .
                                                  "<td style='text-align: center; '><button class = 'btn btn-sm btn-success shadow-sm' type = 'submit' formaction= 'sales_manage_returns_2.php' name = 'returnitem'  value = '" . $row['ProdCode']. "' > Return </button></td></tr>\n";
                                                 }
                                                 // dito sa part na toh, pag fully returned na status ng invoice or pag may item na nareturn na lahat, dapat grayed out din siya and not clickable

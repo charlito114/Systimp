@@ -140,12 +140,6 @@
                           </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-home fa-fw text-white"></i>
-                          </a>
-                        </li>
                           
 <!-- COPY END -->
 
@@ -240,7 +234,7 @@
                                             // output data of each row
 
                                             while($row = $search_result->fetch_assoc()) {
-                                                echo "\t<tr><td >" . $row['Date'] . "</td><td><input type = 'submit' name = 'SONum' value = '" . $row['SONum'] . "' class = 'btn' style = 'color: #4e73df;' > </td><td>"  .  $row['TotalAmount'] . "</td><td>" . $row['Status'] ."</td></tr>\n";
+                                                echo "\t<tr><td >" . $row['Date'] . "</td><td><input type = 'submit' name = 'SONum' value = '" . $row['SONum'] . "' class = 'btn' style = 'color: #4e73df;' > </td><td>&#8369; "  .  $row['TotalAmount'] . "</td><td>" . $row['Status'] ."</td></tr>\n";
                                                 }
                                             } 
 
