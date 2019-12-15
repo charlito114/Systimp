@@ -313,7 +313,7 @@
                                             while($row = $result2->fetch_assoc()) {
                                                 // may part dito na  sa isang row, may button for update, once clicked, kukunin niya yung product code nung row na yun
                                                 echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['ProdQuan'] . "</td><td>" . $row['Available'] . "</td><td>" . $row['Issued'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['TotalPrice'] . "</td> <td><button type = 'submit' name = 'receive' ' formaction = 'view_pending_so2.php'  value = '" . $row['ProdCode']. "' class = 'btn'> <i class='fas fa-fw fa-pen' style = 'color:#b4c540;'/>  </button></td>
-                                                <td><button type = 'submit' name = 'cancel' formaction = ''  value = '" . $row['ProdCode']. "' class = 'btn'> <i class='fas fa-fw fa-ban' style = 'color:#ff0000;'/>  </button></td></tr>\n";
+                                                <td><button type = 'submit' name = 'cancel' formaction = ''  value = '" . $row['ProdCode']. "' class = 'btn'> <i class='fas fa-fw fa-trash' style = 'color:#ff0000;'/>  </button></td></tr>\n";
                                                 }
                                                 // echo "</form>";
                                             }
