@@ -21,6 +21,7 @@
             .bg{
                 background-color: #b4c540;
             }
+            
         </style>
     </head>
     <body>
@@ -36,7 +37,7 @@
                     
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg topbar mb-4 static-top shadow">
-                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Inventory List</div>
+                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Remove Product</div>
                       <!-- Sidebar Toggle (Topbar) -->
                       <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -167,7 +168,7 @@
                     
                     <!-- Inventory Stuff -->
                     
-                    <div class="card-body mb-4">
+                    <div class="card-body">
                         <!-- Search Bar-->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                             <form action="inventory.php" class="navbar-search" method="post">
@@ -190,15 +191,12 @@
                                     $query = "SELECT p.prodcode, p.category, p.brand, p.proddesc, p.size, p.prodquan, p.repoint, p.quansold, p.price, p.status, count(so.ProdCode) as countso, count(po.ProductCode) as countpo FROM products p LEFT JOIN salesorderdetails so ON p.prodcode = so.ProdCode LEFT JOIN p_podetails po ON so.ProdCode = po.ProductCode 
                                     WHERE CONCAT(prodcode, category, brand, proddesc) LIKE '%".$valueToSearch."%' GROUP BY p.prodcode";
                                     $search_result = filterTable($query);
-
                                 }
                                 else {
                                      $query = "SELECT p.prodcode, p.category, p.brand, p.proddesc, p.size, p.prodquan, p.repoint, p.quansold, p.price, p.status, count(so.ProdCode) as countso, count(po.ProductCode) as countpo FROM products p LEFT JOIN salesorderdetails so ON p.prodcode = so.ProdCode LEFT JOIN p_podetails po ON so.ProdCode = po.ProductCode 
                                      WHERE p.status != 'Discontinued' GROUP BY p.prodcode ";
                                     $search_result = filterTable($query);
                                 }
-
-
                                 function filterTable($query)
                                 {
                                     $con = mysqli_connect("localhost", "root", "", "inventory");
@@ -269,17 +267,16 @@
                                     <?php 
                                       if ($search_result->num_rows > 0) {
                                     // output data of each row
-
                                     while($row = $search_result->fetch_assoc()) {
-                                      if($row['countso']==0 || $row['countpo'!==0]){
+                                      if($row['countso']==0 || $row['countpo'==0]){
                                         echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .
                                           $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" .
                                            $row['prodquan'] . "</td><td>&#8369; " . $row['price'] ."</td><td>" . $row['countso'] . "</td><td>" . $row['countpo'] . "</td><td><button type = 'submit' formaction = 'delrow.php'  name = 'remove'  value = '" . $row['prodcode']. "' class = 'btn'> <i class='fas fa-fw fa-minus-square' style = 'color:#e74a3b;'/> </button></td></tr>\n";
                                         }
                                         else{
-                                          echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .
+                                          echo "\t<tr class='table-secondary'><td>" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .
                                           $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" .
-                                           $row['prodquan'] . "</td><td>&#8369; " . $row['price'] ."</td><td>" . $row['countso'] . "</td><td>" . $row['countpo'] . "</td><td><button type = 'submit' formaction = 'delrow.php'  name = 'remove'  value = '" . $row['prodcode']. "' class = 'btn'> <i class='fas fa-fw fa-minus-square' style = 'color:#e74a3b;'/> </button></td></tr>\n";
+                                           $row['prodquan'] . "</td><td>&#8369; " . $row['price'] ."</td><td>" . $row['countso'] . "</td><td>" . $row['countpo'] . "</td><td><button type = 'submit'  name = 'remove'  value = '" . $row['prodcode']. "' class = 'btn' disabled> <i class='fas fa-fw fa-minus-square' style = 'color:#e74a3b;'/> </button></td></tr>\n";
                                         }
                                       }
                                     } 
