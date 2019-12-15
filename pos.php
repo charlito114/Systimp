@@ -571,7 +571,16 @@
                                                 <div class="modal-body">
                                                     <div class="col-lg-10">
                                                         <div class="row d-flex justify-content-between">
-                                                            <label class="c-label">Product Code: <?php echo  $_SESSION['ProdCode'] ?> </label>
+                                                            <label class="c-label">Product Code: <?php echo  $_SESSION['ProdCode'] ?> </label><br>
+                                                            <?php $selectdescription =" SELECT proddesc FROM products WHERE prodcode = ".$_SESSION['ProdCode'];
+                                                              $result1 = $con->query($selectdescription);
+                                                              if ($result1->num_rows > 0) {
+                                                                  while($row = $result1->fetch_assoc()) {
+                                                                      $description = $row['proddesc'];
+                                                                  }
+                                                              }?>
+                                                            <label class="c-label">Description: <?php echo  $description ?> </label>
+
                                                         </div>
                                                             <!--<input class="c-input form-control col-sm-6" type = "number" name= "prodcode">-->
                                                         <?php                                         
@@ -712,7 +721,7 @@ echo "window.location.href='pos.php'</script>";
                                                 <div class="modal-body">
                                                     <div class="row d-flex justify-content-between">
                                                         <label class="c-label">Bank: </label>
-                                                        <select class="c-input form-control col-sm-6" type = "number" name= "banknumber">
+                                                        <select class="c-input form-control col-sm-6" type = "text" name= "banknumber">
                                                             <option>INSERT PHP OPTIONS HERE </option>
                                                         </select>
                                                     </div>

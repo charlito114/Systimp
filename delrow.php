@@ -3,12 +3,11 @@ error_reporting(0);
  require_once("db/connection.php");
  session_start();
 
-echo  $_SESSION['countorder'];
-echo  $_SESSION['countpurchase'];
 
-if (isset($_POST['remove']) &&( $_SESSION['countorder']!= 1 || $_SESSION['countpurchase']!= 1) )
+
+if (isset($_POST['remove']) )
 {
-    $todelete =  $_SESSION['search'];
+    $todelete =  $_POST['remove'];
     $query = "UPDATE products SET status = 'Discontinued' WHERE prodcode = $todelete";
 
 
