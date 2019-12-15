@@ -13,6 +13,8 @@ if (isset($_POST['submit']))
     $read = new MongoDB\Driver\Query($filter, $option);
     $result = $conn->executeQuery("$dbname.$temptable", $read);
     foreach ($result as $res) {
+        $res->prodcode;
+
       $res->category;
         $res->brand;	
        $res->proddesc;	

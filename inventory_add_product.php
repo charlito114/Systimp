@@ -299,7 +299,18 @@ body{
                     <?php
                     
                         if (isset($_POST['add']) && !empty($_POST['description']) && !empty($_POST['size']) &&  !empty($_POST['quantity']) && !empty($_POST['repoint']) &&  !empty($_POST['price'])){
-                        $prodcode = 10000000003;  //must insert code for count , siguro isa nanaman tong filter blah blah 
+                            $filter = [];
+                            $option = [];
+                            // select data in descending order from table/collection "users"
+                            $read = new MongoDB\Driver\Query($filter, $option);
+                            $result = $conn->executeQuery("$dbname.$c_users", $read);
+                            $count= 0;
+                            foreach ($result as $res) {        
+                              //  $res->prodcode;             
+                                $count = $count+1;	
+                           }
+
+                            $prodcode = 10000000000 + $count + 1;  //must insert code for count , siguro isa nanaman tong filter blah blah 
                         $category = $_POST['category'];
                         $brand = $_POST['brand'];
                         $desc = $_POST['description'];
@@ -376,6 +387,7 @@ body{
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                       <thead>
                                         <tr>
+                                          <th>Product Code</th>
                                           <th>Category</th>
                                           <th>Brand</th>
                                           <th>Description</th>
@@ -397,7 +409,7 @@ body{
 
                                         foreach ($result as $res) {
                                             echo "<tr>";
-                                           // echo "<td>".$res->prodcode."</td>";
+                                            echo "<td>".$res->prodcode."</td>";
                                             echo "<td>".$res->category."</td>";
                                             echo "<td>".$res->brand."</td>";	
                                             echo "<td>".$res->proddesc."</td>";	
