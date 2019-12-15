@@ -25,6 +25,10 @@ require_once("db/connection.php");
                 color: black;
                 margin: 10px;
             }
+            input[type=date]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                display: none;
+            }
         </style>
     </head>
     <body>
@@ -145,12 +149,12 @@ require_once("db/connection.php");
                           </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
+                        <!-- Nav Item - Messages 
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-home fa-fw text-white"></i>
                           </a>
-                        </li>
+                        </li> -->
                           
 <!-- COPY END -->
                         <div class="topbar-divider d-none d-sm-block"></div>
