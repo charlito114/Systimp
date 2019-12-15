@@ -234,7 +234,7 @@
                                         echo "<form method = post>";
                                         $currentstatus = $row['Status'];
                                         if($currentstatus == 'Active' ){
-                                        echo "\t<tr><td >" . $row['Email'] . "</td><td>" . $row['LastName'] . "</td><td>"  .  $row['FirstName'] . "</td><td>" . $row['Birthday'] .  "</td><td>" . $row['UserType'] . "</td><td>" . $row['Status'] ."</td><td><button type = 'submit' name = 'disable'  value = '" . $row['Email'] . "' class = 'btn' style = 'color: #e74a3b;' > <i class='fas fa-fw fa-user-minus'/> </button></td></tr><br>";
+                                        echo "\t<tr><td >" . $row['Email'] . "</td><td>" . $row['LastName'] . "</td><td>"  .  $row['FirstName'] . "</td><td>" . $row['Birthday'] .  "</td><td>" . $row['UserType'] . "</td><td>" . $row['Status'] ."</td><td><button type = 'submit' name = 'disable'  value = '" . $row['Email'] . "' class = 'btn' style = 'color: #e74a3b;' > <i class='fas fa-fw fa-user-alt-slash'/> </button></td></tr><br>";
                                         }
                                         else{
                                           echo "\t<tr><td >" . $row['Email'] . "</td><td>" . $row['LastName'] . "</td><td>"  .  $row['FirstName'] . "</td><td>" . $row['Birthday'] .  "</td><td>" . $row['UserType'] . "</td><td>" . $row['Status'] ."</td><td><button type = 'submit' name = 'enable'  value = '" . $row['Email'] . "' class = 'btn' style = 'color: #2e59d9;' > <i class='fas fa-fw fa-user-check'/> </button></td></tr><br>";
