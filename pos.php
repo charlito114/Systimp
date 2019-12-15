@@ -216,12 +216,12 @@
                           </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
+                        <!-- Nav Item - Messages 
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-home fa-fw text-white"></i>
                           </a>
-                        </li>
+                        </li> -->
                           
 <!-- COPY END -->
 
@@ -711,8 +711,10 @@ echo "window.location.href='pos.php'</script>";
                                               <form method = "post" action = "">
                                                 <div class="modal-body">
                                                     <div class="row d-flex justify-content-between">
-                                                        <label class="c-label">Bank Number: </label>
-                                                        <input class="c-input form-control col-sm-6" type = "number" name= "banknumber">
+                                                        <label class="c-label">Bank: </label>
+                                                        <select class="c-input form-control col-sm-6" type = "number" name= "banknumber">
+                                                            <option>INSERT PHP OPTIONS HERE </option>
+                                                        </select>
                                                     </div>
                                                     <div class="row d-flex justify-content-between">
                                                         <label class="c-label">Cheque Number: </label>
@@ -801,11 +803,11 @@ echo "window.location.href='pos.php'</script>";}
                                             <tbody>
                                                 <tr>
                                                     <td>Total Items:</td>
-                                                    <td><?php echo $numItems; ?></td>
+                                                    <td>&#8369; <?php echo $numItems; ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Subtotal:</td>
-                                                    <td><?php echo  $_SESSION['Subtotal1']; ?></td>
+                                                    <td>&#8369; <?php echo  $_SESSION['Subtotal1']; ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>12% VAT:</td>
@@ -813,7 +815,7 @@ echo "window.location.href='pos.php'</script>";}
                                                 </tr>
                                                 <tr>
                                                     <td>Discount:</td>
-                                                    <td><?php echo  $_SESSION['discount1']; ?></td>
+                                                    <td>&#8369; <?php echo  $_SESSION['discount1']; ?></td>
                                                 </tr>
                                                 <!-- ALY TOTAL IS HERE, FOR UR CODE KANINA DURING WEBTECH -->
                                                 <tr>
