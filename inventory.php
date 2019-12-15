@@ -1,6 +1,7 @@
 <?php
+    require_once("config.php");
+
     /*session_start();
-    require_once("connection.php");
     error_reporting(0);*/
         ?>
 <html>
@@ -26,7 +27,7 @@
     <body>
         <!-- Page Wrapper -->
         <div id="wrapper">
-            <?php include 'config.php' ?>
+            <?php include 'sidebar.php' ?>
             
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">

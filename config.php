@@ -21,6 +21,8 @@
 	$dbname = 'jansy';
 	$c_users = 'products';
 	$temptable = 'temporaryproducts';
+	$temporder = 'temporaryorders';
+
     $conn = new MongoDB\Driver\Manager("mongodb://$dbhost:$dbport");
 
   /*  $filter = ["category" => "pvc blue"];
@@ -34,7 +36,7 @@ $result = $conn->executeQuery("$dbname.$c_users", $read);
 
 ?>
 
-<<!--html>
+<!--html>
 <head></head>
 <body>
 <table>

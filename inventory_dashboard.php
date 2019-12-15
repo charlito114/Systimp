@@ -1,7 +1,7 @@
 <html>
     <?php
         session_start();
-        require_once("db/connection.php");
+       // require_once("db/connection.php");
     ?>
     <head>
         <title>Lunatech Systems</title>
@@ -31,7 +31,7 @@
         
         <!-- Page Wrapper -->
         <div id="wrapper">
-            <?php include 'sidebar.php' ?>
+            <?php include 'config.php';  include "sidebar.php" ?>
             
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -83,6 +83,7 @@
                             <form method = "post" class="table-responsive-lg">
                             <table class="table table-wrapper">
                                 <?php
+                                /*
                                 $getNotifs ="SELECT * FROM notifications";
                                 $search_result = mysqli_query($con, $getNotifs);
                                     if ($search_result->num_rows > 0) {
@@ -99,6 +100,7 @@
                                                                         
                                         }
                                       }
+                                      */
                                   
                                 ?>
                                 <!--<tr>
@@ -110,7 +112,9 @@
                             </form>
 
                             <?php
+                            /*
                             if(isset($_POST['notification'])) {
+                            
                                 $notifID = $_POST['notification']; 
                                 $specificNotif ="SELECT * FROM notifications WHERE notifID = $notifID";
                                 $search_result = mysqli_query($con, $specificNotif);
@@ -139,6 +143,7 @@
                                 }
                                 
                             }
+                            */
                             ?>
                           </div>
                         </li>
@@ -184,20 +189,23 @@
                                               <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Low Quantity Products</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                  <?php
-                                                  $LSQuery = ("SELECT count(prodcode) AS LSCount FROM products  WHERE prodquan < repoint");
-                                                  $LSResult =  $con->query($LSQuery);
-                                                  if ($LSResult->num_rows > 0) {
-                                                      // output data of each row
-                                                      while($row = $LSResult->fetch_assoc()) {
-                                                          $Lowstock= $row['LSCount'];
-                                                          $_SESSION['LSCount'] = $Lowstock;
-                                                          echo $Lowstock;
-                                                          }
-                                                      } else {
-                                                          echo "0";
-                                                          }
-                                                  ?>
+                                                <?php
+                                                  $filter = [];
+                                                  $option = [];
+                                                  // select data in descending order from table/collection "users"
+                                                  $read = new MongoDB\Driver\Query($filter, $option);
+                                                  $result = $conn->executeQuery("$dbname.$c_users", $read);
+                                                $count = 0;
+                                                  foreach ($result as $res) {
+                                                     if($res->prodquan < $res->repoint){
+                                                          $count = (int)($count + 1);
+                                                     }
+                                                      
+                                                 }
+
+                                                 echo $count;
+
+                                                      ?>
                                                 </div>
                                               </div>
                                               <div class="col-auto">
@@ -220,7 +228,10 @@
                                               <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Discontinued Products</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                  <?php
+                                                
+                                                  /*
+
+                                                  
                                                   $DCQuery = ("SELECT count(prodcode) AS DCount FROM products  WHERE status = 'Discontinued' ");
                                                   $DCResult =  $con->query($DCQuery);
                                                   if ($DCResult->num_rows > 0) {
@@ -233,6 +244,8 @@
                                                       } else {
                                                           echo "0";
                                                           }
+
+                                                          */
                                                   ?>
                                                 </div>
                                               </div>
@@ -249,6 +262,7 @@
 
                                   <!-- Restocked Products -->
                                   <?php
+                                  /*
                                   $RPQuery = "SELECT COUNT(PONum) AS RPCount FROM purchaseaudit WHERE Date(purchaseaudit.date) = date(now())";
                                   $RPResult =  $con->query($RPQuery);
                                   if ($RPResult->num_rows > 0) {
@@ -259,7 +273,8 @@
                                           }
                                       } else {
                                             $Restocked = 0;
-                                          }                       
+                                          }    
+                                          */                   
                                   ?>
                                     <!--  
                                   <div class="col-xl-3 col-md-6 mb-4">
@@ -320,6 +335,27 @@
                                           </thead>
                                           <tbody>
                                             <?php
+
+                                            $filter = [];
+                                            $option = [];
+                                            // select data in descending order from table/collection "users"
+                                            $read = new MongoDB\Driver\Query($filter, $option);
+                                            $result = $conn->executeQuery("$dbname.$c_users", $read);
+                                            foreach ($result as $res) {
+                                            if($res->prodquan < $res->repoint){
+                                                echo "<tr>";
+                                                echo "<td>".$res->prodcode."</td>";
+                                                echo "<td>".$res->category."</td>";
+                                                    echo "<td>".$res->brand."</td>";	
+                                                    echo "<td>".$res->proddesc."</td>";
+                                                echo "<td>".$res->size."</td>";
+                                                    echo "<td>".$res->prodquan."</td>";	
+                                                    echo "<td>".$res->repoint."</td>";
+                                                    echo "</tr>";
+                                            }
+                                           
+                                            }
+                                            /*
                                               $viewTop = "SELECT * FROM products WHERE prodquan < repoint";
                                               $search_result = mysqli_query($con, $viewTop);
                                               if ($search_result->num_rows > 0) {
@@ -331,6 +367,7 @@
                                              else {
                                                echo "<tr><td colspan='7'><center> 0 results </center></td></tr>";
                                                }
+                                               */
                                                 
                                               ?>
                                           </tbody>
@@ -362,6 +399,7 @@
                                           </thead>
                                           <tbody>
                                           <?php
+                                          /*
                                             $viewTop = "SELECT * FROM products WHERE status = 'Discontinued'";
                                             $search_result = mysqli_query($con, $viewTop);
                                             if ($search_result->num_rows > 0) {
@@ -373,6 +411,7 @@
                                             else {
                                                echo "<tr><td colspan='7'><center> 0 results </center></td></tr>";
                                                }
+                                               */
                                             ?>
                                           </tbody>
                                         </table>
@@ -409,6 +448,7 @@
                                           </thead>
                                           <tbody>
                                           <?php
+                                          /*
                                             $viewRestocked = " SELECT pa.ProductCode, Sum(pa.Received)AS Received, p.category, p.brand, p.proddesc, p.size  FROM purchaseaudit pa JOIN products p ON pa.ProductCode = p.prodcode
                                             WHERE Date(pa.date) = date(now())
                                             GROUP BY pa.ProductCode";
@@ -422,6 +462,8 @@
                                             else {
                                                echo "<tr><td colspan='7'><center> 0 results </center></td></tr>";
                                                }
+                                               */
+                                            
                                             ?>
                                           </tbody>
                                         </table>
