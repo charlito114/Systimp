@@ -1,13 +1,18 @@
-<?php session_start();  
-error_reporting(0);
-require_once("db/connection.php");?>
-
-<html> 
+<?php
+    /*session_start();
+    require_once("connection.php");
+    error_reporting(0);*/
+        ?>
+<html>
+    
     <head>
         <title>Lunatech Systems</title>
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        
+          <!-- Custom styles for this page -->
+          <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
         
         <style>
             body{
@@ -21,7 +26,7 @@ require_once("db/connection.php");?>
     <body>
         <!-- Page Wrapper -->
         <div id="wrapper">
-            <?php include 'sidebar.php' ?>
+            <?php include 'config.php' ?>
             
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -31,7 +36,7 @@ require_once("db/connection.php");?>
                     
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg topbar mb-4 static-top shadow">
-                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Remove Product</div>
+                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Inventory List</div>
                       <!-- Sidebar Toggle (Topbar) -->
                       <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -60,7 +65,7 @@ require_once("db/connection.php");?>
                           </div>
                         </li>
 
-                      <!-- COPY START -->
+                        <!-- COPY START -->
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -76,6 +81,7 @@ require_once("db/connection.php");?>
                             <form method = "post" class="table-responsive-lg">
                             <table class="table table-wrapper">
                                 <?php
+                                /*
                                 $getNotifs ="SELECT * FROM notifications";
                                 $search_result = mysqli_query($con, $getNotifs);
                                     if ($search_result->num_rows > 0) {
@@ -92,6 +98,7 @@ require_once("db/connection.php");?>
                                                                         
                                         }
                                       }
+                                      */
                                   
                                 ?>
                                 <!--<tr>
@@ -103,6 +110,7 @@ require_once("db/connection.php");?>
                             </form>
 
                             <?php
+                            /*
                             if(isset($_POST['notification'])) {
                                 $notifID = $_POST['notification']; 
                                 $specificNotif ="SELECT * FROM notifications WHERE notifID = $notifID";
@@ -131,7 +139,7 @@ require_once("db/connection.php");?>
                                     header("location:view_pending_order.php");       
                                 }
                                 
-                            }
+                            }*/
                             ?>
                           </div>
                         </li>
@@ -166,16 +174,16 @@ require_once("db/connection.php");?>
                         </div>
                     </div>
                     
-                    <!-- Remove Product-->
+                    <!-- Inventory Stuff -->
                     
                     <div class="card-body mb-4">
                         <!-- Search Bar-->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
-                            <form action="inventory_remove_product.php" class="navbar-search" method="post">
+                            <form action="inventory.php" class="navbar-search" method="post">
                                 <div class="input-group">
-                                    <input type="text" class="form-control bg-light small" placeholder="Search by product category, brand, code or description" aria-label="Search" aria-describedby="basic-addon2" style="width: 450px" name="valueToSearch">
+                                    <input type="text" class="form-control bg-light small" placeholder="Search by code, category, brand or description" aria-label="Search" aria-describedby="basic-addon2" style="width: 450px" name="valueToSearch">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit" name="search" value="Filter">
+                                        <button class="btn btn-primary" type="submit" name="search" value="search">
                                             <i class="fas fa-search fa-sm"></i>
                                         </button>
                                     </div>
@@ -183,147 +191,132 @@ require_once("db/connection.php");?>
                             </form>
                             
                             <?php
-                            if(isset($_POST['search']))
-                            {   
-                                session_start();
-                                $valueToSearch = $_POST['valueToSearch'];
-                                $_SESSION['search'] = $valueToSearch;
-                                // search in all table columns
-                                // using concat mysql function
-                                $query = "SELECT * FROM products WHERE status != 'Discontinued' AND CONCAT(prodcode) LIKE '%".$_SESSION['search']."%'";
-                                $search_result = filterTable($query);
+                            /*
+                                if(isset($_POST['search']))
+                                {
+                                    $valueToSearch = $_POST['valueToSearch'];
+                                    // search in all table columns
+                                    // using concat mysql function
+                                    $query = "SELECT * FROM products WHERE CONCAT(prodcode, category, brand, proddesc) LIKE '%".$valueToSearch."%'";
+                                    $search_result = filterTable($query);
 
-                            }
-                            else {
-                                $query = "SELECT * FROM products WHERE prodcode =' ' ";
-                                $search_result = filterTable($query);
-                                $query = "SELECT * FROM salesorderdetails WHERE prodcode =' ' ";
-
-                            }
+                                }
+                                else {
+                                    $query = "SELECT * FROM products";
+                                     $query = "SELECT * FROM products WHERE status != 'Discontinued' ";
+                                    $search_result = filterTable($query);
+                                }
 
 
-                            function filterTable($query)
-                            {
-                                $con = mysqli_connect("localhost", "root", "", "inventory");
-                                $filter_Result = mysqli_query($con, $query);
-                                return $filter_Result; 
-                            }
-                            
-                            if (isset($_POST['search']) &&($search_result->num_rows > 0) && $valueToSearch!= null) {
-                                                                 
-
-                            // output data of each row
+                                function filterTable($query)
+                                {
+                                    $con = mysqli_connect("localhost", "root", "", "inventory");
+                                    $filter_Result = mysqli_query($con, $query);
+                                    return $filter_Result;
+                                }*/
                             ?>
                             
                         </div>
                         
+                        <!-- Print 
+                        <div class="d-flex" style=" margin-top: 0;">
+                            <div style="width: 80%;">
+                                <button name="print" value="print" onclick="window.location.href='inventory_inventory_report.php';" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin-left: 30px; width: 100px;"> Print </button>
+                            </div> -->
+
+                            <!-- Pagination 
+                            <div class="col-md-7" style="width: 20%; float: right;">
+                                <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                    <ul class="pagination" style="float: right;">
+                                        <li class="paginate_button page-item previous disabled" id="dataTable_previous">
+                                            <a href ="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                                        <li class="paginate_button page-item active">
+                                            <a href ="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+                                        </li>
+                                        <li class="paginate_button page-item">
+                                            <a href ="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+                                        </li>
+                                        <li class="paginate_button page-item">
+                                            <a href ="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a>
+                                        </li>
+                                        <li class="paginate_button page-item">
+                                            <a href ="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a>
+                                        </li>
+                                        <li class="paginate_button page-item">
+                                            <a href ="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a>
+                                        </li>
+                                        <li class="paginate_button page-item next" id="dataTable_next">
+                                            <a href ="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">Next</a></li>
+                                    </ul>
+                                </div>
+                            </div> -->
+                        </div>
+                        
                         <!-- Table -->
                         <div class="table-responsive">
-                            <form class="navbar-expand" onsubmit="return confirm('Confirm removal of product?');">
-                                 <header class="panel-heading">Product Details</header>
-                            <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0; border-top: .20rem solid #b4c540;">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                              <thead>
-                                <tr>
-                                  <th>Product Code</th>
-                                  <th>Category</th>
-                                  <th>Brand</th>
-                                  <th>Description</th>
-                                  <th>Size</th>
-                                  <th>Quantity</th>
-                                  <th>Reorder Point</th>
-                                  <th>Price</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <?php 
-                                
-                                    while($row = $search_result->fetch_assoc()) {
-                                    echo "\t<tr  ><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['price'] ."</td></tr>\n";
-                                    }
-                                  ?>
-                              </tbody>
-                            </table>
-                            </div>
-                            
-                            <header class="panel-heading">Ongoing Customer Orders</header>
-                            <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0; border-top: .20rem solid #b4c540;">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                              <thead>
-                                <tr>
-                                  <th>Date</th>
-                                  <th>PO Number</th>
-                                  <th>Amount</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <?php
-                                  
-                                $viewpendingorder = "SELECT o.Date, o.SONum, o.TotalAmount FROM salesorderdetails sod LEFT JOIN ordermanagement o ON sod.SONum = o.SONum WHERE CONCAT(prodcode) LIKE '%".$valueToSearch."%' AND o.status != 'Completed' LIMIT 1";
-                                $result = $con->query($viewpendingorder);
-                                if ($result->num_rows > 0) {
-                                    $countorder =1;
-                                    $_SESSION['countorder'] = $countorder;
-                                    while($row = $result->fetch_assoc()) {
-                                        echo "\t<tr  ><td >" . $row['Date'] . "</td><td>" . $row['SONum'] . "</td><td>"  .  $row['TotalAmount'] ."</td></tr>\n"; }
-                                ?>
-                            <?php } ?>
-                              </tbody>
-                            </table>
-                            </div>
-     
-                            <header class="panel-heading">Ongoing Supplier Orders</header>
-                            <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0; border-top: .20rem solid #b4c540;">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                              <thead>
-                                <tr>
-                                  <th>Date</th>
-                                  <th>SO Number</th>
-                                  <th>Supplier Name</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <?php
-                                    $viewpendingpurchase = "SELECT p.Date, p.PONum, p.SupplierName FROM p_podetails pod LEFT JOIN p_purchasingmanagement p ON pod.PONum = p.PONum WHERE CONCAT(ProductCode) LIKE '%".$_SESSION['search']."%' AND p.status != 'Completed' LIMIT 1";
-                                    $result = $con->query($viewpendingpurchase);
-                                    if ($result->num_rows > 0) {
-                                        $countpurchase =1;
-                                        $_SESSION['countpurchase'] = $countpurchase;
-                                        while($row = $result->fetch_assoc()) {
-                                            echo "\t<tr  ><td >" . $row['Date'] . "</td><td>" . $row['PONum'] . "</td><td>"  .  $row['SupplierName'] ."</td></tr>\n";
-                                        } 
-                                    }  
-                                    ?>
-                              </tbody>
-                            </table>
-                            </div>
-                                
-                            <!-- Remove Button-->
-                            <div class="d-flex" style=" margin-top: 10px;">
-                                <div style="width: 90%; float: left;"></div>
-                                <button name='remove' value ='remove' formaction = 'delrow.php' onclick='myFunction()' class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="width: 100px;float: right;"> Remove </button>
-                            </div>
-                            
-                            <?php
-                                 } //if before all tables
-                                else if (isset($_POST['search']) &&$valueToSearch== null){
-                                    echo '<script language="javascript">';
-                                    echo 'alert("Please enter a value")';
-                                    echo '</script>';
-                                }
+                            <form method = 'post' action = ''>
+                                <div class="card-body mb-4" style="padding-top: 0;">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="padding-top: 0; border-top: .20rem solid #b4c540;">
+                                  <thead>
+                                    <tr>
+                                    <th>Code</th>
 
-                                    #please add these error checking codes
-                                else if (isset($_POST['search']) &&($search_result->num_rows == 0)){
-                                    echo '<script language="javascript">';
-                                    echo 'alert("Invalid Search Parameter. Please Try Again")';
-                                    echo '</script>';
-                                }    
-                            ?>
+                                      <th>Category</th>
+                                      <th>Brand</th>
+                                      <th>Description</th>
+                                      <th>Size</th>
+                                      <th>Quantity</th>
+                                      <th>Reorder Point</th>
+                                      <th>Price</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <?php /* 
+                                      if ($search_result->num_rows > 0) {
+                                    // output data of each row
+
+                                    while($row = $search_result->fetch_assoc()) {
+                                        echo "\t<tr><td >" . $row['prodcode'] . "</td><td>" . $row['category'] . "</td><td>"  .  $row['brand'] . "</td><td>" . $row['proddesc'] . "</td><td>" . $row['size'] . "</td><td>" . $row['prodquan'] . "</td><td>" . $row['repoint'] . "</td><td>" . $row['price'] ."</td></tr>\n";
+                                        }
+                                    } */
+                                    $filter = ["status" => "available"];
+                                    $option = [];
+                                    // select data in descending order from table/collection "users"
+                                    $read = new MongoDB\Driver\Query($filter, $option);
+                                    $result = $conn->executeQuery("$dbname.$c_users", $read);
+
+                                    foreach ($result as $res) {
+                                      echo "<tr>";
+                                      echo "<td>".$res->prodcode."</td>";
+                                      echo "<td>".$res->category."</td>";
+                                          echo "<td>".$res->brand."</td>";	
+                                          echo "<td>".$res->proddesc."</td>";
+                                      echo "<td>".$res->size."</td>";
+                                          echo "<td>".$res->prodquan."</td>";	
+                                          echo "<td>".$res->repoint."</td>";
+                                          $res->status;	
+
+                                          echo "<td>".$res->price."</td>";	
+                                          echo  "<td><button type = 'submit' formaction = 'remove.php'  name = 'remove'  value = '" . $res->_id. "' class = 'btn'> <i class='fas fa-fw fa-minus-square' style = 'color:#e74a3b;'/> </button></td>";
+                                          echo "</tr>";
+                                  
+                                    }
+                                      ?>
+                                  </tbody>
+                                </table>
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+  <!-- Page level plugins -->
+  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/demo/datatables-demo.js"></script>
     </body>
 </html>
