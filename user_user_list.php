@@ -243,7 +243,27 @@
                                         }
                                         if (isset($_POST['disable'])) {
                                             $email= $_POST['disable'];
-                                            $status = "Disabled";
+                                            $status = "Inactive";
+                                            $statusquery = "UPDATE users 
+                                                            SET status = '".$status."'
+                                                            WHERE Email = '".$email."'";
+                                            if(mysqli_query($con,$statusquery)){
+                                                $alert = "Successfully updated user!";
+                                                echo '<script type="text/javascript">';
+                                                echo 'alert("'.$alert.'")';
+                                                echo '</script>'; 
+                                            }
+                                            else{
+                                                $alert = mysqli_error($con);
+                                                echo $alert;
+                                                echo '<script type="text/javascript">';
+                                                echo 'alert("'.$alert.'")';
+                                                echo '</script>';  
+                                                }
+                                        }
+                                        else if (isset($_POST['enable'])){
+                                          $email= $_POST['enable'];
+                                          $status = "Active";
                                             $statusquery = "UPDATE users 
                                                             SET status = '".$status."'
                                                             WHERE Email = '".$email."'";
