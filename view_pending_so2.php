@@ -284,7 +284,7 @@
                         <!-- Table -->
                         
                             <div class="col-lg-12">
-                                <form method="post" class="navbar-expand col-lg-12">
+                                <form method="post" class="navbar-expand col-lg-12" action = "processUpdateSO.php">
                                 <header class="card-header font-weight-bold">Pending Products</header>
                                 <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -300,7 +300,7 @@
                                           <th>Issued</th>
                                           <th>Price</th>
                                           <th>Total Price</th>
-                                          <th></th>
+                                          <th>Update Quantity</th>
                                           <th></th>
                                         </tr>
                                       </thead>
@@ -312,8 +312,7 @@
                                             // output data of each row
                                             while($row = $result2->fetch_assoc()) {
                                                 // may part dito na  sa isang row, may button for update, once clicked, kukunin niya yung product code nung row na yun
-                                                echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['ProdQuan'] . "</td><td>" . $row['Available'] . "</td><td>" . $row['Issued'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['TotalPrice'] . "</td> <td><button type = 'submit' name = 'receive' ' formaction = 'view_pending_so2.php'  value = '" . $row['ProdCode']. "' class = 'btn'> <i class='fas fa-fw fa-pen' style = 'color:#b4c540;'/>  </button></td>
-                                                <td><button type = 'submit' name = 'cancel' formaction = ''  value = '" . $row['ProdCode']. "' class = 'btn'> <i class='fas fa-fw fa-ban' style = 'color:#ff0000;'/>  </button></td></tr>\n";
+                                                echo "\t<tr><td >" . $row['ProdCode'] . "</td><td>" . $row['Category'] . "</td><td>"  .  $row['Brand'] . "</td><td>" . $row['ProdDesc'] . "</td><td>" . $row['Size'] . "</td><td>" . $row['ProdQuan'] . "</td><td>" . $row['Available'] . "</td><td>" . $row['Issued'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['TotalPrice'] . "</td> <td><input type = 'text' name = 'updatevalue'  value = '' class = 'form-control' ></td> <td><button type = 'submit'  name = 'submit'  value = '" . $row['ProdCode'] . "' class = 'btn btn-sm btn-success shadow-sm'> Submit </button></td></tr>\n";
                                                 }
                                                 // echo "</form>";
                                             }
