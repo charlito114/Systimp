@@ -73,7 +73,7 @@ require_once("db/connection.php");
                           </div>
                         </li>
 
-                       <!-- COPY START -->
+                                              <!-- COPY START -->
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -89,18 +89,27 @@ require_once("db/connection.php");
                             <form method = "post" class="table-responsive-lg">
                             <table class="table table-wrapper">
                                 <?php
-                                $getNotifs ="SELECT * FROM notifications";
+                                $getNotifs ="SELECT notifID, TIMESTAMPDIFF(hour, date, now()) as temptime, if(TIMESTAMPDIFF(hour, date, now())>24, ROUND(TIMESTAMPDIFF(hour, date, now())/24,0), TIMESTAMPDIFF(hour, date, now())) as notiftime, code, description, type, status FROM notifications";
                                 $search_result = mysqli_query($con, $getNotifs);
                                     if ($search_result->num_rows > 0) {
                                         while($row = $search_result->fetch_assoc()) {
                                             $status = $row['status'];
-                                            if($status == 'Unread'){
+                                            $temptime = $row['temptime'];
+                                            if($status == 'Unread' && $temptime>24){
                                               echo "\t<tr class='table-active'><td style='width: 1%;'><span class='icon-circle bg-warning '><i class='fas fa-exclamation-triangle text-white'></i></span></td>
-                                                  <td><button class='btn' name = 'notification' value = '" . $row['notifID'] . "'>" . $row['date']  . "<br>". $row['description'] . "  </button></td></tr>";
+                                                  <td><button class='btn' name = 'notification' value = '" . $row['notifID'] . "'>" . $row['notiftime']  . " days ago<br>". $row['description'] . "  </button></td></tr>";
                                             }
-                                            else if($status == 'Read') {                                              
+                                            else if ($status == 'Unread' && $temptime<=24){
+                                              echo "\t<tr class='table-active'><td style='width: 1%;'><span class='icon-circle bg-warning '><i class='fas fa-exclamation-triangle text-white'></i></span></td>
+                                              <td><button class='btn' name = 'notification' value = '" . $row['notifID'] . "'>" . $row['notiftime']  . " hours ago <br>". $row['description'] . "  </button></td></tr>";
+                                            }
+                                            else if($status == 'Read' && $temptime>24) {                                              
                                               echo "\t<tr><td style='width: 1%;'><span class='icon-circle bg-warning '><i class='fas fa-exclamation-triangle text-white'></i></span></td>
-                                              <td><button class='btn' name = 'notification' value = '" . $row['notifID'] . "'>" . $row['date']  . "<br>". $row['description'] . "  </button></td></tr>";
+                                              <td><button class='btn' name = 'notification' value = '" . $row['notifID'] . "'>" . $row['notiftime']  . " days ago<br>". $row['description'] . "  </button></td></tr>";
+                                            }
+                                            else if($status == 'Read' && $temptime<=24) {    
+                                              echo "\t<tr><td style='width: 1%;'><span class='icon-circle bg-warning '><i class='fas fa-exclamation-triangle text-white'></i></span></td>
+                                              <td><button class='btn' name = 'notification' value = '" . $row['notifID'] . "'>" . $row['notiftime']  . " hours ago<br>". $row['description'] . "  </button></td></tr>";                                          
                                             }
                                                                         
                                         }
