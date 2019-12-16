@@ -180,7 +180,7 @@
                                 </div>
                                 
                                 <!--SO Details Form -->
-                                <form method = "post" action = "order_add_order2.php">
+                                <form method = "post" action = "">
                                     <div class="row">
                                         <div class="col-lg-5 mb-4" style="float: left;">
                                             <div class="card-body">
@@ -323,11 +323,12 @@
                                                             $result = $conn->executeQuery("$dbname.$c_users", $read);
                         
                                                             foreach ($result as $res) {
-                                                            if($res->status ="Unavailable"){
-                                                                //header("location:order_add_order2.php?message=Product is no longer being sold");
-                                                            }
-                                                            else{
-                                                                 $prodcode = $res->prodcode;
+                                                                if($res->status == "unavailable" ){
+                                                                    header("location:order_add_order2.php?message= Item has been discontinued.");
+
+                                                                }
+                                                                else{
+                                                                $prodcode = $res->prodcode;
                                                                  $category = $res->category;
                                                                  $brand = $res->brand;
                                                                  $proddesc = $res->proddesc;
@@ -342,10 +343,10 @@
                                                                  $_SESSION['proddesc'] = $proddesc;
                                                                  $_SESSION['size'] = $size;  
                                                             }
-                                                                                                                  
+                                                        }
                                                                  
                                                                  
-                                                            }
+                                                            
                                                             
                                                         }
                                                                     
@@ -470,7 +471,7 @@
                                     <!-- Add Button-->
                                     <div class="d-flex" style=" margin-top: 10px;">
                                         <div style="width: 90%; float: left;"></div>
-                                        <button name="add" value="add" type="submit"  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="width: 10%;float: right;"> Add </button>
+                                        <button name="add" value="add" type="submit" formaction="updateinventory.php"  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="width: 10%;float: right;"> Add </button>
                                     </div>
                                 </form>
                                 <?php
@@ -526,8 +527,9 @@
                                             echo '</script>';  
                                         }
                                         */
-                                        $order = $_POST['quantity'];
-                                        $product = array (
+                                        
+                                 
+                                      /* $product = array (
                                             'prodcode' => $_SESSION['prodcode'],
                                             'category' => $_SESSION['category'],
                                             'brand' => $_SESSION['brand'],
@@ -556,7 +558,7 @@
                                             $single_insert->insert($product);
                                             $conn->executeBulkWrite("$dbname.$temporder", $single_insert);
                                 
-                                        }
+                                        }*/
                                     }
                                         
 
@@ -567,7 +569,7 @@
                         
                         <!-- Table -->
                         
-                            <div class="col-lg-12">
+                           <!-- <div class="col-lg-12">
                                 <form method="post" class="navbar-expand col-lg-12">
                                 <header class="card-header font-weight-bold">Product Order Summary</header>
                                 <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
@@ -581,14 +583,14 @@
                                           <th>Size</th>
                                           <th>Available</th>
                                           <th>Quantity</th>
-                                         <!-- <th>Price</th>
-                                          <th>Total Price</th> -->
+                                         < <th>Price</th>
+                                          <th>Total Price</th> 
                                         </tr>
                                       </thead>
-                                      <tbody>
+                                      <tbody> -->
                                         <?php
 
-                                            $filter = [];
+                                          /*  $filter = [];
                                             $option = [];
                                             // select data in descending order from table/collection "users"
                                             $read = new MongoDB\Driver\Query($filter, $option);
@@ -626,20 +628,16 @@
                                 </div>
                             </form>
                             
-                            <form method="post"> 
+                           <!-- <form method="post"> 
                                 <div class="d-flex" style=" margin-top: 10px;">
-                                    <!-- Remove Button-->
                                     <div style="width: 80%; float: left;">
-                                        <!--<button name="add" value="add" formaction="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="width: 10%;float: left;"> Remove </button>-->
                                     </div>
                                     <div class="d-flex" style="width: 30%; float: right;">
-                                    <!-- Submit Button-->
                                     <button type = 'submit' name = 'submit'  value = 'submit' formaction = 'updateinventory.php' class="d-flex d-sm-inline-block btn btn-sm btn-success shadow-sm" style="width: 35%; float: left; margin-right: 20%;"> Submit </button>
-                                    <!-- Cancel Button-->
                                     <button type = 'submit' name = 'back'  value = 'back' class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" style="width: 35%; float: right;"> Cancel </button>
                                     </div>
                                 </div>
-                            </form>
+                            </form> -->
                             </div>
                             
                             
@@ -657,7 +655,7 @@
                                     
                                     
                                     //redirecting to the display page (index.php in our case)
-                                    header("Location:order_add_order2.php");
+                                  //  header("Location:order_add_order2.php");
                                     
                                     
                                     

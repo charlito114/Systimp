@@ -26,7 +26,7 @@
     <body>
         <!-- Page Wrapper -->
         <div id="wrapper">
-            <?php include 'config.php' ?>
+            <?php include 'config.php'; include 'sidebar.php' ?>
             
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -36,7 +36,7 @@
                     
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg topbar mb-4 static-top shadow">
-                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Inventory List</div>
+                        <div class="sidebar-brand-text mx-3" style="color:white; font-size: 30px;">Remove Products</div>
                       <!-- Sidebar Toggle (Topbar) -->
                       <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>

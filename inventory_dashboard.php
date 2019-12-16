@@ -190,7 +190,7 @@
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Low Quantity Products</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 <?php
-                                                  $filter = [];
+                                                  $filter = ["status" => "available"];
                                                   $option = [];
                                                   // select data in descending order from table/collection "users"
                                                   $read = new MongoDB\Driver\Query($filter, $option);
@@ -336,7 +336,7 @@
                                           <tbody>
                                             <?php
 
-                                            $filter = [];
+                                            $filter = ["status" => "available"];
                                             $option = [];
                                             // select data in descending order from table/collection "users"
                                             $read = new MongoDB\Driver\Query($filter, $option);
