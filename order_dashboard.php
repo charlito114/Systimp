@@ -67,7 +67,7 @@
                           </div>
                         </li>
 
-                       <!-- COPY START -->
+                                             <!-- COPY START -->
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -152,12 +152,12 @@
                           </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
+                        <!-- Nav Item - Messages 
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-home fa-fw text-white"></i>
                           </a>
-                        </li>
+                        </li> -->
                           
 <!-- COPY END -->
 
