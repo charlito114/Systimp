@@ -177,7 +177,7 @@
                     <!-- Inventory Stuff -->
                     
                     <div class="card-body mb-4">
-                        <!-- Search Bar-->
+                        <!-- Search Bar
                         <div class="d-sm-flex align-items-center justify-content-between mb-4" style="padding-top: 0;">
                             <form action="inventory.php" class="navbar-search" method="post">
                                 <div class="input-group">
@@ -188,7 +188,7 @@
                                         </button>
                                     </div>
                                 </div>
-                            </form>
+                            </form> -->
                             
                             <?php
                             /*
@@ -268,6 +268,8 @@
                                       <th>Quantity</th>
                                       <th>Reorder Point</th>
                                       <th>Price</th>
+                                      <th>Action</th>
+
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -297,7 +299,7 @@
                                           $res->status;	
 
                                           echo "<td>".$res->price."</td>";	
-                                          echo  "<td><button type = 'submit' formaction = 'remove.php'  name = 'remove'  value = '" . $res->_id. "' class = 'btn'> <i class='fas fa-fw fa-minus-square' style = 'color:#e74a3b;'/> </button></td>";
+                                          echo  "<td><button type = 'submit' formaction = 'remove.php'  name = 'remove'  value = '" . $res->_id. "' class = 'btn'> <i class='fas fa-fw fa-trash' style = 'color:#e74a3b;'/> </button></td>";
                                           echo "</tr>";
                                   
                                     }
