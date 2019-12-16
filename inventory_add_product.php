@@ -303,11 +303,16 @@ body{
                             $option = [];
                             // select data in descending order from table/collection "users"
                             $read = new MongoDB\Driver\Query($filter, $option);
-                            $result = $conn->executeQuery("$dbname.$c_users", $read);
+                            $result = $conn->executeQuery("$dbname.$temptable", $read);
+                            $result2 = $conn->executeQuery("$dbname.$c_users", $read);
                             $count= 0;
                             foreach ($result as $res) {        
                               //  $res->prodcode;             
                                 $count = $count+1;	
+                           }
+                           foreach ($result2 as $res2) {        
+                              //  $res->prodcode;             
+                                $count = $count+1;  
                            }
 
                             $prodcode = 10000000000 + $count + 1;  //must insert code for count , siguro isa nanaman tong filter blah blah 
