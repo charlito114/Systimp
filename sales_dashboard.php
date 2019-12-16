@@ -124,7 +124,7 @@ var month = "For the month of " + monthNames[d.getMonth()-1];
                           </div>
                         </li>
 
-                                              <!-- COPY START -->
+                        <!-- COPY START -->
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                           <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
